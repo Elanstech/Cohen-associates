@@ -180,7 +180,7 @@ body {
     left: 0;
     width: 100%;
     height: 120%;
-    background-image: url('/api/placeholder/1920/1080');
+    background-image: url('https://github.com/Elanstech/Cohen-associates/blob/main/cohenfront.jpeg?raw=true');
     background-size: cover;
     background-position: center;
     transform: translateZ(-1px) scale(1.5);
