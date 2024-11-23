@@ -1,85 +1,94 @@
 // Wait for DOM to load
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const menuButton = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize loading sequence
+    initLoader();
     
-    if (menuButton) {
-        menuButton.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuButton.classList.toggle('active');
-        });
-    }
+    // Initialize all features
+    initNavigation();
+    initParallax();
+    initAnimations();
+    initScrollProgress();
+    initCounters();
+    initContactForm();
+    initScrollTop();
+});
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-menu') && !e.target.closest('.menu-toggle')) {
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                menuButton.classList.remove('active');
-            }
-        }
+// Loading Sequence
+function initLoader() {
+    const loader = document.querySelector('.loader');
+    
+    window.addEventListener('load', () => {
+        loader.classList.add('fade-out');
+        setTimeout(() => {
+            loader.style.display = 'none';
+            document.body.classList.remove('no-scroll');
+        }, 500);
+    });
+}
+
+// Navigation
+function initNavigation() {
+    const nav = document.querySelector('.nav-wrapper');
+    const toggle = document.querySelector('.nav-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const links = document.querySelectorAll('.nav-links a, .mobile-menu a');
+    
+    // Mobile menu toggle
+    toggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        toggle.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
     });
 
-    // Smooth Scroll for Navigation Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                // Close mobile menu after clicking
-                if (navMenu && navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    menuButton.classList.remove('active');
-                }
-            }
-        });
-    });
-
-    // Scroll to Top Button
-    const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '↑';
-    scrollButton.className = 'scroll-top';
-    document.body.appendChild(scrollButton);
-
+    // Scroll event for navigation
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollButton.style.display = 'block';
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
         } else {
-            scrollButton.style.display = 'none';
+            nav.classList.remove('scrolled');
         }
     });
 
-    scrollButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Form Validation
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+    // Smooth scroll for navigation links
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            if (validateForm(this)) {
-                // If form is valid, you can submit it
-                console.log('Form is valid, submitting...');
-                // Add your form submission code here
-                this.submit();
-            }
+            const target = document.querySelector(link.getAttribute('href'));
+            
+            // Close mobile menu if open
+            mobileMenu.classList.remove('active');
+            toggle.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+
+            // Smooth scroll to target
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
     });
+}
 
-    // Animation on Scroll
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+// Parallax Effect
+function initParallax() {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    window.addEventListener('scroll', () => {
+        parallaxElements.forEach(element => {
+            const speed = element.getAttribute('data-parallax') || 0.5;
+            const offset = window.scrollY * speed;
+            element.style.transform = `translateY(${offset}px)`;
+        });
+    });
+}
+
+// Animations
+function initAnimations() {
+    const animatedElements = document.querySelectorAll('[data-scroll]');
     
     const observerOptions = {
-        threshold: 0.2
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -91,81 +100,178 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    animatedElements.forEach(element => {
-        observer.observe(element);
-    });
-});
+    animatedElements.forEach(element => observer.observe(element));
+}
 
-// Form Validation Function
-function validateForm(form) {
-    let isValid = true;
-    const inputs = form.querySelectorAll('input, textarea');
+// Scroll Progress
+function initScrollProgress() {
+    const progress = document.querySelector('.scroll-progress');
     
-    inputs.forEach(input => {
-        // Remove existing error messages
-        const existingError = input.nextElementSibling;
-        if (existingError && existingError.classList.contains('error-message')) {
-            existingError.remove();
-        }
-
-        // Check if field is required
-        if (input.hasAttribute('required') && !input.value.trim()) {
-            showError(input, 'This field is required');
-            isValid = false;
-        }
-
-        // Email validation
-        if (input.type === 'email' && input.value.trim()) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(input.value)) {
-                showError(input, 'Please enter a valid email address');
-                isValid = false;
-            }
-        }
-
-        // Phone validation
-        if (input.type === 'tel' && input.value.trim()) {
-            const phoneRegex = /^\+?[\d\s-]{10,}$/;
-            if (!phoneRegex.test(input.value)) {
-                showError(input, 'Please enter a valid phone number');
-                isValid = false;
-            }
-        }
+    window.addEventListener('scroll', () => {
+        const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progress.style.width = `${scrolled}%`;
     });
+}
+
+// Number Counters
+function initCounters() {
+    const counters = document.querySelectorAll('.counter');
+    
+    const observerOptions = {
+        threshold: 1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    entry.target.textContent = Math.round(current);
+
+                    if (current < target) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        entry.target.textContent = target;
+                    }
+                };
+
+                updateCounter();
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// Contact Form
+function initContactForm() {
+    const form = document.querySelector('.contact-form');
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Form validation
+                if (!validateForm(data)) return;
+                
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                // Simulate form submission (replace with actual API call)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                showFormMessage('Message sent successfully!', 'success');
+                form.reset();
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+            } catch (error) {
+                showFormMessage('An error occurred. Please try again.', 'error');
+            }
+        });
+    }
+}
+
+// Form Validation
+function validateForm(data) {
+    let isValid = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\+?[\d\s-]{10,}$/;
+
+    if (!data.name?.trim()) {
+        showInputError('name', 'Name is required');
+        isValid = false;
+    }
+
+    if (!emailRegex.test(data.email?.trim())) {
+        showInputError('email', 'Please enter a valid email');
+        isValid = false;
+    }
+
+    if (data.phone && !phoneRegex.test(data.phone.trim())) {
+        showInputError('phone', 'Please enter a valid phone number');
+        isValid = false;
+    }
+
+    if (!data.message?.trim()) {
+        showInputError('message', 'Message is required');
+        isValid = false;
+    }
 
     return isValid;
 }
 
-// Show Error Message
-function showError(input, message) {
+// Show Input Error
+function showInputError(inputName, message) {
+    const input = document.querySelector(`[name="${inputName}"]`);
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
-    input.parentNode.insertBefore(errorDiv, input.nextSibling);
+    
+    // Remove existing error message
+    const existingError = input.parentElement.querySelector('.error-message');
+    if (existingError) existingError.remove();
+    
+    input.parentElement.appendChild(errorDiv);
     input.classList.add('error');
 
-    // Remove error when user starts typing
+    // Remove error on input
     input.addEventListener('input', function() {
         this.classList.remove('error');
-        const error = this.nextElementSibling;
-        if (error && error.classList.contains('error-message')) {
-            error.remove();
+        errorDiv.remove();
+    }, { once: true });
+}
+
+// Show Form Message
+function showFormMessage(message, type) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message ${type}`;
+    messageDiv.textContent = message;
+    
+    const form = document.querySelector('.contact-form');
+    form.insertBefore(messageDiv, form.firstChild);
+    
+    setTimeout(() => messageDiv.remove(), 5000);
+}
+
+// Scroll to Top
+function initScrollTop() {
+    const scrollBtn = document.querySelector('.scroll-top');
+    
+    window.addEventListener('scroll', debounce(() => {
+        if (window.scrollY > 500) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
         }
+    }, 100));
+
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-// Handle Loading State
-function showLoading(button) {
-    const originalText = button.textContent;
-    button.textContent = 'Loading...';
-    button.disabled = true;
-    return () => {
-        button.textContent = originalText;
-        button.disabled = false;
-    };
-}
-
-// Utility function to debounce scroll events
+// Utility: Debounce
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -177,18 +283,3 @@ function debounce(func, wait) {
         timeout = setTimeout(later, wait);
     };
 }
-
-// Handle Responsive Images
-function handleResponsiveImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    images.forEach(img => {
-        if (img.getBoundingClientRect().top < window.innerHeight + 100) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-        }
-    });
-}
-
-// Initialize responsive images
-window.addEventListener('load', handleResponsiveImages);
-window.addEventListener('scroll', debounce(handleResponsiveImages, 100));
