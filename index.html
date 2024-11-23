@@ -15,7 +15,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="no-scroll">
+<body>
     <!-- Loader -->
     <div class="loader">
         <div class="loader-content">
@@ -58,8 +58,10 @@
         </ul>
     </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
+    <!-- Hero Section with Parallax -->
+    <section id="home" class="hero parallax-section">
+        <div class="hero-background" data-parallax="0.5"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="animate-text" data-scroll data-scroll-speed="2">
                 Expert Tax & Business Solutions
@@ -110,10 +112,15 @@
                 <p>Expert property management solutions</p>
             </div>
         </div>
+        <div class="section-footer">
+            <a href="services.html" class="learn-more-btn">Learn More About Our Services</a>
+        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about parallax-section">
+        <div class="section-background" data-parallax="0.4"></div>
+        <div class="section-overlay"></div>
         <div class="about-content">
             <div class="about-text" data-scroll data-scroll-speed="1">
                 <h2>About Us</h2>
@@ -137,6 +144,9 @@
                     <p>Success Rate</p>
                 </div>
             </div>
+        </div>
+        <div class="section-footer">
+            <a href="about.html" class="learn-more-btn">Learn More About Us</a>
         </div>
     </section>
 
@@ -166,11 +176,17 @@
                 </div>
             </div>
         </div>
+        <div class="section-footer">
+            <a href="team.html" class="learn-more-btn">Meet Our Full Team</a>
+        </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="contact-info" data-scroll data-scroll-speed="1">
+    <section id="contact" class="contact parallax-section">
+        <div class="section-background" data-parallax="0.3"></div>
+        <div class="section-overlay"></div>
+        <div class="contact-container">
+            <div class="contact-info" data-scroll data-scroll-speed="1">
                 <h2>Get in Touch</h2>
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
@@ -195,7 +211,6 @@
                     <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
                 </div>
             </div>
-
             <form class="contact-form" data-scroll data-scroll-speed="1.2">
                 <div class="form-group">
                     <input type="text" name="name" required>
