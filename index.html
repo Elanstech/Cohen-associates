@@ -3,102 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cohen & Associates - Expert Tax and Business Solutions</title>
-    <meta name="description" content="Expert tax and business solutions serving domestic and international clients with over 20 years of experience.">
+    <title>Cohen & Associates - Tax Experts</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Optional: Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.html">Cohen & Associates</a>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-wrapper" data-scroll-sticky>
+        <div class="nav-content">
+            <div class="logo" data-scroll data-scroll-speed="1">
+                Cohen & Associates
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="pages/about.html">About</a></li>
-                <li><a href="pages/services.html">Services</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="cta-button">Schedule a Consultation</button>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Expert Tax and Business Solutions You Can Trust</h1>
-                <p>Serving domestic and international clients with over 20 years of experience.</p>
-                <button class="cta-button">Get Started</button>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero parallax-section">
+        <div class="hero-content">
+            <h1 class="animate-text" data-scroll data-scroll-speed="2">
+                Expert Tax & Business Solutions
+            </h1>
+            <p class="animate-text-delay" data-scroll data-scroll-speed="1.5">
+                Serving domestic and international clients with over 20 years of experience
+            </p>
+            <div class="cta-buttons" data-scroll data-scroll-speed="1">
+                <button class="primary-btn">Get Started</button>
+                <button class="secondary-btn">Learn More</button>
             </div>
-        </section>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
 
-        <section class="services">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Tax Preparation</h3>
-                    <p>Professional tax services for individuals and businesses</p>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2 data-scroll data-scroll-speed="1">Our Services</h2>
+            <div class="section-line" data-scroll data-scroll-speed="1.2"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-scroll>
+                <div class="card-icon">
+                    <i class="fas fa-calculator"></i>
                 </div>
-                <div class="service-card">
-                    <h3>Business Advisory</h3>
-                    <p>Strategic guidance for your business growth</p>
-                </div>
-                <div class="service-card">
-                    <h3>Real Estate Support</h3>
-                    <p>Comprehensive real estate tax and advisory services</p>
-                </div>
-                <div class="service-card">
-                    <h3>Property Management</h3>
-                    <p>Expert property management solutions</p>
+                <h3>Tax Preparation</h3>
+                <p>Comprehensive tax services for individuals and businesses</p>
+                <div class="card-hover">
+                    <span>Learn More →</span>
                 </div>
             </div>
-        </section>
+            <!-- More service cards... -->
+        </div>
+    </section>
 
-        <section class="about-preview">
-            <h2>About Us</h2>
-            <div class="team-members">
-                <div class="team-member">
+    <!-- About Section with Parallax -->
+    <section id="about" class="about parallax-section">
+        <div class="about-content">
+            <div class="about-text" data-scroll data-scroll-speed="1">
+                <h2>About Us</h2>
+                <p>Expert financial solutions tailored to your needs</p>
+            </div>
+            <div class="about-stats" data-scroll data-scroll-speed="1.5">
+                <div class="stat-item">
+                    <span class="counter" data-target="20">0</span>
+                    <p>Years Experience</p>
+                </div>
+                <!-- More stats... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="section-header">
+            <h2>Our Team</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-member" data-scroll>
+                <div class="member-image">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="member-info">
                     <h3>Oksana Inoyatova</h3>
-                    <p>Specializing in closely-held small and midsize businesses, as well as high-net-worth individuals.</p>
-                </div>
-                <div class="team-member">
-                    <h3>Steve Inoyatov</h3>
-                    <p>Expert in financial auditing and working with high-net-worth individuals and businesses.</p>
+                    <p>Tax Expert</p>
                 </div>
             </div>
-        </section>
+            <!-- More team members... -->
+        </div>
+    </section>
 
-        <section class="contact-preview">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <p>93-03 63rd Drive, Rego Park, NY 11374</p>
-                <div class="contact-details">
-                    <p>Oksana: (917) 209-9386</p>
-                    <p>Steve: (347) 992-3638</p>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info" data-scroll data-scroll-speed="1">
+                <h2>Get in Touch</h2>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>93-03 63rd Drive, Rego Park, NY 11374</p>
                 </div>
+                <!-- More contact info... -->
             </div>
-        </section>
-    </main>
+            <form class="contact-form" data-scroll data-scroll-speed="1.2">
+                <div class="form-group">
+                    <input type="text" required>
+                    <label>Name</label>
+                    <span class="focus-border"></span>
+                </div>
+                <!-- More form fields... -->
+            </form>
+        </div>
+    </section>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
-            <div class="footer-info">
+            <div class="footer-section">
                 <h3>Cohen & Associates</h3>
                 <p>Expert Tax and Business Solutions</p>
             </div>
-            <div class="footer-contact">
-                <p>93-03 63rd Drive, Rego Park, NY 11374</p>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Phone: (917) 209-9386</p>
                 <p>Email: info@cohen-associates.com</p>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+        </div>
     </footer>
 
+    <!-- Scroll Indicators -->
+    <div class="scroll-progress"></div>
+    <button class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
     <script src="js/main.js"></script>
 </body>
 </html>
