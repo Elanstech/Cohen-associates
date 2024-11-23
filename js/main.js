@@ -71,14 +71,38 @@ function initNavigation() {
 
 // Parallax Effect
 function initParallax() {
-    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    const parallaxSections = document.querySelectorAll('.parallax-section');
+    let ticking = false;
     
-    window.addEventListener('scroll', () => {
-        parallaxElements.forEach(element => {
-            const speed = element.getAttribute('data-parallax') || 0.5;
-            const offset = window.scrollY * speed;
-            element.style.transform = `translateY(${offset}px)`;
+    function updateParallax(scrollPos) {
+        parallaxSections.forEach(section => {
+            const background = section.querySelector('.section-background, .hero-background');
+            if (background) {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = rect.top;
+                const sectionBottom = rect.bottom;
+                const viewportHeight = window.innerHeight;
+                
+                // Check if section is in viewport
+                if (sectionTop < viewportHeight && sectionBottom > 0) {
+                    const scrolled = scrollPos;
+                    const speed = background.dataset.parallax || 0.5;
+                    const yPos = -(sectionTop * speed);
+                    background.style.transform = `translate3d(0, ${yPos}px, -1px) scale(1.5)`;
+                }
+            }
         });
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.pageYOffset;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateParallax(scrollPos);
+            });
+            ticking = true;
+        }
     });
 }
 
@@ -95,6 +119,14 @@ function initAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animated');
+                
+                // Add specific animation for section backgrounds
+                const background = entry.target.querySelector('.section-background');
+                if (background) {
+                    background.style.transition = 'transform 0.5s ease-out';
+                    background.style.transform = 'translateZ(-1px) scale(1.5)';
+                }
+                
                 observer.unobserve(entry.target);
             }
         });
@@ -270,6 +302,24 @@ function initScrollTop() {
         });
     });
 }
+
+// Handle Learn More Buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.learn-more-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            // Add smooth transition before redirecting
+            e.preventDefault();
+            const href = button.getAttribute('href');
+            
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300);
+        });
+    });
+});
 
 // Utility: Debounce
 function debounce(func, wait) {
