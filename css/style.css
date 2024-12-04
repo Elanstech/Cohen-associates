@@ -117,10 +117,10 @@ body {
 }
 
 .logo-img {
-    width: 180px;
+    width: 200px;
     height: 70px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .logo-text {
