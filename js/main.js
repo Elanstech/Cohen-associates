@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initScrollTop();
     initContactForm();
+    initAboutTabs();
+    initTimelineAnimation();
 });
 
 // Loader
@@ -25,15 +27,26 @@ function initLoader() {
 // Navigation
 function initNavigation() {
     const navbar = document.querySelector('.navbar');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
+    let lastScroll = 0;
 
     // Handle scroll events for navbar
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Hide/show navbar on scroll
+        if (currentScroll > lastScroll && currentScroll > 500) {
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            navbar.style.transform = 'translateY(0)';
+        }
+        lastScroll = currentScroll;
     });
 
     // Smooth scroll for navigation links
@@ -42,9 +55,18 @@ function initNavigation() {
             e.preventDefault();
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const mobileMenu = document.querySelector('.mobile-menu');
+                if (mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                }
+                
+                const offset = navbar.offsetHeight;
+                const targetPosition = target.offsetTop - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -104,15 +126,37 @@ function initParallaxSlider() {
     }
 
     // Event listeners
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoSlide();
+    });
+
     nextBtn.addEventListener('click', () => {
         nextSlide();
         resetAutoSlide();
     });
 
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoSlide();
-    });
+    // Touch/swipe support
+    let touchStartX = 0;
+    const heroSection = document.querySelector('.hero-parallax');
+    
+    heroSection.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const difference = touchStartX - touchEndX;
+
+        if (Math.abs(difference) > 50) { // Minimum swipe distance
+            if (difference > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoSlide();
+        }
+    }, { passive: true });
 
     // Auto slide
     function startAutoSlide() {
@@ -127,9 +171,8 @@ function initParallaxSlider() {
     startAutoSlide();
 
     // Pause auto slide on hover
-    const sliderContainer = document.querySelector('.hero-parallax');
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+    heroSection.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    heroSection.addEventListener('mouseleave', startAutoSlide);
 }
 
 // Mobile Menu
@@ -147,20 +190,20 @@ function initMobileMenu() {
     mobileMenuBtn.addEventListener('click', toggleMenu);
     closeMenuBtn.addEventListener('click', toggleMenu);
 
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+        if (mobileMenu.classList.contains('active') &&
+            !mobileMenu.contains(e.target) &&
+            !mobileMenuBtn.contains(e.target)) {
             toggleMenu();
-            const target = document.querySelector(link.getAttribute('href'));
-            if (target) {
-                setTimeout(() => {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }, 300);
-            }
-        });
+        }
+    });
+
+    // Handle mobile menu links
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', toggleMenu);
     });
 }
-
 // Scroll Animations
 function initScrollAnimations() {
     const observerOptions = {
@@ -168,57 +211,76 @@ function initScrollAnimations() {
         rootMargin: '0px 0px -50px 0px'
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    // General animations for sections
+    const fadeElements = document.querySelectorAll('.fade-in, .service-card, .team-showcase, .about-content');
+    const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                fadeObserver.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in, .service-card, .team-showcase').forEach(el => {
-        observer.observe(el);
-    });
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    // Stagger animation for service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+                serviceObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    serviceCards.forEach(card => serviceObserver.observe(card));
 }
 
-// Counter Animation
+// Counter Animations
 function initCounters() {
     const counters = document.querySelectorAll('.counter');
     
     function animateCounter(counter) {
         const target = parseInt(counter.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
+        const duration = 2000; // 2 seconds
+        const startTime = performance.now();
+        const startValue = 0;
 
-        const updateCounter = () => {
-            current += increment;
-            counter.textContent = Math.round(current);
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
 
-            if (current < target) {
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
+            // Easing function for smooth counting
+            const easeOutQuad = progress => 1 - (1 - progress) * (1 - progress);
+            const easedProgress = easeOutQuad(progress);
+
+            const currentValue = Math.round(startValue + (target - startValue) * easedProgress);
+            counter.textContent = currentValue.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
             }
-        };
+        }
 
-        updateCounter();
+        requestAnimationFrame(update);
     }
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.5 }
-    );
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
 
-    counters.forEach(counter => observer.observe(counter));
+    counters.forEach(counter => counterObserver.observe(counter));
 }
 
 // Scroll to Top
@@ -248,6 +310,63 @@ function initScrollTop() {
     });
 }
 
+// About Section Tabs
+function initAboutTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function switchTab(tabId) {
+        tabButtons.forEach(button => button.classList.remove('active'));
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none';
+        });
+
+        const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const activeContent = document.getElementById(tabId);
+
+        activeButton.classList.add('active');
+        activeContent.style.display = 'block';
+
+        // Trigger reflow to ensure animation plays
+        void activeContent.offsetWidth;
+        activeContent.classList.add('active');
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab');
+            switchTab(tabId);
+        });
+    });
+
+    // Initialize first tab
+    if (tabButtons.length > 0) {
+        const firstTabId = tabButtons[0].getAttribute('data-tab');
+        switchTab(firstTabId);
+    }
+}
+
+// Timeline Animation
+function initTimelineAnimation() {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('animated');
+                }, index * 200); // Stagger animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    timelineItems.forEach(item => observer.observe(item));
+}
+
 // Contact Form
 function initContactForm() {
     const form = document.querySelector('.contact-form');
@@ -262,13 +381,18 @@ function initContactForm() {
             if (!validateForm(form)) return;
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             
             // Simulate form submission (replace with actual API call)
             await new Promise(resolve => setTimeout(resolve, 1500));
             
-            showFormMessage('Message sent successfully!', 'success');
+            showFormMessage('Message sent successfully! We\'ll get back to you soon.', 'success');
             form.reset();
+
+            // Reset floating labels
+            form.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
+                input.classList.remove('has-value');
+            });
         } catch (error) {
             showFormMessage('Error sending message. Please try again.', 'error');
         } finally {
@@ -276,44 +400,55 @@ function initContactForm() {
             submitBtn.textContent = 'Send Message';
         }
     });
+
+    // Handle floating labels
+    form.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
+        input.addEventListener('input', () => {
+            input.classList.toggle('has-value', input.value.trim() !== '');
+        });
+    });
 }
 
 // Form Validation
 function validateForm(form) {
-    const inputs = form.querySelectorAll('input, textarea');
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
     let isValid = true;
 
     inputs.forEach(input => {
-        if (input.hasAttribute('required') && !input.value.trim()) {
+        if (!input.value.trim()) {
             showInputError(input, 'This field is required');
             isValid = false;
-        } else if (input.type === 'email' && input.value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(input.value)) {
-                showInputError(input, 'Please enter a valid email');
-                isValid = false;
-            }
+        } else if (input.type === 'email' && !validateEmail(input.value)) {
+            showInputError(input, 'Please enter a valid email address');
+            isValid = false;
         }
     });
 
     return isValid;
 }
 
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function showInputError(input, message) {
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
+    const formGroup = input.closest('.form-group');
+    let errorDiv = formGroup.querySelector('.error-message');
+    
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        formGroup.appendChild(errorDiv);
+    }
+    
     errorDiv.textContent = message;
-    
-    const existingError = input.parentElement.querySelector('.error-message');
-    if (existingError) existingError.remove();
-    
-    input.parentElement.appendChild(errorDiv);
     input.classList.add('error');
 
-    input.addEventListener('input', function() {
-        this.classList.remove('error');
+    input.addEventListener('input', function removeError() {
+        input.classList.remove('error');
         errorDiv.remove();
-    }, { once: true });
+        input.removeEventListener('input', removeError);
+    });
 }
 
 function showFormMessage(message, type) {
@@ -324,5 +459,13 @@ function showFormMessage(message, type) {
     const form = document.querySelector('.contact-form');
     form.insertBefore(messageDiv, form.firstChild);
     
-    setTimeout(() => messageDiv.remove(), 5000);
+    setTimeout(() => {
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 300);
+    }, 5000);
 }
+
+// Initialize everything when page loads
+window.addEventListener('load', () => {
+    document.body.classList.remove('no-scroll');
+});
