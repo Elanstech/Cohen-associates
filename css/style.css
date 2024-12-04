@@ -377,6 +377,55 @@ body {
 .stat-highlight {
     text-align: center;
 }
+/* Logo Styles */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.logo-text {
+    color: var(--white);
+}
+
+.logo-text h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.logo-text span {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Adjust logo text color when navbar is scrolled */
+.navbar.scrolled .logo-text {
+    color: var(--primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-text h1 {
+        font-size: 1.2rem;
+    }
+
+    .logo-text span {
+        font-size: 0.8rem;
+    }
+}
 
 .counter {
     font-size: 3rem;
