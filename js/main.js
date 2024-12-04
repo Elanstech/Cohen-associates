@@ -132,7 +132,7 @@ function initCircleStats() {
                 const offset = circumference - (value / 100 * circumference);
                 
                 // Animate the circle
-                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDasharray = `${circumference} ${circumference}`;
                 circle.style.strokeDashoffset = circumference;
                 
                 setTimeout(() => {
@@ -152,7 +152,7 @@ function initCircleStats() {
 // Scroll Animations
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
-        '.service-card, .team-member, .info-card, .hero-feature'
+        '.service-card, .team-member, .info-card, .hero-feature, .about-card, .contact-card'
     );
     
     const observer = new IntersectionObserver((entries) => {
@@ -160,6 +160,8 @@ function initScrollAnimations() {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }, index * 100);
                 observer.unobserve(entry.target);
             }
@@ -169,7 +171,12 @@ function initScrollAnimations() {
         rootMargin: '50px'
     });
 
-    animatedElements.forEach(el => observer.observe(el));
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
 }
 
 // Timeline Animation
@@ -207,16 +214,18 @@ function initAboutTabs() {
         const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
         const activeContent = document.getElementById(tabId);
 
-        activeButton.classList.add('active');
-        activeContent.style.display = 'block';
-        
-        // Trigger reflow to ensure animation plays
-        void activeContent.offsetWidth;
-        activeContent.classList.add('active');
+        if (activeButton && activeContent) {
+            activeButton.classList.add('active');
+            activeContent.style.display = 'block';
+            
+            // Trigger reflow to ensure animation plays
+            void activeContent.offsetWidth;
+            activeContent.classList.add('active');
 
-        // Reinitialize circle stats if switching to mission tab
-        if (tabId === 'mission') {
-            initCircleStats();
+            // Reinitialize circle stats if switching to mission tab
+            if (tabId === 'mission') {
+                initCircleStats();
+            }
         }
     }
 
@@ -242,7 +251,7 @@ function initScrollTop() {
     window.addEventListener('scroll', () => {
         if (!isScrolling) {
             window.requestAnimationFrame(() => {
-                if (window.scrollY > 500) {
+                if (window.pageYOffset > 500) {
                     scrollBtn.classList.add('visible');
                 } else {
                     scrollBtn.classList.remove('visible');
