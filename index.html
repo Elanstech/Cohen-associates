@@ -14,9 +14,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -32,12 +29,8 @@
         <div class="top-bar">
             <div class="container">
                 <div class="contact-info">
-                    <a href="tel:Oksana:9172099386 Steve:3479923638">
-                        <i class="fas fa-phone"></i>Oksana:(917)-209-9386 Steve:(347)-992-3638
-                    </a>
-                    <a href="mailto:info@cohen-associates.com">
-                        <i class="fas fa-envelope"></i>info@cohen-associates.com
-                    </a>
+                    <a href="tel:Oksana:9172099386 Steve:3479923638"><i class="fas fa-phone"></i>Oksana:(917)-209-9386 Steve:(347)-992-3638</a>
+                    <a href="mailto:info@cohen-associates.com"><i class="fas fa-envelope"></i> info@cohen-associates.com</a>
                 </div>
             </div>
         </div>
@@ -46,9 +39,7 @@
         <nav class="navbar">
             <div class="container">
                 <a href="#" class="logo">
-                    <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/cohenlogo.jpeg" 
-                         alt="Cohen & Associates Logo" 
-                         class="logo-img">
+                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenlogo.jpeg?raw=true" alt="Cohen & Associates Logo" class="logo-img">
                     <div class="logo-text">
                         <h1>Cohen & Associates</h1>
                         <span>Tax & Business Solutions</span>
@@ -84,391 +75,227 @@
         </div>
     </header>
 
-    <!-- Hero Section with Parallax -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-slider swiper">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide hero-slide" data-swiper-parallax="50%">
-                    <div class="hero-slide-bg" style="background-image: url('https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg')"></div>
-                    <div class="hero-content">
-                        <h2 class="slide-title" data-swiper-parallax="-300">
-                            Expert Financial Solutions
-                        </h2>
-                        <p class="slide-description" data-swiper-parallax="-200">
-                            Strategic tax planning and comprehensive financial advisory services
-                        </p>
-                        <div class="slide-buttons" data-swiper-parallax="-100">
-                            <button class="btn btn-primary">Get Started</button>
-                            <button class="btn btn-outline">Learn More</button>
-                        </div>
-                    </div>
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome To Cohen & Associates</h1>
+                <p class="hero-text">Your Exclusive Partner in Wealth Management and Financial Planning</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Schedule Consultation</button>
+                    <button class="btn btn-outline">Learn More</button>
                 </div>
-
-                <!-- Slide 2 -->
-                <div class="swiper-slide hero-slide" data-swiper-parallax="50%">
-                    <div class="hero-slide-bg" style="background-image: url('https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/office.jpg')"></div>
-                    <div class="hero-content">
-                        <h2 class="slide-title" data-swiper-parallax="-300">
-                            Tax Planning Excellence
-                        </h2>
-                        <p class="slide-description" data-swiper-parallax="-200">
-                            Optimize your tax strategy with our expert team
-                        </p>
-                        <div class="slide-buttons" data-swiper-parallax="-100">
-                            <button class="btn btn-primary">Talk to an Expert</button>
-                            <button class="btn btn-outline">Our Services</button>
-                        </div>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Expert Tax Advisory</span>
                     </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="swiper-slide hero-slide" data-swiper-parallax="50%">
-                    <div class="hero-slide-bg" style="background-image: url('https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/meeting.jpg')"></div>
-                    <div class="hero-content">
-                        <h2 class="slide-title" data-swiper-parallax="-300">
-                            Business Advisory Services
-                        </h2>
-                        <p class="slide-description" data-swiper-parallax="-200">
-                            Guiding your business towards sustainable growth
-                        </p>
-                        <div class="slide-buttons" data-swiper-parallax="-100">
-                            <button class="btn btn-primary">Schedule Consultation</button>
-                            <button class="btn btn-outline">About Us</button>
-                        </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Business Advisory</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Financial Solutions</span>
                     </div>
                 </div>
             </div>
-            <!-- Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
         </div>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
+        <div class="hero-scroll">
             <span>Scroll Down</span>
             <i class="fas fa-chevron-down"></i>
         </div>
+    </section>
 
-        <!-- Hero Features -->
-        <div class="hero-features">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Strategic Planning</h3>
-                        <p>Comprehensive financial strategies for growth</p>
+ <section id="about" class="about">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">Who We Are</span>
+            <h2>Two Decades of Financial Excellence</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="about-grid">
+            <!-- Image Column -->
+            <div class="about-image">
+                <div class="about-image-box">
+                    <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Cohen & Associates Office">
+                    <div class="experience-badge">
+                        <span class="years">20+</span>
+                        <span class="text">Years of<br>Experience</span>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Content Column -->
+            <div class="about-content">
+                <h3>Expert Financial Solutions for Your Business Growth</h3>
+                <p class="lead-text">Since 2004, Cohen & Associates has been providing exceptional tax and financial advisory services to businesses across New York.</p>
+                
+                <div class="key-features">
                     <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Tax Optimization</h3>
-                        <p>Maximize returns with expert tax planning</p>
+                        <div class="feature-text">
+                            <h4>Professional Excellence</h4>
+                            <p>Certified experts delivering premium financial solutions</p>
+                        </div>
                     </div>
                     <div class="feature-item">
                         <div class="feature-icon">
-                            <i class="fas fa-handshake"></i>
+                            <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3>Personal Service</h3>
-                        <p>Dedicated support for your business needs</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section (Previously Updated) -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-subtitle">Who We Are</span>
-                <h2>Two Decades of Financial Excellence</h2>
-                <div class="section-line"></div>
-            </div>
-            
-            <div class="about-grid">
-                <!-- Image Column -->
-                <div class="about-image">
-                    <div class="about-image-box">
-                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" 
-                             alt="Cohen & Associates Office">
-                        <div class="experience-badge">
-                            <span class="years">20+</span>
-                            <span class="text">Years of<br>Experience</span>
+                        <div class="feature-text">
+                            <h4>Strategic Planning</h4>
+                            <p>Customized strategies for optimal financial growth</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Content Column -->
-                <div class="about-content">
-                    <h3>Expert Financial Solutions for Your Business Growth</h3>
-                    <p class="lead-text">Since 2004, Cohen & Associates has been providing exceptional tax and financial advisory services to businesses across New York.</p>
-                    
-                    <div class="key-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Professional Excellence</h4>
-                                <p>Certified experts delivering premium financial solutions</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Strategic Planning</h4>
-                                <p>Customized strategies for optimal financial growth</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="achievement-grid">
-                        <div class="achievement-item">
-                            <div class="achievement-number" data-count="1000">0</div>
-                            <div class="achievement-label">Satisfied Clients</div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="achievement-number" data-count="50">0</div>
-                            <div class="achievement-label">Expert Team</div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="achievement-number" data-count="95">0</div>
-                            <div class="achievement-label">Success Rate</div>
-                        </div>
+                <div class="achievement-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-number" data-count="1000">0</div>
+                        <div class="achievement-label">Satisfied Clients</div>
                     </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number" data-count="50">0</div>
+                        <div class="achievement-label">Expert Team</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number" data-count="95">0</div>
+                        <div class="achievement-label">Success Rate</div>
+                    </div>
+                </div>
 
-                    <div class="about-cta">
-                        <button class="btn btn-primary">Schedule Consultation</button>
-                        <div class="contact-info">
-                            <i class="fas fa-phone"></i>
-                            <div class="contact-text">
-                                <span>Need Help? Call Us</span>
-                                <a href="tel:9172099386">(917) 209-9386</a>
-                            </div>
+                <div class="about-cta">
+                    <button class="btn btn-primary">Schedule Consultation</button>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-text">
+                            <span>Need Help? Call Us</span>
+                            <a href="tel:9172099386">(917) 209-9386</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle">Our Services</span>
-                <h2>Comprehensive Financial Solutions</h2>
+                <h2>Our Services</h2>
                 <div class="section-line"></div>
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
+                    <i class="fas fa-calculator"></i>
                     <h3>Tax Planning</h3>
                     <p>Strategic tax planning and preparation for individuals and businesses</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                    <i class="fas fa-chart-line"></i>
                     <h3>Financial Advisory</h3>
                     <p>Expert guidance for your business growth and financial success</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
+                    <i class="fas fa-globe"></i>
                     <h3>International Tax</h3>
                     <p>Specialized services for international business and taxation</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
+                    <i class="fas fa-building"></i>
                     <h3>Real Estate Services</h3>
                     <p>Comprehensive real estate tax and advisory solutions</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
+            </div>
+            <div class="services-cta">
+                <button class="btn btn-primary">Explore Our Services</button>
             </div>
         </div>
     </section>
 
-    <!-- Team Section (Redesigned) -->
+    <!-- Team Section -->
     <section id="team" class="team">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle">Our Experts</span>
-                <h2>Meet Our Professional Team</h2>
+                <h2>Meet Our Expert Team</h2>
                 <div class="section-line"></div>
             </div>
-            
             <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" 
-                             alt="Team Member">
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Team Member">
                     </div>
-                    <div class="team-info">
-                        <h3>Oksana Cohen</h3>
-                        <span class="position">Managing Partner</span>
-                        <p>Expert in international taxation and business advisory</p>
+                    <div class="member-info">
+                        <h3>Our Leadership</h3>
+                        <p>Dedicated professionals with decades of combined experience</p>
                     </div>
                 </div>
-                
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" 
-                             alt="Team Member">
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h3>Steve Cohen</h3>
-                        <span class="position">Senior Tax Advisor</span>
-                        <p>Specialized in corporate tax strategy and planning</p>
-                    </div>
+                <div class="team-text">
+                    <h3>Expert Financial Guidance</h3>
+                    <p>Our team brings together diverse expertise in tax, finance, and business advisory services to deliver comprehensive solutions for your needs.</p>
+                    <ul class="team-highlights">
+                        <li><i class="fas fa-check-circle"></i>Certified Public Accountants</li>
+                        <li><i class="fas fa-check-circle"></i>Tax Specialists</li>
+                        <li><i class="fas fa-check-circle"></i>Business Advisors</li>
+                        <li><i class="fas fa-check-circle"></i>Financial Planners</li>
+                    </ul>
+                    <button class="btn btn-primary">Meet The Team</button>
                 </div>
-                
-                <div class="team-card">
-                    <div class="team-image">
-                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" 
-                             alt="Team Member">
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                    <div class="team-info">
-                        <h3>Sarah Johnson</h3>
-                        <span class="position">Financial Advisor</span>
-                        <p>Expert in business growth and financial planning</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-cta">
-                <div class="team-cta-content">
-                    <h3>Ready to Work With Our Experts?</h3>
-                    <p>Schedule a consultation with our team today</p>
-                </div>
-                <button class="btn btn-primary">Book Consultation</button>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section (Redesigned) -->
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle">Get In Touch</span>
-                <h2>Let's Start a Conversation</h2>
+                <h2>Get in Touch</h2>
                 <div class="section-line"></div>
             </div>
-
-            <div class="contact-wrapper">
+            <div class="contact-grid">
                 <div class="contact-info">
-                    <div class="contact-card">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3>Visit Our Office</h3>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Visit Us</h3>
                         <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
                     </div>
-                    
-                    <div class="contact-card">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
                         <h3>Call Us</h3>
                         <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
                     </div>
-                    
-                    <div class="contact-card">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
                         <h3>Email Us</h3>
                         <p>info@cohen-associates.com</p>
                     </div>
-
-                    <div class="contact-social">
-                        <h3>Follow Us</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" required>
+                        <label for="name">Your Name</label>
                     </div>
-                </div>
-
-                <div class="contact-form-wrapper">
-                    <form class="contact-form">
-                        <div class="form-header">
-                            <h3>Send Us a Message</h3>
-                            <p>Fill out the form below and we'll get back to you shortly</p>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <input type="text" id="name" required>
-                                <label for="name">Your Name</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="email" id="email" required>
-                                <label for="email">Your Email</label>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="tel" id="phone">
-                            <label for="phone">Phone (Optional)</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <select id="service" required>
-                                <option value="">Select Service</option>
-                                <option value="tax">Tax Planning</option>
-                                <option value="advisory">Financial Advisory</option>
-                                <option value="international">International Tax</option>
-                                <option value="real-estate">Real Estate Services</option>
-                            </select>
-                            <label for="service">Service Interested In</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea id="message" required></textarea>
-                            <label for="message">Your Message</label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Send Message
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="phone">
+                        <label for="phone">Phone (Optional)</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" required></textarea>
+                        <label for="message">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
@@ -481,7 +308,6 @@
                     <div class="footer-logo">Cohen & Associates</div>
                     <p>Expert Tax and Business Solutions</p>
                 </div>
-                
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <a href="#home">Home</a>
@@ -490,7 +316,6 @@
                     <a href="#team">Team</a>
                     <a href="#contact">Contact</a>
                 </div>
-                
                 <div class="footer-contact">
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 93-03 63rd Drive, Rego Park, NY 11374</p>
@@ -498,7 +323,6 @@
                     <p><i class="fas fa-envelope"></i> info@cohen-associates.com</p>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
             </div>
@@ -510,8 +334,7 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <!-- Custom JavaScript -->
     <script src="./js/main.js"></script>
 </body>
 </html>
