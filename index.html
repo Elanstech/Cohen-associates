@@ -1,3 +1,4 @@
+// index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,86 +76,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-parallax">
-        <div class="parallax-slider">
-            <!-- Slide 1 -->
-            <div class="parallax-slide">
-                <div class="parallax-bg" style="background-image: url('images/hero-1.jpg')"></div>
-                <div class="slide-content container">
-                    <h2>Expert Financial Solutions</h2>
-                    <p>Strategic tax planning and wealth management for your future</p>
-                    <button class="btn btn-secondary">Schedule Consultation</button>
-                </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="parallax-slide">
-                <div class="parallax-bg" style="background-image: url('images/hero-2.jpg')"></div>
-                <div class="slide-content container">
-                    <h2>International Tax Expertise</h2>
-                    <p>Comprehensive solutions for global business needs</p>
-                    <button class="btn btn-secondary">Learn More</button>
-                </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="parallax-slide">
-                <div class="parallax-bg" style="background-image: url('images/hero-3.jpg')"></div>
-                <div class="slide-content container">
-                    <h2>Business Advisory</h2>
-                    <p>Expert guidance for your business growth</p>
-                    <button class="btn btn-secondary">Get Started</button>
-                </div>
-            </div>
-        </div>
-        <!-- Slider Navigation -->
-        <div class="slider-nav">
-            <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-            <div class="slide-dots"></div>
-            <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Services</h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="services-grid">
-                <!-- Service Card 1 -->
-                <div class="service-card">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Tax Planning</h3>
-                    <p>Strategic tax planning and preparation for individuals and businesses</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <!-- Service Card 2 -->
-                <div class="service-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Financial Advisory</h3>
-                    <p>Expert guidance for your business growth and financial success</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <!-- Service Card 3 -->
-                <div class="service-card">
-                    <i class="fas fa-globe"></i>
-                    <h3>International Tax</h3>
-                    <p>Specialized services for international business and taxation</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <!-- Service Card 4 -->
-                <div class="service-card">
-                    <i class="fas fa-building"></i>
-                    <h3>Real Estate Services</h3>
-                    <p>Comprehensive real estate tax and advisory solutions</p>
-                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
+       <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-header">
@@ -164,17 +86,38 @@
             <div class="about-content">
                 <div class="about-text">
                     <div class="about-tabs">
-                        <button class="tab-button" data-tab="mission">Our Mission</button>
+                        <button class="tab-button active" data-tab="mission">Our Mission</button>
                         <button class="tab-button" data-tab="values">Our Values</button>
                     </div>
-                    <div class="tab-content" id="mission">
+                    <div class="tab-content active" id="mission">
                         <h3>Our Mission</h3>
                         <p>At Cohen & Associates, we're dedicated to providing exceptional financial guidance and personalized solutions that empower our clients to achieve their goals.</p>
-                        <ul class="mission-points">
-                            <li><i class="fas fa-check-circle"></i>Expert Financial Guidance</li>
-                            <li><i class="fas fa-check-circle"></i>Personalized Solutions</li>
-                            <li><i class="fas fa-check-circle"></i>Innovation Focus</li>
-                        </ul>
+                        <div class="stats-circles">
+                            <div class="stat-circle">
+                                <svg viewBox="0 0 120 120">
+                                    <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                                    <circle class="progress" cx="60" cy="60" r="54" data-value="20"/>
+                                    <text x="60" y="55" class="stat-number">20</text>
+                                    <text x="60" y="75" class="stat-label">Years</text>
+                                </svg>
+                            </div>
+                            <div class="stat-circle">
+                                <svg viewBox="0 0 120 120">
+                                    <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                                    <circle class="progress" cx="60" cy="60" r="54" data-value="90"/>
+                                    <text x="60" y="55" class="stat-number">1K+</text>
+                                    <text x="60" y="75" class="stat-label">Clients</text>
+                                </svg>
+                            </div>
+                            <div class="stat-circle">
+                                <svg viewBox="0 0 120 120">
+                                    <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                                    <circle class="progress" cx="60" cy="60" r="54" data-value="75"/>
+                                    <text x="60" y="55" class="stat-number">50+</text>
+                                    <text x="60" y="75" class="stat-label">Experts</text>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-content" id="values">
                         <h3>Our Values</h3>
@@ -203,56 +146,59 @@
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
                             <h4>2004</h4>
-                            <p>Founded in New York</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h4>2009</h4>
-                            <p>Expanded to International Markets</p>
+                            <p>Founded in NY</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
                             <h4>2014</h4>
-                            <p>Opened Second Office</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <h4>2019</h4>
-                            <p>Launched Digital Solutions</p>
+                            <p>Expanded Services</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="timeline-content">
                             <h4>2024</h4>
-                            <p>Celebrating 20 Years of Excellence</p>
+                            <p>20 Years Strong</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="about-stats">
-                <div class="stat-item">
-                    <span class="counter" data-target="20">0</span>
-                    <p>Years Experience</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Tax Planning</h3>
+                    <p>Strategic tax planning and preparation for individuals and businesses</p>
                 </div>
-                <div class="stat-item">
-                    <span class="counter" data-target="1000">0</span>
-                    <p>Happy Clients</p>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Financial Advisory</h3>
+                    <p>Expert guidance for your business growth and financial success</p>
                 </div>
-                <div class="stat-item">
-                    <span class="counter" data-target="50">0</span>
-                    <p>Team Members</p>
+                <div class="service-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>International Tax</h3>
+                    <p>Specialized services for international business and taxation</p>
                 </div>
-                <div class="stat-item">
-                    <span class="counter" data-target="15">0</span>
-                    <p>Industry Awards</p>
+                <div class="service-card">
+                    <i class="fas fa-building"></i>
+                    <h3>Real Estate Services</h3>
+                    <p>Comprehensive real estate tax and advisory solutions</p>
                 </div>
+            </div>
+            <div class="services-cta">
+                <button class="btn btn-primary">Explore Our Services</button>
             </div>
         </div>
     </section>
@@ -260,20 +206,30 @@
     <!-- Team Section -->
     <section id="team" class="team">
         <div class="container">
-            <div class="team-content">
-                <div class="team-text">
-                    <h2>Meet Our Expert Team</h2>
-                    <p>Our dedicated professionals bring decades of combined experience in tax, finance, and business advisory services.</p>
-                    <button class="btn btn-primary">View All Team Members</button>
-                </div>
-                <div class="team-showcase">
-                    <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Cohen & Associates Team" class="team-image">
-                    <div class="team-overlay">
-                        <div class="stat-highlight">
-                            <span class="counter" data-target="20">0</span>
-                            <p>Years of Excellence</p>
-                        </div>
+            <div class="section-header">
+                <h2>Meet Our Expert Team</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Team Member">
                     </div>
+                    <div class="member-info">
+                        <h3>Our Leadership</h3>
+                        <p>Dedicated professionals with decades of combined experience</p>
+                    </div>
+                </div>
+                <div class="team-text">
+                    <h3>Expert Financial Guidance</h3>
+                    <p>Our team brings together diverse expertise in tax, finance, and business advisory services to deliver comprehensive solutions for your needs.</p>
+                    <ul class="team-highlights">
+                        <li><i class="fas fa-check-circle"></i>Certified Public Accountants</li>
+                        <li><i class="fas fa-check-circle"></i>Tax Specialists</li>
+                        <li><i class="fas fa-check-circle"></i>Business Advisors</li>
+                        <li><i class="fas fa-check-circle"></i>Financial Planners</li>
+                    </ul>
+                    <button class="btn btn-primary">Meet The Team</button>
                 </div>
             </div>
         </div>
@@ -282,22 +238,26 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <div class="section-line"></div>
+            </div>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h2>Get in Touch</h2>
-                    <div class="info-items">
-                        <div class="info-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <p>93-03 63rd Drive, Rego Park, NY 11374</p>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone"></i>
-                            <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-envelope"></i>
-                            <p>info@cohen-associates.com</p>
-                        </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Visit Us</h3>
+                        <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Call Us</h3>
+                        <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Us</h3>
+                        <p>info@cohen-associates.com</p>
                     </div>
                 </div>
                 <form class="contact-form">
@@ -322,7 +282,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -351,7 +310,7 @@
             </div>
         </div>
     </footer>
-    <!-- Scroll to Top Button -->
+   <!-- Scroll to Top Button -->
     <button class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </button>
