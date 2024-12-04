@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initAboutTabs();
     initTimelineAnimation();
+    initHeroScroll();
 });
 
 // Loader
@@ -25,6 +26,7 @@ function initLoader() {
 
 // Navigation
 function initNavigation() {
+    const header = document.querySelector('.header');
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav-links a');
     let lastScroll = 0;
@@ -32,20 +34,25 @@ function initNavigation() {
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         
+        // Add/remove scrolled class
         if (currentScroll > 50) {
+            header.classList.add('scrolled');
             navbar.classList.add('scrolled');
         } else {
+            header.classList.remove('scrolled');
             navbar.classList.remove('scrolled');
         }
 
+        // Hide/show header on scroll
         if (currentScroll > lastScroll && currentScroll > 500) {
-            navbar.style.transform = 'translateY(-100%)';
+            header.style.transform = 'translateY(-100%)';
         } else {
-            navbar.style.transform = 'translateY(0)';
+            header.style.transform = 'translateY(0)';
         }
         lastScroll = currentScroll;
     });
 
+    // Smooth scroll for navigation
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -57,11 +64,12 @@ function initNavigation() {
                     document.body.classList.remove('no-scroll');
                 }
                 
-                const offset = navbar.offsetHeight;
-                const targetPosition = target.offsetTop - offset;
-                
+                const headerOffset = header.offsetHeight;
+                const elementPosition = target.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+
                 window.scrollTo({
-                    top: targetPosition,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
             }
@@ -83,6 +91,7 @@ function initMobileMenu() {
     mobileMenuBtn.addEventListener('click', toggleMenu);
     closeMenuBtn.addEventListener('click', toggleMenu);
 
+    // Close menu on outside click
     document.addEventListener('click', (e) => {
         if (mobileMenu.classList.contains('active') &&
             !mobileMenu.contains(e.target) &&
@@ -90,6 +99,24 @@ function initMobileMenu() {
             toggleMenu();
         }
     });
+}
+
+// Hero Scroll Button
+function initHeroScroll() {
+    const heroScroll = document.querySelector('.hero-scroll');
+    if (heroScroll) {
+        heroScroll.addEventListener('click', () => {
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const position = aboutSection.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: position,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
 }
 
 // Circle Stats Animation
@@ -124,7 +151,9 @@ function initCircleStats() {
 
 // Scroll Animations
 function initScrollAnimations() {
-    const elements = document.querySelectorAll('.service-card, .team-member, .info-card');
+    const animatedElements = document.querySelectorAll(
+        '.service-card, .team-member, .info-card, .hero-feature'
+    );
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -136,10 +165,11 @@ function initScrollAnimations() {
             }
         });
     }, {
-        threshold: 0.2
+        threshold: 0.2,
+        rootMargin: '50px'
     });
 
-    elements.forEach(el => observer.observe(el));
+    animatedElements.forEach(el => observer.observe(el));
 }
 
 // Timeline Animation
@@ -183,6 +213,11 @@ function initAboutTabs() {
         // Trigger reflow to ensure animation plays
         void activeContent.offsetWidth;
         activeContent.classList.add('active');
+
+        // Reinitialize circle stats if switching to mission tab
+        if (tabId === 'mission') {
+            initCircleStats();
+        }
     }
 
     tabButtons.forEach(button => {
