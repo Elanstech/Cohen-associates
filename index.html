@@ -31,7 +31,7 @@
     <header class="header">
         <nav class="navbar container">
             <a href="#" class="logo">
-                <div class="logo-mark">C&A</div>
+                <img src="assets/logo.png" alt="Cohen & Associates Logo" class="logo-image">
                 <div class="logo-text">
                     <h1>Cohen & Associates</h1>
                     <span>Financial Excellence</span>
@@ -58,7 +58,7 @@
             </button>
         </nav>
     </header>
-
+    
     <!-- Mobile Menu -->
     <div class="mobile-menu">
         <div class="menu-header">
@@ -108,7 +108,7 @@
                 <div class="visual-container">
                     <div class="shape shape-1"></div>
                     <div class="shape shape-2"></div>
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenfront.jpeg?raw=true" alt="Cohen & Associates" class="hero-image">
+                    <img src="assets/hero-image.jpg" alt="Cohen & Associates" class="hero-image">
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -131,6 +131,7 @@
             <div class="scroll-line"></div>
         </div>
     </section>
+
     <!-- Services Section -->
     <section id="services" class="services" data-scroll-section>
         <div class="container">
@@ -232,14 +233,12 @@
                 <div class="about-visual" data-scroll data-scroll-speed="-1">
                     <div class="visual-container">
                         <div class="image-wrapper">
-                            <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Cohen & Associates Office">
+                            <img src="assets/about-image.jpg" alt="Cohen & Associates Team">
                         </div>
                         <div class="experience-badge">
                             <span class="years">20+</span>
                             <span class="text">Years of Excellence</span>
                         </div>
-                        <div class="shape shape-1"></div>
-                        <div class="shape shape-2"></div>
                     </div>
                 </div>
             </div>
@@ -259,7 +258,7 @@
                 <div class="team-card" data-scroll data-scroll-speed="1.2">
                     <div class="card-visual">
                         <div class="image-wrapper">
-                            <img src="https://github.com/Elanstech/Cohen-associates/blob/main/Oksanafront.jpeg?raw=true" alt="Oksana Inoyatova">
+                            <img src="assets/team-1.jpg" alt="Team Member">
                         </div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
@@ -276,7 +275,7 @@
                 <div class="team-card" data-scroll data-scroll-speed="1.4">
                     <div class="card-visual">
                         <div class="image-wrapper">
-                            <img src="https://github.com/Elanstech/Cohen-associates/blob/main/stevefront.jpeg?raw=true" alt="Steve Inoyatov">
+                            <img src="assets/team-2.jpg" alt="Team Member">
                         </div>
                         <div class="social-links">
                             <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
@@ -305,20 +304,26 @@
                     <div class="info-cards">
                         <div class="info-card">
                             <i class="fas fa-map-marker-alt"></i>
-                            <h3>Visit Us</h3>
-                            <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
+                            <div class="info-content">
+                                <h3>Visit Us</h3>
+                                <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
+                            </div>
                         </div>
 
                         <div class="info-card">
                             <i class="fas fa-phone"></i>
-                            <h3>Call Us</h3>
-                            <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
+                            <div class="info-content">
+                                <h3>Call Us</h3>
+                                <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
+                            </div>
                         </div>
 
                         <div class="info-card">
                             <i class="fas fa-envelope"></i>
-                            <h3>Email Us</h3>
-                            <p>info@cohen-associates.com</p>
+                            <div class="info-content">
+                                <h3>Email Us</h3>
+                                <p>info@cohen-associates.com</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -328,35 +333,30 @@
                         <div class="form-group">
                             <input type="text" id="name" required>
                             <label for="name">Full Name</label>
-                            <div class="form-border"></div>
                         </div>
 
                         <div class="form-group">
                             <input type="email" id="email" required>
                             <label for="email">Email Address</label>
-                            <div class="form-border"></div>
                         </div>
 
                         <div class="form-group">
                             <input type="tel" id="phone">
                             <label for="phone">Phone (Optional)</label>
-                            <div class="form-border"></div>
                         </div>
 
                         <div class="form-group">
                             <select id="service" required>
                                 <option value="">Select Service</option>
-                                <option value="tax">Tax Planning</option>
+                        <option value="tax">Tax Planning</option>
                                 <option value="international">International Services</option>
                                 <option value="advisory">Business Advisory</option>
                             </select>
-                            <div class="form-border"></div>
                         </div>
 
                         <div class="form-group full-width">
                             <textarea id="message" required></textarea>
                             <label for="message">Your Message</label>
-                            <div class="form-border"></div>
                         </div>
                     </div>
 
@@ -420,6 +420,6 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>
