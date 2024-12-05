@@ -51,17 +51,6 @@ function initLocomotiveScroll() {
         }, 250);
     });
 
-    // Handle anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(anchor.getAttribute('href'));
-            if (target) {
-                scroll.scrollTo(target);
-            }
-        });
-    });
-
     return scroll;
 }
 
@@ -71,16 +60,16 @@ function initNavigation() {
     const logo = document.querySelector('.logo-mark');
     let lastScroll = 0;
 
+    // Navigation state handler
     function updateNavigation() {
         const currentScroll = window.pageYOffset;
         
-        // Add/remove scrolled class based on scroll position
         if (currentScroll > 50) {
             header.classList.add('scrolled');
-            if (logo) logo.style.transform = 'scale(0.8)';
+            logo.style.transform = 'scale(0.8)';
         } else {
             header.classList.remove('scrolled');
-            if (logo) logo.style.transform = 'scale(1)';
+            logo.style.transform = 'scale(1)';
         }
 
         // Hide/show header on scroll direction
@@ -93,11 +82,23 @@ function initNavigation() {
         lastScroll = currentScroll;
     }
 
-    // Active link updating
-    function updateActiveLink() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
+    // Throttle scroll events
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateNavigation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
 
+    // Active link updating
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    function updateActiveLink() {
         const currentPos = window.pageYOffset;
 
         sections.forEach(section => {
@@ -116,12 +117,9 @@ function initNavigation() {
         });
     }
 
-    // Throttle scroll events
-    let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
-                updateNavigation();
                 updateActiveLink();
                 ticking = false;
             });
@@ -130,7 +128,7 @@ function initNavigation() {
     });
 }
 
-// Mobile Menu Functionality
+// Mobile Menu
 function initMobileMenu() {
     const menuTrigger = document.querySelector('.menu-trigger');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -146,12 +144,12 @@ function initMobileMenu() {
     menuTrigger.addEventListener('click', toggleMenu);
     closeButton.addEventListener('click', toggleMenu);
 
-    // Close menu on link click and smooth scroll
+    // Close menu on link click
     menuLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
+        link.addEventListener('click', () => {
             toggleMenu();
             
+            // Smooth scroll to section
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
@@ -184,8 +182,7 @@ function initParallaxEffects() {
         
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const yPos = -(scrolled * speed) / 10;
-            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
         });
     });
 }
@@ -263,6 +260,7 @@ function initFormInteractions() {
         const input = group.querySelector('input, textarea, select');
         const label = group.querySelector('label');
 
+        // Handle focus states
         input.addEventListener('focus', () => {
             group.classList.add('focused');
         });
@@ -276,6 +274,7 @@ function initFormInteractions() {
             }
         });
 
+        // Handle initial state
         if (input.value) {
             group.classList.add('filled');
         }
@@ -290,11 +289,11 @@ function initFormInteractions() {
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.innerHTML;
         
-        try {
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-            // Simulate API call - replace with actual API call
+        try {
+            // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 2000));
             
             showNotification('Message sent successfully!', 'success');
@@ -316,33 +315,27 @@ function validateForm(form) {
 
     form.querySelectorAll('[required]').forEach(field => {
         const group = field.closest('.form-group');
-        removeError(group);
+        const errorMessage = group.querySelector('.error-message') || document.createElement('div');
+        errorMessage.className = 'error-message';
 
         if (!field.value.trim()) {
             isValid = false;
-            showError(group, 'This field is required');
+            errorMessage.textContent = 'This field is required';
+            group.appendChild(errorMessage);
         } else if (field.type === 'email' && !emailRegex.test(field.value)) {
             isValid = false;
-            showError(group, 'Please enter a valid email address');
+            errorMessage.textContent = 'Please enter a valid email address';
+            group.appendChild(errorMessage);
+        } else {
+            const existingError = group.querySelector('.error-message');
+            if (existingError) existingError.remove();
         }
     });
 
     return isValid;
 }
 
-// Helper Functions
-function showError(group, message) {
-    const error = document.createElement('div');
-    error.className = 'error-message';
-    error.textContent = message;
-    group.appendChild(error);
-}
-
-function removeError(group) {
-    const existingError = group.querySelector('.error-message');
-    if (existingError) existingError.remove();
-}
-
+// Notification System
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -362,7 +355,7 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-// Smooth Scroll for Anchor Links
+// Smooth Anchor Navigation
 function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
