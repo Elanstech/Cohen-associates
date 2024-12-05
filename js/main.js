@@ -1,4 +1,4 @@
-// Main JavaScript Code
+// Main JavaScript
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initHeroSlider();
@@ -143,31 +143,19 @@ function initMobileMenu() {
     overlay.addEventListener('click', toggleMenu);
 }
 
-// Scroll Animations
+// Scroll Animations with AOS
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll(
-        '.feature-item, .team-card, .service-card, .info-card, .about-content'
-    );
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, index * 100);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.2
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        disable: 'mobile'
     });
-
-    animatedElements.forEach(el => observer.observe(el));
 }
 
 // Counter Animation
 function initCounterAnimation() {
-    const counters = document.querySelectorAll('.trust-item .number');
+    const counters = document.querySelectorAll('[data-count]');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -234,7 +222,7 @@ function initContactForm() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         
         try {
-            // Simulate form submission
+            // Simulate form submission - Replace with actual API call
             await new Promise(resolve => setTimeout(resolve, 1500));
             showMessage('Message sent successfully!', 'success');
             form.reset();
