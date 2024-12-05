@@ -906,7 +906,24 @@ body {
     grid-template-columns: 1fr 1.5fr;
     gap: 4rem;
 }
+.map-container {
+    margin-top: 4rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
 
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+}
+
+@media (max-width: 768px) {
+    .map-container iframe {
+        height: 350px;
+    }
+}
 .info-cards {
     display: grid;
     gap: 2rem;
