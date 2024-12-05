@@ -7,9 +7,7 @@
     <meta name="description" content="Expert tax and business solutions serving domestic and international clients with over 20 years of experience.">
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="no-scroll">
     <!-- Loader -->
@@ -34,29 +32,31 @@
 
     <!-- Header -->
     <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <a href="#" class="logo">
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenlogo.jpeg?raw=true" alt="Cohen & Associates Logo" class="logo-img">
-                    <div class="logo-text">
-                        <h1>Cohen & Associates</h1>
-                        <span>Tax & Business Solutions</span>
-                    </div>
-                </a>
-                <div class="nav-links">
-                    <a href="#home" class="active">Home</a>
-                    <a href="#services">Services</a>
-                    <a href="#about">About</a>
-                    <a href="#team">Team</a>
-                    <a href="#contact">Contact</a>
-                    <button class="btn btn-primary pulse-animation">Free Consultation</button>
+        <nav class="navbar container">
+            <a href="#" class="logo">
+                <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenlogo.jpeg?raw=true" alt="Cohen & Associates Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Cohen & Associates</h1>
+                    <span>Tax & Business Solutions</span>
                 </div>
-                <button class="mobile-menu-button" aria-label="Toggle Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            </a>
+            
+            <div class="nav-wrapper">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="btn btn-primary pulse-animation">Free Consultation</button>
             </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
 
         <!-- Mobile Menu -->
@@ -74,7 +74,7 @@
             </div>
         </div>
     </header>
-  
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-slider swiper">
@@ -238,15 +238,15 @@
                     
                     <div class="stats-grid">
                         <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                            <span class="stat-number" data-count="1000">1000</span>
+                            <span class="stat-number" data-count="1000">0</span>
                             <span class="stat-label">Satisfied Clients</span>
                         </div>
                         <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                            <span class="stat-number" data-count="20">20</span>
+                            <span class="stat-number" data-count="20">0</span>
                             <span class="stat-label">Years Experience</span>
                         </div>
                         <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                            <span class="stat-number" data-count="95">95</span>
+                            <span class="stat-number" data-count="95">0</span>
                             <span class="stat-label">Success Rate</span>
                         </div>
                     </div>
@@ -286,58 +286,58 @@
     </section>
 
     <!-- Team Section -->
-<section id="team" class="team">
-    <div class="container">
-        <div class="section-header" data-aos="fade-up">
-            <span class="overline">Our Experts</span>
-            <h2>Meet Our Founders</h2>
-            <p>Dedicated professionals committed to your success</p>
-        </div>
-        
-        <div class="team-grid"> <!-- This wrapper div was missing -->
-            <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="team-image-wrapper">
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/Oksanafront.jpeg?raw=true" alt="Oksana Inoyatova">
-                    <div class="team-overlay">
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="overline">Our Experts</span>
+                <h2>Meet Our Founders</h2>
+                <p>Dedicated professionals committed to your success</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="team-image-wrapper">
+                        <img src="https://github.com/Elanstech/Cohen-associates/blob/main/Oksanafront.jpeg?raw=true" alt="Oksana Inoyatova">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
+                    <div class="team-content">
+                        <h3>Oksana Inoyatova</h3>
+                        <span class="team-role">Founder & CEO</span>
+                        <p>Founder</p>
+                    </div>
                 </div>
-                <div class="team-content">
-                    <h3>Oksana Inoyatova</h3>
-                    <span class="team-role">Founder & CEO</span>
-                    <p>Founder</p>
+
+                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="team-image-wrapper">
+                        <img src="https://github.com/Elanstech/Cohen-associates/blob/main/stevefront.jpeg?raw=true" alt="Steve Inoyatov">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3>Steve Inoyatov</h3>
+                        <span class="team-role">Co-Founder & CFO</span>
+                        <p>Focused on business development and operational excellence</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="team-image-wrapper">
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/stevefront.jpeg?raw=true" alt="Steve Inoyatov">
-                    <div class="team-overlay">
-                        <div class="team-social">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fas fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-content">
-                    <h3>Steve Inoyatov</h3>
-                    <span class="team-role">Co-Founder & CFO</span>
-                    <p>Focused on business development and operational excellence</p>
-                </div>
+            <div class="team-cta" data-aos="fade-up">
+                <button class="btn btn-primary">Meet Our Full Team</button>
+                <a href="careers.html" class="btn btn-outline">Join Our Team</a>
             </div>
         </div>
+    </section>
 
-        <div class="team-cta" data-aos="fade-up">
-            <button class="btn btn-primary">Meet Our Full Team</button>
-            <a href="careers.html" class="btn btn-outline">Join Our Team</a>
-        </div>
-    </div>
-</section>
-   
-        <!-- Contact Section -->
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="contact-grid">
@@ -377,15 +377,15 @@
                 <form class="contact-form" data-aos="fade-left">
                     <div class="form-grid">
                         <div class="form-group">
-                            <input type="text" id="name" required placeholder="">
+                            <input type="text" id="name" required>
                             <label for="name">Full Name</label>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" required placeholder="">
+                            <input type="email" id="email" required>
                             <label for="email">Email Address</label>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" placeholder="">
+                            <input type="tel" id="phone">
                             <label for="phone">Phone (Optional)</label>
                         </div>
                         <div class="form-group">
@@ -397,13 +397,14 @@
                             </select>
                         </div>
                         <div class="form-group full-width">
-                            <textarea id="message" required placeholder=""></textarea>
+                            <textarea id="message" required></textarea>
                             <label for="message">Your Message</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
+            
             <div class="map-container" data-aos="fade-up">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.941293041111!2d-73.86381532430708!3d40.72167087138171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25e1e7e782567%3A0x7e84c366bb491fda!2s93-03%2063rd%20Dr%2C%20Rego%20Park%2C%20NY%2011374!5e0!3m2!1sen!2sus!4v1707076419695!5m2!1sen!2sus"
@@ -455,8 +456,6 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
-        
