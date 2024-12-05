@@ -316,14 +316,15 @@ body {
 
 /* Hero Scroll Indicator */
 /* Update the .hero-scroll styles */
+/* Update the .hero-scroll styles */
 .hero-scroll {
     position: absolute;
-    bottom: 2rem;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
     color: var(--white);
     text-align: center;
-    z-index: 2;
+    z-index: 3;
     cursor: pointer;
     animation: bounce 2s infinite;
 }
