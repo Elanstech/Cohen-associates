@@ -380,9 +380,22 @@ body {
     font-size: 0.9rem;
 }
 
+/* Update the .phone-numbers styles */
 .phone-numbers {
     display: flex;
     gap: 2rem;
+    justify-content: flex-end;
+}
+
+.phone-numbers a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.phone-numbers span {
+    text-align: right;
 }
 .navbar {
     padding: 1rem 0;
