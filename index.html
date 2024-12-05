@@ -4,40 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cohen & Associates - Expert Financial Solutions</title>
-    <meta name="description" content="Expert tax and business solutions serving domestic and international clients with over 20 years of experience.">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
-    
-    <!-- AOS Animation -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <!-- Locomotive Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="no-scroll">
+<body class="loading" data-scroll-container>
     <!-- Loader -->
     <div class="loader">
-        <div class="loader-content">
-            <div class="loader-logo">C&A</div>
-            <div class="loader-spinner"></div>
-        </div>
+        <svg class="loader-logo" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" stroke="currentColor" fill="none"/>
+            <path d="M30,50 L70,50" stroke="currentColor"/>
+            <path d="M50,30 L50,70" stroke="currentColor"/>
+        </svg>
     </div>
 
     <!-- Header -->
     <header class="header">
         <nav class="navbar container">
             <a href="#" class="logo">
-                <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenlogo.jpeg?raw=true" alt="Cohen & Associates Logo" class="logo-img">
+                <div class="logo-mark">C&A</div>
                 <div class="logo-text">
                     <h1>Cohen & Associates</h1>
-                    <span>Tax & Business Solutions</span>
+                    <span>Financial Excellence</span>
                 </div>
             </a>
             
@@ -49,236 +46,200 @@
                     <li><a href="#team">Team</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <button class="btn btn-primary pulse-animation">Free Consultation</button>
+                <button class="btn btn-primary">
+                    <span>Free Consultation</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
 
-            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
-                <span></span>
+            <button class="menu-trigger">
                 <span></span>
                 <span></span>
             </button>
         </nav>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu">
-            <button class="mobile-close-button" aria-label="Close Menu">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="mobile-nav-links">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#team">Team</a>
-                <a href="#contact">Contact</a>
-                <button class="btn btn-primary">Free Consultation</button>
-            </div>
-        </div>
     </header>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="menu-header">
+            <div class="logo-mark">C&A</div>
+            <button class="menu-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="menu-nav">
+            <a href="#home" class="menu-link">Home</a>
+            <a href="#services" class="menu-link">Services</a>
+            <a href="#about" class="menu-link">About</a>
+            <a href="#team" class="menu-link">Team</a>
+            <a href="#contact" class="menu-link">Contact</a>
+        </nav>
+        <div class="menu-footer">
+            <button class="btn btn-primary">Free Consultation</button>
+            <div class="menu-contact">
+                <p><i class="fas fa-phone"></i> (917) 209-9386</p>
+                <p><i class="fas fa-envelope"></i> info@cohen-associates.com</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-slider swiper">
-            <div class="swiper-wrapper">
-                <!-- Slide 1: Welcome -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h1 class="hero-title" data-swiper-parallax="-300">Welcome to Cohen & Associates</h1>
-                        <p class="hero-subtitle" data-swiper-parallax="-200">Your Trusted Partner in Financial Excellence Since 2004</p>
-                        <div class="hero-buttons" data-swiper-parallax="-100">
-                            <button class="btn btn-primary">Start Your Journey</button>
-                            <button class="btn btn-outline">Learn More</button>
-                        </div>
-                    </div>
+    <section id="home" class="hero" data-scroll-section>
+        <div class="hero-content container">
+            <div class="hero-text">
+                <h1 class="hero-title" data-scroll data-scroll-speed="1">
+                    <span class="reveal-text">Elevating Your</span>
+                    <span class="reveal-text">Financial Future</span>
+                </h1>
+                <p class="hero-subtitle" data-scroll data-scroll-speed="2">
+                    Expert tax and business solutions with over two decades of excellence in financial services.
+                </p>
+                <div class="hero-cta" data-scroll data-scroll-speed="1.5">
+                    <button class="btn btn-primary">
+                        <span>Start Your Journey</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-outline">
+                        <span>Learn More</span>
+                    </button>
                 </div>
-
-                <!-- Slide 2: Services -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&auto=format')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h2 class="hero-title" data-swiper-parallax="-300">Discover Our Expertise</h2>
-                        <p class="hero-subtitle" data-swiper-parallax="-200">Comprehensive Financial Solutions for Your Success</p>
-                        <div class="hero-features" data-swiper-parallax="-100">
-                            <div class="feature-item">
-                                <i class="fas fa-chart-line"></i>
-                                <span>Tax Planning</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-globe"></i>
-                                <span>International Services</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-building"></i>
-                                <span>Business Advisory</span>
-                            </div>
-                        </div>
-                        <div class="hero-buttons" data-swiper-parallax="-50">
-                            <button class="btn btn-primary">Explore Services</button>
-                        </div>
-                    </div>
+            </div>
+            <div class="hero-visual" data-scroll data-scroll-speed="-2">
+                <div class="visual-container">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/cohenlogo.jpeg?raw=true" alt="Cohen & Associates" class="hero-image">
                 </div>
-
-                <!-- Slide 3: Trust -->
-                <div class="swiper-slide hero-slide">
-                    <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&auto=format')"></div>
-                    <div class="hero-overlay"></div>
-                    <div class="hero-content">
-                        <h2 class="hero-title" data-swiper-parallax="-300">Building Trust Through Excellence</h2>
-                        <p class="hero-subtitle" data-swiper-parallax="-200">Join Over 1,000+ Satisfied Clients Who Trust Our Expertise</p>
-                        <div class="trust-indicators" data-swiper-parallax="-100">
-                            <div class="trust-item">
-                                <span class="number" data-count="20">0</span>
-                                <span class="label">Years Experience</span>
-                            </div>
-                            <div class="trust-item">
-                                <span class="number" data-count="95">0</span>
-                                <span class="label">Client Satisfaction</span>
-                            </div>
-                            <div class="trust-item">
-                                <span class="number" data-count="24">0</span>
-                                <span class="label">Hour Support</span>
-                            </div>
-                        </div>
-                        <div class="hero-buttons" data-swiper-parallax="-50">
-                            <button class="btn btn-primary">Schedule Consultation</button>
-                        </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="number" data-count="20">0</span>
+                        <span class="label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number" data-count="1000">0</span>
+                        <span class="label">Clients Served</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number" data-count="95">0</span>
+                        <span class="label">Success Rate</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
         </div>
-
-        <!-- Scroll Indicator -->
         <div class="hero-scroll">
             <span>Scroll to Explore</span>
-            <i class="fas fa-chevron-down"></i>
+            <div class="scroll-line"></div>
         </div>
     </section>
-
     <!-- Services Section -->
-    <section id="services" class="services">
+    <section id="services" class="services" data-scroll-section>
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="overline">What We Offer</span>
-                <h2>Comprehensive Financial Solutions</h2>
-                <p>Tailored services to meet your unique financial needs</p>
+            <div class="section-header" data-scroll data-scroll-speed="1">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">Comprehensive Financial Solutions</h2>
+                <p class="section-subtitle">Tailored strategies to elevate your financial success</p>
             </div>
             
             <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-icon">
+                <div class="service-card" data-scroll data-scroll-speed="1.2">
+                    <div class="card-visual">
                         <i class="fas fa-chart-pie"></i>
+                        <div class="visual-circle"></div>
                     </div>
-                    <div class="service-content">
-                        <h3>Tax Strategy & Planning</h3>
-                        <p>Strategic tax planning that maximizes benefits and ensures compliance</p>
-                        <ul class="service-features">
-                            <li>Personal & Business Tax</li>
-                            <li>Tax Optimization</li>
-                            <li>Compliance Management</li>
-                        </ul>
-                        <a href="#" class="btn-outline">Learn More</a>
-                    </div>
+                    <h3>Tax Strategy & Planning</h3>
+                    <p>Strategic tax planning that maximizes benefits and ensures compliance through expert analysis</p>
+                    <ul class="service-features">
+                        <li>Personal & Business Tax Planning</li>
+                        <li>Tax Optimization Strategies</li>
+                        <li>Compliance Management</li>
+                    </ul>
+                    <a href="#" class="card-link">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <div class="service-card featured" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-icon">
+                <div class="service-card featured" data-scroll data-scroll-speed="1">
+                    <div class="card-visual">
                         <i class="fas fa-globe"></i>
+                        <div class="visual-circle"></div>
                     </div>
-                    <div class="service-content">
-                        <h3>International Services</h3>
-                        <p>Global financial solutions for businesses operating across borders</p>
-                        <ul class="service-features">
-                            <li>Cross-border Taxation</li>
-                            <li>International Compliance</li>
-                            <li>Global Strategy</li>
-                        </ul>
-                        <a href="#" class="btn-outline">Learn More</a>
-                    </div>
+                    <h3>International Services</h3>
+                    <p>Global financial solutions for businesses operating across borders with comprehensive support</p>
+                    <ul class="service-features">
+                        <li>Cross-border Taxation</li>
+                        <li>International Compliance</li>
+                        <li>Global Strategy Development</li>
+                    </ul>
+                    <a href="#" class="card-link">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-icon">
+                <div class="service-card" data-scroll data-scroll-speed="1.4">
+                    <div class="card-visual">
                         <i class="fas fa-building"></i>
+                        <div class="visual-circle"></div>
                     </div>
-                    <div class="service-content">
-                        <h3>Business Advisory</h3>
-                        <p>Expert guidance for sustainable business growth and success</p>
-                        <ul class="service-features">
-                            <li>Growth Strategy</li>
-                            <li>Risk Management</li>
-                            <li>Performance Analysis</li>
-                        </ul>
-                        <a href="#" class="btn-outline">Learn More</a>
-                    </div>
+                    <h3>Business Advisory</h3>
+                    <p>Expert guidance for sustainable business growth and long-term financial success</p>
+                    <ul class="service-features">
+                        <li>Growth Strategy Planning</li>
+                        <li>Risk Management</li>
+                        <li>Performance Analysis</li>
+                    </ul>
+                    <a href="#" class="card-link">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-            </div>
-
-            <div class="services-cta" data-aos="fade-up">
-                <button class="btn btn-primary">View All Services</button>
-                <a href="services.html" class="btn btn-outline">Download Service Brochure</a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about" data-scroll-section>
         <div class="container">
             <div class="about-grid">
-                <div class="about-content" data-aos="fade-right">
-                    <span class="overline">About Us</span>
-                    <h2>Two Decades of Financial Excellence</h2>
-                    <p class="lead">Since 2004, we've been providing exceptional financial services to businesses across New York and beyond.</p>
+                <div class="about-content" data-scroll data-scroll-speed="1">
+                    <span class="section-tag">About Us</span>
+                    <h2 class="section-title">Two Decades of Financial Excellence</h2>
+                    <p class="section-text">Since 2004, we've been empowering businesses across New York with expert financial services and innovative solutions that drive growth and ensure success.</p>
                     
-                    <div class="stats-grid">
-                        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                            <span class="stat-number" data-count="1000">0</span>
-                            <span class="stat-label">Satisfied Clients</span>
-                        </div>
-                        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                            <span class="stat-number" data-count="20">0</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                            <span class="stat-number" data-count="95">0</span>
-                            <span class="stat-label">Success Rate</span>
-                        </div>
-                    </div>
-
                     <div class="about-features">
-                        <div class="feature" data-aos="fade-up" data-aos-delay="400">
-                            <i class="fas fa-check-circle"></i>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <div class="feature-content">
                                 <h4>Expert Team</h4>
                                 <p>Certified professionals with extensive industry experience</p>
                             </div>
                         </div>
-                        <div class="feature" data-aos="fade-up" data-aos-delay="500">
-                            <i class="fas fa-check-circle"></i>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <div class="feature-content">
                                 <h4>Personalized Approach</h4>
                                 <p>Tailored solutions for your unique financial needs</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="about-cta" data-aos="fade-up">
-                        <button class="btn btn-primary">Learn More About Us</button>
-                        <a href="about.html" class="btn btn-outline">View Company History</a>
-                    </div>
                 </div>
-                
-                <div class="about-image" data-aos="fade-left">
-                    <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Cohen & Associates Office">
-                    <div class="experience-badge">
-                        <span class="years">20+</span>
-                        <span class="text">Years of Excellence</span>
+
+                <div class="about-visual" data-scroll data-scroll-speed="-1">
+                    <div class="visual-container">
+                        <div class="image-wrapper">
+                            <img src="https://raw.githubusercontent.com/Elanstech/Cohen-associates/refs/heads/main/frontcohen.jpeg" alt="Cohen & Associates Office">
+                        </div>
+                        <div class="experience-badge">
+                            <span class="years">20+</span>
+                            <span class="text">Years of Excellence</span>
+                        </div>
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
                     </div>
                 </div>
             </div>
@@ -286,126 +247,127 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="team">
+    <section id="team" class="team" data-scroll-section>
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="overline">Our Experts</span>
-                <h2>Meet Our Founders</h2>
-                <p>Dedicated professionals committed to your success</p>
+            <div class="section-header" data-scroll data-scroll-speed="1">
+                <span class="section-tag">Our Team</span>
+                <h2 class="section-title">Meet Our Leadership</h2>
+                <p class="section-subtitle">Dedicated professionals committed to your success</p>
             </div>
-            
+
             <div class="team-grid">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="team-image-wrapper">
-                        <img src="https://github.com/Elanstech/Cohen-associates/blob/main/Oksanafront.jpeg?raw=true" alt="Oksana Inoyatova">
-                        <div class="team-overlay">
-                            <div class="team-social">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fas fa-envelope"></i></a>
-                            </div>
+                <div class="team-card" data-scroll data-scroll-speed="1.2">
+                    <div class="card-visual">
+                        <div class="image-wrapper">
+                            <img src="https://github.com/Elanstech/Cohen-associates/blob/main/Oksanafront.jpeg?raw=true" alt="Oksana Inoyatova">
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="team-content">
+                    <div class="card-content">
                         <h3>Oksana Inoyatova</h3>
-                        <span class="team-role">Founder & CEO</span>
-                        <p>Founder</p>
+                        <span class="role">Founder & CEO</span>
+                        <p>Visionary leader with extensive experience in international finance</p>
                     </div>
                 </div>
 
-                <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="team-image-wrapper">
-                        <img src="https://github.com/Elanstech/Cohen-associates/blob/main/stevefront.jpeg?raw=true" alt="Steve Inoyatov">
-                        <div class="team-overlay">
-                            <div class="team-social">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fas fa-envelope"></i></a>
-                            </div>
+                <div class="team-card" data-scroll data-scroll-speed="1.4">
+                    <div class="card-visual">
+                        <div class="image-wrapper">
+                            <img src="https://github.com/Elanstech/Cohen-associates/blob/main/stevefront.jpeg?raw=true" alt="Steve Inoyatov">
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="team-content">
+                    <div class="card-content">
                         <h3>Steve Inoyatov</h3>
-                        <span class="team-role">Co-Founder & CFO</span>
-                        <p>Focused on business development and operational excellence</p>
+                        <span class="role">Co-Founder & CFO</span>
+                        <p>Strategic financial expert focusing on business growth</p>
                     </div>
                 </div>
-            </div>
-
-            <div class="team-cta" data-aos="fade-up">
-                <button class="btn btn-primary">Meet Our Full Team</button>
-                <a href="careers.html" class="btn btn-outline">Join Our Team</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" data-scroll-section>
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="section-header">
-                        <span class="overline">Contact Us</span>
-                        <h2>Get In Touch</h2>
-                        <p>Let's discuss how we can help you achieve your financial goals</p>
-                    </div>
+                <div class="contact-info" data-scroll data-scroll-speed="1">
+                    <span class="section-tag">Contact Us</span>
+                    <h2 class="section-title">Let's Start a Conversation</h2>
+                    <p class="section-text">Ready to elevate your financial future? We're here to help.</p>
 
                     <div class="info-cards">
-                        <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="info-card">
                             <i class="fas fa-map-marker-alt"></i>
-                            <h3>Visit Our Office</h3>
+                            <h3>Visit Us</h3>
                             <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
                         </div>
 
-                        <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="info-card">
                             <i class="fas fa-phone"></i>
                             <h3>Call Us</h3>
                             <p>Oksana: (917) 209-9386<br>Steve: (347) 992-3638</p>
                         </div>
 
-                        <div class="info-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="info-card">
                             <i class="fas fa-envelope"></i>
                             <h3>Email Us</h3>
                             <p>info@cohen-associates.com</p>
                         </div>
                     </div>
-
-                    <div class="contact-cta" data-aos="fade-up">
-                        <button class="btn btn-primary">Schedule A Consultation</button>
-                        <a href="locations.html" class="btn btn-outline">View All Locations</a>
-                    </div>
                 </div>
 
-                <form class="contact-form" data-aos="fade-left">
+                <form class="contact-form" data-scroll data-scroll-speed="1.2">
                     <div class="form-grid">
                         <div class="form-group">
                             <input type="text" id="name" required>
                             <label for="name">Full Name</label>
+                            <div class="form-border"></div>
                         </div>
+
                         <div class="form-group">
                             <input type="email" id="email" required>
                             <label for="email">Email Address</label>
+                            <div class="form-border"></div>
                         </div>
+
                         <div class="form-group">
                             <input type="tel" id="phone">
                             <label for="phone">Phone (Optional)</label>
+                            <div class="form-border"></div>
                         </div>
+
                         <div class="form-group">
                             <select id="service" required>
                                 <option value="">Select Service</option>
                                 <option value="tax">Tax Planning</option>
-                                <option value="advisory">Business Advisory</option>
                                 <option value="international">International Services</option>
+                                <option value="advisory">Business Advisory</option>
                             </select>
+                            <div class="form-border"></div>
                         </div>
+
                         <div class="form-group full-width">
                             <textarea id="message" required></textarea>
                             <label for="message">Your Message</label>
+                            <div class="form-border"></div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span>Send Message</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </form>
             </div>
             
-            <div class="map-container" data-aos="fade-up">
+            <div class="map-container" data-scroll data-scroll-speed="1">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.941293041111!2d-73.86381532430708!3d40.72167087138171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25e1e7e782567%3A0x7e84c366bb491fda!2s93-03%2063rd%20Dr%2C%20Rego%20Park%2C%20NY%2011374!5e0!3m2!1sen!2sus!4v1707076419695!5m2!1sen!2sus"
                     width="100%"
@@ -420,21 +382,28 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" data-scroll-section>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <div class="footer-logo">Cohen & Associates</div>
-                    <p>Expert Tax and Business Solutions</p>
+                    <div class="footer-logo">
+                        <div class="logo-mark">C&A</div>
+                        <span>Cohen & Associates</span>
+                    </div>
+                    <p>Expert financial solutions tailored to your success</p>
                 </div>
+
                 <div class="footer-links">
                     <h3>Quick Links</h3>
-                    <a href="#home">Home</a>
-                    <a href="#services">Services</a>
-                    <a href="#about">About</a>
-                    <a href="#team">Team</a>
-                    <a href="#contact">Contact</a>
+                    <nav class="footer-nav">
+                        <a href="#home">Home</a>
+                        <a href="#services">Services</a>
+                        <a href="#about">About</a>
+                        <a href="#team">Team</a>
+                        <a href="#contact">Contact</a>
+                    </nav>
                 </div>
+
                 <div class="footer-contact">
                     <h3>Contact Info</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 93-03 63rd Drive, Rego Park, NY 11374</p>
@@ -442,20 +411,15 @@
                     <p><i class="fas fa-envelope"></i> info@cohen-associates.com</p>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" aria-label="Scroll to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
