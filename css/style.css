@@ -355,9 +355,11 @@ body {
     font-size: 0.9rem;
 }
 
+/* Update the .contact-info styles */
 .contact-info {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 2rem;
 }
 
@@ -372,6 +374,10 @@ body {
 
 .contact-info a:hover {
     color: var(--secondary);
+}
+
+.contact-info span {
+    font-size: 0.9rem;
 }
 
 .navbar {
