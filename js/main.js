@@ -51,6 +51,17 @@ function initLocomotiveScroll() {
         }, 250);
     });
 
+    // Handle anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) {
+                scroll.scrollTo(target);
+            }
+        });
+    });
+
     return scroll;
 }
 
@@ -60,16 +71,16 @@ function initNavigation() {
     const logo = document.querySelector('.logo-mark');
     let lastScroll = 0;
 
-    // Navigation state handler
     function updateNavigation() {
         const currentScroll = window.pageYOffset;
         
+        // Add/remove scrolled class based on scroll position
         if (currentScroll > 50) {
             header.classList.add('scrolled');
-            logo.style.transform = 'scale(0.8)';
+            if (logo) logo.style.transform = 'scale(0.8)';
         } else {
             header.classList.remove('scrolled');
-            logo.style.transform = 'scale(1)';
+            if (logo) logo.style.transform = 'scale(1)';
         }
 
         // Hide/show header on scroll direction
@@ -82,23 +93,11 @@ function initNavigation() {
         lastScroll = currentScroll;
     }
 
-    // Throttle scroll events
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                updateNavigation();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-
     // Active link updating
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
     function updateActiveLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
         const currentPos = window.pageYOffset;
 
         sections.forEach(section => {
@@ -117,9 +116,12 @@ function initNavigation() {
         });
     }
 
+    // Throttle scroll events
+    let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
+                updateNavigation();
                 updateActiveLink();
                 ticking = false;
             });
@@ -128,7 +130,7 @@ function initNavigation() {
     });
 }
 
-// Mobile Menu
+// Mobile Menu Functionality
 function initMobileMenu() {
     const menuTrigger = document.querySelector('.menu-trigger');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -144,12 +146,12 @@ function initMobileMenu() {
     menuTrigger.addEventListener('click', toggleMenu);
     closeButton.addEventListener('click', toggleMenu);
 
-    // Close menu on link click
+    // Close menu on link click and smooth scroll
     menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
             toggleMenu();
             
-            // Smooth scroll to section
             const target = document.querySelector(link.getAttribute('href'));
             if (target) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
@@ -182,7 +184,8 @@ function initParallaxEffects() {
         
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+            const yPos = -(scrolled * speed) / 10;
+            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
         });
     });
 }
@@ -260,7 +263,6 @@ function initFormInteractions() {
         const input = group.querySelector('input, textarea, select');
         const label = group.querySelector('label');
 
-        // Handle focus states
         input.addEventListener('focus', () => {
             group.classList.add('focused');
         });
@@ -274,7 +276,6 @@ function initFormInteractions() {
             }
         });
 
-        // Handle initial state
         if (input.value) {
             group.classList.add('filled');
         }
@@ -289,11 +290,11 @@ function initFormInteractions() {
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.innerHTML;
         
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
         try {
-            // Simulate API call
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Simulate API call - replace with actual API call
             await new Promise(resolve => setTimeout(resolve, 2000));
             
             showNotification('Message sent successfully!', 'success');
@@ -315,27 +316,33 @@ function validateForm(form) {
 
     form.querySelectorAll('[required]').forEach(field => {
         const group = field.closest('.form-group');
-        const errorMessage = group.querySelector('.error-message') || document.createElement('div');
-        errorMessage.className = 'error-message';
+        removeError(group);
 
         if (!field.value.trim()) {
             isValid = false;
-            errorMessage.textContent = 'This field is required';
-            group.appendChild(errorMessage);
+            showError(group, 'This field is required');
         } else if (field.type === 'email' && !emailRegex.test(field.value)) {
             isValid = false;
-            errorMessage.textContent = 'Please enter a valid email address';
-            group.appendChild(errorMessage);
-        } else {
-            const existingError = group.querySelector('.error-message');
-            if (existingError) existingError.remove();
+            showError(group, 'Please enter a valid email address');
         }
     });
 
     return isValid;
 }
 
-// Notification System
+// Helper Functions
+function showError(group, message) {
+    const error = document.createElement('div');
+    error.className = 'error-message';
+    error.textContent = message;
+    group.appendChild(error);
+}
+
+function removeError(group) {
+    const existingError = group.querySelector('.error-message');
+    if (existingError) existingError.remove();
+}
+
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -355,7 +362,7 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-// Smooth Anchor Navigation
+// Smooth Scroll for Anchor Links
 function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
