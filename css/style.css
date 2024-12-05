@@ -359,9 +359,8 @@ body {
 /* Update the .contact-info styles */
 .contact-info {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
 }
 
 .contact-info a {
@@ -381,6 +380,10 @@ body {
     font-size: 0.9rem;
 }
 
+.phone-numbers {
+    display: flex;
+    gap: 2rem;
+}
 .navbar {
     padding: 1rem 0;
     background: transparent;
