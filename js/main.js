@@ -1,186 +1,211 @@
-// Initialize all components when DOM is loaded
+// Main initialization
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
-    initHeroSlider();
+    initLocomotiveScroll();
     initNavigation();
     initMobileMenu();
-    initScrollAnimations();
+    initParallaxEffects();
+    initRevealAnimations();
     initCounterAnimation();
-    initScrollTop();
-    initContactForm();
-    initSmoothScroll();
+    initFormInteractions();
+    initSmoothAnchors();
 });
 
 // Loader Animation
 function initLoader() {
     const loader = document.querySelector('.loader');
     window.addEventListener('load', () => {
-        loader.style.opacity = '0';
         setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.classList.remove('no-scroll');
-        }, 500);
+            loader.style.opacity = '0';
+            document.body.classList.remove('loading');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 300);
+        }, 1000);
     });
 }
 
-// Hero Slider Configuration
-function initHeroSlider() {
-    const heroSwiper = new Swiper('.hero-slider', {
-        speed: 1000,
-        parallax: true,
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
+// Locomotive Scroll Configuration
+function initLocomotiveScroll() {
+    const scroll = new LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true,
+        multiplier: 0.8,
+        lerp: 0.1,
+        getDirection: true,
+        mobile: {
+            smooth: false
         },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-        on: {
-            slideChange: function() {
-                animateSlideContent(this.slides[this.activeIndex]);
-            }
+        tablet: {
+            smooth: false,
+            breakpoint: 992
         }
     });
-}
 
-// Animate Slide Content
-function animateSlideContent(slide) {
-    const elements = slide.querySelectorAll(
-        '.hero-title, .hero-subtitle, .hero-features, .hero-buttons, .trust-indicators'
-    );
-    
-    elements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            el.style.transition = 'all 0.6s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }, index * 200);
+    // Update locomotive scroll on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            scroll.update();
+        }, 250);
     });
+
+    return scroll;
 }
 
 // Navigation Functionality
 function initNavigation() {
     const header = document.querySelector('.header');
-    const navbar = document.querySelector('.navbar');
+    const logo = document.querySelector('.logo-mark');
     let lastScroll = 0;
-    let isScrolling = false;
 
-    window.addEventListener('scroll', () => {
-        if (!isScrolling) {
-            window.requestAnimationFrame(() => {
-                handleNavigation();
-                isScrolling = false;
-            });
-            isScrolling = true;
-        }
-    });
-
-    function handleNavigation() {
+    // Navigation state handler
+    function updateNavigation() {
         const currentScroll = window.pageYOffset;
         
-        // Add/remove scrolled class
         if (currentScroll > 50) {
             header.classList.add('scrolled');
+            logo.style.transform = 'scale(0.8)';
         } else {
             header.classList.remove('scrolled');
+            logo.style.transform = 'scale(1)';
         }
 
-        // Hide/show header on scroll
+        // Hide/show header on scroll direction
         if (currentScroll > lastScroll && currentScroll > 500) {
             header.style.transform = 'translateY(-100%)';
         } else {
             header.style.transform = 'translateY(0)';
         }
-        
+
         lastScroll = currentScroll;
-
-        // Update active menu item
-        updateActiveMenuItem();
     }
-}
 
-// Update Active Menu Item
-function updateActiveMenuItem() {
+    // Throttle scroll events
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateNavigation();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // Active link updating
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
-            const targetId = section.getAttribute('id');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${targetId}`) {
-                    link.classList.add('active');
-                }
+
+    function updateActiveLink() {
+        const currentPos = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (currentPos >= sectionTop && currentPos < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateActiveLink();
+                ticking = false;
             });
+            ticking = true;
         }
     });
 }
 
 // Mobile Menu
 function initMobileMenu() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
-    const closeMenuBtn = document.querySelector('.mobile-close-button');
+    const menuTrigger = document.querySelector('.menu-trigger');
     const mobileMenu = document.querySelector('.mobile-menu');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-nav-links a');
-    
+    const closeButton = document.querySelector('.menu-close');
+    const menuLinks = document.querySelectorAll('.menu-link');
+
     function toggleMenu() {
+        menuTrigger.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.classList.toggle('no-scroll');
     }
-    
-    mobileMenuBtn.addEventListener('click', toggleMenu);
-    closeMenuBtn.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking a link
-    mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', toggleMenu);
+
+    menuTrigger.addEventListener('click', toggleMenu);
+    closeButton.addEventListener('click', toggleMenu);
+
+    // Close menu on link click
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+            
+            // Smooth scroll to section
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 
-    // Close menu when clicking outside
+    // Close menu on outside click
     document.addEventListener('click', (e) => {
-        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && mobileMenu.classList.contains('active')) {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(e.target) && 
+            !menuTrigger.contains(e.target)) {
             toggleMenu();
         }
     });
 }
 
-// Scroll Animations with Intersection Observer
-function initScrollAnimations() {
-    const elements = document.querySelectorAll('[data-aos]');
+// Parallax Effects
+function initParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('[data-scroll-speed]');
     
-    const options = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
+    parallaxElements.forEach(element => {
+        const speed = element.getAttribute('data-scroll-speed');
+        
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+        });
+    });
+}
+
+// Reveal Animations
+function initRevealAnimations() {
+    const observerOptions = {
+        root: null,
+        threshold: 0.1,
+        rootMargin: '0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('aos-animate');
+                entry.target.classList.add('revealed');
                 observer.unobserve(entry.target);
             }
         });
-    }, options);
-    
-    elements.forEach(element => {
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.reveal-text, .fade-in, .slide-up').forEach(element => {
         observer.observe(element);
     });
 }
@@ -189,6 +214,10 @@ function initScrollAnimations() {
 function initCounterAnimation() {
     const counters = document.querySelectorAll('[data-count]');
     
+    const observerOptions = {
+        threshold: 0.5
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -196,77 +225,85 @@ function initCounterAnimation() {
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.5
-    });
-    
+    }, observerOptions);
+
     counters.forEach(counter => observer.observe(counter));
-}
 
-function animateCounter(counter) {
-    const target = parseInt(counter.getAttribute('data-count'));
-    let count = 0;
-    const duration = 2000;
-    const increment = target / (duration / 16);
-    
-    function updateCount() {
-        if (count < target) {
-            count += increment;
-            counter.textContent = Math.round(count);
-            requestAnimationFrame(updateCount);
-        } else {
-            counter.textContent = target;
-        }
+    function animateCounter(counter) {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                counter.textContent = Math.round(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(updateCounter);
     }
-    
-    requestAnimationFrame(updateCount);
 }
 
-// Scroll to Top Button
-function initScrollTop() {
-    const scrollBtn = document.querySelector('.scroll-top');
-    
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 500) {
-            scrollBtn.classList.add('visible');
-        } else {
-            scrollBtn.classList.remove('visible');
-        }
-    });
-    
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-// Contact Form Handling
-function initContactForm() {
+// Form Interactions
+function initFormInteractions() {
     const form = document.querySelector('.contact-form');
     if (!form) return;
-    
+
+    const formGroups = form.querySelectorAll('.form-group');
+
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, textarea, select');
+        const label = group.querySelector('label');
+
+        // Handle focus states
+        input.addEventListener('focus', () => {
+            group.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            group.classList.remove('focused');
+            if (input.value) {
+                group.classList.add('filled');
+            } else {
+                group.classList.remove('filled');
+            }
+        });
+
+        // Handle initial state
+        if (input.value) {
+            group.classList.add('filled');
+        }
+    });
+
+    // Form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         if (!validateForm(form)) return;
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
         
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
         try {
-            // Simulate form submission - Replace with actual API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            showMessage('Message sent successfully!', 'success');
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            showNotification('Message sent successfully!', 'success');
             form.reset();
+            formGroups.forEach(group => group.classList.remove('filled'));
         } catch (error) {
-            showMessage('Error sending message. Please try again.', 'error');
+            showNotification('Failed to send message. Please try again.', 'error');
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalText;
         }
     });
 }
@@ -274,75 +311,63 @@ function initContactForm() {
 // Form Validation
 function validateForm(form) {
     let isValid = true;
-    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            showError(input, 'This field is required');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    form.querySelectorAll('[required]').forEach(field => {
+        const group = field.closest('.form-group');
+        const errorMessage = group.querySelector('.error-message') || document.createElement('div');
+        errorMessage.className = 'error-message';
+
+        if (!field.value.trim()) {
             isValid = false;
-        } else if (input.type === 'email' && !validateEmail(input.value)) {
-            showError(input, 'Please enter a valid email address');
+            errorMessage.textContent = 'This field is required';
+            group.appendChild(errorMessage);
+        } else if (field.type === 'email' && !emailRegex.test(field.value)) {
             isValid = false;
+            errorMessage.textContent = 'Please enter a valid email address';
+            group.appendChild(errorMessage);
+        } else {
+            const existingError = group.querySelector('.error-message');
+            if (existingError) existingError.remove();
         }
     });
-    
+
     return isValid;
 }
 
-function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+// Notification System
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
 
-// Show Form Error
-function showError(input, message) {
-    const formGroup = input.closest('.form-group');
-    const error = formGroup.querySelector('.error-message') || document.createElement('div');
-    
-    error.className = 'error-message';
-    error.textContent = message;
-    
-    if (!formGroup.querySelector('.error-message')) {
-        formGroup.appendChild(error);
-    }
-    
-    input.classList.add('error');
-    
-    input.addEventListener('input', function removeError() {
-        error.remove();
-        input.classList.remove('error');
-        input.removeEventListener('input', removeError);
-    });
-}
+    document.body.appendChild(notification);
 
-// Show Form Message
-function showMessage(message, type) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${type}`;
-    messageDiv.textContent = message;
-    
-    const form = document.querySelector('.contact-form');
-    form.insertBefore(messageDiv, form.firstChild);
-    
     setTimeout(() => {
-        messageDiv.style.opacity = '0';
-        setTimeout(() => messageDiv.remove(), 300);
+        notification.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
     }, 3000);
 }
 
-// Smooth Scroll
-function initSmoothScroll() {
+// Smooth Anchor Navigation
+function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(anchor.getAttribute('href'));
             
             if (target) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerHeight;
-                
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
                 window.scrollTo({
-                    top: offsetPosition,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
             }
