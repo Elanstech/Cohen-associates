@@ -385,19 +385,20 @@ body {
 .phone-numbers {
     display: flex;
     gap: 2rem;
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .phone-numbers a {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     gap: 0.5rem;
 }
 
 .phone-numbers span {
+    font-size: 0.9rem;
     text-align: right;
 }
+
 .navbar {
     padding: 1rem 0;
     background: transparent;
