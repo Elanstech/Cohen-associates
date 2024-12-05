@@ -23,7 +23,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body class="no-scroll">
     <!-- Loader -->
     <div class="loader">
         <div class="loader-content">
@@ -34,7 +34,6 @@
 
     <!-- Header -->
     <header class="header">
-        <!-- Navigation -->
         <nav class="navbar">
             <div class="container">
                 <a href="#" class="logo">
@@ -52,7 +51,7 @@
                     <a href="#contact">Contact</a>
                     <button class="btn btn-primary pulse-animation">Free Consultation</button>
                 </div>
-                <button class="mobile-menu-button">
+                <button class="mobile-menu-button" aria-label="Toggle Menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -62,7 +61,7 @@
 
         <!-- Mobile Menu -->
         <div class="mobile-menu">
-            <button class="mobile-close-button">
+            <button class="mobile-close-button" aria-label="Close Menu">
                 <i class="fas fa-times"></i>
             </button>
             <div class="mobile-nav-links">
@@ -121,32 +120,33 @@
                     </div>
                 </div>
 
-           <!-- Slide 3: Trust -->
-<div class="swiper-slide hero-slide">
-    <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&auto=format')"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <h2 class="hero-title" data-swiper-parallax="-300">Building Trust Through Excellence</h2>
-        <p class="hero-subtitle" data-swiper-parallax="-200">Join Over 1,000+ Satisfied Clients Who Trust Our Expertise</p>
-        <div class="trust-indicators" data-swiper-parallax="-100">
-            <div class="trust-item">
-                <span class="number" data-count="20">20+</span>
-                <span class="label">Years Experience</span>
+                <!-- Slide 3: Trust -->
+                <div class="swiper-slide hero-slide">
+                    <div class="hero-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1600&auto=format')"></div>
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h2 class="hero-title" data-swiper-parallax="-300">Building Trust Through Excellence</h2>
+                        <p class="hero-subtitle" data-swiper-parallax="-200">Join Over 1,000+ Satisfied Clients Who Trust Our Expertise</p>
+                        <div class="trust-indicators" data-swiper-parallax="-100">
+                            <div class="trust-item">
+                                <span class="number" data-count="20">0</span>
+                                <span class="label">Years Experience</span>
+                            </div>
+                            <div class="trust-item">
+                                <span class="number" data-count="95">0</span>
+                                <span class="label">Client Satisfaction</span>
+                            </div>
+                            <div class="trust-item">
+                                <span class="number" data-count="24">0</span>
+                                <span class="label">Hour Support</span>
+                            </div>
+                        </div>
+                        <div class="hero-buttons" data-swiper-parallax="-50">
+                            <button class="btn btn-primary">Schedule Consultation</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="trust-item">
-                <span class="number" data-count="95">95</span>
-                <span class="label">Client Satisfaction</span>
-            </div>
-            <div class="trust-item">
-                <span class="number" data-count="24">24</span>
-                <span class="label">Hour Support</span>
-            </div>
-        </div>
-        <div class="hero-buttons" data-swiper-parallax="-50">
-            <button class="btn btn-primary">Schedule Consultation</button>
-        </div>
-    </div>
-</div>
             
             <!-- Navigation -->
             <div class="swiper-button-next"></div>
@@ -160,11 +160,12 @@
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
-<!-- Services Section -->
+
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
-                <span class="overline">Our Expertise</span>
+                <span class="overline">What We Offer</span>
                 <h2>Comprehensive Financial Solutions</h2>
                 <p>Tailored services to meet your unique financial needs</p>
             </div>
@@ -218,6 +219,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="services-cta" data-aos="fade-up">
+                <button class="btn btn-primary">View All Services</button>
+                <a href="services.html" class="btn btn-outline">Download Service Brochure</a>
+            </div>
         </div>
     </section>
 
@@ -261,6 +267,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="about-cta" data-aos="fade-up">
+                        <button class="btn btn-primary">Learn More About Us</button>
+                        <a href="about.html" class="btn btn-outline">View Company History</a>
+                    </div>
                 </div>
                 
                 <div class="about-image" data-aos="fade-left">
@@ -281,27 +292,7 @@
                 <span class="overline">Our Experts</span>
                 <h2>Meet Our Leadership</h2>
                 <p>Dedicated professionals committed to your success</p>
-            </div>
-
-            <div class="team-grid">
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="team-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&auto=format" alt="Team Member">
-                        <div class="team-overlay">
-                            <div class="team-social">
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                                <a href="#"><i class="fas fa-envelope"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h3>Financial Advisory</h3>
-                        <span class="team-role">Expert Guidance</span>
-                        <p>Specialized in complex financial planning and strategy development</p>
-                    </div>
-                </div>
-
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+            </div><div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="team-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&auto=format" alt="Team Member">
                         <div class="team-overlay">
@@ -334,6 +325,11 @@
                         <p>Focused on business development and operational excellence</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="team-cta" data-aos="fade-up">
+                <button class="btn btn-primary">Meet Our Full Team</button>
+                <a href="careers.html" class="btn btn-outline">Join Our Team</a>
             </div>
         </div>
     </section>
@@ -368,20 +364,25 @@
                             <p>info@cohen-associates.com</p>
                         </div>
                     </div>
+
+                    <div class="contact-cta" data-aos="fade-up">
+                        <button class="btn btn-primary">Schedule A Consultation</button>
+                        <a href="locations.html" class="btn btn-outline">View All Locations</a>
+                    </div>
                 </div>
 
                 <form class="contact-form" data-aos="fade-left">
                     <div class="form-grid">
                         <div class="form-group">
-                            <input type="text" id="name" required>
+                            <input type="text" id="name" required placeholder="">
                             <label for="name">Full Name</label>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" required>
+                            <input type="email" id="email" required placeholder="">
                             <label for="email">Email Address</label>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone">
+                            <input type="tel" id="phone" placeholder="">
                             <label for="phone">Phone (Optional)</label>
                         </div>
                         <div class="form-group">
@@ -393,7 +394,7 @@
                             </select>
                         </div>
                         <div class="form-group full-width">
-                            <textarea id="message" required></textarea>
+                            <textarea id="message" required placeholder=""></textarea>
                             <label for="message">Your Message</label>
                         </div>
                     </div>
@@ -403,7 +404,7 @@
         </div>
     </section>
 
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -432,17 +433,32 @@
         </div>
     </footer>
 
-
-
     <!-- Scroll to Top Button -->
-<button class="scroll-top">
-    <i class="fas fa-arrow-up"></i>
-</button>
+    <button class="scroll-top" aria-label="Scroll to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<!-- Scripts -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
 
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&auto=format" alt="Team Member">
+                        <div class="team-overlay">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3>Financial Advisory</h3>
+                        <span class="team-role">Expert Guidance</span>
+                        <p>Specialized in complex financial planning and strategy development</p>
+                    </div>
+                </div>
