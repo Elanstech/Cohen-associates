@@ -939,6 +939,9 @@ section {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
 }
+.image-wrapper img {
+    object-fit: contain;
+}
 
 .image-wrapper img {
     width: 100%;
