@@ -315,6 +315,7 @@ body {
 }
 
 /* Hero Scroll Indicator */
+/* Update the .hero-scroll styles */
 .hero-scroll {
     position: absolute;
     bottom: 2rem;
