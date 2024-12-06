@@ -15,16 +15,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">
-                    <!-- Replace with your logo -->
-                    <img src="path/to/your/logo.png" alt="Cohen & Associates Logo">
+                    <!-- Replace src with your logo path -->
+                    <img src="logo.png" alt="Cohen & Associates Logo">
                 </a>
                 
                 <div class="nav-links">
@@ -57,26 +64,65 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Slider -->
     <section id="home" class="hero">
-        <div class="hero-bg">
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Expert Financial Solutions for Your Success</h1>
-                <p>Comprehensive tax and business advisory services tailored to your needs</p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-primary">Get Started</a>
-                    <a href="#services" class="btn btn-secondary">Our Services</a>
+        <div class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="hero-slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80')"></div>
+                <div class="container">
+                    <div class="slide-content" data-aos="fade-up">
+                        <h1>Welcome to Cohen & Associates</h1>
+                        <p>Your trusted partner in financial excellence and tax expertise</p>
+                        <div class="slide-cta">
+                            <a href="#services" class="btn btn-primary">Explore Services</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80')"></div>
+                <div class="container">
+                    <div class="slide-content" data-aos="fade-up">
+                        <h1>International Tax Expertise</h1>
+                        <p>Global solutions for your cross-border business needs</p>
+                        <div class="slide-cta">
+                            <a href="#international" class="btn btn-primary">Discover More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')"></div>
+                <div class="container">
+                    <div class="slide-content" data-aos="fade-up">
+                        <h1>Strategic Business Advisory</h1>
+                        <p>Comprehensive solutions for sustainable growth</p>
+                        <div class="slide-cta">
+                            <a href="#consultation" class="btn btn-primary">Free Consultation</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Slider Controls -->
+        <div class="slider-controls">
+            <button class="slider-arrow prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="slider-dots"></div>
+            <button class="slider-arrow next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </section>
 
-    <!-- Services Preview Section -->
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
@@ -90,7 +136,7 @@
                     </div>
                     <h3>Tax Strategy</h3>
                     <p>Strategic tax planning and compliance solutions for businesses and individuals</p>
-                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="/services/tax-strategy.html" class="btn btn-secondary">View Details</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-icon">
@@ -98,7 +144,7 @@
                     </div>
                     <h3>International Tax</h3>
                     <p>Expert guidance for cross-border transactions and global tax compliance</p>
-                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="/services/international-tax.html" class="btn btn-secondary">View Details</a>
                 </div>
                 <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-icon">
@@ -106,8 +152,11 @@
                     </div>
                     <h3>Business Advisory</h3>
                     <p>Comprehensive business solutions to drive growth and ensure success</p>
-                    <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="/services/business-advisory.html" class="btn btn-secondary">View Details</a>
                 </div>
+            </div>
+            <div class="section-footer" data-aos="fade-up">
+                <a href="/services.html" class="btn btn-primary">View All Services</a>
             </div>
         </div>
     </section>
@@ -133,9 +182,9 @@
                             <span class="stat-label">Success Rate</span>
                         </div>
                     </div>
+                    <a href="/about.html" class="btn btn-primary">Learn More About Us</a>
                 </div>
                 <div class="about-image" data-aos="fade-left">
-                    <!-- Replace with your image -->
                     <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Office">
                 </div>
             </div>
@@ -152,7 +201,6 @@
             <div class="team-grid">
                 <div class="team-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-image">
-                        <!-- Replace with team member image -->
                         <img src="https://images.unsplash.com/photo-1580518324671-c2f0833a3af3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team Member">
                     </div>
                     <div class="member-info">
@@ -162,7 +210,6 @@
                 </div>
                 <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="member-image">
-                        <!-- Replace with team member image -->
                         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team Member">
                     </div>
                     <div class="member-info">
@@ -170,6 +217,9 @@
                         <p>Co-Founder & CFO</p>
                     </div>
                 </div>
+            </div>
+            <div class="section-footer" data-aos="fade-up">
+                <a href="/team.html" class="btn btn-primary">Meet Our Full Team</a>
             </div>
         </div>
     </section>
@@ -209,6 +259,9 @@
                         <p>Bring your previous tax returns, financial statements, business registration documents, and any specific questions or concerns you'd like to discuss. This helps us provide the most accurate and helpful guidance.</p>
                     </div>
                 </div>
+            </div>
+            <div class="section-footer" data-aos="fade-up">
+                <a href="/faq.html" class="btn btn-primary">View All FAQs</a>
             </div>
         </div>
     </section>
@@ -274,7 +327,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <img src="path/to/your/logo.png" alt="Cohen & Associates Logo" class="footer-logo">
+                    <img src="logo.png" alt="Cohen & Associates Logo" class="footer-logo">
                     <p>Expert financial solutions tailored to your success</p>
                 </div>
                 <div class="footer-links">
@@ -301,6 +354,6 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
