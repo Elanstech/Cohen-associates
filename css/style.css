@@ -347,19 +347,20 @@ img {
     );
 }
 
+/* Hero Section Text Position Fix */
 .slide-content {
     position: relative;
     z-index: 2;
     color: var(--text-light);
     max-width: 800px;
-    margin: 0 auto;
-    padding: var(--spacing-3xl) var(--spacing-xl);
-    text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease 0.3s;
+    padding: 0 2rem;
+    /* Adjust vertical position - place at center of viewport */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
 }
-
 .hero-slide.active .slide-content {
     opacity: 1;
     transform: translateY(0);
@@ -434,6 +435,111 @@ img {
     background: var(--secondary);
     transform: scale(1.3);
 }
+
+/* Enhanced Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary Button */
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary-dark);
+}
+
+.btn-primary:hover {
+    background: var(--secondary-light);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.btn-secondary:hover::before {
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    color: var(--text-light);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Icon Animations */
+.btn i {
+    transition: transform 0.3s ease;
+}
+
+.btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Button Group Spacing */
+.slide-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Responsive Button Adjustments */
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.875rem 1.75rem;
+        min-width: 160px;
+        font-size: 0.95rem;
+    }
+
+    .slide-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
 
 /* Services Section */
 .services {
