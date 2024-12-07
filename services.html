@@ -14,10 +14,22 @@
     <!-- AOS Animation Library -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
+    <!-- Vanilla Tilt.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/services.css">
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <svg class="loader-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" />
+            </svg>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -56,51 +68,97 @@
         </div>
     </div>
 
+    <!-- Hero Section -->
     <section class="services-hero">
-    <div class="hero-background">
-        <div class="animated-circles">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
+        <div class="hero-background">
+            <div class="geometric-shapes">
+                <div class="shape cube">
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                    <div class="face right"></div>
+                    <div class="face left"></div>
+                    <div class="face top"></div>
+                    <div class="face bottom"></div>
+                </div>
+                <div class="shape pyramid"></div>
+                <div class="shape sphere"></div>
+            </div>
+            <div class="particle-grid">
+                <div class="particles"></div>
+            </div>
         </div>
-        <div class="floating-icons">
-            <i class="fas fa-calculator" data-speed="2"></i>
-            <i class="fas fa-file-invoice-dollar" data-speed="3"></i>
-            <i class="fas fa-book" data-speed="4"></i>
-            <i class="fas fa-handshake" data-speed="3"></i>
-            <i class="fas fa-chart-line" data-speed="2"></i>
-            <i class="fas fa-university" data-speed="4"></i>
-        </div>
-    </div>
-    <div class="container">
-        <div class="hero-content">
-            <h1 class="animated-title">
-                <span class="text-reveal">Our</span>
-                <span class="text-reveal">Services</span>
-            </h1>
-            <p class="animated-text">Comprehensive financial solutions tailored to your needs</p>
-            <div class="hero-cards">
-                <div class="hero-card" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fas fa-book"></i>
-                    <h3>Bookkeeping</h3>
+
+        <div class="container">
+            <div class="hero-content">
+                <div class="title-wrapper">
+                    <h1 class="glitch-text" data-text="Our Services">Our Services</h1>
+                    <div class="subtitle-animation">
+                        <span class="typing-text"></span>
+                        <span class="cursor"></span>
+                    </div>
                 </div>
-                <div class="hero-card" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <h3>Tax Services</h3>
-                </div>
-                <div class="hero-card" data-aos="zoom-in" data-aos-delay="300">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Accounting</h3>
-                </div>
-                <div class="hero-card" data-aos="zoom-in" data-aos-delay="400">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Consulting</h3>
+
+                <div class="service-cards-3d">
+                    <div class="card-3d" data-tilt data-tilt-max="10">
+                        <div class="card-content">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Bookkeeping</h3>
+                            <div class="card-hover-content">
+                                <p>Comprehensive bookkeeping solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d" data-tilt data-tilt-max="10">
+                        <div class="card-content">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h3>Tax Services</h3>
+                            <div class="card-hover-content">
+                                <p>Expert tax planning & preparation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d" data-tilt data-tilt-max="10">
+                        <div class="card-content">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3>Accounting</h3>
+                            <div class="card-hover-content">
+                                <p>Professional accounting services</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-3d" data-tilt data-tilt-max="10">
+                        <div class="card-content">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Consulting</h3>
+                            <div class="card-hover-content">
+                                <p>Strategic business consulting</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrows">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
     <!-- Services Grid -->
     <section class="services-grid">
         <div class="container">
@@ -121,12 +179,12 @@
                             <p>Professional documentation and financial record preparation</p>
                         </li>
                         <li>
-                            <h3>Full Charge Accounts Payable/Accounts Receivable</h3>
-                            <p>Comprehensive management of your business transactions</p>
+                            <h3>Full Charge AP/AR</h3>
+                            <p>Comprehensive management of accounts payable and receivable</p>
                         </li>
                         <li>
                             <h3>Financial Reports</h3>
-                            <p>General Ledger, Balance Sheet, Profit and Loss Statement and many other reports</p>
+                            <p>General Ledger, Balance Sheet, Profit and Loss Statement and more</p>
                         </li>
                     </ul>
                 </div>
@@ -149,23 +207,23 @@
                             <p>Complete payroll management and processing</p>
                         </li>
                         <li>
-                            <h3>Tax Dispute Resolution & Audits</h3>
-                            <p>Professional representation and resolution services</p>
+                            <h3>Tax Dispute Resolution</h3>
+                            <p>Expert handling of tax disputes and audits</p>
                         </li>
                         <li>
-                            <h3>Complex Tax Issues & Research</h3>
-                            <p>Expert analysis and solutions for complicated tax matters</p>
+                            <h3>Complex Tax Issues</h3>
+                            <p>Specialized solutions for complex tax situations</p>
                         </li>
                         <li>
-                            <h3>IRS Voluntary Tax Disclosure</h3>
-                            <p>Guidance through voluntary disclosure programs</p>
+                            <h3>IRS Voluntary Disclosure</h3>
+                            <p>Professional guidance through disclosure programs</p>
                         </li>
                         <li>
                             <h3>Sales Tax Returns</h3>
                             <p>Accurate and timely sales tax filing</p>
                         </li>
                         <li>
-                            <h3>FIRPTA Withholding Compliance</h3>
+                            <h3>FIRPTA Compliance</h3>
                             <p>Foreign investment real property tax assistance</p>
                         </li>
                     </ul>
@@ -181,20 +239,20 @@
                 <div class="category-content">
                     <ul>
                         <li>
-                            <h3>Business Financial Statements</h3>
-                            <p>Professional preparation of comprehensive financial reports</p>
+                            <h3>Financial Statements</h3>
+                            <p>Professional preparation of business financial statements</p>
                         </li>
                         <li>
-                            <h3>Non-Resident Asset Statements</h3>
-                            <p>Preparation of Assets and Liabilities Statements for non-resident individuals</p>
+                            <h3>Asset Statements</h3>
+                            <p>Comprehensive asset and liability statements for non-residents</p>
                         </li>
                         <li>
-                            <h3>Books and Records Review</h3>
+                            <h3>Books Review</h3>
                             <p>Thorough examination and verification of financial records</p>
                         </li>
                         <li>
-                            <h3>Company Structure Optimization</h3>
-                            <p>Formation and optimization of ownership structure for tax purposes</p>
+                            <h3>Company Structure</h3>
+                            <p>Optimal ownership structure formation for tax purposes</p>
                         </li>
                         <li>
                             <h3>ITIN Services</h3>
@@ -211,7 +269,9 @@
                     <h2>Consulting Services</h2>
                 </div>
                 <div class="category-content">
-                    <p class="consulting-intro">We offer a wide range of business consultancy and project management services to all clientele. Cohen & Associates is a full service consulting firm, working with a variety of corporate and non-corporate clients, to assist them on resolving issues related to:</p>
+                    <div class="consulting-intro">
+                        <p>We offer comprehensive business consultancy and project management services to all clientele, working with corporate and non-corporate clients to resolve issues related to:</p>
+                    </div>
                     <ul>
                         <li>
                             <h3>Business Strategy</h3>
@@ -219,19 +279,19 @@
                         </li>
                         <li>
                             <h3>Financial Advisory</h3>
-                            <p>Accounting and investment guidance</p>
+                            <p>Expert accounting and investment guidance</p>
                         </li>
                         <li>
-                            <h3>Legal Policy Consultation</h3>
+                            <h3>Legal Policy</h3>
                             <p>Guidance on legal and regulatory compliance</p>
                         </li>
                         <li>
                             <h3>International Business</h3>
-                            <p>Support for domestic and foreign businesses operating in the US and overseas</p>
+                            <p>Support for domestic and foreign business operations</p>
                         </li>
                         <li>
                             <h3>Creative Industries</h3>
-                            <p>Specialized consulting for artistic and media-related projects</p>
+                            <p>Specialized consulting for artistic and media projects</p>
                         </li>
                     </ul>
                 </div>
