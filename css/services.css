@@ -1,1 +1,143 @@
-hello
+/* Import base styles from main CSS */
+@import url('./style.css');
+
+/* Services Hero Section */
+.services-hero {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    padding: 120px 0 80px;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-light);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Services Grid */
+.services-grid {
+    padding: var(--spacing-3xl) 0;
+    background: var(--gray-50);
+}
+
+.service-category {
+    background: var(--text-light);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition-base);
+}
+
+.service-category:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.category-header {
+    background: var(--primary);
+    color: var(--text-light);
+    padding: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.category-header i {
+    font-size: 2rem;
+    color: var(--secondary);
+}
+
+.category-header h2 {
+    margin: 0;
+    color: var(--text-light);
+}
+
+.category-content {
+    padding: var(--spacing-xl);
+}
+
+.category-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.category-content li {
+    padding: var(--spacing-lg);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    transition: var(--transition-base);
+}
+
+.category-content li:hover {
+    background: var(--gray-100);
+    transform: translateX(5px);
+}
+
+.category-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary);
+}
+
+.category-content p {
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.consulting-intro {
+    margin-bottom: var(--spacing-xl);
+    color: var(--gray-700);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .category-content ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .category-header {
+        padding: var(--spacing-lg);
+    }
+
+    .category-content {
+        padding: var(--spacing-lg);
+    }
+}
