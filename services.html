@@ -14,9 +14,6 @@
     <!-- AOS Animation Library -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
-    <!-- Vanilla Tilt.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/services.css">
 </head>
@@ -24,9 +21,7 @@
     <!-- Loader -->
     <div class="loader">
         <div class="loader-content">
-            <svg class="loader-svg" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" />
-            </svg>
+            <div class="spinner"></div>
         </div>
     </div>
 
@@ -68,233 +63,140 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Services Hero Section -->
     <section class="services-hero">
-        <div class="hero-background">
-            <div class="geometric-shapes">
-                <div class="shape cube">
-                    <div class="face front"></div>
-                    <div class="face back"></div>
-                    <div class="face right"></div>
-                    <div class="face left"></div>
-                    <div class="face top"></div>
-                    <div class="face bottom"></div>
-                </div>
-                <div class="shape pyramid"></div>
-                <div class="shape sphere"></div>
-            </div>
-            <div class="particle-grid">
-                <div class="particles"></div>
-            </div>
+        <div class="floating-bg">
+            <div class="floating-circle"></div>
+            <div class="floating-square"></div>
+            <div class="floating-triangle"></div>
         </div>
-
         <div class="container">
             <div class="hero-content">
-                <div class="title-wrapper">
-                    <h1 class="glitch-text" data-text="Our Services">Our Services</h1>
-                    <div class="subtitle-animation">
-                        <span class="typing-text"></span>
-                        <span class="cursor"></span>
+                <h1 data-aos="fade-up">Our Services</h1>
+                <p data-aos="fade-up" data-aos-delay="100">Comprehensive financial solutions tailored to your needs</p>
+                <div class="hero-cards" data-aos="fade-up" data-aos-delay="200">
+                    <div class="featured-service">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Tax Strategy</h3>
+                        <p>Expert tax planning and optimization</p>
+                    </div>
+                    <div class="featured-service">
+                        <i class="fas fa-globe"></i>
+                        <h3>International Tax</h3>
+                        <p>Global tax compliance solutions</p>
+                    </div>
+                    <div class="featured-service">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Accounting</h3>
+                        <p>Professional accounting services</p>
                     </div>
                 </div>
-
-                <div class="service-cards-3d">
-                    <div class="card-3d" data-tilt data-tilt-max="10">
-                        <div class="card-content">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <h3>Bookkeeping</h3>
-                            <div class="card-hover-content">
-                                <p>Comprehensive bookkeeping solutions</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-3d" data-tilt data-tilt-max="10">
-                        <div class="card-content">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-file-invoice-dollar"></i>
-                            </div>
-                            <h3>Tax Services</h3>
-                            <div class="card-hover-content">
-                                <p>Expert tax planning & preparation</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-3d" data-tilt data-tilt-max="10">
-                        <div class="card-content">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-calculator"></i>
-                            </div>
-                            <h3>Accounting</h3>
-                            <div class="card-hover-content">
-                                <p>Professional accounting services</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-3d" data-tilt data-tilt-max="10">
-                        <div class="card-content">
-                            <div class="icon-wrapper">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3>Consulting</h3>
-                            <div class="card-hover-content">
-                                <p>Strategic business consulting</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <div class="arrows">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </section>
 
-    <!-- Services Grid -->
+    <!-- Services Grid Section -->
     <section class="services-grid">
         <div class="container">
-            <!-- Bookkeeping Services -->
+            <!-- Tax Services -->
             <div class="service-category" data-aos="fade-up">
-                <div class="category-header">
-                    <i class="fas fa-book"></i>
-                    <h2>Bookkeeping Services</h2>
+                <div class="service-header">
+                    <div class="icon-circle">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h2>Tax Services</h2>
                 </div>
-                <div class="category-content">
-                    <ul>
-                        <li>
-                            <h3>Paperless Bookkeeping</h3>
-                            <p>Modern, efficient, and environmentally friendly bookkeeping solutions</p>
-                        </li>
-                        <li>
-                            <h3>Write-ups</h3>
-                            <p>Professional documentation and financial record preparation</p>
-                        </li>
-                        <li>
-                            <h3>Full Charge AP/AR</h3>
-                            <p>Comprehensive management of accounts payable and receivable</p>
-                        </li>
-                        <li>
-                            <h3>Financial Reports</h3>
-                            <p>General Ledger, Balance Sheet, Profit and Loss Statement and more</p>
-                        </li>
-                    </ul>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>Personal Tax Planning</h3>
+                        <p>Strategic tax planning and compliance for individuals</p>
+                        <ul>
+                            <li>Tax return preparation</li>
+                            <li>Tax optimization strategies</li>
+                            <li>Estate tax planning</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Business Tax Services</h3>
+                        <p>Comprehensive tax solutions for businesses</p>
+                        <ul>
+                            <li>Corporate tax planning</li>
+                            <li>Sales tax compliance</li>
+                            <li>Business structure optimization</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
-            <!-- Tax Services -->
+            <!-- International Services -->
             <div class="service-category" data-aos="fade-up">
-                <div class="category-header">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <h2>Tax Services</h2>
+                <div class="service-header">
+                    <div class="icon-circle">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2>International Services</h2>
                 </div>
-                <div class="category-content">
-                    <ul>
-                        <li>
-                            <h3>Tax Preparation</h3>
-                            <p>1065, 1120, 1120-S, 990, 1040 and 1040NR</p>
-                        </li>
-                        <li>
-                            <h3>Payroll Services</h3>
-                            <p>Complete payroll management and processing</p>
-                        </li>
-                        <li>
-                            <h3>Tax Dispute Resolution</h3>
-                            <p>Expert handling of tax disputes and audits</p>
-                        </li>
-                        <li>
-                            <h3>Complex Tax Issues</h3>
-                            <p>Specialized solutions for complex tax situations</p>
-                        </li>
-                        <li>
-                            <h3>IRS Voluntary Disclosure</h3>
-                            <p>Professional guidance through disclosure programs</p>
-                        </li>
-                        <li>
-                            <h3>Sales Tax Returns</h3>
-                            <p>Accurate and timely sales tax filing</p>
-                        </li>
-                        <li>
-                            <h3>FIRPTA Compliance</h3>
-                            <p>Foreign investment real property tax assistance</p>
-                        </li>
-                    </ul>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>Global Tax Planning</h3>
+                        <p>Cross-border tax optimization strategies</p>
+                        <ul>
+                            <li>International tax compliance</li>
+                            <li>Transfer pricing</li>
+                            <li>Foreign tax credits</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Expatriate Services</h3>
+                        <p>Comprehensive support for international professionals</p>
+                        <ul>
+                            <li>Expatriate tax returns</li>
+                            <li>FBAR compliance</li>
+                            <li>International tax treaties</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
             <!-- Accounting Services -->
             <div class="service-category" data-aos="fade-up">
-                <div class="category-header">
-                    <i class="fas fa-calculator"></i>
+                <div class="service-header">
+                    <div class="icon-circle">
+                        <i class="fas fa-calculator"></i>
+                    </div>
                     <h2>Accounting Services</h2>
                 </div>
-                <div class="category-content">
-                    <ul>
-                        <li>
-                            <h3>Financial Statements</h3>
-                            <p>Professional preparation of business financial statements</p>
-                        </li>
-                        <li>
-                            <h3>Asset Statements</h3>
-                            <p>Comprehensive asset and liability statements for non-residents</p>
-                        </li>
-                        <li>
-                            <h3>Books Review</h3>
-                            <p>Thorough examination and verification of financial records</p>
-                        </li>
-                        <li>
-                            <h3>Company Structure</h3>
-                            <p>Optimal ownership structure formation for tax purposes</p>
-                        </li>
-                        <li>
-                            <h3>ITIN Services</h3>
-                            <p>Complete ITIN application assistance and related services</p>
-                        </li>
-                    </ul>
+                <div class="service-list">
+                    <div class="service-item">
+                        <h3>Financial Reporting</h3>
+                        <p>Comprehensive financial statement preparation</p>
+                        <ul>
+                            <li>Balance sheet preparation</li>
+                            <li>Income statement analysis</li>
+                            <li>Cash flow management</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>Bookkeeping</h3>
+                        <p>Professional bookkeeping solutions</p>
+                        <ul>
+                            <li>Daily transaction recording</li>
+                            <li>Account reconciliation</li>
+                            <li>Financial record maintenance</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Consulting Services -->
-            <div class="service-category" data-aos="fade-up">
-                <div class="category-header">
-                    <i class="fas fa-handshake"></i>
-                    <h2>Consulting Services</h2>
-                </div>
-                <div class="category-content">
-                    <div class="consulting-intro">
-                        <p>We offer comprehensive business consultancy and project management services to all clientele, working with corporate and non-corporate clients to resolve issues related to:</p>
-                    </div>
-                    <ul>
-                        <li>
-                            <h3>Business Strategy</h3>
-                            <p>Sales, marketing, and public relations consulting</p>
-                        </li>
-                        <li>
-                            <h3>Financial Advisory</h3>
-                            <p>Expert accounting and investment guidance</p>
-                        </li>
-                        <li>
-                            <h3>Legal Policy</h3>
-                            <p>Guidance on legal and regulatory compliance</p>
-                        </li>
-                        <li>
-                            <h3>International Business</h3>
-                            <p>Support for domestic and foreign business operations</p>
-                        </li>
-                        <li>
-                            <h3>Creative Industries</h3>
-                            <p>Specialized consulting for artistic and media projects</p>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2>Ready to Get Started?</h2>
+                <p>Contact us today for a free consultation about your financial needs</p>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
             </div>
         </div>
     </section>
