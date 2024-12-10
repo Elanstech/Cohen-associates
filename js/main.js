@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initAOS();
     initMobileMenu();
     initStickyHeader();
-    initHeroSlider();
-    initFAQ();
     initStats();
+    initFAQ();
     initFormLabels();
     initSmoothScroll();
 });
@@ -96,132 +95,6 @@ function initStickyHeader() {
     });
 }
 
-// Hero Slider
-function initHeroSlider() {
-    const slider = document.querySelector('.hero-slider');
-    const slides = document.querySelectorAll('.hero-slide');
-    const dotsContainer = document.querySelector('.slider-dots');
-    const prevBtn = document.querySelector('.slider-arrow.prev');
-    const nextBtn = document.querySelector('.slider-arrow.next');
-    let currentSlide = 0;
-    let slideInterval;
-
-    // Create dots
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        dotsContainer.appendChild(dot);
-    });
-
-    // Initialize first slide
-    slides[0].classList.add('active');
-
-    function goToSlide(index) {
-        const currentActive = document.querySelector('.hero-slide.active');
-        const currentDot = document.querySelector('.dot.active');
-        
-        currentActive.classList.remove('active');
-        currentDot.classList.remove('active');
-        
-        slides[index].classList.add('active');
-        dotsContainer.children[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function nextSlide() {
-        const next = (currentSlide + 1) % slides.length;
-        goToSlide(next);
-    }
-
-    function prevSlide() {
-        const prev = (currentSlide - 1 + slides.length) % slides.length;
-        goToSlide(prev);
-    }
-
-    // Event listeners
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetInterval();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetInterval();
-    });
-
-    // Auto-slide functionality
-    function startSlideInterval() {
-        slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function resetInterval() {
-        clearInterval(slideInterval);
-        startSlideInterval();
-    }
-
-    startSlideInterval();
-
-    // Pause on hover
-    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
-    slider.addEventListener('mouseleave', startSlideInterval);
-
-    // Touch events for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    slider.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    slider.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
-            resetInterval();
-        }
-    }
-}
-
-// FAQ Accordion
-function initFAQ() {
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-
-        question.addEventListener('click', () => {
-            const isOpen = item.classList.contains('active');
-
-            // Close all FAQ items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-                const faqAnswer = faqItem.querySelector('.faq-answer');
-                faqAnswer.style.height = '0px';
-            });
-
-            // Open clicked item if it wasn't open
-            if (!isOpen) {
-                item.classList.add('active');
-                answer.style.height = answer.scrollHeight + 'px';
-            }
-        });
-    });
-}
-
 // Stats Counter Animation
 function initStats() {
     const stats = document.querySelectorAll('.stat-number');
@@ -259,6 +132,33 @@ function initStats() {
 
         requestAnimationFrame(updateCounter);
     }
+}
+
+// FAQ Accordion
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        question.addEventListener('click', () => {
+            const isOpen = item.classList.contains('active');
+
+            // Close all FAQ items
+            faqItems.forEach(faqItem => {
+                faqItem.classList.remove('active');
+                const faqAnswer = faqItem.querySelector('.faq-answer');
+                faqAnswer.style.height = '0px';
+            });
+
+            // Open clicked item if it wasn't open
+            if (!isOpen) {
+                item.classList.add('active');
+                answer.style.height = answer.scrollHeight + 'px';
+            }
+        });
+    });
 }
 
 // Form Labels Animation
@@ -314,3 +214,106 @@ function scrollToSection(href) {
         behavior: 'smooth'
     });
 }
+
+// Handle floating cards animation
+function initFloatingCards() {
+    const cards = document.querySelectorAll('.floating-card');
+    
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.5}s`;
+    });
+}
+
+// Initialize parallax effect for hero image
+function initParallax() {
+    const heroImage = document.querySelector('.hero-image');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (heroImage) {
+            heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
+        }
+    });
+}
+
+// Form validation
+function initFormValidation() {
+    const form = document.querySelector('.contact-form form');
+    
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Basic validation
+            let isValid = true;
+            const errors = {};
+            
+            if (!data.name || data.name.trim() === '') {
+                errors.name = 'Name is required';
+                isValid = false;
+            }
+            
+            if (!data.email || !isValidEmail(data.email)) {
+                errors.email = 'Valid email is required';
+                isValid = false;
+            }
+            
+            if (!data.message || data.message.trim() === '') {
+                errors.message = 'Message is required';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Submit form
+                // Add your form submission logic here
+                console.log('Form submitted:', data);
+                form.reset();
+                showSuccessMessage();
+            } else {
+                showErrors(errors);
+            }
+        });
+    }
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function showSuccessMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.classList.add('form-success');
+    successMessage.textContent = 'Thank you for your message. We\'ll be in touch soon!';
+    
+    const form = document.querySelector('.contact-form form');
+    form.parentNode.insertBefore(successMessage, form.nextSibling);
+    
+    setTimeout(() => {
+        successMessage.remove();
+    }, 5000);
+}
+
+function showErrors(errors) {
+    // Remove existing error messages
+    document.querySelectorAll('.form-error').forEach(error => error.remove());
+    
+    // Add new error messages
+    Object.entries(errors).forEach(([field, message]) => {
+        const input = document.querySelector(`[name="${field}"]`);
+        const error = document.createElement('div');
+        error.classList.add('form-error');
+        error.textContent = message;
+        input.parentNode.appendChild(error);
+    });
+}
+
+// Initialize all interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    initFloatingCards();
+    initParallax();
+    initFormValidation();
+});
