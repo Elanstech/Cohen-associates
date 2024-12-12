@@ -8,22 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatsCounter();
     initSmoothScroll();
     initParallaxEffects();
+    initTeamHover();
 });
 
 // Loader
 function initLoader() {
     const loader = document.querySelector('.loader');
     
-    window.addEventListener('load', () => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.classList.remove('loading');
-        }, 500);
-    });
+    if (loader) {
+        window.addEventListener('load', () => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                document.body.classList.remove('loading');
+            }, 500);
+        });
+    }
 }
 
-// Enhanced Video Player
+// Enhanced Video Player with Error Handling
 function initVideoPlayer() {
     const videoWrapper = document.querySelector('.video-wrapper');
     if (!videoWrapper) return;
@@ -34,55 +37,61 @@ function initVideoPlayer() {
 
     if (!video || !playButton || !overlay) return;
 
-    // Initial state
-    video.controls = false;
     let isPlaying = false;
 
-    function togglePlay() {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
+    function togglePlay(event) {
+        if (event) {
+            event.stopPropagation();
+        }
+        
+        try {
+            if (video.paused) {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        updatePlayState();
+                    }).catch(error => {
+                        console.error("Video playback error:", error);
+                        isPlaying = false;
+                        updatePlayState();
+                    });
+                }
+            } else {
+                video.pause();
+                isPlaying = false;
+                updatePlayState();
+            }
+        } catch (error) {
+            console.error("Video control error:", error);
         }
     }
 
-    function updateButton() {
+    function updatePlayState() {
         const icon = playButton.querySelector('i');
         icon.classList.remove('fa-play', 'fa-pause');
-        icon.classList.add(video.paused ? 'fa-play' : 'fa-pause');
-    }
-
-    function updateOverlay() {
-        overlay.style.opacity = video.paused ? '1' : '0';
-        overlay.style.pointerEvents = video.paused ? 'auto' : 'none';
+        icon.classList.add(isPlaying ? 'fa-pause' : 'fa-play');
+        overlay.style.opacity = isPlaying ? '0' : '1';
+        overlay.style.pointerEvents = isPlaying ? 'none' : 'auto';
     }
 
     // Event Listeners
-    playButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        togglePlay();
-    });
-
-    video.addEventListener('click', () => {
-        togglePlay();
-    });
+    playButton.addEventListener('click', togglePlay);
+    video.addEventListener('click', togglePlay);
 
     video.addEventListener('play', () => {
         isPlaying = true;
-        updateButton();
-        updateOverlay();
+        updatePlayState();
     });
 
     video.addEventListener('pause', () => {
         isPlaying = false;
-        updateButton();
-        updateOverlay();
+        updatePlayState();
     });
 
     video.addEventListener('ended', () => {
         isPlaying = false;
-        updateButton();
-        updateOverlay();
+        updatePlayState();
     });
 
     // Keyboard Navigation
@@ -96,7 +105,7 @@ function initVideoPlayer() {
     videoWrapper.setAttribute('tabindex', '0');
 }
 
-// AOS Initialization
+// AOS (Animate on Scroll) Initialization
 function initAOS() {
     AOS.init({
         duration: 1000,
@@ -111,6 +120,8 @@ function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuLinks = document.querySelectorAll('.mobile-menu-links a');
+
+    if (!menuBtn || !mobileMenu) return;
 
     function toggleMenu() {
         menuBtn.classList.toggle('active');
@@ -137,33 +148,6 @@ function initMobileMenu() {
     });
 }
 
-// Sticky Header
-function initStickyHeader() {
-    const header = document.querySelector('.header');
-    const scrollThreshold = 50;
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        // Add/remove scrolled class
-        if (currentScroll > scrollThreshold) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        // Hide/show header based on scroll direction
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-
-        lastScroll = currentScroll;
-    });
-}
-
 // Enhanced Stats Counter
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
@@ -178,7 +162,6 @@ function initStatsCounter() {
             if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
                 animateCounter(entry.target);
                 entry.target.classList.add('counted');
-                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -189,20 +172,21 @@ function initStatsCounter() {
 function animateCounter(element) {
     const target = parseInt(element.getAttribute('data-count'));
     const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
+    const start = Date.now();
 
-    const updateCounter = () => {
-        current += step;
-        if (current < target) {
-            element.textContent = Math.round(current);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target;
+    function update() {
+        const now = Date.now();
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.round(progress * target);
+        
+        element.textContent = value;
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
         }
-    };
+    }
 
-    requestAnimationFrame(updateCounter);
+    requestAnimationFrame(update);
 }
 
 // Smooth Scroll
@@ -219,7 +203,7 @@ function scrollToSection(href) {
     const target = document.querySelector(href);
     if (!target) return;
 
-    const headerHeight = document.querySelector('.header').offsetHeight;
+    const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
     const elementPosition = target.offsetTop;
     const offsetPosition = elementPosition - headerHeight;
 
@@ -229,57 +213,64 @@ function scrollToSection(href) {
     });
 }
 
-// Parallax Effects
-function initParallaxEffects() {
-    const shapes = document.querySelectorAll('.hero-shape-1, .hero-shape-2, .hero-shape-3');
-    const heroImages = document.querySelector('.hero-images');
-    
+// Sticky Header
+function initStickyHeader() {
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    const scrollThreshold = 50;
+    let lastScroll = 0;
+
     window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        
-        if (heroImages) {
-            heroImages.style.transform = `translateY(${scrolled * 0.1}px)`;
+        const currentScroll = window.pageYOffset;
+
+        // Add/remove scrolled class
+        header.classList.toggle('scrolled', currentScroll > scrollThreshold);
+
+        // Hide/show header based on scroll direction
+        if (currentScroll > lastScroll && currentScroll > 500) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
         }
 
-        shapes.forEach((shape, index) => {
-            const speed = 0.1 * (index + 1);
-            const direction = index % 2 === 0 ? 1 : -1;
-            shape.style.transform = `translate(${scrolled * speed * direction}px, ${scrolled * speed}px)`;
+        lastScroll = currentScroll;
+    });
+}
+
+// Parallax Effects
+function initParallaxEffects() {
+    const heroImages = document.querySelector('.hero-images');
+    const heroContent = document.querySelector('.hero-content');
+    
+    if (!heroImages || !heroContent) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const speed = 0.15;
+
+        requestAnimationFrame(() => {
+            heroImages.style.transform = `translateY(${scrolled * speed}px)`;
+            heroContent.style.transform = `translateY(${scrolled * speed * 0.5}px)`;
         });
     });
 }
 
-// Team Member Hover Effects
-document.querySelectorAll('.team-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
+// Team Hover Effects
+function initTeamHover() {
+    const teamCards = document.querySelectorAll('.team-card');
+
+    teamCards.forEach(card => {
         const image = card.querySelector('.member-image img');
-        if (image) {
+        
+        if (!image) return;
+
+        card.addEventListener('mouseenter', () => {
             image.style.transform = 'scale(1.1)';
-        }
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        const image = card.querySelector('.member-image img');
-        if (image) {
-            image.style.transform = 'scale(1)';
-        }
-    });
-});
-
-// Initialize Timeline Animation
-document.addEventListener('DOMContentLoaded', () => {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                observer.unobserve(entry.target);
-            }
         });
-    }, {
-        threshold: 0.5
-    });
 
-    timelineItems.forEach(item => observer.observe(item));
-});
+        card.addEventListener('mouseleave', () => {
+            image.style.transform = 'scale(1)';
+        });
+    });
+}
