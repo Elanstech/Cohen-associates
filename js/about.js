@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initStickyHeader();
     initStatsCounter();
+    initSmoothScroll();
     initHeroParallax();
 });
 
@@ -21,7 +22,7 @@ function initLoader() {
     });
 }
 
-// Video Player
+// Enhanced Video Player
 function initVideoPlayer() {
     const videoWrapper = document.querySelector('.video-wrapper');
     if (!videoWrapper) return;
@@ -30,59 +31,35 @@ function initVideoPlayer() {
     const playButton = videoWrapper.querySelector('.play-button');
     const overlay = videoWrapper.querySelector('.video-overlay');
 
-    playButton.addEventListener('click', () => {
-        if (video.paused) {
-            video.play();
-            overlay.style.opacity = '0';
-            overlay.style.pointerEvents = 'none';
-            playButton.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
+    if (!video || !playButton || !overlay) return;
+
+    // Initial state
+    video.controls = false;
+    let isPlaying = false;
+
+    // Update UI based on video state
+    function updatePlayState(playing) {
+        isPlaying = playing;
+        playButton.innerHTML = playing ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        overlay.style.opacity = playing ? '0' : '1';
+        overlay.style.pointerEvents = playing ? 'none' : 'auto';
+    }
+
+    // Play button click handler
+    playButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isPlaying) {
             video.pause();
-            overlay.style.opacity = '1';
-            overlay.style.pointerEvents = 'auto';
-            playButton.innerHTML = '<i class="fas fa-play"></i>';
+        } else {
+            video.play();
         }
     });
 
-    video.addEventListener('ended', () => {
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-        playButton.innerHTML = '<i class="fas fa-play"></i>';
+    // Video event listeners
+    video.addEventListener('play', () => {
+        updatePlayState(true);
     });
-}
-
-// AOS Initialization
-function initAOS() {
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100,
-        easing: 'ease-out'
-    });
-}
-
-// Mobile Menu
-function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuLinks = document.querySelectorAll('.mobile-menu-links a');
-
-    function toggleMenu() {
-        menuBtn.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
-    }
-
-    menuBtn.addEventListener('click', toggleMenu);
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            toggleMenu();
-            scrollToSection(link.getAttribute('href'));
-        });
-    });
-
-    // Close menu when clicking outside
+     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (mobileMenu.classList.contains('active') && 
             !mobileMenu.contains(e.target) && 
@@ -119,7 +96,7 @@ function initStickyHeader() {
     });
 }
 
-// Stats Counter Animation
+// Stats Counter
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
     
@@ -160,21 +137,16 @@ function animateCounter(element) {
     requestAnimationFrame(updateCounter);
 }
 
-// Hero Parallax Effect
-function initHeroParallax() {
-    const heroImage = document.querySelector('.hero-image');
-    const accentBox = document.querySelector('.accent-box');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        if (heroImage && accentBox) {
-            heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
-            accentBox.style.transform = `translate(${scrolled * 0.05}px, ${scrolled * 0.05}px)`;
-        }
+// Smooth Scroll
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToSection(anchor.getAttribute('href'));
+        });
     });
 }
 
-// Smooth Scroll
 function scrollToSection(href) {
     const target = document.querySelector(href);
     if (!target) return;
@@ -189,7 +161,24 @@ function scrollToSection(href) {
     });
 }
 
-// Handle floating animations for milestone items
+// Hero Parallax Effect
+function initHeroParallax() {
+    const heroImage = document.querySelector('.hero-visual');
+    const shapes = document.querySelectorAll('.floating-shape');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (heroImage) {
+            heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+        shapes.forEach((shape, index) => {
+            const direction = index % 2 === 0 ? 1 : -1;
+            shape.style.transform = `translate(${scrolled * 0.05 * direction}px, ${scrolled * 0.05}px) rotate(${15 * direction}deg)`;
+        });
+    });
+}
+
+// Initialize any additional animations
 document.querySelectorAll('.milestone').forEach((milestone, index) => {
     milestone.style.animationDelay = `${index * 0.2}s`;
 });
