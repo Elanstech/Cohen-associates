@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initStickyHeader();
     initStatsCounter();
     initSmoothScroll();
-    initHeroParallax();
+    initParallaxEffects();
 });
 
 // Loader
@@ -18,6 +18,7 @@ function initLoader() {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.style.display = 'none';
+            document.body.classList.remove('loading');
         }, 500);
     });
 }
@@ -37,29 +38,96 @@ function initVideoPlayer() {
     video.controls = false;
     let isPlaying = false;
 
-    // Update UI based on video state
-    function updatePlayState(playing) {
-        isPlaying = playing;
-        playButton.innerHTML = playing ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
-        overlay.style.opacity = playing ? '0' : '1';
-        overlay.style.pointerEvents = playing ? 'none' : 'auto';
+    function togglePlay() {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
     }
 
-    // Play button click handler
+    function updateButton() {
+        const icon = playButton.querySelector('i');
+        icon.classList.remove('fa-play', 'fa-pause');
+        icon.classList.add(video.paused ? 'fa-play' : 'fa-pause');
+    }
+
+    function updateOverlay() {
+        overlay.style.opacity = video.paused ? '1' : '0';
+        overlay.style.pointerEvents = video.paused ? 'auto' : 'none';
+    }
+
+    // Event Listeners
     playButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (isPlaying) {
-            video.pause();
-        } else {
-            video.play();
+        togglePlay();
+    });
+
+    video.addEventListener('click', () => {
+        togglePlay();
+    });
+
+    video.addEventListener('play', () => {
+        isPlaying = true;
+        updateButton();
+        updateOverlay();
+    });
+
+    video.addEventListener('pause', () => {
+        isPlaying = false;
+        updateButton();
+        updateOverlay();
+    });
+
+    video.addEventListener('ended', () => {
+        isPlaying = false;
+        updateButton();
+        updateOverlay();
+    });
+
+    // Keyboard Navigation
+    videoWrapper.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+            e.preventDefault();
+            togglePlay();
         }
     });
 
-    // Video event listeners
-    video.addEventListener('play', () => {
-        updatePlayState(true);
+    videoWrapper.setAttribute('tabindex', '0');
+}
+
+// AOS Initialization
+function initAOS() {
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        easing: 'ease-out'
     });
-     // Close menu when clicking outside
+}
+
+// Mobile Menu
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuLinks = document.querySelectorAll('.mobile-menu-links a');
+
+    function toggleMenu() {
+        menuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu();
+            scrollToSection(link.getAttribute('href'));
+        });
+    });
+
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (mobileMenu.classList.contains('active') && 
             !mobileMenu.contains(e.target) && 
@@ -96,7 +164,7 @@ function initStickyHeader() {
     });
 }
 
-// Stats Counter
+// Enhanced Stats Counter
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
     
@@ -161,35 +229,57 @@ function scrollToSection(href) {
     });
 }
 
-// Hero Parallax Effect
-function initHeroParallax() {
-    const heroImage = document.querySelector('.hero-visual');
-    const shapes = document.querySelectorAll('.floating-shape');
+// Parallax Effects
+function initParallaxEffects() {
+    const shapes = document.querySelectorAll('.hero-shape-1, .hero-shape-2, .hero-shape-3');
+    const heroImages = document.querySelector('.hero-images');
     
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        if (heroImage) {
-            heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+        
+        if (heroImages) {
+            heroImages.style.transform = `translateY(${scrolled * 0.1}px)`;
         }
+
         shapes.forEach((shape, index) => {
+            const speed = 0.1 * (index + 1);
             const direction = index % 2 === 0 ? 1 : -1;
-            shape.style.transform = `translate(${scrolled * 0.05 * direction}px, ${scrolled * 0.05}px) rotate(${15 * direction}deg)`;
+            shape.style.transform = `translate(${scrolled * speed * direction}px, ${scrolled * speed}px)`;
         });
     });
 }
 
-// Initialize any additional animations
-document.querySelectorAll('.milestone').forEach((milestone, index) => {
-    milestone.style.animationDelay = `${index * 0.2}s`;
-});
-
-// Handle team member hover effects
+// Team Member Hover Effects
 document.querySelectorAll('.team-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
-        card.querySelector('.member-image img').style.transform = 'scale(1.1)';
+        const image = card.querySelector('.member-image img');
+        if (image) {
+            image.style.transform = 'scale(1.1)';
+        }
     });
     
     card.addEventListener('mouseleave', () => {
-        card.querySelector('.member-image img').style.transform = 'scale(1)';
+        const image = card.querySelector('.member-image img');
+        if (image) {
+            image.style.transform = 'scale(1)';
+        }
     });
+});
+
+// Initialize Timeline Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    timelineItems.forEach(item => observer.observe(item));
 });
