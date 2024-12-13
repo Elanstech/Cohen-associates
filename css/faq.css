@@ -1,0 +1,129 @@
+/* Import base styles */
+@import url('./style.css');
+
+/* Hero Section */
+.faq-hero {
+    position: relative;
+    min-height: 70vh;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    padding: 120px 0 80px;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.faq-hero h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+}
+
+.faq-hero p {
+    font-size: 1.2rem;
+    color: var(--gray-300);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: var(--spacing-3xl) var(--spacing-xl);
+    background: var(--gray-50);
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.faq-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary);
+}
+
+.faq-header p {
+    color: var(--gray-600);
+    font-size: 1rem;
+}
+
+/* FAQ Grid */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+/* FAQ Item */
+.faq-item {
+    background: var(--text-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition-base);
+}
+
+.faq-item:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.faq-question:hover {
+    color: var(--secondary);
+}
+
+.faq-answer {
+    padding: var(--spacing-lg);
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    display: none;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* FAQ Icon */
+.toggle-icon {
+    font-size: 1.2rem;
+    transition: var(--transition-fast);
+    color: var(--gray-500);
+}
+
+.faq-item.active .toggle-icon {
+    transform: rotate(180deg);
+    color: var(--secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .faq-hero {
+        padding: 100px 0 60px;
+    }
+
+    .faq-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+    }
+
+    .faq-answer {
+        font-size: 0.85rem;
+    }
+}
