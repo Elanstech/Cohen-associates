@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initStickyHeader();
     initTeamCards();
+    initHeroShowcase();
 });
 
 // Loader Animation
@@ -141,7 +142,9 @@ function scrollToSection(href) {
             behavior: 'smooth'
         });
     }
-    // Hero Section Interactive Features
+}
+
+// Hero Section Interactive Features
 function initHeroShowcase() {
     const cards = document.querySelectorAll('.showcase-card');
     const dots = document.querySelectorAll('.nav-dot');
@@ -180,10 +183,4 @@ function initHeroShowcase() {
     
     cards.forEach(card => card.addEventListener('mouseenter', stopAutoRotate));
     dots.forEach(dot => dot.addEventListener('mouseenter', stopAutoRotate));
-}
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initHeroShowcase();
-});
 }
