@@ -60,7 +60,9 @@ function initStatsCounter() {
                 // Animate the progress ring
                 const progressRing = entry.target.closest('.stat-item')
                     .querySelector('.progress-ring');
-                progressRing.style.opacity = '1';
+                if (progressRing) {
+                    progressRing.style.opacity = '1';
+                }
             }
         });
     }, observerOptions);
@@ -134,6 +136,8 @@ function initSmoothScroll() {
 }
 
 function scrollToSection(href) {
+    if (href === '#') return;
+    
     const target = document.querySelector(href);
     if (!target) return;
 
