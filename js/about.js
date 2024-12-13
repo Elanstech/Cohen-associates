@@ -1,7 +1,7 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
-    initVideoPlayer();
+    initVideoModal();
     initAOS();
     initMobileMenu();
     initStickyHeader();
@@ -10,58 +10,84 @@ document.addEventListener('DOMContentLoaded', () => {
     initTeamHover();
 });
 
-// Loader Animation
-function initLoader() {
-    const loader = document.querySelector('.loader');
+// Video Modal Functions
+function initVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('storyVideo');
     
-    if (loader) {
-        window.addEventListener('load', () => {
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-                document.body.classList.remove('loading');
-            }, 500);
-        });
-    }
+    window.openVideoModal = function() {
+        modal.classList.add('active');
+        video.play();
+        document.body.style.overflow = 'hidden';
+    };
+    
+    window.closeVideoModal = function() {
+        modal.classList.remove('active');
+        video.pause();
+        video.currentTime = 0;
+        document.body.style.overflow = '';
+    };
+    
+    // Close modal when clicking outside video
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeVideoModal();
+        }
+    });
+    
+    // Handle escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeVideoModal();
+        }
+    });
 }
 
-// Video Player Controls
-function initVideoPlayer() {
-    const videoWrapper = document.querySelector('.video-wrapper');
-    if (!videoWrapper) return;
+// Enhanced Stats Counter with Animation
+function initStatsCounter() {
+    const stats = document.querySelectorAll('.stat-number');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
 
-    const video = videoWrapper.querySelector('video');
-    const playButton = videoWrapper.querySelector('.play-button');
-    const overlay = videoWrapper.querySelector('.video-overlay');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                animateCounter(entry.target);
+                entry.target.classList.add('counted');
+                // Animate the progress ring
+                const progressRing = entry.target.closest('.stat-item')
+                    .querySelector('.progress-ring');
+                progressRing.style.opacity = '1';
+            }
+        });
+    }, observerOptions);
 
-    if (!video || !playButton || !overlay) return;
+    stats.forEach(stat => observer.observe(stat));
+}
 
-    function togglePlay(event) {
-        if (event) event.stopPropagation();
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-value'));
+    const duration = 2000;
+    const start = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
         
-        if (video.paused) {
-            video.play();
-            playButton.querySelector('i').classList.replace('fa-play', 'fa-pause');
-            overlay.style.opacity = '0';
-        } else {
-            video.pause();
-            playButton.querySelector('i').classList.replace('fa-pause', 'fa-play');
-            overlay.style.opacity = '1';
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.round(easeOutQuart * target);
+        
+        element.textContent = current;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
         }
     }
-
-    playButton.addEventListener('click', togglePlay);
-    video.addEventListener('click', togglePlay);
-}
-
-// AOS Animation Initialization
-function initAOS() {
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100,
-        easing: 'ease-out'
-    });
+    
+    requestAnimationFrame(update);
 }
 
 // Mobile Menu Toggle
@@ -97,47 +123,7 @@ function initMobileMenu() {
     });
 }
 
-// Stats Counter Animation
-function initStatsCounter() {
-    const stats = document.querySelectorAll('.stat-number');
-    
-    const observerOptions = {
-        threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                animateCounter(entry.target);
-                entry.target.classList.add('counted');
-            }
-        });
-    }, observerOptions);
-
-    stats.forEach(stat => observer.observe(stat));
-}
-
-function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-value'));
-    const duration = 2000;
-    const start = Date.now();
-
-    function update() {
-        const now = Date.now();
-        const progress = Math.min((now - start) / duration, 1);
-        const value = Math.round(progress * target);
-        
-        element.textContent = value;
-
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-
-    requestAnimationFrame(update);
-}
-
-// Smooth Scroll Implementation
+// Smooth Scroll
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -161,7 +147,7 @@ function scrollToSection(href) {
     });
 }
 
-// Sticky Header Implementation
+// Sticky Header
 function initStickyHeader() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -172,10 +158,8 @@ function initStickyHeader() {
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
 
-        // Add/remove scrolled class
         header.classList.toggle('scrolled', currentScroll > scrollThreshold);
 
-        // Hide/show header based on scroll direction
         if (currentScroll > lastScroll && currentScroll > 500) {
             header.style.transform = 'translateY(-100%)';
         } else {
@@ -203,4 +187,29 @@ function initTeamHover() {
             image.style.transform = 'scale(1)';
         });
     });
+}
+
+// Initialize AOS
+function initAOS() {
+    AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+        easing: 'ease-out'
+    });
+}
+
+// Loader Animation
+function initLoader() {
+    const loader = document.querySelector('.loader');
+    
+    if (loader) {
+        window.addEventListener('load', () => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                document.body.classList.remove('loading');
+            }, 500);
+        });
+    }
 }
