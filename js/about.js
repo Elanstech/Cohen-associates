@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initStickyHeader();
     initStatsCounter();
     initSmoothScroll();
-    initParallaxEffects();
     initTeamHover();
 });
 
-// Loader
+// Loader Animation
 function initLoader() {
     const loader = document.querySelector('.loader');
     
@@ -26,7 +25,7 @@ function initLoader() {
     }
 }
 
-// Enhanced Video Player with Error Handling
+// Video Player Controls
 function initVideoPlayer() {
     const videoWrapper = document.querySelector('.video-wrapper');
     if (!videoWrapper) return;
@@ -37,75 +36,25 @@ function initVideoPlayer() {
 
     if (!video || !playButton || !overlay) return;
 
-    let isPlaying = false;
-
     function togglePlay(event) {
-        if (event) {
-            event.stopPropagation();
-        }
+        if (event) event.stopPropagation();
         
-        try {
-            if (video.paused) {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        isPlaying = true;
-                        updatePlayState();
-                    }).catch(error => {
-                        console.error("Video playback error:", error);
-                        isPlaying = false;
-                        updatePlayState();
-                    });
-                }
-            } else {
-                video.pause();
-                isPlaying = false;
-                updatePlayState();
-            }
-        } catch (error) {
-            console.error("Video control error:", error);
+        if (video.paused) {
+            video.play();
+            playButton.querySelector('i').classList.replace('fa-play', 'fa-pause');
+            overlay.style.opacity = '0';
+        } else {
+            video.pause();
+            playButton.querySelector('i').classList.replace('fa-pause', 'fa-play');
+            overlay.style.opacity = '1';
         }
     }
 
-    function updatePlayState() {
-        const icon = playButton.querySelector('i');
-        icon.classList.remove('fa-play', 'fa-pause');
-        icon.classList.add(isPlaying ? 'fa-pause' : 'fa-play');
-        overlay.style.opacity = isPlaying ? '0' : '1';
-        overlay.style.pointerEvents = isPlaying ? 'none' : 'auto';
-    }
-
-    // Event Listeners
     playButton.addEventListener('click', togglePlay);
     video.addEventListener('click', togglePlay);
-
-    video.addEventListener('play', () => {
-        isPlaying = true;
-        updatePlayState();
-    });
-
-    video.addEventListener('pause', () => {
-        isPlaying = false;
-        updatePlayState();
-    });
-
-    video.addEventListener('ended', () => {
-        isPlaying = false;
-        updatePlayState();
-    });
-
-    // Keyboard Navigation
-    videoWrapper.addEventListener('keydown', (e) => {
-        if (e.code === 'Space') {
-            e.preventDefault();
-            togglePlay();
-        }
-    });
-
-    videoWrapper.setAttribute('tabindex', '0');
 }
 
-// AOS (Animate on Scroll) Initialization
+// AOS Animation Initialization
 function initAOS() {
     AOS.init({
         duration: 1000,
@@ -115,7 +64,7 @@ function initAOS() {
     });
 }
 
-// Mobile Menu
+// Mobile Menu Toggle
 function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -148,13 +97,12 @@ function initMobileMenu() {
     });
 }
 
-// Enhanced Stats Counter
+// Stats Counter Animation
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
     
     const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
+        threshold: 0.5
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -170,7 +118,7 @@ function initStatsCounter() {
 }
 
 function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-count'));
+    const target = parseInt(element.getAttribute('data-value'));
     const duration = 2000;
     const start = Date.now();
 
@@ -189,7 +137,7 @@ function animateCounter(element) {
     requestAnimationFrame(update);
 }
 
-// Smooth Scroll
+// Smooth Scroll Implementation
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -213,7 +161,7 @@ function scrollToSection(href) {
     });
 }
 
-// Sticky Header
+// Sticky Header Implementation
 function initStickyHeader() {
     const header = document.querySelector('.header');
     if (!header) return;
@@ -238,25 +186,7 @@ function initStickyHeader() {
     });
 }
 
-// Parallax Effects
-function initParallaxEffects() {
-    const heroImages = document.querySelector('.hero-images');
-    const heroContent = document.querySelector('.hero-content');
-    
-    if (!heroImages || !heroContent) return;
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const speed = 0.15;
-
-        requestAnimationFrame(() => {
-            heroImages.style.transform = `translateY(${scrolled * speed}px)`;
-            heroContent.style.transform = `translateY(${scrolled * speed * 0.5}px)`;
-        });
-    });
-}
-
-// Team Hover Effects
+// Team Card Hover Effects
 function initTeamHover() {
     const teamCards = document.querySelectorAll('.team-card');
 
