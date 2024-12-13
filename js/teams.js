@@ -141,4 +141,49 @@ function scrollToSection(href) {
             behavior: 'smooth'
         });
     }
+    // Hero Section Interactive Features
+function initHeroShowcase() {
+    const cards = document.querySelectorAll('.showcase-card');
+    const dots = document.querySelectorAll('.nav-dot');
+    
+    function setActiveCard(index) {
+        // Remove active class from all cards and dots
+        cards.forEach(card => card.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active class to selected card and dot
+        cards[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
+    
+    // Add click events to cards
+    cards.forEach((card, index) => {
+        card.addEventListener('click', () => setActiveCard(index));
+    });
+    
+    // Add click events to navigation dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => setActiveCard(index));
+    });
+    
+    // Auto-rotate cards
+    let currentIndex = 0;
+    const autoRotate = setInterval(() => {
+        currentIndex = (currentIndex + 1) % cards.length;
+        setActiveCard(currentIndex);
+    }, 5000);
+    
+    // Stop auto-rotation when user interacts
+    function stopAutoRotate() {
+        clearInterval(autoRotate);
+    }
+    
+    cards.forEach(card => card.addEventListener('mouseenter', stopAutoRotate));
+    dots.forEach(dot => dot.addEventListener('mouseenter', stopAutoRotate));
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initHeroShowcase();
+});
 }
