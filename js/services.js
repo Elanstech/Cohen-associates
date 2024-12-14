@@ -1,10 +1,11 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all components
     initLoader();
     initAOS();
     initMobileMenu();
     initStickyHeader();
-    initServiceCards();
+    initServiceInteractions();
     initSmoothScroll();
 });
 
@@ -22,6 +23,7 @@ function initLoader() {
         }, 500);
     });
 }
+
 
 // Initialize AOS with custom settings
 function initAOS() {
