@@ -1,11 +1,11 @@
-// Import necessary dependencies
+// Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initAOS();
     initMobileMenu();
     initStickyHeader();
+    initServiceCards();
     initSmoothScroll();
-    initServiceInteractions();
 });
 
 // Page Loader
@@ -92,49 +92,37 @@ function initStickyHeader() {
     });
 }
 
-// Service Interactions
-function initServiceInteractions() {
-    const serviceItems = document.querySelectorAll('.service-item');
-    const featuredServices = document.querySelectorAll('.featured-service');
+// Service Cards Interactions
+function initServiceCards() {
+    const serviceCards = document.querySelectorAll('.featured-service');
 
-    // Add hover interactions for service items
-    serviceItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const icon = item.querySelector('h3');
-            if (icon) {
-                icon.style.color = 'var(--secondary-dark)';
-            }
+    serviceCards.forEach(card => {
+        // Add hover effect for service icons
+        card.addEventListener('mouseenter', () => {
+            const icon = card.querySelector('.service-icon i');
+            icon.style.transform = 'scale(1.1) rotate(5deg)';
         });
 
-        item.addEventListener('mouseleave', () => {
-            const icon = item.querySelector('h3');
-            if (icon) {
-                icon.style.color = 'var(--secondary)';
+        card.addEventListener('mouseleave', () => {
+            const icon = card.querySelector('.service-icon i');
+            icon.style.transform = 'scale(1) rotate(0deg)';
+        });
+
+        // Add click handler for service cards
+        card.addEventListener('click', () => {
+            const serviceType = card.getAttribute('data-service');
+            const targetSection = document.querySelector(`#${serviceType}-section`);
+            if (targetSection) {
+                scrollToSection(targetSection);
             }
         });
     });
 
-    // Add hover interactions for featured services
-    featuredServices.forEach(service => {
-        service.addEventListener('mouseenter', () => {
-            const icon = service.querySelector('.service-icon i');
-            if (icon) {
-                icon.style.transform = 'scale(1.1) rotate(5deg)';
-            }
-            service.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-
-        service.addEventListener('mouseleave', () => {
-            const icon = service.querySelector('.service-icon i');
-            if (icon) {
-                icon.style.transform = 'scale(1) rotate(0deg)';
-            }
-            service.style.transform = 'translateY(0) scale(1)';
-        });
-
-        // Add click handler for smooth scrolling
-        service.addEventListener('click', () => {
-            const serviceType = service.getAttribute('data-service');
+    // Handle learn more buttons separately
+    document.querySelectorAll('.learn-more').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent triggering parent card click
+            const serviceType = e.target.closest('.featured-service').getAttribute('data-service');
             const targetSection = document.querySelector(`#${serviceType}-section`);
             if (targetSection) {
                 scrollToSection(targetSection);
@@ -173,38 +161,35 @@ function scrollToSection(target) {
     });
 }
 
-// Handle window events
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
+// Particle Animation (optional enhancement)
+function initParticleAnimation() {
+    const particles = document.querySelectorAll('.particle');
+    
+    particles.forEach(particle => {
+        // Random initial position
+        const x = Math.random() * 20 - 10;
+        const y = Math.random() * 20 - 10;
+        
+        // Apply random transform
+        particle.style.transform = `translate(${x}px, ${y}px)`;
+    });
+}
 
+// Refresh AOS on window resize
 window.addEventListener('resize', () => {
     AOS.refresh();
 });
 
-// Prevent form submission if present
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', (e) => {
+// Initialize particle animation if present
+if (document.querySelector('.particle')) {
+    initParticleAnimation();
+}
+
+// Handle form submission if contact form exists
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        // Add your form handling logic here
+        // Add your form submission logic here
     });
-});
-
-// Initialize any tooltips or popovers
-document.querySelectorAll('[data-tooltip]').forEach(element => {
-    element.addEventListener('mouseenter', (e) => {
-        // Add your tooltip logic here
-    });
-});
-
-// Handle service card learn more buttons
-document.querySelectorAll('.learn-more').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent triggering parent card click
-        const service = e.target.closest('.featured-service').getAttribute('data-service');
-        const section = document.querySelector(`#${service}-section`);
-        if (section) {
-            scrollToSection(section);
-        }
-    });
-});
+}
