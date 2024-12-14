@@ -1,4 +1,4 @@
-// Initialize all functionality when DOM is loaded
+// Import necessary dependencies
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initAOS();
@@ -117,11 +117,28 @@ function initServiceInteractions() {
     // Add hover interactions for featured services
     featuredServices.forEach(service => {
         service.addEventListener('mouseenter', () => {
+            const icon = service.querySelector('.service-icon i');
+            if (icon) {
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+            }
             service.style.transform = 'translateY(-10px) scale(1.02)';
         });
 
         service.addEventListener('mouseleave', () => {
+            const icon = service.querySelector('.service-icon i');
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }
             service.style.transform = 'translateY(0) scale(1)';
+        });
+
+        // Add click handler for smooth scrolling
+        service.addEventListener('click', () => {
+            const serviceType = service.getAttribute('data-service');
+            const targetSection = document.querySelector(`#${serviceType}-section`);
+            if (targetSection) {
+                scrollToSection(targetSection);
+            }
         });
     });
 }
@@ -131,21 +148,28 @@ function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = anchor.getAttribute('href');
-            if (targetId === '#') return;
-
-            const target = document.querySelector(targetId);
-            if (!target) return;
-
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const elementPosition = target.offsetTop;
-            const offsetPosition = elementPosition - headerHeight;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            scrollToSection(anchor.getAttribute('href'));
         });
+    });
+}
+
+// Helper function for smooth scrolling
+function scrollToSection(target) {
+    if (target === '#') return;
+    
+    const targetElement = typeof target === 'string' 
+        ? document.querySelector(target) 
+        : target;
+
+    if (!targetElement) return;
+
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
     });
 }
 
@@ -156,4 +180,31 @@ window.addEventListener('load', () => {
 
 window.addEventListener('resize', () => {
     AOS.refresh();
+});
+
+// Prevent form submission if present
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add your form handling logic here
+    });
+});
+
+// Initialize any tooltips or popovers
+document.querySelectorAll('[data-tooltip]').forEach(element => {
+    element.addEventListener('mouseenter', (e) => {
+        // Add your tooltip logic here
+    });
+});
+
+// Handle service card learn more buttons
+document.querySelectorAll('.learn-more').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent triggering parent card click
+        const service = e.target.closest('.featured-service').getAttribute('data-service');
+        const section = document.querySelector(`#${service}-section`);
+        if (section) {
+            scrollToSection(section);
+        }
+    });
 });
