@@ -1,15 +1,14 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all components
     initLoader();
     initAOS();
     initMobileMenu();
     initStickyHeader();
     initStats();
-    initHeroSlider();
     initFAQ();
-    initFormValidation();
+    initFormLabels();
     initSmoothScroll();
-    initFloatingCards();
 });
 
 // Page Loader
@@ -35,57 +34,6 @@ function initAOS() {
         offset: 100,
         easing: 'ease-out'
     });
-}
-
-// Hero Slider
-function initHeroSlider() {
-    const slides = document.querySelectorAll('.hero-slider .slide');
-    const prevBtn = document.querySelector('.prev-slide');
-    const nextBtn = document.querySelector('.next-slide');
-    let currentSlide = 0;
-    const slideInterval = 5000; // 5 seconds between slides
-    let slideTimer;
-
-    function goToSlide(index) {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = (index + slides.length) % slides.length;
-        slides[currentSlide].classList.add('active');
-    }
-
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-        goToSlide(currentSlide - 1);
-    }
-
-    function startSlideTimer() {
-        slideTimer = setInterval(nextSlide, slideInterval);
-    }
-
-    function resetSlideTimer() {
-        clearInterval(slideTimer);
-        startSlideTimer();
-    }
-
-    if (slides.length > 0) {
-        // Event listeners for buttons
-        if (prevBtn && nextBtn) {
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                resetSlideTimer();
-            });
-
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                resetSlideTimer();
-            });
-        }
-
-        // Start automatic slideshow
-        startSlideTimer();
-    }
 }
 
 // Mobile Menu
@@ -213,93 +161,20 @@ function initFAQ() {
     });
 }
 
-// Form Validation
-function initFormValidation() {
-    const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            if (validateForm(form)) {
-                // If it's a contact form with mailto
-                if (form.action.includes('mailto')) {
-                    const formData = new FormData(form);
-                    const mailtoLink = constructMailtoLink(formData);
-                    window.location.href = mailtoLink;
-                }
-                
-                showSuccessMessage(form);
-                form.reset();
-            }
-        });
+// Form Labels Animation
+function initFormLabels() {
+    const formGroups = document.querySelectorAll('.form-group');
 
-        // Initialize floating labels
-        initFloatingLabels(form);
-    });
-}
-
-function validateForm(form) {
-    let isValid = true;
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    
-    removeErrors(form);
-
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            showError(input, 'This field is required');
-            isValid = false;
-        } else if (input.type === 'email' && !isValidEmail(input.value)) {
-            showError(input, 'Please enter a valid email address');
-            isValid = false;
-        }
-    });
-
-    return isValid;
-}
-
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function showError(input, message) {
-    const formGroup = input.closest('.form-group');
-    const error = document.createElement('div');
-    error.classList.add('form-error');
-    error.textContent = message;
-    formGroup.appendChild(error);
-}
-
-function removeErrors(form) {
-    form.querySelectorAll('.form-error').forEach(error => error.remove());
-}
-
-function constructMailtoLink(formData) {
-    const email = 'info@cohen-associates.com';
-    const subject = encodeURIComponent('Contact Form Submission');
-    const body = encodeURIComponent(
-        `Name: ${formData.get('name')}\n` +
-        `Email: ${formData.get('email')}\n` +
-        `Phone: ${formData.get('phone') || 'Not provided'}\n\n` +
-        `Message:\n${formData.get('message')}`
-    );
-
-    return `mailto:${email}?subject=${subject}&body=${body}`;
-}
-
-// Floating Labels
-function initFloatingLabels(form) {
-    const formGroups = form.querySelectorAll('.form-group');
-    
     formGroups.forEach(group => {
-        const input = group.querySelector('input, textarea, select');
-        if (!input) return;
-        
+        const input = group.querySelector('input, textarea');
+        const label = group.querySelector('label');
+
+        if (!input || !label) return;
+
         input.addEventListener('focus', () => {
             group.classList.add('focused');
         });
-        
+
         input.addEventListener('blur', () => {
             group.classList.remove('focused');
             if (input.value.trim()) {
@@ -308,7 +183,7 @@ function initFloatingLabels(form) {
                 group.classList.remove('has-value');
             }
         });
-        
+
         // Set initial state
         if (input.value.trim()) {
             group.classList.add('has-value');
@@ -340,7 +215,7 @@ function scrollToSection(href) {
     });
 }
 
-// Floating Cards Animation
+// Handle floating cards animation
 function initFloatingCards() {
     const cards = document.querySelectorAll('.floating-card');
     
@@ -349,15 +224,96 @@ function initFloatingCards() {
     });
 }
 
-// Success Message
-function showSuccessMessage(form) {
-    const message = document.createElement('div');
-    message.classList.add('form-success');
-    message.textContent = 'Thank you for your message. We\'ll be in touch soon!';
+// Initialize parallax effect for hero image
+function initParallax() {
+    const heroImage = document.querySelector('.hero-image');
     
-    form.parentNode.insertBefore(message, form.nextSibling);
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (heroImage) {
+            heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
+        }
+    });
+}
+
+// Form validation
+function initFormValidation() {
+    const form = document.querySelector('.contact-form form');
+    
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Basic validation
+            let isValid = true;
+            const errors = {};
+            
+            if (!data.name || data.name.trim() === '') {
+                errors.name = 'Name is required';
+                isValid = false;
+            }
+            
+            if (!data.email || !isValidEmail(data.email)) {
+                errors.email = 'Valid email is required';
+                isValid = false;
+            }
+            
+            if (!data.message || data.message.trim() === '') {
+                errors.message = 'Message is required';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Submit form
+                // Add your form submission logic here
+                console.log('Form submitted:', data);
+                form.reset();
+                showSuccessMessage();
+            } else {
+                showErrors(errors);
+            }
+        });
+    }
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function showSuccessMessage() {
+    const successMessage = document.createElement('div');
+    successMessage.classList.add('form-success');
+    successMessage.textContent = 'Thank you for your message. We\'ll be in touch soon!';
+    
+    const form = document.querySelector('.contact-form form');
+    form.parentNode.insertBefore(successMessage, form.nextSibling);
     
     setTimeout(() => {
-        message.remove();
+        successMessage.remove();
     }, 5000);
 }
+
+function showErrors(errors) {
+    // Remove existing error messages
+    document.querySelectorAll('.form-error').forEach(error => error.remove());
+    
+    // Add new error messages
+    Object.entries(errors).forEach(([field, message]) => {
+        const input = document.querySelector(`[name="${field}"]`);
+        const error = document.createElement('div');
+        error.classList.add('form-error');
+        error.textContent = message;
+        input.parentNode.appendChild(error);
+    });
+}
+
+// Initialize all interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    initFloatingCards();
+    initParallax();
+    initFormValidation();
+});
