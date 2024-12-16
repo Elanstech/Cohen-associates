@@ -1,14 +1,13 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
     initLoader();
     initAOS();
     initMobileMenu();
     initStickyHeader();
     initStats();
-    initFAQ();
-    initFormLabels();
+    initFormValidation();
     initSmoothScroll();
+    initFloatingCards();
 });
 
 // Page Loader
@@ -17,11 +16,9 @@ function initLoader() {
     
     window.addEventListener('load', () => {
         loader.style.opacity = '0';
-        loader.style.visibility = 'hidden';
-        document.body.classList.remove('loading');
-        
         setTimeout(() => {
             loader.style.display = 'none';
+            document.body.classList.remove('loading');
         }, 500);
     });
 }
@@ -41,15 +38,15 @@ function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuLinks = document.querySelectorAll('.mobile-menu-links a');
-
+    
     function toggleMenu() {
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.classList.toggle('no-scroll');
     }
-
+    
     menuBtn.addEventListener('click', toggleMenu);
-
+    
     // Close menu when clicking links
     menuLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -57,7 +54,7 @@ function initMobileMenu() {
             scrollToSection(link.getAttribute('href'));
         });
     });
-
+    
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (mobileMenu.classList.contains('active') && 
@@ -73,24 +70,24 @@ function initStickyHeader() {
     const header = document.querySelector('.header');
     const scrollThreshold = 50;
     let lastScroll = 0;
-
+    
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-
+        
         // Add/remove scrolled class
         if (currentScroll > scrollThreshold) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-
+        
         // Hide/show header based on scroll direction
         if (currentScroll > lastScroll && currentScroll > 500) {
             header.style.transform = 'translateY(-100%)';
         } else {
             header.style.transform = 'translateY(0)';
         }
-
+        
         lastScroll = currentScroll;
     });
 }
@@ -102,7 +99,7 @@ function initStats() {
     const observerOptions = {
         threshold: 0.5
     };
-
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -111,15 +108,15 @@ function initStats() {
             }
         });
     }, observerOptions);
-
+    
     stats.forEach(stat => observer.observe(stat));
-
+    
     function animateCounter(element) {
         const target = parseInt(element.getAttribute('data-target'));
         const duration = 2000;
         const step = target / (duration / 16);
         let current = 0;
-
+        
         const updateCounter = () => {
             current += step;
             if (current < target) {
@@ -129,116 +126,14 @@ function initStats() {
                 element.textContent = target;
             }
         };
-
+        
         requestAnimationFrame(updateCounter);
     }
 }
 
-// FAQ Accordion
-function initFAQ() {
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-
-        question.addEventListener('click', () => {
-            const isOpen = item.classList.contains('active');
-
-            // Close all FAQ items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
-                const faqAnswer = faqItem.querySelector('.faq-answer');
-                faqAnswer.style.height = '0px';
-            });
-
-            // Open clicked item if it wasn't open
-            if (!isOpen) {
-                item.classList.add('active');
-                answer.style.height = answer.scrollHeight + 'px';
-            }
-        });
-    });
-}
-
-// Form Labels Animation
-function initFormLabels() {
-    const formGroups = document.querySelectorAll('.form-group');
-
-    formGroups.forEach(group => {
-        const input = group.querySelector('input, textarea');
-        const label = group.querySelector('label');
-
-        if (!input || !label) return;
-
-        input.addEventListener('focus', () => {
-            group.classList.add('focused');
-        });
-
-        input.addEventListener('blur', () => {
-            group.classList.remove('focused');
-            if (input.value.trim()) {
-                group.classList.add('has-value');
-            } else {
-                group.classList.remove('has-value');
-            }
-        });
-
-        // Set initial state
-        if (input.value.trim()) {
-            group.classList.add('has-value');
-        }
-    });
-}
-
-// Smooth Scroll
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            scrollToSection(anchor.getAttribute('href'));
-        });
-    });
-}
-
-function scrollToSection(href) {
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    const headerHeight = document.querySelector('.header').offsetHeight;
-    const elementPosition = target.offsetTop;
-    const offsetPosition = elementPosition - headerHeight;
-
-    window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-    });
-}
-
-// Handle floating cards animation
-function initFloatingCards() {
-    const cards = document.querySelectorAll('.floating-card');
-    
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.5}s`;
-    });
-}
-
-// Initialize parallax effect for hero image
-function initParallax() {
-    const heroImage = document.querySelector('.hero-image');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        if (heroImage) {
-            heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
-        }
-    });
-}
-
-// Form validation
+// Form Validation
 function initFormValidation() {
-    const form = document.querySelector('.contact-form form');
+    const form = document.querySelector('#contactForm');
     
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -246,21 +141,22 @@ function initFormValidation() {
             
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            
-            // Basic validation
             let isValid = true;
             const errors = {};
             
+            // Validate name
             if (!data.name || data.name.trim() === '') {
                 errors.name = 'Name is required';
                 isValid = false;
             }
             
+            // Validate email
             if (!data.email || !isValidEmail(data.email)) {
                 errors.email = 'Valid email is required';
                 isValid = false;
             }
             
+            // Validate message
             if (!data.message || data.message.trim() === '') {
                 errors.message = 'Message is required';
                 isValid = false;
@@ -268,10 +164,8 @@ function initFormValidation() {
             
             if (isValid) {
                 // Submit form
-                // Add your form submission logic here
-                console.log('Form submitted:', data);
-                form.reset();
                 showSuccessMessage();
+                form.reset();
             } else {
                 showErrors(errors);
             }
@@ -289,7 +183,7 @@ function showSuccessMessage() {
     successMessage.classList.add('form-success');
     successMessage.textContent = 'Thank you for your message. We\'ll be in touch soon!';
     
-    const form = document.querySelector('.contact-form form');
+    const form = document.querySelector('#contactForm');
     form.parentNode.insertBefore(successMessage, form.nextSibling);
     
     setTimeout(() => {
@@ -311,9 +205,65 @@ function showErrors(errors) {
     });
 }
 
-// Initialize all interactive elements
-document.addEventListener('DOMContentLoaded', () => {
-    initFloatingCards();
-    initParallax();
-    initFormValidation();
-});
+// Smooth Scroll
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToSection(anchor.getAttribute('href'));
+        });
+    });
+}
+
+function scrollToSection(href) {
+    const target = document.querySelector(href);
+    if (!target) return;
+    
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const elementPosition = target.offsetTop;
+    const offsetPosition = elementPosition - headerHeight;
+    
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}
+
+// Floating Cards Animation
+function initFloatingCards() {
+    const cards = document.querySelectorAll('.floating-card');
+    
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.5}s`;
+    });
+}
+
+// Form Labels Animation
+function initFormLabels() {
+    const formGroups = document.querySelectorAll('.form-group');
+    
+    formGroups.forEach(group => {
+        const input = group.querySelector('input, textarea');
+        const label = group.querySelector('label');
+        
+        if (!input || !label) return;
+        
+        input.addEventListener('focus', () => {
+            group.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', () => {
+            group.classList.remove('focused');
+            if (input.value.trim()) {
+                group.classList.add('has-value');
+            } else {
+                group.classList.remove('has-value');
+            }
+        });
+        
+        // Set initial state
+        if (input.value.trim()) {
+            group.classList.add('has-value');
+        }
+    });
+}
