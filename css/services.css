@@ -10,6 +10,24 @@
     overflow: hidden;
     color: var(--text-light);
 }
+.hero-text {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.hero-text h1 {
+    font-size: var(--font-size-6xl);
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--gray-200);
+    margin: 0 auto;
+    max-width: 600px;
+}
 
 .hero-background {
     position: absolute;
@@ -88,7 +106,7 @@
     backdrop-filter: blur(10px);
     padding: var(--spacing-xl);
     border-radius: var(--radius-xl);
-    text-align: center;
+    -align: center;
     transition: var(--transition-base);
     cursor: pointer;
 }
