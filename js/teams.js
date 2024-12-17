@@ -4,58 +4,21 @@ const teamBios = {
         name: "Oksana Inoyatova",
         role: "Founder & CEO",
         image: "oksanafront.jpeg",
-        bio: `Oksana Inoyatova is the visionary founder and CEO of Cohen & Associates, bringing over two decades of expertise in financial services and taxation. 
-        After earning her Master of Business Administration with a focus in Finance from New York University and her Bachelor's in Accounting from Queens College, CUNY, 
-        Oksana established herself as a leading voice in international taxation and business consulting.
-
-        As a Certified Public Accountant, Oksana founded Cohen & Associates in 2004 with a vision to provide comprehensive financial solutions tailored to each client's unique needs. 
-        Her extensive background includes serving as a financial advisor for Fortune 500 companies, where she developed deep expertise in international tax planning and business strategy.
-
-        Under her leadership, Cohen & Associates has grown from a small practice to serving over 1000 clients, specializing in complex tax structures and international business operations. 
-        Oksana has been recognized as one of the Top 40 Under 40 by CPA Practice Advisor and is a frequent speaker at international tax conferences. Her commitment to excellence 
-        and client service has established Cohen & Associates as a trusted name in financial services.
-
-        Oksana maintains active memberships in the American Institute of CPAs (AICPA) and the New York State Society of CPAs (NYSSCPA), reflecting her dedication to maintaining 
-        the highest professional standards in the industry.`,
+        bio: `Oksana graduated with honors from Queens College, City University of New York, in 2005, earning dual degrees in Accounting and Economics. She gained extensive experience working for top-tier firms like Deloitte, where she developed expertise in tax preparation for high-net-worth individuals and international clients. Oksana is a trusted advisor for clients navigating complex financial landscapes, with in-depth knowledge of FATCA compliance and international tax matters.`,
         linkedin: "https://www.linkedin.com/in/oksana-inoyatova-72680515"
     },
     steve: {
         name: "Steve Inoyatov",
         role: "Co-Founder & CFO",
         image: "websteve.jpeg",
-        bio: `Steve Inoyatov serves as the Co-Founder and Chief Financial Officer of Cohen & Associates, bringing a wealth of experience in international finance 
-        and strategic planning. With a Master's in Taxation from New York University and a Bachelor's in Finance from Baruch College, Steve has established himself 
-        as an integral part of the firm's leadership team.
-
-        Throughout his career spanning over 15 years, Steve has specialized in developing innovative financial strategies and optimizing tax structures for both 
-        domestic and international clients. His expertise in cross-border taxation and financial planning has been instrumental in expanding Cohen & Associates' 
-        international presence.
-
-        As CFO, Steve oversees the firm's financial operations while maintaining a hands-on approach with key clients. His deep understanding of both US and 
-        international tax laws has helped numerous clients navigate complex financial landscapes successfully. Steve's commitment to continuous learning and 
-        professional development ensures that Cohen & Associates stays at the forefront of evolving financial regulations and best practices.
-
-        Beyond his role at Cohen & Associates, Steve is actively involved in professional development initiatives and regularly contributes to industry 
-        publications on topics related to international taxation and financial strategy.`,
+        bio: `Steve, an honors graduate from Queens College, earned his dual degrees in Accounting and Economics. With experience at both Big 4 and small to mid-sized public accounting firms, Steve specializes in serving dental and medical providers, international and domestic celebrities, real estate professionals, and high-net-worth individuals. He focuses on providing tailored tax structures to maximize savings at the federal, state, and local levels. Steve holds the prestigious IRS Enrolled Agent status, granting him unlimited rights to represent taxpayers before the IRS in all 50 states. Together, Oksana and Steve lead a firm dedicated to guiding clients toward financial success, whether locally or globally.`,
         linkedin: "https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465"
     },
     eddie: {
         name: "Eddie Maks",
         role: "Manager",
         image: "eddy.jpeg",
-        bio: `Eddie Maks brings a dynamic approach to his role as Manager at Cohen & Associates, where he leads operational excellence and team performance. 
-        With a strong background in accounting and financial management, Eddie has been instrumental in streamlining processes and enhancing client service delivery.
-
-        After completing his education in Business Administration with a focus on Accounting, Eddie joined Cohen & Associates where he quickly demonstrated his 
-        ability to manage complex projects and lead teams effectively. His expertise spans various areas of accounting and tax preparation, with particular 
-        strength in developing efficient workflows and maintaining high standards of accuracy.
-
-        Eddie's client-focused approach and deep understanding of tax regulations have made him a valuable asset to the firm. He works closely with both individual 
-        and business clients, providing comprehensive tax planning and compliance services. His attention to detail and commitment to excellence ensure that clients 
-        receive the highest level of service.
-
-        In his role as Manager, Eddie continues to develop and implement innovative solutions to meet clients' evolving needs while mentoring junior team members 
-        and maintaining the firm's high standards of service delivery.`,
+        bio: `Eddie is an experienced accounting professional with a strong background in assisting high net worth individuals and business owners. He specializes in helping clients navigate the complexities of tax planning and financial management. His expertise includes managing tax compliance, structuring real estate transactions, and implementing tax-saving strategies. He works closely with business owners, particularly real estate developers, investors, and property owners to optimize their financial outcomes while ensuring adherence to tax regulations. Eddie is also a co-founder of non-profit organization that assists families and children with special needs.`,
         linkedin: "#"
     },
     yulia: {
