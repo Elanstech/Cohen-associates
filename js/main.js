@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFloatingCards();
     initParallax();
     initFormValidation();
+    initIntersectionObserver();
 });
 
 // Page Loader
@@ -83,34 +84,40 @@ function initMobileMenu() {
 // Sticky Header
 function initStickyHeader() {
     const header = document.querySelector('.header');
-    const scrollThreshold = 50;
+    const scrollTrigger = 100;
     let lastScroll = 0;
+    let scrollTimeout;
 
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
+        clearTimeout(scrollTimeout);
 
-        // Add/remove scrolled class
-        if (currentScroll > scrollThreshold) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        scrollTimeout = setTimeout(() => {
+            const currentScroll = window.pageYOffset;
 
-        // Hide/show header based on scroll direction
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
+            // Add/remove scrolled class
+            if (currentScroll > scrollTrigger) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
 
-        lastScroll = currentScroll;
+            // Hide/show header based on scroll direction
+            if (currentScroll > lastScroll && currentScroll > 500) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+
+            lastScroll = currentScroll;
+        }, 50);
     });
 }
 
 // Stats Counter Animation
 function initStats() {
     const stats = document.querySelectorAll('.stat-number');
-    
+    let animated = false;
+
     const observerOptions = {
         threshold: 0.5,
         rootMargin: '0px'
@@ -118,9 +125,9 @@ function initStats() {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
                 animateCounter(entry.target);
-                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -236,7 +243,7 @@ function initFloatingCards() {
         card.style.animationDelay = `${index * 0.5}s`;
     });
 
-    // Add hover effect
+    // Add hover effect pause
     cards.forEach(card => {
         card.addEventListener('mouseover', () => {
             card.style.animationPlayState = 'paused';
@@ -351,25 +358,47 @@ function resetFormStyles() {
     });
 }
 
-// Handle form submission errors gracefully
-window.addEventListener('unhandledrejection', event => {
-    console.error('Form submission error:', event.reason);
-    showErrors({ general: 'An error occurred. Please try again later.' });
-});
+// Intersection Observer for Animations
+function initIntersectionObserver() {
+    const elements = document.querySelectorAll('.fade-up, .fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px'
+    });
+    
+    elements.forEach(element => observer.observe(element));
+}
 
-// Add resize handler for mobile menu
+// Handle window resize
 window.addEventListener('resize', () => {
-    const mobileMenu = document.querySelector('.mobile-menu');
-    if (window.innerWidth > 992 && mobileMenu.classList.contains('active')) {
-        mobileMenu.classList.remove('active');
-        document.querySelector('.mobile-menu-btn').classList.remove('active');
-        document.body.classList.remove('no-scroll');
+    if (window.innerWidth > 992) {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            menuBtn.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
     }
 });
 
-// Prevent form submission when pressing Enter
+// Prevent form submission on Enter key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
         e.preventDefault();
     }
+});
+
+// Handle form submission errors gracefully
+window.addEventListener('unhandledrejection', event => {
+    console.error('Form submission error:', event.reason);
+    showErrors({ general: 'An error occurred. Please try again later.' });
 });
