@@ -6,11 +6,33 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initStickyHeader();
     initStatsCounter();
-    initSmoothScroll();
-    initTeamHover();
+    initParallaxEffects();
 });
 
-// Video Modal Functions
+// Loader
+function initLoader() {
+    const loader = document.querySelector('.loader');
+    
+    window.addEventListener('load', () => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+            document.body.classList.add('page-loaded');
+        }, 500);
+    });
+}
+
+// Initialize AOS (Animate on Scroll)
+function initAOS() {
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100,
+        easing: 'ease-out-cubic'
+    });
+}
+
+// Video Modal Handling
 function initVideoModal() {
     const modal = document.getElementById('videoModal');
     const video = document.getElementById('storyVideo');
@@ -35,7 +57,7 @@ function initVideoModal() {
         }
     });
     
-    // Handle escape key
+    // Handle escape key press
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeVideoModal();
@@ -43,42 +65,99 @@ function initVideoModal() {
     });
 }
 
-// Enhanced Stats Counter with Animation
+// Mobile Menu
+function initMobileMenu() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const body = document.body;
+    let isMenuOpen = false;
+    
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', toggleMenu);
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu when pressing escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMenu();
+            }
+        });
+    }
+    
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        menuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        body.style.overflow = isMenuOpen ? 'hidden' : '';
+    }
+}
+
+// Sticky Header
+function initStickyHeader() {
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        // Add/remove scrolled class
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Hide/show header based on scroll direction
+        if (currentScroll > lastScroll && currentScroll > 500) {
+            header.classList.add('header-hidden');
+        } else {
+            header.classList.remove('header-hidden');
+        }
+        
+        lastScroll = currentScroll;
+    });
+}
+
+// Stats Counter Animation
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
+    const progressCircles = document.querySelectorAll('.progress-ring-circle');
     
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                animateCounter(entry.target);
-                entry.target.classList.add('counted');
-                // Animate the progress ring
-                const progressRing = entry.target.closest('.stat-item')
-                    .querySelector('.progress-ring');
-                if (progressRing) {
-                    progressRing.style.opacity = '1';
-                }
+                const stat = entry.target;
+                const targetValue = parseInt(stat.getAttribute('data-value'));
+                const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
+                
+                animateCounter(stat, targetValue);
+                animateProgress(progressCircle, targetValue);
+                stat.classList.add('counted');
             }
         });
-    }, observerOptions);
-
+    }, {
+        threshold: 0.5
+    });
+    
     stats.forEach(stat => observer.observe(stat));
 }
 
-function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-value'));
+function animateCounter(element, target) {
     const duration = 2000;
     const start = performance.now();
+    const startValue = 0;
     
     function update(currentTime) {
         const elapsed = currentTime - start;
         const progress = Math.min(elapsed / duration, 1);
         
+        // Easing function for smooth animation
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
         const current = Math.round(easeOutQuart * target);
         
@@ -92,128 +171,64 @@ function animateCounter(element) {
     requestAnimationFrame(update);
 }
 
-// Mobile Menu Toggle
-function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuLinks = document.querySelectorAll('.mobile-menu-links a');
-
-    if (!menuBtn || !mobileMenu) return;
-
-    function toggleMenu() {
-        menuBtn.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
-    }
-
-    menuBtn.addEventListener('click', toggleMenu);
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            toggleMenu();
-            scrollToSection(link.getAttribute('href'));
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
-            !menuBtn.contains(e.target)) {
-            toggleMenu();
-        }
-    });
-}
-
-// Smooth Scroll
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-            scrollToSection(anchor.getAttribute('href'));
-        });
-    });
-}
-
-function scrollToSection(href) {
-    if (href === '#') return;
+function animateProgress(circle, percentage) {
+    if (!circle) return;
     
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
-    const elementPosition = target.offsetTop;
-    const offsetPosition = elementPosition - headerHeight;
-
-    window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-    });
+    const circumference = 2 * Math.PI * 54; // circle radius = 54
+    const offset = circumference - (percentage / 100) * circumference;
+    
+    circle.style.strokeDasharray = circumference;
+    circle.style.strokeDashoffset = circumference;
+    
+    setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+        circle.style.opacity = '1';
+    }, 100);
 }
 
-// Sticky Header
-function initStickyHeader() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-
-    const scrollThreshold = 50;
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        header.classList.toggle('scrolled', currentScroll > scrollThreshold);
-
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-
-        lastScroll = currentScroll;
-    });
-}
-
-// Team Card Hover Effects
-function initTeamHover() {
-    const teamCards = document.querySelectorAll('.team-card');
-
-    teamCards.forEach(card => {
-        const image = card.querySelector('.member-image img');
+// Parallax Effects
+function initParallaxEffects() {
+    const particles = document.querySelectorAll('.particle');
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
         
-        if (!image) return;
-
-        card.addEventListener('mouseenter', () => {
-            image.style.transform = 'scale(1.1)';
-        });
-
-        card.addEventListener('mouseleave', () => {
-            image.style.transform = 'scale(1)';
+        particles.forEach((particle, index) => {
+            const speed = 0.02 + (index * 0.01);
+            const x = (mouseX - window.innerWidth / 2) * speed;
+            const y = (mouseY - window.innerHeight / 2) * speed;
+            
+            particle.style.transform = `translate(${x}px, ${y}px)`;
         });
     });
 }
 
-// Initialize AOS
-function initAOS() {
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100,
-        easing: 'ease-out'
-    });
-}
-
-// Loader Animation
-function initLoader() {
-    const loader = document.querySelector('.loader');
-    
-    if (loader) {
-        window.addEventListener('load', () => {
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-                document.body.classList.remove('loading');
-            }, 500);
-        });
+// Handle Window Resize
+window.addEventListener('resize', debounce(() => {
+    if (window.innerWidth > 992) {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        
+        if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            menuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
+}, 250));
+
+// Utility function: Debounce
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
