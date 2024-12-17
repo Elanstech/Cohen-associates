@@ -17,7 +17,6 @@
     overflow: hidden;
 }
 
-/* Animated Circle Background */
 .animated-circles .circle {
     position: absolute;
     border-radius: 50%;
@@ -55,12 +54,25 @@
     75% { transform: translate(-20px, -20px) rotate(-5deg); }
 }
 
-.hero-content {
+.hero-container {
     position: relative;
     z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl);
+}
+
+.hero-content {
+    text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: var(--font-size-6xl);
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
 }
 
 .hero-badge {
@@ -70,15 +82,10 @@
     border-radius: var(--radius-full);
     color: var(--secondary);
     font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: var(--spacing-lg);
     backdrop-filter: blur(10px);
-}
-
-.hero-text h1 {
-    font-size: var(--font-size-6xl);
-    color: var(--text-light);
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.2;
 }
 
 .hero-text p {
@@ -110,6 +117,12 @@
     margin: 0 auto var(--spacing-3xl);
 }
 
+.section-header h2 {
+    font-size: var(--font-size-4xl);
+    color: var(--primary);
+    margin-bottom: var(--spacing-md);
+}
+
 .section-badge {
     display: inline-block;
     padding: var(--spacing-xs) var(--spacing-lg);
@@ -117,12 +130,6 @@
     border-radius: var(--radius-full);
     color: var(--secondary);
     font-weight: var(--font-weight-semibold);
-    margin-bottom: var(--spacing-md);
-}
-
-.section-header h2 {
-    font-size: var(--font-size-4xl);
-    color: var(--primary);
     margin-bottom: var(--spacing-md);
 }
 
@@ -154,6 +161,7 @@
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: var(--transition-base);
+    position: relative;
 }
 
 .team-card:hover {
@@ -191,7 +199,10 @@
 .image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
     transition: var(--transition-base);
 }
@@ -204,10 +215,35 @@
     transform: scale(1.1);
 }
 
+.read-more-btn {
+    background: var(--secondary);
+    color: var(--text-light);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    transition: var(--transition-base);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.team-card:hover .read-more-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.read-more-btn:hover {
+    background: var(--secondary-dark);
+    transform: translateY(-3px);
+}
+
 .member-info {
     padding: var(--spacing-xl);
     text-align: center;
-    position: relative;
 }
 
 .member-info h3 {
@@ -257,20 +293,69 @@
     transform: translateY(-3px) rotate(8deg);
 }
 
-/* Footer Styles - Matching other pages */
-.footer {
-    background: var(--primary-dark);
-    color: var(--text-light);
-    padding: var(--spacing-4xl) 0 var(--spacing-lg);
+/* Bio Modal */
+.bio-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    opacity: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: var(--spacing-2xl);
-    max-width: 1200px;
-    margin: 0 auto var(--spacing-2xl);
-    padding: 0 var(--spacing-xl);
+.bio-modal.active {
+    display: flex;
+    opacity: 1;
+    align-items: flex-start;
+    justify-content: center;
+    padding: var(--spacing-2xl) var(--spacing-md);
+}
+
+.bio-modal-content {
+    background: var(--text-light);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.bio-modal.active .bio-modal-content {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    color: var(--gray-600);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: var(--transition-base);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-modal:hover {
+    background: var(--secondary);
+    color: var(--text-light);
+    transform: rotate(90deg);
+}
+
+.bio-content {
+    padding: var(--spacing-2xl);
 }
 
 /* Responsive Design */
@@ -283,16 +368,6 @@
 @media (max-width: 992px) {
     .team-grid:not(.founders) {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-xl);
-    }
-    
-    .footer-info {
-        grid-column: span 2;
-        text-align: center;
     }
 }
 
@@ -308,10 +383,6 @@
         margin: 0 auto;
     }
     
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-    
     .circle {
         display: none;
     }
@@ -322,16 +393,24 @@
         font-size: var(--font-size-3xl);
     }
     
-    .hero-text p {
-        font-size: var(--font-size-lg);
-    }
-    
-    .section-header h2 {
-        font-size: var(--font-size-3xl);
-    }
-    
     .member-info {
         padding: var(--spacing-lg);
+    }
+    
+    .bio-modal-content {
+        width: 95%;
+    }
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -347,5 +426,10 @@
     .team-card {
         break-inside: avoid;
         box-shadow: none;
+    }
+    
+    .read-more-btn,
+    .bio-modal {
+        display: none !important;
     }
 }
