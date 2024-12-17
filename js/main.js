@@ -1,6 +1,5 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all components
     initLoader();
     initAOS();
     initMobileMenu();
@@ -9,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initFAQ();
     initFormLabels();
     initSmoothScroll();
+    initFloatingCards();
+    initParallax();
+    initFormValidation();
 });
 
 // Page Loader
@@ -41,11 +43,15 @@ function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuLinks = document.querySelectorAll('.mobile-menu-links a');
+    const overlay = document.createElement('div');
+    overlay.classList.add('mobile-menu-overlay');
+    document.body.appendChild(overlay);
 
     function toggleMenu() {
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.classList.toggle('no-scroll');
+        overlay.classList.toggle('active');
     }
 
     menuBtn.addEventListener('click', toggleMenu);
@@ -59,13 +65,7 @@ function initMobileMenu() {
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
-            !menuBtn.contains(e.target)) {
-            toggleMenu();
-        }
-    });
+    overlay.addEventListener('click', toggleMenu);
 }
 
 // Sticky Header
@@ -268,8 +268,7 @@ function initFormValidation() {
             
             if (isValid) {
                 // Submit form
-                // Add your form submission logic here
-                console.log('Form submitted:', data);
+                submitForm(data);
                 form.reset();
                 showSuccessMessage();
             } else {
@@ -311,9 +310,40 @@ function showErrors(errors) {
     });
 }
 
-// Initialize all interactive elements
-document.addEventListener('DOMContentLoaded', () => {
-    initFloatingCards();
-    initParallax();
-    initFormValidation();
+// Form submission
+async function submitForm(data) {
+    try {
+        const response = await fetch('your-api-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        // Handle success
+        showSuccessMessage();
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle error
+        showErrors({
+            general: 'There was an error sending your message. Please try again later.'
+        });
+    }
+}
+
+// Initialize everything on load
+window.addEventListener('load', () => {
+    // Remove loader
+    const loader = document.querySelector('.loader');
+    if (loader) {
+        loader.style.display = 'none';
+    }
+    
+    // Show page content
+    document.body.classList.remove('loading');
 });
