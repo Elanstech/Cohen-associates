@@ -75,9 +75,9 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-text" data-aos="fade-up">
-                    <span class="hero-badge">Our Team</span>
-                    <h1>Meet the Experts Behind<br>Your Financial Success</h1>
-                    <p>Dedicated professionals committed to transforming your financial future</p>
+                    <h1>The Team Behind Your Success</h1>
+                    <span class="hero-badge">Meet Our Experts</span>
+                    <p>We're committed to providing exceptional financial services</p>
                 </div>
             </div>
         </div>
@@ -87,16 +87,21 @@
     <section class="team-section leadership">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Leadership</span>
-                <h2>Our Founders</h2>
-                <p>Visionary leaders driving our commitment to excellence</p>
+                <h2>Leadership</h2>
+                <span class="section-badge">Our Founders</span>
+                <p>Visionary leaders guiding our commitment to excellence</p>
             </div>
             <div class="team-grid founders">
                 <!-- Founder 1 -->
                 <div class="team-card featured" data-aos="fade-up">
                     <div class="member-image">
                         <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
-                        <div class="image-overlay"></div>
+                        <div class="image-overlay">
+                            <button class="read-more-btn" onclick="openBioModal('oksana')">
+                                Read Full Bio
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="member-info">
                         <h3>Oksana Inoyatova</h3>
@@ -115,7 +120,12 @@
                 <div class="team-card featured" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-image">
                         <img src="websteve.jpeg" alt="Steve Inoyatov">
-                        <div class="image-overlay"></div>
+                        <div class="image-overlay">
+                            <button class="read-more-btn" onclick="openBioModal('steve')">
+                                Read Full Bio
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="member-info">
                         <h3>Steve Inoyatov</h3>
@@ -137,17 +147,22 @@
     <section class="team-section core-team">
         <div class="section-container">
             <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Core Team</span>
-                <h2>The Experts Behind Our Success</h2>
+                <h2>Core Team</h2>
+                <span class="section-badge">The Experts Behind Our Success</span>
                 <p>Meet our dedicated team of professionals</p>
             </div>
             
             <div class="team-grid">
-                <!-- Team Member: Eddie -->
+                <!-- Eddie -->
                 <div class="team-card" data-aos="fade-up">
                     <div class="member-image">
                         <img src="eddy.jpeg" alt="Eddie Maks">
-                        <div class="image-overlay"></div>
+                        <div class="image-overlay">
+                            <button class="read-more-btn" onclick="openBioModal('eddie')">
+                                Read Full Bio
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="member-info">
                         <h3>Eddie Maks</h3>
@@ -161,11 +176,16 @@
                     </div>
                 </div>
 
-                <!-- Team Member: Yulia -->
+                <!-- Yulia -->
                 <div class="team-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-image">
                         <img src="yulia.jpeg" alt="Yulia Konopka">
-                        <div class="image-overlay"></div>
+                        <div class="image-overlay">
+                            <button class="read-more-btn" onclick="openBioModal('yulia')">
+                                Read Full Bio
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="member-info">
                         <h3>Yulia Konopka</h3>
@@ -179,11 +199,16 @@
                     </div>
                 </div>
 
-                <!-- Team Member: Marianell -->
+                <!-- Marianell -->
                 <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="member-image">
                         <img src="mari.jpeg" alt="Marianell Phillipen">
-                        <div class="image-overlay"></div>
+                        <div class="image-overlay">
+                            <button class="read-more-btn" onclick="openBioModal('marianell')">
+                                Read Full Bio
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="member-info">
                         <h3>Marianell Phillipen</h3>
@@ -196,11 +221,21 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Add additional team members here -->
             </div>
         </div>
     </section>
+
+    <!-- Bio Modal -->
+    <div class="bio-modal" id="bioModal">
+        <div class="bio-modal-content">
+            <button class="close-modal" onclick="closeBioModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="bio-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
