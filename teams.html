@@ -27,7 +27,7 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="container">
+        <div class="header-container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
                     <img src="logocohen.jpeg" alt="Cohen & Associates Logo">
@@ -37,9 +37,9 @@
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
                     <a href="about.html">About</a>
-                    <a href="teams.html" class="active">Team</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#" class="active">Team</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
                 </div>
                 
                 <button class="mobile-menu-btn">
@@ -57,84 +57,45 @@
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
-            <a href="teams.html">Team</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
+            <a href="#" class="active">Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
         </div>
     </div>
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-background">
-        <div class="animated-circles">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
-    </div>
-    <div class="hero-container">
-        <div class="hero-content">
-            <div class="hero-text" data-aos="fade-up">
-                <span class="hero-badge">Meet Our Team</span>
-                <h1>The Minds Behind<br>Your Financial Success</h1>
-                <p>A dedicated team of experts committed to transforming your financial future</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="animated-circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
             </div>
-            <div class="team-showcase" data-aos="fade-up" data-aos-delay="200">
-                <div class="team-cards">
-                    <div class="showcase-card active" style="background-image: url('oksanafront.JPG')">
-                        <div class="card-content">
-                            <h3>Oksana Inoyatova</h3>
-                            <span>Founder & CEO</span>
-                        </div>
-                    </div>
-                    <div class="showcase-card" style="background-image: url('websteve.jpeg')">
-                        <div class="card-content">
-                            <h3>Steve Inoyatov</h3>
-                            <span>Co-Founder & CFO</span>
-                        </div>
-                    </div>
-                    <div class="showcase-card" style="background-image: url('eddy.jpeg')">
-                        <div class="card-content">
-                            <h3>Eddie Maks</h3>
-                            <span>Manager</span>
-                        </div>
-                    </div>
-                    <div class="showcase-card" style="background-image: url('yulia.jpeg')">
-                        <div class="card-content">
-                            <h3>Yulia Konopka</h3>
-                            <span>Executive Assistant</span>
-                        </div>
-                    </div>
-                    <div class="showcase-card" style="background-image: url('mari.jpeg')">
-                        <div class="card-content">
-                            <h3>Marianell Phillipen</h3>
-                            <span>Senior Accountant</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="showcase-nav">
-                    <button class="nav-dot active"></button>
-                    <button class="nav-dot"></button>
-                    <button class="nav-dot"></button>
-                    <button class="nav-dot"></button>
-                    <button class="nav-dot"></button>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up">
+                    <span class="hero-badge">Our Team</span>
+                    <h1>Meet the Experts Behind<br>Your Financial Success</h1>
+                    <p>Dedicated professionals committed to transforming your financial future</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-    
+    </section>
+
     <!-- Leadership Section -->
     <section class="team-section leadership">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-badge">Leadership</span>
                 <h2>Our Founders</h2>
+                <p>Visionary leaders driving our commitment to excellence</p>
             </div>
             <div class="team-grid founders">
+                <!-- Founder 1 -->
                 <div class="team-card featured" data-aos="fade-up">
                     <div class="member-image">
-                        <img src="https://github.com/Elanstech/Cohen-associates/blob/main/oksanafront.JPG?raw=true" alt="Oksana Inoyatova">
+                        <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
                         <div class="image-overlay"></div>
                     </div>
                     <div class="member-info">
@@ -142,10 +103,15 @@
                         <span class="member-role">Founder & CEO</span>
                         <p>Leading with vision and expertise in financial services for over 20 years.</p>
                         <div class="member-social">
-                            <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" 
+                               rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Founder 2 -->
                 <div class="team-card featured" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-image">
                         <img src="websteve.jpeg" alt="Steve Inoyatov">
@@ -156,7 +122,10 @@
                         <span class="member-role">Co-Founder & CFO</span>
                         <p>Expert in international finance and strategic planning.</p>
                         <div class="member-social">
-                            <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" target="_blank" 
+                               rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -166,12 +135,15 @@
 
     <!-- Core Team Section -->
     <section class="team-section core-team">
-        <div class="container">
+        <div class="section-container">
             <div class="section-header" data-aos="fade-up">
                 <span class="section-badge">Core Team</span>
                 <h2>The Experts Behind Our Success</h2>
+                <p>Meet our dedicated team of professionals</p>
             </div>
+            
             <div class="team-grid">
+                <!-- Team Member: Eddie -->
                 <div class="team-card" data-aos="fade-up">
                     <div class="member-image">
                         <img src="eddy.jpeg" alt="Eddie Maks">
@@ -182,10 +154,14 @@
                         <span class="member-role">Manager</span>
                         <p>Driving operational excellence and team performance.</p>
                         <div class="member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Team Member: Yulia -->
                 <div class="team-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="member-image">
                         <img src="yulia.jpeg" alt="Yulia Konopka">
@@ -196,55 +172,80 @@
                         <span class="member-role">Executive Assistant</span>
                         <p>Ensuring seamless operations and client support.</p>
                         <div class="member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Team Member: Marianell -->
                 <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="member-image">
                         <img src="mari.jpeg" alt="Marianell Phillipen">
                         <div class="image-overlay"></div>
                     </div>
                     <div class="member-info">
-                        <h3>Mariniel Berkonti</h3>
+                        <h3>Marianell Phillipen</h3>
                         <span class="member-role">Senior Accountant</span>
                         <p>Expert in financial analysis and reporting.</p>
                         <div class="member-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Add additional team members here -->
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
-                    <p>Expert financial solutions tailored to your success</p>
+        <div class="footer-content">
+            <div class="footer-info">
+                <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
+                <p>Expert financial solutions tailored to your success</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/CohenAssociatesinc" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <nav>
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
                     <a href="about.html">About</a>
-                    <a href="teams.html">Team</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 93-03 63rd Drive, Rego Park, NY 11374</p>
-                    <p><i class="fas fa-phone"></i> (718) 457-3840</p>
-                    <p><i class="fas fa-envelope"></i> info@cohen-associates.com</p>
-                </div>
+                    <a href="#">Team</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    93-03 63rd Drive, Rego Park, NY 11374
+                </p>
+                <p>
+                    <i class="fas fa-phone"></i>
+                    (718) 457-3840
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    info@cohen-associates.com
+                </p>
             </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
         </div>
     </footer>
 
