@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initFAQ();
     initFormLabels();
     initSmoothScroll();
+    initFloatingCards();
+    initParallax();
+    initFormValidation();
 });
 
 // Page Loader
@@ -32,7 +35,8 @@ function initAOS() {
         duration: 1000,
         once: true,
         offset: 100,
-        easing: 'ease-out'
+        easing: 'ease-out',
+        disable: window.innerWidth < 768
     });
 }
 
@@ -41,11 +45,12 @@ function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuLinks = document.querySelectorAll('.mobile-menu-links a');
+    const body = document.body;
 
     function toggleMenu() {
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
+        body.classList.toggle('no-scroll');
     }
 
     menuBtn.addEventListener('click', toggleMenu);
@@ -63,6 +68,13 @@ function initMobileMenu() {
         if (mobileMenu.classList.contains('active') && 
             !mobileMenu.contains(e.target) && 
             !menuBtn.contains(e.target)) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
             toggleMenu();
         }
     });
@@ -100,7 +112,8 @@ function initStats() {
     const stats = document.querySelectorAll('.stat-number');
     
     const observerOptions = {
-        threshold: 0.5
+        threshold: 0.5,
+        rootMargin: '0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -215,28 +228,41 @@ function scrollToSection(href) {
     });
 }
 
-// Handle floating cards animation
+// Floating Cards Animation
 function initFloatingCards() {
     const cards = document.querySelectorAll('.floating-card');
     
     cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.5}s`;
     });
-}
 
-// Initialize parallax effect for hero image
-function initParallax() {
-    const heroImage = document.querySelector('.hero-image');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        if (heroImage) {
-            heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
-        }
+    // Add hover effect
+    cards.forEach(card => {
+        card.addEventListener('mouseover', () => {
+            card.style.animationPlayState = 'paused';
+        });
+
+        card.addEventListener('mouseout', () => {
+            card.style.animationPlayState = 'running';
+        });
     });
 }
 
-// Form validation
+// Parallax Effect
+function initParallax() {
+    const heroImage = document.querySelector('.hero-image');
+    
+    if (window.innerWidth > 768) { // Only on desktop
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    }
+}
+
+// Form Validation
 function initFormValidation() {
     const form = document.querySelector('.contact-form form');
     
@@ -267,11 +293,10 @@ function initFormValidation() {
             }
             
             if (isValid) {
-                // Submit form
-                // Add your form submission logic here
-                console.log('Form submitted:', data);
-                form.reset();
+                // Success handling
                 showSuccessMessage();
+                form.reset();
+                resetFormStyles();
             } else {
                 showErrors(errors);
             }
@@ -285,6 +310,11 @@ function isValidEmail(email) {
 }
 
 function showSuccessMessage() {
+    const existingSuccess = document.querySelector('.form-success');
+    if (existingSuccess) {
+        existingSuccess.remove();
+    }
+
     const successMessage = document.createElement('div');
     successMessage.classList.add('form-success');
     successMessage.textContent = 'Thank you for your message. We\'ll be in touch soon!';
@@ -304,16 +334,42 @@ function showErrors(errors) {
     // Add new error messages
     Object.entries(errors).forEach(([field, message]) => {
         const input = document.querySelector(`[name="${field}"]`);
+        const formGroup = input.closest('.form-group');
+        
         const error = document.createElement('div');
         error.classList.add('form-error');
         error.textContent = message;
-        input.parentNode.appendChild(error);
+        
+        formGroup.appendChild(error);
+        formGroup.classList.add('has-error');
     });
 }
 
-// Initialize all interactive elements
-document.addEventListener('DOMContentLoaded', () => {
-    initFloatingCards();
-    initParallax();
-    initFormValidation();
+function resetFormStyles() {
+    document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('has-error', 'has-value', 'focused');
+    });
+}
+
+// Handle form submission errors gracefully
+window.addEventListener('unhandledrejection', event => {
+    console.error('Form submission error:', event.reason);
+    showErrors({ general: 'An error occurred. Please try again later.' });
+});
+
+// Add resize handler for mobile menu
+window.addEventListener('resize', () => {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (window.innerWidth > 992 && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        document.querySelector('.mobile-menu-btn').classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    }
+});
+
+// Prevent form submission when pressing Enter
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+    }
 });
