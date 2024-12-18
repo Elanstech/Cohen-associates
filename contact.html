@@ -11,19 +11,23 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- AOS -->
+    <!-- AOS Animation Library -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     
+    <!-- Flatpickr for DateTime Picker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+    
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/contact.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - Same as index -->
     <header class="header">
-        <div class="container">
+        <div class="header-container">
             <nav class="navbar">
                 <a href="index.html" class="logo">
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/0P0A5476-removebg-preview.png?raw=true" alt="Cohen & Associates Logo">
+                    <img src="logocohen.jpeg" alt="Cohen & Associates Logo">
                 </a>
                 
                 <div class="nav-links">
@@ -44,7 +48,7 @@
         </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu - Same as index -->
     <div class="mobile-menu">
         <div class="mobile-menu-links">
             <a href="index.html">Home</a>
@@ -56,99 +60,125 @@
         </div>
     </div>
 
-    <!-- Contact Hero Section -->
-    <section class="contact-hero">
-        <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Get in Touch</h1>
-                <p>We're here to help with your financial needs</p>
-            </div>
+    <!-- Page Title Section -->
+    <section class="page-title">
+        <div class="section-container">
+            <h1 data-aos="fade-up">Contact Us</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Get in touch with our team or schedule a consultation</p>
         </div>
-        <div class="hero-shape"></div>
     </section>
 
-    <!-- Main Contact Section -->
-    <section class="contact-main">
-        <div class="container">
-            <div class="contact-grid">
-                <!-- Contact Information -->
-                <div class="contact-info" data-aos="fade-right">
-                    <div class="info-card">
-                        <div class="card-header">
-                            <h2>Contact Information</h2>
-                            <p>Reach out to us through any of these channels</p>
-                        </div>
-                        <div class="info-items">
-                            <div class="info-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div>
-                                    <h3>Visit Us</h3>
-                                    <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-phone"></i>
-                                <div>
-                                    <h3>Call Us</h3>
-                                    <p>(718) 457-3840</p>
-                                    <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                                </div>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-envelope"></i>
-                                <div>
-                                    <h3>Email Us</h3>
-                                    <p>info@cohen-associates.com</p>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Contact Information Section -->
+    <section class="contact-info-section">
+        <div class="section-container">
+            <div class="info-grid">
+                <div class="info-card" data-aos="fade-up">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="card-content">
+                        <h3>Visit Us</h3>
+                        <p>93-03 63rd Drive,<br>Rego Park, NY 11374</p>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="contact-form-wrapper" data-aos="fade-left">
-                    <form id="contactForm" action="mailto:info@cohen-associates.com" method="post" enctype="text/plain">
-                        <div class="form-header">
-                            <h2>Send Us a Message</h2>
-                            <p>Fill out the form below and we'll get back to you shortly</p>
-                        </div>
-                        
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <input type="text" name="name" id="name" required>
-                                <label for="name">Your Name</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="email" name="email" id="email" required>
-                                <label for="email">Email Address</label>
-                            </div>
+                <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-phone"></i>
+                    <div class="card-content">
+                        <h3>Call Us</h3>
+                        <p>Phone: (718) 457-3840</p>
+                        <p>Fax: (718) 457-3841</p>
+                    </div>
+                </div>
+
+                <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-envelope"></i>
+                    <div class="card-content">
+                        <h3>Email Us</h3>
+                        <p>info@cohen-associates.com</p>
+                        <p>support@cohen-associates.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Forms Section -->
+    <section class="contact-forms-section">
+        <div class="section-container">
+            <div class="forms-grid">
+                <!-- Direct Contact Form -->
+                <div class="contact-form" data-aos="fade-right">
+                    <h2>Send Us a Message</h2>
+                    <form action="mailto:info@cohen-associates.com" method="post" enctype="text/plain" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Your Name</label>
                         </div>
                         
                         <div class="form-group">
-                            <input type="tel" name="phone" id="phone">
-                            <label for="phone">Phone Number (Optional)</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email Address</label>
                         </div>
                         
                         <div class="form-group">
-                            <select name="subject" id="subject" required>
-                                <option value="">Select a Subject</option>
-                                <option value="Tax Services">Tax Services</option>
-                                <option value="Business Advisory">Business Advisory</option>
-                                <option value="International Tax">International Tax</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <label for="subject">Subject</label>
+                            <input type="tel" id="phone" name="phone">
+                            <label for="phone">Phone (Optional)</label>
                         </div>
                         
                         <div class="form-group">
-                            <textarea name="message" id="message" rows="5" required></textarea>
+                            <textarea id="message" name="message" required></textarea>
                             <label for="message">Your Message</label>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">
-                            <span>Send Message</span>
                             <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="booking-form" data-aos="fade-left">
+                    <h2>Schedule a Consultation</h2>
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <input type="text" id="bookingName" name="bookingName" required>
+                            <label for="bookingName">Your Name</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="bookingEmail" name="bookingEmail" required>
+                            <label for="bookingEmail">Email Address</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="tel" id="bookingPhone" name="bookingPhone" required>
+                            <label for="bookingPhone">Phone Number</label>
+                        </div>
+
+                        <div class="form-group">
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select Service</option>
+                                <option value="tax">Tax Consultation</option>
+                                <option value="financial">Financial Planning</option>
+                                <option value="business">Business Advisory</option>
+                                <option value="other">Other Services</option>
+                            </select>
+                            <label for="serviceType" class="select-label">Service Type</label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="bookingDate" name="bookingDate" class="datepicker" required>
+                            <label for="bookingDate">Preferred Date & Time</label>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="bookingNotes" name="bookingNotes"></textarea>
+                            <label for="bookingNotes">Additional Notes (Optional)</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="fas fa-calendar-check"></i>
+                            Schedule Consultation
                         </button>
                     </form>
                 </div>
@@ -158,10 +188,10 @@
 
     <!-- Map Section -->
     <section class="map-section">
-        <div class="container">
-            <div class="map-wrapper" data-aos="fade-up">
+        <div class="section-container">
+            <div class="map-container" data-aos="fade-up">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.7735!2d-73.8608!3d40.7289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25e2f6c8c8c8f%3A0x8c8c8c8c8c8c8c8c!2s93-03%2063rd%20Dr%2C%20Rego%20Park%2C%20NY%2011374!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6576883563186!2d-73.8642247!3d40.7289359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25e21f5c5b8a9%3A0x3b8cc2571d6b6200!2s93-03%2063rd%20Dr%2C%20Rego%20Park%2C%20NY%2011374!5e0!3m2!1sen!2sus!4v1640901460000!5m2!1sen!2sus"
                     width="100%" 
                     height="450" 
                     style="border:0;" 
@@ -172,37 +202,57 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer - Same as index -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <img src="https://github.com/Elanstech/Cohen-associates/blob/main/0P0A5476-removebg-preview.png?raw=true" alt="Cohen & Associates Logo" class="footer-logo">
-                    <p>Expert financial solutions tailored to your success</p>
+        <div class="footer-content">
+            <div class="footer-info">
+                <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
+                <p>Expert financial solutions tailored to your success</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/CohenAssociatesinc" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <nav>
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
                     <a href="about.html">About</a>
                     <a href="teams.html">Team</a>
+                    <a href="faq.html">FAQ</a>
                     <a href="contact.html">Contact</a>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 93-03 63rd Drive, Rego Park, NY 11374</p>
-                    <p><i class="fas fa-phone"></i> (718) 457-3840</p>
-                    <p><i class="fas fa-envelope"></i> info@cohen-associates.com</p>
-                </div>
+                </nav>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    93-03 63rd Drive, Rego Park, NY 11374
+                </p>
+                <p>
+                    <i class="fas fa-phone"></i>
+                    (718) 457-3840
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    info@cohen-associates.com
+                </p>
             </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="./js/main.js"></script>
     <script src="./js/contact.js"></script>
 </body>
 </html>
