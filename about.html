@@ -86,114 +86,19 @@
                             <i class="fas fa-users"></i>
                             Meet Our Team
                         </a>
-                        <button class="btn-play" onclick="openVideoModal()">
-                            <span class="play-icon">
-                                <i class="fas fa-play"></i>
-                            </span>
-                            Watch Our Story
-                        </button>
                     </div>
                 </div>
                 <div class="hero-visual" data-aos="fade-left">
-                    <div class="hero-image-wrapper">
-                        <img src="aboutusoffice.JPG" alt="Cohen & Associates Office">
+                    <div class="hero-video-wrapper">
+                        <video id="heroVideo" autoplay muted loop playsinline>
+                            <source src="movie.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="experience-badge">
                             <span class="number">20+</span>
                             <span class="text">Years of Excellence</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="section-container">
-            <div class="stats-header" data-aos="fade-up">
-                <span class="section-badge">Our Impact</span>
-                <h2>Growth Through Numbers</h2>
-                <p>Two decades of excellence in financial services</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="20">0</div>
-                        <div class="stat-label">Years of Excellence</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-                
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="1000">0</div>
-                        <div class="stat-label">Happy Clients</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-                
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="95">0</div>
-                        <div class="stat-label">Success Rate</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Story Section -->
-    <section class="story-section">
-        <div class="section-container">
-            <div class="story-content">
-                <div class="story-text" data-aos="fade-right">
-                    <span class="section-badge">Our Story</span>
-                    <h2>Building Trust Through Excellence</h2>
-                    <p>Our accounting firm distinguishes itself by offering tailored financial strategies 
-                    that go beyond numbers. With a team of over 15 accountants and support staff, we 
-                    provide a full spectrum of services designed to meet the unique needs of businesses, 
-                    from start-ups to established corporations, as well as high-net-worth individuals.</p>
-                    
-                    <p>Specializing in optimal tax structures and business consulting, we represent 
-                    businesses and individuals before the IRS and other tax authorities across all 50 
-                    states. We handle all aspects of tax and accounting, including consulting, 
-                    preparation of federal and state tax returns for businesses, individuals, trusts, 
-                    non-profits, and more.</p>
-                    
-                    <div class="story-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Expert Financial Planning</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Personalized Solutions</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Innovative Approach</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="story-image" data-aos="fade-left">
-                    <img src="aboutuspageimage.jpeg" alt="Cohen & Associates Team">
                 </div>
             </div>
         </div>
@@ -248,19 +153,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Video Modal -->
-    <div class="video-modal" id="videoModal">
-        <div class="video-modal-content">
-            <button class="close-modal" onclick="closeVideoModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <video id="storyVideo" controls>
-                <source src="movie.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
