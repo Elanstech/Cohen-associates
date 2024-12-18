@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initStickyHeader();
     initParallaxEffects();
     initHeroVideo();
+    initStatsCounter();
 });
 
 // Hero Video Initialization
@@ -129,6 +130,66 @@ function initStickyHeader() {
         
         lastScroll = currentScroll;
     });
+}
+
+// Stats Counter Animation
+function initStatsCounter() {
+    const stats = document.querySelectorAll('.stat-number');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                const stat = entry.target;
+                const targetValue = parseInt(stat.getAttribute('data-value'));
+                const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
+                
+                animateCounter(stat, targetValue);
+                animateProgress(progressCircle, targetValue);
+                stat.classList.add('counted');
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+    
+    stats.forEach(stat => observer.observe(stat));
+}
+
+function animateCounter(element, target) {
+    const duration = 2000;
+    const start = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const current = Math.round(easeOutQuart * target);
+        
+        element.textContent = current + (target === 95 ? '%' : '');
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+function animateProgress(circle, percentage) {
+    if (!circle) return;
+    
+    const circumference = 2 * Math.PI * 54; // circle radius = 54
+    const offset = circumference - (percentage / 100) * circumference;
+    
+    circle.style.strokeDasharray = circumference;
+    circle.style.strokeDashoffset = circumference;
+    
+    setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+        circle.style.opacity = '1';
+    }, 100);
 }
 
 // Parallax Effects
