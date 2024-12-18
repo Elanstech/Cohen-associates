@@ -1,13 +1,53 @@
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
-    initVideoModal();
     initAOS();
     initMobileMenu();
     initStickyHeader();
-    initStatsCounter();
     initParallaxEffects();
+    initHeroVideo();
 });
+
+// Hero Video Initialization
+function initHeroVideo() {
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+        // Ensure video plays when it's ready
+        heroVideo.addEventListener('loadeddata', () => {
+            heroVideo.play().catch(error => {
+                console.log("Auto-play was prevented:", error);
+            });
+        });
+
+        // Handle visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                heroVideo.pause();
+            } else {
+                heroVideo.play().catch(error => {
+                    console.log("Play on visibility change was prevented:", error);
+                });
+            }
+        });
+
+        // Optimize performance by reducing quality when not in viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    heroVideo.pause();
+                } else {
+                    heroVideo.play().catch(error => {
+                        console.log("Play on intersection was prevented:", error);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        observer.observe(heroVideo);
+    }
+}
 
 // Loader
 function initLoader() {
@@ -29,39 +69,6 @@ function initAOS() {
         once: true,
         offset: 100,
         easing: 'ease-out-cubic'
-    });
-}
-
-// Video Modal Handling
-function initVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('storyVideo');
-    
-    window.openVideoModal = function() {
-        modal.classList.add('active');
-        video.play();
-        document.body.style.overflow = 'hidden';
-    };
-    
-    window.closeVideoModal = function() {
-        modal.classList.remove('active');
-        video.pause();
-        video.currentTime = 0;
-        document.body.style.overflow = '';
-    };
-    
-    // Close modal when clicking outside video
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeVideoModal();
-        }
-    });
-    
-    // Handle escape key press
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeVideoModal();
-        }
     });
 }
 
@@ -122,68 +129,6 @@ function initStickyHeader() {
         
         lastScroll = currentScroll;
     });
-}
-
-// Stats Counter Animation
-function initStatsCounter() {
-    const stats = document.querySelectorAll('.stat-number');
-    const progressCircles = document.querySelectorAll('.progress-ring-circle');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                const stat = entry.target;
-                const targetValue = parseInt(stat.getAttribute('data-value'));
-                const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
-                
-                animateCounter(stat, targetValue);
-                animateProgress(progressCircle, targetValue);
-                stat.classList.add('counted');
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-    
-    stats.forEach(stat => observer.observe(stat));
-}
-
-function animateCounter(element, target) {
-    const duration = 2000;
-    const start = performance.now();
-    const startValue = 0;
-    
-    function update(currentTime) {
-        const elapsed = currentTime - start;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        // Easing function for smooth animation
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        const current = Math.round(easeOutQuart * target);
-        
-        element.textContent = current;
-        
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-    
-    requestAnimationFrame(update);
-}
-
-function animateProgress(circle, percentage) {
-    if (!circle) return;
-    
-    const circumference = 2 * Math.PI * 54; // circle radius = 54
-    const offset = circumference - (percentage / 100) * circumference;
-    
-    circle.style.strokeDasharray = circumference;
-    circle.style.strokeDashoffset = circumference;
-    
-    setTimeout(() => {
-        circle.style.strokeDashoffset = offset;
-        circle.style.opacity = '1';
-    }, 100);
 }
 
 // Parallax Effects
