@@ -25,7 +25,13 @@
         </div>
     </div>
 
-    <!-- Header (Kept as is) -->
+    <!-- Background Pattern -->
+    <div class="background-patterns">
+        <div class="pattern pattern-1"></div>
+        <div class="pattern pattern-2"></div>
+    </div>
+
+    <!-- Header -->
     <header class="header">
         <div class="header-container">
             <nav class="navbar">
@@ -63,70 +69,94 @@
         </div>
     </div>
 
-    <!-- Modern Hero Section -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-container">
-            <div class="hero-content" data-aos="fade-up">
-                <div class="hero-badge">Our Team</div>
-                <h1>Meet the Experts Behind Your Success</h1>
-                <p>Together, we bring decades of experience in financial services, tax planning, and business advisory to help you achieve your goals.</p>
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up">
+                    <span class="hero-badge">Our Team</span>
+                    <h1>Meet Our Expert 
+                        <span class="gradient-text">Financial</span> Team
+                    </h1>
+                    <p class="hero-description">Our licensed professionals bring decades of experience in tax planning, financial advisory, and business solutions to help you achieve your goals.</p>
+                </div>
             </div>
-            <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-                <div class="stat-item">
-                    <span class="stat-number">20+</span>
+            <div class="hero-stats">
+                <div class="stat-item" data-aos="fade-up">
+                    <span class="stat-number" data-target="20">0</span>
                     <span class="stat-label">Years Experience</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">1000+</span>
+                <div class="stat-divider"></div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="stat-number" data-target="1000">0</span>
                     <span class="stat-label">Happy Clients</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Dedication</span>
+                <div class="stat-divider"></div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <span class="stat-number" data-target="100">0</span>
+                    <span class="stat-label">Client Satisfaction</span>
                 </div>
             </div>
         </div>
-        <div class="hero-pattern"></div>
     </section>
 
     <!-- Leadership Section -->
     <section class="leadership-section">
         <div class="section-container">
-            <div class="founders-grid">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Leadership</span>
+                <h2>Our Founders</h2>
+                <p>Visionary leaders committed to your financial success</p>
+            </div>
+            <div class="leadership-grid">
                 <!-- Oksana's Card -->
-                <div class="founder-card" data-aos="fade-right">
-                    <div class="founder-image">
-                        <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
-                        <button class="bio-trigger" onclick="openBioModal('oksana')">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="founder-info">
-                        <h2>Oksana Inoyatova</h2>
-                        <span class="founder-role">Founder & CEO</span>
-                        <div class="founder-social">
-                            <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
+                <div class="team-card featured" data-aos="fade-up">
+                    <div class="card-inner">
+                        <div class="member-image">
+                            <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
+                            <div class="image-overlay">
+                                <button class="read-more-btn" onclick="openBioModal('oksana')">
+                                    View Full Bio
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Oksana Inoyatova</h3>
+                            <span class="member-role">Founder & CEO</span>
+                            <p>Expert in tax preparation and international financial services.</p>
+                            <div class="member-social">
+                                <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" 
+                                   rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Steve's Card -->
-                <div class="founder-card" data-aos="fade-left">
-                    <div class="founder-image">
-                        <img src="websteve.jpeg" alt="Steve Inoyatov">
-                        <button class="bio-trigger" onclick="openBioModal('steve')">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="founder-info">
-                        <h2>Steve Inoyatov</h2>
-                        <span class="founder-role">Co-Founder & CFO</span>
-                        <div class="founder-social">
-                            <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
+                <div class="team-card featured" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-inner">
+                        <div class="member-image">
+                            <img src="websteve.jpeg" alt="Steve Inoyatov">
+                            <div class="image-overlay">
+                                <button class="read-more-btn" onclick="openBioModal('steve')">
+                                    View Full Bio
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3>Steve Inoyatov</h3>
+                            <span class="member-role">Co-Founder & CFO</span>
+                            <p>Specializes in tax structuring and business advisory services.</p>
+                            <div class="member-social">
+                                <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" target="_blank" 
+                                   rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,62 +164,87 @@
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Core Team Section -->
     <section class="team-section">
         <div class="section-container">
-            <div class="team-header" data-aos="fade-up">
-                <h2>Our Expert Team</h2>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-badge">Our Experts</span>
+                <h2>Core Team Members</h2>
                 <p>Meet the dedicated professionals who make our success possible</p>
             </div>
-            <div class="team-carousel" data-aos="fade-up">
+            <div class="team-grid">
                 <!-- Eddie's Card -->
-                <div class="team-card">
-                    <div class="card-front">
-                        <img src="eddy.jpeg" alt="Eddie Maks">
-                        <div class="card-overlay">
-                            <h3>Eddie Maks</h3>
-                            <span>Manager</span>
+                <div class="team-card" data-aos="fade-up">
+                    <div class="card-inner">
+                        <div class="member-image">
+                            <img src="eddy.jpeg" alt="Eddie Maks">
+                            <div class="image-overlay">
+                                <button class="read-more-btn" onclick="openBioModal('eddie')">
+                                    View Full Bio
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-back">
-                        <h3>Eddie Maks</h3>
-                        <span class="role">Manager</span>
-                        <p>Specializing in high net worth individuals and business owners</p>
-                        <button class="read-more" onclick="openBioModal('eddie')">View Full Bio</button>
+                        <div class="member-info">
+                            <h3>Eddie Maks</h3>
+                            <span class="member-role">Manager</span>
+                            <p>Specialized in high net worth individuals and business advisory.</p>
+                            <div class="member-social">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Yulia's Card -->
-                <div class="team-card">
-                    <div class="card-front">
-                        <img src="yulia.jpeg" alt="Yulia Konopka">
-                        <div class="card-overlay">
-                            <h3>Yulia Konopka</h3>
-                            <span>Executive Assistant</span>
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-inner">
+                        <div class="member-image">
+                            <img src="yulia.jpeg" alt="Yulia Konopka">
+                            <div class="image-overlay">
+                                <button class="read-more-btn" onclick="openBioModal('yulia')">
+                                    View Full Bio
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-back">
-                        <h3>Yulia Konopka</h3>
-                        <span class="role">Executive Assistant</span>
-                        <p>Ensuring seamless operations and exceptional client support</p>
-                        <button class="read-more" onclick="openBioModal('yulia')">View Full Bio</button>
+                        <div class="member-info">
+                            <h3>Yulia Konopka</h3>
+                            <span class="member-role">Executive Assistant</span>
+                            <p>Ensures seamless operations and exceptional client support.</p>
+                            <div class="member-social">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Marianell's Card -->
-                <div class="team-card">
-                    <div class="card-front">
-                        <img src="mari.jpeg" alt="Marianell Phillipen">
-                        <div class="card-overlay">
-                            <h3>Marianell Phillipen</h3>
-                            <span>Senior Accountant</span>
+                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-inner">
+                        <div class="member-image">
+                            <img src="mari.jpeg" alt="Marianell Phillipen">
+                            <div class="image-overlay">
+                                <button class="read-more-btn" onclick="openBioModal('marianell')">
+                                    View Full Bio
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-back">
-                        <h3>Marianell Phillipen</h3>
-                        <span class="role">Senior Accountant</span>
-                        <p>Expert in financial analysis and business advisory</p>
-                        <button class="read-more" onclick="openBioModal('marianell')">View Full Bio</button>
+                        <div class="member-info">
+                            <h3>Marianell Phillipen</h3>
+                            <span class="member-role">Senior Accountant</span>
+                            <p>Expert in financial analysis and business advisory services.</p>
+                            <div class="member-social">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,7 +263,7 @@
         </div>
     </div>
 
-    <!-- Footer (Kept as is) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-info">
