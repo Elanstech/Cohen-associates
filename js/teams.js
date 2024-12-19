@@ -25,35 +25,26 @@ const teamBios = {
         name: "Yulia Konopka",
         role: "Executive Assistant",
         image: "yulia.jpeg",
-        bio: `Yulia Konopka serves as the Executive Assistant at Cohen & Associates, where she plays a crucial role in ensuring seamless operations and 
-        exceptional client support. With her background in business administration and extensive experience in office management, Yulia has become an 
-        indispensable part of the firm's day-to-day operations.
+        bio: `Yulia Konopka serves as the Executive Assistant at Cohen & Associates, where she plays a crucial role in ensuring seamless operations and exceptional client support. With her background in business administration and extensive experience in office management, Yulia has become an indispensable part of the firm's day-to-day operations.
 
-        In her role, Yulia manages complex administrative tasks, coordinates team schedules, and serves as the primary point of contact for client 
-        communications. Her exceptional organizational skills and attention to detail ensure that all office operations run smoothly and efficiently.
+        In her role, Yulia manages complex administrative tasks, coordinates team schedules, and serves as the primary point of contact for client communications. Her exceptional organizational skills and attention to detail ensure that all office operations run smoothly and efficiently.
 
-        Yulia's commitment to professional excellence is evident in her proactive approach to problem-solving and her dedication to maintaining the 
-        highest standards of client service. She has implemented several innovative systems to improve office efficiency and enhance the client experience.
+        Yulia's commitment to professional excellence is evident in her proactive approach to problem-solving and her dedication to maintaining the highest standards of client service. She has implemented several innovative systems to improve office efficiency and enhance the client experience.
 
-        Beyond her administrative duties, Yulia contributes significantly to team building and maintaining a positive work environment at Cohen & Associates. 
-        Her multilingual capabilities and cultural awareness have been particularly valuable in serving the firm's diverse international client base.`,
+        Beyond her administrative duties, Yulia contributes significantly to team building and maintaining a positive work environment at Cohen & Associates. Her multilingual capabilities and cultural awareness have been particularly valuable in serving the firm's diverse international client base.`,
         linkedin: "#"
     },
     marianell: {
         name: "Marianell Phillipen",
         role: "Senior Accountant",
         image: "mari.jpeg",
-        bio: `Marianell Phillipen brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background 
-        in accounting and finance, Marianell has developed a reputation for excellence in financial analysis and reporting.
+        bio: `Marianell Phillipen brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background in accounting and finance, Marianell has developed a reputation for excellence in financial analysis and reporting.
 
-        Throughout her career, Marianell has demonstrated exceptional skill in handling complex accounting challenges and providing innovative solutions 
-        for clients. Her expertise spans various areas of accounting, including tax preparation, financial statement analysis, and business advisory services.
+        Throughout her career, Marianell has demonstrated exceptional skill in handling complex accounting challenges and providing innovative solutions for clients. Her expertise spans various areas of accounting, including tax preparation, financial statement analysis, and business advisory services.
 
-        As a Senior Accountant, Marianell plays a key role in managing client relationships and ensuring the highest quality of service delivery. Her 
-        attention to detail and thorough understanding of accounting principles have made her an invaluable resource for both clients and team members.
+        As a Senior Accountant, Marianell plays a key role in managing client relationships and ensuring the highest quality of service delivery. Her attention to detail and thorough understanding of accounting principles have made her an invaluable resource for both clients and team members.
 
-        Marianell's commitment to professional development and staying current with industry trends enables her to provide cutting-edge solutions and 
-        advice to clients. Her dedication to excellence and client satisfaction exemplifies the core values of Cohen & Associates.`,
+        Marianell's commitment to professional development and staying current with industry trends enables her to provide cutting-edge solutions and advice to clients. Her dedication to excellence and client satisfaction exemplifies the core values of Cohen & Associates.`,
         linkedin: "#"
     }
 };
@@ -65,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initStickyHeader();
     initTeamCards();
+    initBioModal();
     initParallaxEffects();
 });
 
@@ -150,7 +142,7 @@ function initStickyHeader() {
     });
 }
 
-// Team Cards Interaction
+// Team Cards
 function initTeamCards() {
     const teamCards = document.querySelectorAll('.team-card');
     
@@ -160,6 +152,7 @@ function initTeamCards() {
         const overlay = card.querySelector('.image-overlay');
         const readMoreBtn = card.querySelector('.read-more-btn');
         
+        // Mouse events
         card.addEventListener('mouseenter', () => {
             if (image) image.style.transform = 'scale(1.1)';
             if (overlay) overlay.style.opacity = '1';
@@ -178,9 +171,12 @@ function initTeamCards() {
             }
         });
         
-        // Add keyboard navigation
-        card.setAttribute('tabindex', '0');
+        // Touch events for mobile
+        card.addEventListener('touchstart', handleTouchStart, false);
+        card.addEventListener('touchend', handleTouchEnd, false);
         
+        // Keyboard navigation
+        card.setAttribute('tabindex', '0');
         card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const memberId = card.getAttribute('data-member-id');
@@ -190,7 +186,26 @@ function initTeamCards() {
     });
 }
 
-// Bio Modal Functions
+// Bio Modal
+function initBioModal() {
+    const modal = document.querySelector('.bio-modal');
+    const closeBtn = modal.querySelector('.close-modal');
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeBioModal();
+        }
+    });
+    
+    // Close modal with escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeBioModal();
+        }
+    });
+}
+
 function openBioModal(memberId) {
     const member = teamBios[memberId];
     const modal = document.querySelector('.bio-modal');
@@ -236,13 +251,6 @@ function closeBioModal() {
     document.body.style.overflow = '';
 }
 
-// Handle escape key for modal
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeBioModal();
-    }
-});
-
 // Parallax Effects
 function initParallaxEffects() {
     const circles = document.querySelectorAll('.circle');
@@ -259,6 +267,27 @@ function initParallaxEffects() {
             circle.style.transform = `translate(${x}px, ${y}px)`;
         });
     });
+}
+
+// Touch Event Handlers
+function handleTouchStart(e) {
+    this.touchStartY = e.touches[0].clientY;
+    this.touchStartX = e.touches[0].clientX;
+}
+
+function handleTouchEnd(e) {
+    if (!this.touchStartY || !this.touchStartX) return;
+    
+    const touchEndY = e.changedTouches[0].clientY;
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaY = Math.abs(this.touchStartY - touchEndY);
+    const deltaX = Math.abs(this.touchStartX - touchEndX);
+    
+    // If the touch was more like a tap than a scroll
+    if (deltaY < 10 && deltaX < 10) {
+        const memberId = this.getAttribute('data-member-id');
+        if (memberId) openBioModal(memberId);
+    }
 }
 
 // Handle window resize
