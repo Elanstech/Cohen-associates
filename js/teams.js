@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initAOS();
     initMobileMenu();
     initStickyHeader();
+    initCounters();
     initTeamCards();
-    initBioModal();
-    initParallaxEffects();
 });
 
 // Initialize Loader
@@ -142,80 +141,81 @@ function initStickyHeader() {
     });
 }
 
-// Team Cards
+// Initialize Stats Counters
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                animateCounter(entry.target, target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+    
+    counters.forEach(counter => observer.observe(counter));
+}
+
+function animateCounter(element, target) {
+    let current = 0;
+    const duration = 2000; // 2 seconds
+    const step = (target / duration) * 16; // 60 FPS
+    
+    function update() {
+        current += step;
+        if (current < target) {
+            element.textContent = Math.round(current);
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = target;
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+// Team Cards Interaction
 function initTeamCards() {
     const teamCards = document.querySelectorAll('.team-card');
     
     teamCards.forEach(card => {
-        // Add hover effect
-        const image = card.querySelector('.member-image img');
-        const overlay = card.querySelector('.image-overlay');
-        const readMoreBtn = card.querySelector('.read-more-btn');
-        
-        // Mouse events
-        card.addEventListener('mouseenter', () => {
-            if (image) image.style.transform = 'scale(1.1)';
-            if (overlay) overlay.style.opacity = '1';
-            if (readMoreBtn) {
-                readMoreBtn.style.opacity = '1';
-                readMoreBtn.style.transform = 'translateY(0)';
-            }
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            if (image) image.style.transform = 'scale(1)';
-            if (overlay) overlay.style.opacity = '0';
-            if (readMoreBtn) {
-                readMoreBtn.style.opacity = '0';
-                readMoreBtn.style.transform = 'translateY(20px)';
-            }
-        });
-        
-        // Touch events for mobile
-        card.addEventListener('touchstart', handleTouchStart, false);
-        card.addEventListener('touchend', handleTouchEnd, false);
-        
-        // Keyboard navigation
+        // Add keyboard navigation
         card.setAttribute('tabindex', '0');
+        
         card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const memberId = card.getAttribute('data-member-id');
-                if (memberId) openBioModal(memberId);
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const readMoreBtn = card.querySelector('.read-more-btn');
+                if (readMoreBtn) {
+                    readMoreBtn.click();
+                }
             }
         });
     });
 }
 
-// Bio Modal
-function initBioModal() {
-    const modal = document.querySelector('.bio-modal');
-    const closeBtn = modal.querySelector('.close-modal');
-    
-    // Close modal when clicking outside
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeBioModal();
-        }
-    });
-    
-    // Close modal with escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeBioModal();
-        }
-    });
-}
-
+// Bio Modal Functions
 function openBioModal(memberId) {
     const member = teamBios[memberId];
     const modal = document.querySelector('.bio-modal');
     const bioContent = modal.querySelector('.bio-content');
     
+    // Format bio text with paragraphs
+    const formattedBio = member.bio.split('\n\n')
+        .map(paragraph => paragraph.trim())
+        .filter(paragraph => paragraph.length > 0)
+        .map(paragraph => `<p>${paragraph}</p>`)
+        .join('');
+    
     // Insert bio content
     bioContent.innerHTML = `
         <div class="bio-header">
             <div class="bio-image">
-                <img src="${member.image}" alt="${member.name}">
+                <img src="${member.image}" alt="${member.name}" />
             </div>
             <div class="bio-info">
                 <h3>${member.name}</h3>
@@ -223,9 +223,7 @@ function openBioModal(memberId) {
             </div>
         </div>
         <div class="bio-text">
-            ${member.bio.split('\n').map(paragraph => 
-                `<p>${paragraph.trim()}</p>`
-            ).join('')}
+            ${formattedBio}
         </div>
         ${member.linkedin !== "#" ? `
             <div class="bio-social">
@@ -242,51 +240,28 @@ function openBioModal(memberId) {
     
     // Focus management
     const closeBtn = modal.querySelector('.close-modal');
-    closeBtn.focus();
+    setTimeout(() => closeBtn.focus(), 100);
+
+    // Add event listeners for modal
+    closeBtn.addEventListener('click', closeBioModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeBioModal();
+    });
+    document.addEventListener('keydown', handleModalKeyboard);
 }
 
 function closeBioModal() {
     const modal = document.querySelector('.bio-modal');
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    
+    // Remove modal event listeners
+    document.removeEventListener('keydown', handleModalKeyboard);
 }
 
-// Parallax Effects
-function initParallaxEffects() {
-    const circles = document.querySelectorAll('.circle');
-    
-    document.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        
-        circles.forEach((circle, index) => {
-            const speed = 0.02 + (index * 0.01);
-            const x = (mouseX - window.innerWidth / 2) * speed;
-            const y = (mouseY - window.innerHeight / 2) * speed;
-            
-            circle.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
-}
-
-// Touch Event Handlers
-function handleTouchStart(e) {
-    this.touchStartY = e.touches[0].clientY;
-    this.touchStartX = e.touches[0].clientX;
-}
-
-function handleTouchEnd(e) {
-    if (!this.touchStartY || !this.touchStartX) return;
-    
-    const touchEndY = e.changedTouches[0].clientY;
-    const touchEndX = e.changedTouches[0].clientX;
-    const deltaY = Math.abs(this.touchStartY - touchEndY);
-    const deltaX = Math.abs(this.touchStartX - touchEndX);
-    
-    // If the touch was more like a tap than a scroll
-    if (deltaY < 10 && deltaX < 10) {
-        const memberId = this.getAttribute('data-member-id');
-        if (memberId) openBioModal(memberId);
+function handleModalKeyboard(e) {
+    if (e.key === 'Escape') {
+        closeBioModal();
     }
 }
 
