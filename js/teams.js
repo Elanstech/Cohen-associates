@@ -35,7 +35,7 @@ const teamBios = {
         linkedin: "#"
     },
     marianell: {
-        name: "Marianell Phillipen",
+        name: "Mariniel Berkonti",
         role: "Senior Accountant",
         image: "mari.jpeg",
         bio: `Marianell Phillipen brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background in accounting and finance, Marianell has developed a reputation for excellence in financial analysis and reporting.
