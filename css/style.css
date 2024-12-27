@@ -1527,7 +1527,26 @@ img {
     .designer-info h4 {
         font-size: var(--font-size-base);
     }
+    
+    .designer-logo-link {
+    display: block;
+    transition: var(--transition-base);
+   
+    }
 
+    .designer-logo-link:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+    
+    }
+
+    .designer-logo-link:focus {
+    outline: 2px solid var(--secondary);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+    
+    }
+    
     .footer-bottom,
     .designer-footer-content {
         padding-left: var(--spacing-md);
