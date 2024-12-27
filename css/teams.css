@@ -1,7 +1,7 @@
 /* Import base styles and variables */
 @import 'style.css';
 
-/* Hero Section Styles */
+/* Hero Section Fixes */
 .hero-section {
     position: relative;
     min-height: 60vh;
@@ -12,16 +12,33 @@
 
 .hero-container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 var(--spacing-xl);
     position: relative;
     z-index: var(--z-above);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-content {
+    width: 100%;
     text-align: center;
     color: var(--text-light);
     margin-bottom: var(--spacing-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-text {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-badge {
@@ -42,6 +59,8 @@
     color: var(--text-light);
     margin-bottom: var(--spacing-lg);
     line-height: 1.2;
+    width: 100%;
+    text-align: center;
 }
 
 .hero-description {
@@ -50,6 +69,7 @@
     margin: 0 auto;
     opacity: 0.9;
     line-height: var(--line-height-relaxed);
+    text-align: center;
 }
 
 .gradient-text {
@@ -496,8 +516,17 @@
 }
 
 @media (max-width: 768px) {
+  .hero-container {
+        padding: 0 var(--spacing-md);
+    }
+
     .hero-text h1 {
-        font-size: var(--font-size-3xl);
+        font-size: var(--font-size-4xl);
+    }
+
+    .hero-description {
+        font-size: var(--font-size-lg);
+        padding: 0 var(--spacing-md);
     }
     
     .hero-stats {
