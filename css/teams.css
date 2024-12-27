@@ -1,5 +1,5 @@
 /* Import base styles and variables */
-@import url('./style.css');
+@import 'style.css';
 
 /* Hero Section Styles */
 .hero-section {
@@ -41,6 +41,7 @@
     font-size: var(--font-size-6xl);
     color: var(--text-light);
     margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
 }
 
 .hero-description {
@@ -48,6 +49,7 @@
     max-width: 600px;
     margin: 0 auto;
     opacity: 0.9;
+    line-height: var(--line-height-relaxed);
 }
 
 .gradient-text {
@@ -67,6 +69,7 @@
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat-item {
@@ -94,7 +97,6 @@
     height: 40px;
     background: rgba(255, 255, 255, 0.2);
 }
-
 /* Section Styles */
 .leadership-section,
 .team-section {
@@ -118,7 +120,7 @@
 .section-badge {
     display: inline-block;
     padding: var(--spacing-xs) var(--spacing-lg);
-    background: rgba(231, 76, 60, 0.1);
+    background: rgba(170, 86, 52, 0.1);
     border-radius: var(--radius-full);
     color: var(--secondary);
     font-weight: var(--font-weight-semibold);
@@ -149,6 +151,7 @@
 .section-header p {
     color: var(--gray-600);
     font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
 }
 
 /* Team Grid Layouts */
@@ -173,11 +176,16 @@
     overflow: hidden;
     box-shadow: var(--shadow-lg);
     transition: var(--transition-base);
+    position: relative;
 }
 
 .team-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-xl);
+}
+
+.team-card.featured {
+    position: relative;
 }
 
 .team-card.featured::before {
@@ -193,6 +201,9 @@
 
 .card-inner {
     position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .member-image {
@@ -214,7 +225,12 @@
 .image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.8) 0%,
+        rgba(0,0,0,0.4) 50%,
+        transparent 100%
+    );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,6 +286,9 @@
 .member-info {
     padding: var(--spacing-xl);
     text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .member-info h3 {
@@ -293,13 +312,14 @@
     margin-bottom: var(--spacing-lg);
     font-size: var(--font-size-base);
     line-height: 1.6;
+    flex-grow: 1;
 }
-
 /* Social Links */
 .member-social {
     display: flex;
     justify-content: center;
     gap: var(--spacing-md);
+    margin-top: auto;
 }
 
 .member-social a {
@@ -329,7 +349,7 @@
     opacity: 0;
     z-index: var(--z-modal);
     overflow-y: auto;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
@@ -350,6 +370,7 @@
     margin: auto;
     transform: translateY(-20px);
     transition: transform 0.3s ease;
+    box-shadow: var(--shadow-xl);
 }
 
 .bio-modal.active .modal-content {
@@ -397,6 +418,7 @@
     border-radius: var(--radius-full);
     overflow: hidden;
     flex-shrink: 0;
+    box-shadow: var(--shadow-lg);
 }
 
 .bio-image img {
@@ -408,6 +430,13 @@
 .bio-info h3 {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-xs);
+    color: var(--primary);
+}
+
+.bio-text p {
+    color: var(--gray-600);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-lg);
 }
 
 .bio-social {
@@ -435,6 +464,10 @@
     .hero-text h1 {
         font-size: var(--font-size-5xl);
     }
+
+    .team-grid {
+        gap: var(--spacing-lg);
+    }
 }
 
 @media (max-width: 992px) {
@@ -448,16 +481,29 @@
         grid-template-columns: 1fr;
         max-width: 500px;
     }
+
+    .hero-text h1 {
+        font-size: var(--font-size-4xl);
+    }
+
+    .section-header h2 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .member-image {
+        padding-top: 90%;
+    }
 }
 
 @media (max-width: 768px) {
     .hero-text h1 {
-        font-size: var(--font-size-4xl);
+        font-size: var(--font-size-3xl);
     }
     
     .hero-stats {
         flex-direction: column;
         gap: var(--spacing-lg);
+        padding: var(--spacing-lg);
     }
     
     .stat-divider {
@@ -474,11 +520,28 @@
         align-items: center;
         text-align: center;
     }
+
+    .hero-description {
+        font-size: var(--font-size-lg);
+    }
+
+    .member-info {
+        padding: var(--spacing-lg);
+    }
+
+    .section-container {
+        padding: 0 var(--spacing-lg);
+    }
 }
 
 @media (max-width: 576px) {
     .hero-text h1 {
-        font-size: var(--font-size-3xl);
+        font-size: var(--font-size-2xl);
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding: 120px 0 40px;
     }
     
     .section-container {
@@ -486,14 +549,72 @@
     }
     
     .member-info {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
     }
     
-    .bio-modal-content {
+    .modal-content {
         width: 95%;
     }
     
     .bio-content {
         padding: var(--spacing-lg);
+    }
+
+    .bio-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .stat-number {
+        font-size: var(--font-size-3xl);
+    }
+
+    .member-social a {
+        width: 36px;
+        height: 36px;
+    }
+
+    .read-more-btn {
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.team-card:focus-visible,
+.read-more-btn:focus-visible,
+.close-modal:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .hero-section {
+        min-height: auto;
+        padding: var(--spacing-2xl) 0;
+        background: none;
+    }
+
+    .team-card {
+        break-inside: avoid;
+        box-shadow: none;
+    }
+
+    .bio-modal {
+        display: none !important;
+    }
+
+    .read-more-btn,
+    .member-social {
+        display: none;
     }
 }
