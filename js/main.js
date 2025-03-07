@@ -78,38 +78,49 @@ function handleParallax() {
     });
 }
 
-// Mobile Menu
+/* Mobile Menu JS Fix */
 function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const body = document.body;
     
-    menuBtn.addEventListener('click', () => {
+    // Create overlay div if it doesn't exist
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
+    
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+        
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+        
+        // Close menu when clicking links
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+    }
+    
+    function toggleMenu() {
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         body.classList.toggle('menu-open');
-    });
-    
-    // Close menu on link click
-    const menuLinks = mobileMenu.querySelectorAll('a');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuBtn.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-    
-    // Close menu on outside click
-    document.addEventListener('click', (e) => {
-        if (mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
-            !menuBtn.contains(e.target)) {
-            menuBtn.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
+        overlay.classList.toggle('active');
+    }
 }
 
 // Sticky Header
