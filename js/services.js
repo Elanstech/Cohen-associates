@@ -1,3 +1,4 @@
+// Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
     initAOS();
@@ -5,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initServiceCards();
     initParallaxEffects();
+    initSmoothScroll();
+    initCategoryCards();
+    initFeatureCards();
+    initScrollAnimations();
+    initBackgroundParticles();
 });
 
 // Initialize Loader
@@ -26,7 +32,8 @@ function initAOS() {
         duration: 800,
         offset: 100,
         once: true,
-        easing: 'ease-out-cubic'
+        easing: 'ease-out-cubic',
+        disable: window.innerWidth < 768
     });
 }
 
@@ -35,7 +42,7 @@ function initScrollEffects() {
     const header = document.querySelector('.header');
     let lastScroll = 0;
     
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
         const currentScroll = window.pageYOffset;
         
         // Add/remove scrolled class
@@ -53,39 +60,51 @@ function initScrollEffects() {
         }
         
         lastScroll = currentScroll;
-    });
+    }, 50));
 }
 
-// Mobile Menu
+// Improved Mobile Menu
 function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const body = document.body;
-    let isMenuOpen = false;
+    
+    // Create overlay div if it doesn't exist
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
     
     if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', toggleMenu);
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
         
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 toggleMenu();
             }
         });
         
-        // Close menu when pressing escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isMenuOpen) {
-                toggleMenu();
-            }
+        // Close menu when clicking links
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
         });
     }
     
     function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
-        body.style.overflow = isMenuOpen ? 'hidden' : '';
+        body.classList.toggle('menu-open');
+        overlay.classList.toggle('active');
     }
 }
 
@@ -97,10 +116,12 @@ function initServiceCards() {
         // Add hover effect
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = 'var(--shadow-xl)';
         });
         
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'var(--shadow-sm)';
         });
         
         // Add focus states for accessibility
@@ -108,10 +129,12 @@ function initServiceCards() {
         
         card.addEventListener('focus', function() {
             this.style.transform = 'translateY(-10px)';
+            this.style.boxShadow = 'var(--shadow-xl)';
         });
         
         card.addEventListener('blur', function() {
             this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'var(--shadow-sm)';
         });
     });
 }
@@ -119,61 +142,47 @@ function initServiceCards() {
 // Parallax Effects
 function initParallaxEffects() {
     const particles = document.querySelectorAll('.particle');
-    let mouseX = 0;
-    let mouseY = 0;
     
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+    // Only enable on desktop as it can cause performance issues on mobile
+    if (window.innerWidth > 992 && particles.length > 0) {
+        let mouseX = 0;
+        let mouseY = 0;
         
-        particles.forEach((particle, index) => {
-            const speed = 0.02 + (index * 0.01);
-            const x = (mouseX - window.innerWidth / 2) * speed;
-            const y = (mouseY - window.innerHeight / 2) * speed;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
             
-            particle.style.transform = `translate(${x}px, ${y}px)`;
+            particles.forEach((particle, index) => {
+                const speed = 0.02 + (index * 0.01);
+                const x = (mouseX - window.innerWidth / 2) * speed;
+                const y = (mouseY - window.innerHeight / 2) * speed;
+                
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+            });
         });
-    });
-}
-
-// Handle window resize
-window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth > 992) {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        
-        if (mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            menuBtn.classList.remove('active');
-            document.body.style.overflow = '';
-        }
     }
-}, 250));
+}
 
 // Smooth Scroll
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
             
-            if (target) {
-                const headerOffset = document.querySelector('.header').offsetHeight;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
+            // Only apply smooth scroll to hash links that point to elements on the page
+            if (href.startsWith('#') && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
                 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                const mobileMenu = document.querySelector('.mobile-menu');
-                const menuBtn = document.querySelector('.mobile-menu-btn');
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    menuBtn.classList.remove('active');
-                    document.body.style.overflow = '';
+                if (target) {
+                    const headerOffset = document.querySelector('.header').offsetHeight;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
                 }
             }
         });
@@ -184,13 +193,13 @@ function initSmoothScroll() {
 function initCategoryCards() {
     const categoryCards = document.querySelectorAll('.category-card');
     
-    categoryCards.forEach(card => {
+    categoryCards.forEach((card, index) => {
         card.addEventListener('click', function() {
-            const targetSection = document.querySelector(`.service-block:nth-child(${Array.from(categoryCards).indexOf(this) + 1})`);
+            const targetSection = document.querySelector(`.service-block:nth-child(${index + 1})`);
             if (targetSection) {
                 const headerOffset = document.querySelector('.header').offsetHeight;
-                const elementPosition = targetSection.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                 
                 window.scrollTo({
                     top: offsetPosition,
@@ -207,43 +216,42 @@ function initFeatureCards() {
     
     featureCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.querySelector('i').style.transform = 'scale(1.2) rotate(10deg)';
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+            }
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = 'var(--shadow-lg)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.querySelector('i').style.transform = 'scale(1) rotate(0)';
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0)';
+            }
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'var(--shadow-sm)';
         });
     });
-}
-
-// Utility function: Debounce
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
 }
 
 // Add scroll-based animations
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('[data-aos]');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('aos-animate');
-            }
+    if ('IntersectionObserver' in window) {
+        const animatedElements = document.querySelectorAll('[data-aos]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('aos-animate');
+                }
+            });
+        }, {
+            threshold: 0.1
         });
-    }, {
-        threshold: 0.1
-    });
-    
-    animatedElements.forEach(element => observer.observe(element));
+        
+        animatedElements.forEach(element => observer.observe(element));
+    }
 }
 
 // Initialize Background Particles
@@ -260,17 +268,43 @@ function initBackgroundParticles() {
     });
 }
 
-// Initialize everything when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
-    initAOS();
-    initScrollEffects();
-    initMobileMenu();
-    initServiceCards();
-    initParallaxEffects();
-    initSmoothScroll();
-    initCategoryCards();
-    initFeatureCards();
-    initScrollAnimations();
-    initBackgroundParticles();
-});
+// Handle window resize
+window.addEventListener('resize', debounce(() => {
+    if (window.innerWidth > 992) {
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const overlay = document.querySelector('.menu-overlay');
+        
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            if (menuBtn) menuBtn.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    }
+}, 250));
+
+// Utility function: Debounce
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Utility function: Throttle
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
