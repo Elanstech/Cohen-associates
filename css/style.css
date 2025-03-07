@@ -650,11 +650,14 @@ body.menu-open {
     background: var(--text-light);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .stat-item {
     text-align: center;
     flex: 1;
+    min-width: 100px; /* Ensure minimum width */
+    padding: var(--spacing-sm) var(--spacing-md); /* Add some padding */
 }
 
 .stat-number {
@@ -671,6 +674,8 @@ body.menu-open {
     color: var(--gray-600);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: normal; /* Allow text to wrap */
+    overflow: visible; /* Make sure text isn't cut off */
 }
 
 .stat-divider {
