@@ -32,21 +32,23 @@ function initHeroVideo() {
         });
 
         // Optimize performance by reducing quality when not in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    heroVideo.pause();
-                } else {
-                    heroVideo.play().catch(error => {
-                        console.log("Play on intersection was prevented:", error);
-                    });
-                }
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        heroVideo.pause();
+                    } else {
+                        heroVideo.play().catch(error => {
+                            console.log("Play on intersection was prevented:", error);
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
-        }, {
-            threshold: 0.1
-        });
 
-        observer.observe(heroVideo);
+            observer.observe(heroVideo);
+        }
     }
 }
 
@@ -69,40 +71,53 @@ function initAOS() {
         duration: 800,
         once: true,
         offset: 100,
-        easing: 'ease-out-cubic'
+        easing: 'ease-out-cubic',
+        disable: window.innerWidth < 768
     });
 }
 
-// Mobile Menu
+// Improved Mobile Menu Implementation
 function initMobileMenu() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const mobileMenu = document.querySelector('.mobile-menu');
     const body = document.body;
-    let isMenuOpen = false;
+    
+    // Create overlay div if it doesn't exist
+    let overlay = document.querySelector('.menu-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+    }
     
     if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', toggleMenu);
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
         
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', toggleMenu);
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
                 toggleMenu();
             }
         });
         
-        // Close menu when pressing escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isMenuOpen) {
-                toggleMenu();
-            }
+        // Close menu when clicking links
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
         });
     }
     
     function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
         menuBtn.classList.toggle('active');
         mobileMenu.classList.toggle('active');
-        body.style.overflow = isMenuOpen ? 'hidden' : '';
+        body.classList.toggle('menu-open');
+        overlay.classList.toggle('active');
     }
 }
 
@@ -111,7 +126,7 @@ function initStickyHeader() {
     const header = document.querySelector('.header');
     let lastScroll = 0;
     
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
         const currentScroll = window.pageYOffset;
         
         // Add/remove scrolled class
@@ -129,35 +144,59 @@ function initStickyHeader() {
         }
         
         lastScroll = currentScroll;
-    });
+    }, 50));
 }
 
-// Stats Counter Animation
+// Stats Counter Animation with Improved Performance
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                const stat = entry.target;
-                const targetValue = parseInt(stat.getAttribute('data-value'));
-                const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
-                
-                animateCounter(stat, targetValue);
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    const stat = entry.target;
+                    const targetValue = parseInt(stat.getAttribute('data-value'));
+                    const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
+                    
+                    animateCounter(stat, targetValue);
+                    animateProgress(progressCircle, targetValue);
+                    stat.classList.add('counted');
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        
+        stats.forEach(stat => observer.observe(stat));
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        stats.forEach(stat => {
+            const targetValue = parseInt(stat.getAttribute('data-value'));
+            animateCounter(stat, targetValue);
+            
+            const progressCircle = stat.closest('.stat-card').querySelector('.progress-ring-circle');
+            if (progressCircle) {
                 animateProgress(progressCircle, targetValue);
-                stat.classList.add('counted');
             }
         });
-    }, {
-        threshold: 0.5
-    });
-    
-    stats.forEach(stat => observer.observe(stat));
+    }
 }
 
 function animateCounter(element, target) {
+    if (!element) return;
+    
     const duration = 2000;
     const start = performance.now();
+    
+    // Check if we should use reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+        // Skip animation for users who prefer reduced motion
+        element.textContent = target + (target === 95 ? '%' : '');
+        return;
+    }
     
     function update(currentTime) {
         const elapsed = currentTime - start;
@@ -180,13 +219,24 @@ function animateCounter(element, target) {
 function animateProgress(circle, percentage) {
     if (!circle) return;
     
+    // Check if we should use reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
     const circumference = 2 * Math.PI * 54; // circle radius = 54
     const offset = circumference - (percentage / 100) * circumference;
     
     circle.style.strokeDasharray = circumference;
     circle.style.strokeDashoffset = circumference;
     
+    if (prefersReducedMotion) {
+        // Skip animation for users who prefer reduced motion
+        circle.style.strokeDashoffset = offset;
+        circle.style.opacity = '1';
+        return;
+    }
+    
     setTimeout(() => {
+        circle.style.transition = 'stroke-dashoffset 2s ease, opacity 0.5s ease';
         circle.style.strokeDashoffset = offset;
         circle.style.opacity = '1';
     }, 100);
@@ -195,21 +245,30 @@ function animateProgress(circle, percentage) {
 // Parallax Effects
 function initParallaxEffects() {
     const particles = document.querySelectorAll('.particle');
-    let mouseX = 0;
-    let mouseY = 0;
     
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+    // Only enable on desktop as it can cause performance issues on mobile
+    if (window.innerWidth > 992 && particles.length > 0) {
+        let mouseX = 0;
+        let mouseY = 0;
         
-        particles.forEach((particle, index) => {
-            const speed = 0.02 + (index * 0.01);
-            const x = (mouseX - window.innerWidth / 2) * speed;
-            const y = (mouseY - window.innerHeight / 2) * speed;
-            
-            particle.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
+        // Check if we should use reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (!prefersReducedMotion) {
+            document.addEventListener('mousemove', throttle((e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                particles.forEach((particle, index) => {
+                    const speed = 0.02 + (index * 0.01);
+                    const x = (mouseX - window.innerWidth / 2) * speed;
+                    const y = (mouseY - window.innerHeight / 2) * speed;
+                    
+                    particle.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            }, 50));
+        }
+    }
 }
 
 // Handle Window Resize
@@ -217,11 +276,13 @@ window.addEventListener('resize', debounce(() => {
     if (window.innerWidth > 992) {
         const mobileMenu = document.querySelector('.mobile-menu');
         const menuBtn = document.querySelector('.mobile-menu-btn');
+        const overlay = document.querySelector('.menu-overlay');
         
-        if (mobileMenu.classList.contains('active')) {
+        if (mobileMenu && mobileMenu.classList.contains('active')) {
             mobileMenu.classList.remove('active');
-            menuBtn.classList.remove('active');
-            document.body.style.overflow = '';
+            if (menuBtn) menuBtn.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
         }
     }
 }, 250));
@@ -237,4 +298,48 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+
+// Utility function: Throttle
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Smooth Scroll Implementation
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            // Only apply smooth scroll to hash links that point to elements on the page
+            if (href.startsWith('#') && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    const headerOffset = document.querySelector('.header').offsetHeight;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
+
+// Run smooth scroll init if not already done
+if (!window.smoothScrollInitialized) {
+    initSmoothScroll();
+    window.smoothScrollInitialized = true;
 }
