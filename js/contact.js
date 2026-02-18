@@ -316,7 +316,7 @@ function createMailtoLink(data, subject) {
         .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
         .join('\n');
 
-    return `mailto:info@cohen-associates.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return `mailto:oksana@cohen-associates.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 // Responsive handler
