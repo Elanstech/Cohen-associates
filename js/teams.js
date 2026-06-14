@@ -34,8 +34,9 @@
             image: 'oksanafront.jpeg',
             linkedin: 'https://www.linkedin.com/in/oksana-inoyatova-72680515',
             bio: [
-                'Oksana graduated with honors from Queens College, City University of New York, in 2005, earning dual degrees in Accounting and Economics. She gained extensive experience working for top-tier firms like Deloitte, where she developed expertise in tax preparation for high-net-worth individuals and international clients.',
-                'Oksana is a trusted advisor for clients navigating complex financial landscapes, with in-depth knowledge of FATCA compliance and international tax matters.'
+                'As Founder and CEO, Oksana has built Cohen & Associates into a boutique firm known for sophisticated tax strategy paired with genuinely personal service. A graduate of CUNY Queens College, she began her career at top-tier firms — including Deloitte — sharpening her expertise in tax preparation for high-net-worth individuals and international clients.',
+                'Today she specializes in tax return preparation and planning for high-net-worth individuals and businesses of every size — from sole proprietorships and partnerships to C and S corporations. Her focus is the optimization of tax structures, helping closely held businesses navigate challenges like double taxation and the balance between distributions and salaries to maximize savings at every level.',
+                'She also brings in-depth knowledge of FATCA compliance, international tax matters, and the U.S. tax obligations of foreign corporations. Above all, Oksana is a trusted advisor who believes in educating her clients — investing the time to keep them informed of the tax-law changes that affect them, and meeting as often as needed to keep the right strategies in place.'
             ]
         },
         steve: {
@@ -44,9 +45,10 @@
             image: 'websteve.jpeg',
             linkedin: 'https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465',
             bio: [
-                'Steve, an honors graduate from Queens College, earned his dual degrees in Accounting and Economics. With experience at both Big 4 and small to mid-sized public accounting firms, Steve specializes in serving dental and medical providers, international and domestic celebrities, real estate professionals, and high-net-worth individuals.',
-                'He focuses on providing tailored tax structures to maximize savings at the federal, state, and local levels. Steve holds the prestigious IRS Enrolled Agent status, granting him unlimited rights to represent taxpayers before the IRS in all 50 states.',
-                'Together, Oksana and Steve lead a firm dedicated to guiding clients toward financial success, whether locally or globally.'
+                'Steve co-founded Cohen & Associates and has led its practice for well over a decade. An honors graduate of Queens College — where he earned dual degrees in Accounting and Economics, graduating Cum Laude with a 3.73 GPA — he holds the prestigious IRS Enrolled Agent designation, granting him unlimited rights to represent taxpayers before the IRS in all 50 states.',
+                'His career spans both Big 4 and mid-sized public accounting firms, in roles ranging from audit and tax associate to tax supervisor and financial controller. That breadth gives him a rare command of accounting and auditing, tax-audit representation, advanced bookkeeping systems, and the domestic and foreign taxation of both individuals and companies.',
+                'Steve specializes in serving dental and medical providers, real estate professionals, international and domestic public figures, and high-net-worth individuals — designing tailored tax structures that maximize savings at the federal, state, and local levels. He is also well versed in real estate transactions and holds a New York real estate salesperson license.',
+                "Fluent in Farsi and Hebrew, Steve brings both technical depth and a personal touch to the firm's diverse, global client base. Together, he and Oksana lead a team dedicated to guiding clients toward financial success — whether across the city or across the world."
             ]
         },
         eddie: {
