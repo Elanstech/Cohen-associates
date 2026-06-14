@@ -39,8 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- ============================================================ STYLES
-         Shared site styles + this page's styles. -->
+    <!-- ============================================================ STYLES -->
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/services.css">
 
@@ -128,474 +127,412 @@
 
     <main>
         <!-- ============================================================ HERO -->
-        <section class="svchero" id="top">
-            <!-- Animated background -->
-            <div class="svchero__bg" aria-hidden="true">
-                <span class="svchero__grid"></span>
-                <span class="svchero__orb svchero__orb--1"></span>
-                <span class="svchero__orb svchero__orb--2"></span>
-                <span class="svchero__orb svchero__orb--3"></span>
-                <span class="svchero__noise"></span>
-            </div>
+        <section class="srv-hero">
+            <span class="srv-hero__glow" aria-hidden="true"></span>
 
-            <div class="shell svchero__inner">
-                <div class="svchero__content" data-reveal>
-                    <a href="index.html" class="svchero__crumb">
-                        <i class="fas fa-arrow-left-long" aria-hidden="true"></i>
-                        <span>Back to Home</span>
-                    </a>
-                    <span class="eyebrow eyebrow--light"><i class="fas fa-layer-group" aria-hidden="true"></i> What We Do</span>
-                    <span class="handwritten svchero__hand">more than the numbers</span>
-                    <h1 class="svchero__title">
-                        Services built around<br><span class="text-accent">your</span> whole picture
-                    </h1>
-                    <p class="svchero__lead">
-                        Three connected pillars — proactive tax strategy, clean financial management,
-                        and forward-looking advisory. Below, we break down exactly what each one
-                        includes, how we work, and what it means for you.
+            <div class="shell srv-hero__inner">
+                <div class="srv-hero__lead-col" data-reveal>
+                    <span class="eyebrow"><i class="fas fa-layer-group" aria-hidden="true"></i> What We Do</span>
+                    <h1 class="srv-hero__title">Three pillars,<br>one standard of <span class="text-accent">care</span>.</h1>
+                    <p class="srv-hero__sub">
+                        Proactive tax strategy, clean financial management, and forward-looking
+                        advisory — explained in full, and scoped entirely around you.
                     </p>
-
-                    <div class="svchero__actions">
+                    <div class="srv-hero__actions">
                         <a href="contact.html" class="btn btn--primary js-magnetic">
                             <i class="fas fa-calendar-check" aria-hidden="true"></i>
                             <span>Book a Consultation</span>
                         </a>
-                        <a href="#service-tax" class="btn btn--outline js-magnetic">
+                        <a href="#svc-01" class="btn btn--outline js-magnetic">
                             <span>Explore Services</span>
                             <i class="fas fa-arrow-down" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Glass "contents" index -->
-                <aside class="svchero__index" data-reveal data-reveal-delay="140" aria-label="On this page">
-                    <span class="svchero__index-label">On this page</span>
-                    <ul class="svchero__index-list">
-                        <li>
-                            <a href="#service-tax">
-                                <span class="svchero__index-num">01</span>
-                                <span class="svchero__index-txt">
-                                    <strong>Tax Strategy &amp; Compliance</strong>
-                                    <small>Plan, file, defend</small>
-                                </span>
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#service-financial">
-                                <span class="svchero__index-num">02</span>
-                                <span class="svchero__index-txt">
-                                    <strong>Financial Management</strong>
-                                    <small>Books, reporting, cash flow</small>
-                                </span>
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#service-advisory">
-                                <span class="svchero__index-num">03</span>
-                                <span class="svchero__index-txt">
-                                    <strong>Business Advisory</strong>
-                                    <small>Growth, risk, succession</small>
-                                </span>
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#process">
-                                <span class="svchero__index-num">04</span>
-                                <span class="svchero__index-txt">
-                                    <strong>How We Work</strong>
-                                    <small>Our 5-step process</small>
-                                </span>
-                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </aside>
-            </div>
-
-            <!-- Scroll cue -->
-            <a href="#service-tax" class="svchero__scroll" aria-label="Scroll to services">
-                <span></span> Scroll
-            </a>
-        </section>
-
-        <!-- ============================================================ CAPABILITIES MARQUEE -->
-        <section class="marquee" aria-label="Capabilities">
-            <div class="marquee__track">
-                <span><i class="fas fa-chart-pie"></i> Tax Planning</span>
-                <span><i class="fas fa-shield-halved"></i> IRS Representation</span>
-                <span><i class="fas fa-building-columns"></i> Entity Structuring</span>
-                <span><i class="fas fa-book"></i> Bookkeeping</span>
-                <span><i class="fas fa-chart-line"></i> Financial Reporting</span>
-                <span><i class="fas fa-globe"></i> International &amp; FATCA</span>
-                <span><i class="fas fa-lightbulb"></i> Business Advisory</span>
-                <span><i class="fas fa-people-arrows"></i> Succession &amp; Exit</span>
-                <span aria-hidden="true"><i class="fas fa-chart-pie"></i> Tax Planning</span>
-                <span aria-hidden="true"><i class="fas fa-shield-halved"></i> IRS Representation</span>
-                <span aria-hidden="true"><i class="fas fa-building-columns"></i> Entity Structuring</span>
-                <span aria-hidden="true"><i class="fas fa-book"></i> Bookkeeping</span>
-                <span aria-hidden="true"><i class="fas fa-chart-line"></i> Financial Reporting</span>
-                <span aria-hidden="true"><i class="fas fa-globe"></i> International &amp; FATCA</span>
-                <span aria-hidden="true"><i class="fas fa-lightbulb"></i> Business Advisory</span>
-                <span aria-hidden="true"><i class="fas fa-people-arrows"></i> Succession &amp; Exit</span>
+                <nav class="srv-hero__index" data-reveal data-reveal-delay="120" aria-label="Services overview">
+                    <a class="srv-hero__idx" href="#svc-01">
+                        <span class="srv-hero__idx-no">01</span>
+                        <span class="srv-hero__idx-body">
+                            <strong>Tax Strategy &amp; Compliance</strong>
+                            <small>Plan · file · defend</small>
+                        </span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a class="srv-hero__idx" href="#svc-02">
+                        <span class="srv-hero__idx-no">02</span>
+                        <span class="srv-hero__idx-body">
+                            <strong>Financial Management</strong>
+                            <small>Books · reporting · cash flow</small>
+                        </span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <a class="srv-hero__idx" href="#svc-03">
+                        <span class="srv-hero__idx-no">03</span>
+                        <span class="srv-hero__idx-body">
+                            <strong>Business Advisory</strong>
+                            <small>Growth · risk · succession</small>
+                        </span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </nav>
             </div>
         </section>
 
-        <!-- ============================================================ SERVICE DEEP-DIVES -->
-        <div class="svcwrap">
+        <!-- ============================================================ SERVICES -->
+        <section class="srv-services">
+            <div class="shell">
 
-            <!-- Floating scroll-spy rail -->
-            <nav class="svcnav js-svcnav" aria-label="Service sections">
-                <a href="#service-tax" class="svcnav__dot is-active" data-spy="service-tax">
-                    <span class="svcnav__bullet"></span>
-                    <span class="svcnav__name">01 · Tax Strategy</span>
-                </a>
-                <a href="#service-financial" class="svcnav__dot" data-spy="service-financial">
-                    <span class="svcnav__bullet"></span>
-                    <span class="svcnav__name">02 · Financial Mgmt</span>
-                </a>
-                <a href="#service-advisory" class="svcnav__dot" data-spy="service-advisory">
-                    <span class="svcnav__bullet"></span>
-                    <span class="svcnav__name">03 · Advisory</span>
-                </a>
-            </nav>
-
-            <!-- ─────────────── 01 · TAX STRATEGY ─────────────── -->
-            <section class="svcblock" id="service-tax">
-                <div class="shell svcblock__inner">
-
-                    <div class="svcblock__media" data-reveal>
-                        <div class="svcblock__frame" data-parallax>
-                            <img class="svcblock__img"
-                                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80"
-                                 alt="Tax documents and planning" loading="lazy" decoding="async">
+                <!-- ─────────── 01 · TAX STRATEGY ─────────── -->
+                <article class="srv-svc" id="svc-01" data-reveal>
+                    <header class="srv-svc__head">
+                        <span class="srv-svc__no" aria-hidden="true">01</span>
+                        <div class="srv-svc__title-wrap">
+                            <span class="eyebrow"><i class="fas fa-chart-pie" aria-hidden="true"></i> Service 01</span>
+                            <h2 class="srv-svc__title">Tax Strategy &amp; Compliance</h2>
+                            <p class="srv-svc__tag">Proactive planning that minimizes liability while keeping you fully compliant — all year, not just at filing time.</p>
                         </div>
-                        <span class="svcblock__index" aria-hidden="true">01</span>
-                        <div class="svcblock__float">
-                            <i class="fas fa-shield-halved" aria-hidden="true"></i>
-                            <div>
-                                <strong>IRS Enrolled Agents</strong>
-                                <span>Audit defense in all 50 states</span>
-                            </div>
-                        </div>
-                    </div>
+                    </header>
 
-                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
-                        <span class="eyebrow"><i class="fas fa-chart-pie" aria-hidden="true"></i> Service 01</span>
-                        <h2>Tax Strategy &amp; <span class="text-accent">Compliance</span></h2>
-                        <p class="svcblock__lead">
-                            Tax shouldn't be a once-a-year scramble. We build a year-round strategy that
-                            legally minimizes what you owe and keeps you airtight with the IRS and every
-                            state and country you touch.
-                        </p>
+                    <div class="srv-svc__body">
+                        <div class="srv-svc__intro">
+                            <p class="srv-svc__lead">
+                                Tax shouldn't be a once-a-year scramble. We build a year-round strategy
+                                that legally lowers what you owe and keeps you airtight with the IRS and
+                                every state and country you touch.
+                            </p>
 
-                        <h3 class="svcblock__sub">What's included</h3>
-                        <ul class="svcblock__grid">
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-compass-drafting" aria-hidden="true"></i></span>
-                                <h4>Proactive Tax Planning</h4>
-                                <p>Multi-year projections and timing of income, deductions, and distributions to shrink your effective rate.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-gavel" aria-hidden="true"></i></span>
-                                <h4>IRS &amp; State Representation</h4>
-                                <p>Enrolled Agents stand in for you on audits, notices, liens, and appeals — federal and state.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-building-columns" aria-hidden="true"></i></span>
-                                <h4>Entity Structuring</h4>
-                                <p>S-corp, C-corp, LLC, and partnership selection or restructuring to optimize how you're taxed.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-percent" aria-hidden="true"></i></span>
-                                <h4>Credits &amp; Incentives</h4>
-                                <p>R&amp;D credits, QBI, energy incentives, and industry-specific deductions you may be leaving behind.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-earth-americas" aria-hidden="true"></i></span>
-                                <h4>International &amp; FATCA</h4>
-                                <p>Foreign income, FBAR, treaty positions, and transfer pricing handled cleanly and compliantly.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
-                                <h4>Return Preparation</h4>
-                                <p>Federal, state, and local filings prepared, reviewed, and filed accurately — and on time.</p>
-                            </li>
-                        </ul>
-
-                        <div class="svcblock__split">
-                            <div class="svcout">
-                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
-                                <ul class="svcout__list">
+                            <div class="srv-svc__outcomes">
+                                <h3>What you walk away with</h3>
+                                <ul class="srv-check">
                                     <li><i class="fas fa-check" aria-hidden="true"></i> A lower effective tax rate</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> No surprise notices or penalties</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> Audit-ready documentation, always</li>
                                 </ul>
                             </div>
-                            <div class="svcwho">
-                                <span class="svcwho__label">Built for</span>
-                                <ul class="svcwho__tags">
+
+                            <div class="srv-svc__who">
+                                <span class="srv-svc__who-label">Built for</span>
+                                <ul class="srv-pills">
                                     <li>Business owners</li>
                                     <li>High earners</li>
                                     <li>Multi-state filers</li>
                                     <li>Expats</li>
                                 </ul>
                             </div>
+
+                            <a href="contact.html" class="btn btn--primary js-magnetic srv-svc__cta">
+                                <span>Talk tax strategy</span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                         </div>
 
-                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
-                            <span>Talk tax strategy</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        <div class="srv-svc__includes">
+                            <h3 class="srv-svc__includes-title">What's included</h3>
+                            <ul class="srv-feature-grid">
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-compass-drafting" aria-hidden="true"></i></span>
+                                    <h4>Proactive Tax Planning</h4>
+                                    <p>Multi-year projections and timing of income, deductions, and distributions.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-gavel" aria-hidden="true"></i></span>
+                                    <h4>IRS &amp; State Representation</h4>
+                                    <p>Enrolled Agents stand in for you on audits, notices, liens, and appeals.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-building-columns" aria-hidden="true"></i></span>
+                                    <h4>Entity Structuring</h4>
+                                    <p>S-corp, C-corp, LLC, and partnership selection to optimize how you're taxed.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-percent" aria-hidden="true"></i></span>
+                                    <h4>Credits &amp; Incentives</h4>
+                                    <p>R&amp;D credits, QBI, and industry deductions you may be leaving behind.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-earth-americas" aria-hidden="true"></i></span>
+                                    <h4>International &amp; FATCA</h4>
+                                    <p>Foreign income, FBAR, treaty positions, and transfer pricing, handled cleanly.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
+                                    <h4>Return Preparation</h4>
+                                    <p>Federal, state, and local filings prepared, reviewed, and filed on time.</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </article>
 
-                </div>
-            </section>
-
-            <!-- ─────────────── 02 · FINANCIAL MANAGEMENT (flipped) ─────────────── -->
-            <section class="svcblock svcblock--flip svcblock--tint" id="service-financial">
-                <div class="shell svcblock__inner">
-
-                    <div class="svcblock__media" data-reveal>
-                        <div class="svcblock__frame" data-parallax>
-                            <img class="svcblock__img"
-                                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80"
-                                 alt="Financial dashboards and reporting" loading="lazy" decoding="async">
+                <!-- ─────────── 02 · FINANCIAL MANAGEMENT ─────────── -->
+                <article class="srv-svc srv-svc--alt" id="svc-02" data-reveal>
+                    <header class="srv-svc__head">
+                        <span class="srv-svc__no" aria-hidden="true">02</span>
+                        <div class="srv-svc__title-wrap">
+                            <span class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> Service 02</span>
+                            <h2 class="srv-svc__title">Financial Management</h2>
+                            <p class="srv-svc__tag">Clean books and clear reporting that power confident, well-timed decisions.</p>
                         </div>
-                        <span class="svcblock__index" aria-hidden="true">02</span>
-                        <div class="svcblock__float">
-                            <i class="fas fa-chart-line" aria-hidden="true"></i>
-                            <div>
-                                <strong>Always current</strong>
-                                <span>Books closed on schedule</span>
-                            </div>
-                        </div>
-                    </div>
+                    </header>
 
-                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
-                        <span class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> Service 02</span>
-                        <h2>Financial <span class="text-accent">Management</span></h2>
-                        <p class="svcblock__lead">
-                            Clean books are the foundation of every good decision. We keep your numbers
-                            accurate, current, and genuinely readable — so you always know exactly where
-                            you stand.
-                        </p>
+                    <div class="srv-svc__body">
+                        <div class="srv-svc__intro">
+                            <p class="srv-svc__lead">
+                                Clean books are the foundation of every good decision. We keep your numbers
+                                accurate, current, and genuinely readable — so you always know exactly where
+                                you stand.
+                            </p>
 
-                        <h3 class="svcblock__sub">What's included</h3>
-                        <ul class="svcblock__grid">
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-book-open" aria-hidden="true"></i></span>
-                                <h4>Bookkeeping &amp; Reconciliation</h4>
-                                <p>Monthly categorization, bank and credit reconciliation, and ledgers that actually tie out.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
-                                <h4>Financial Reporting</h4>
-                                <p>P&amp;L, balance sheet, and cash-flow statements delivered on a predictable schedule.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-money-bill-trend-up" aria-hidden="true"></i></span>
-                                <h4>Cash-Flow Management</h4>
-                                <p>Forecasting, burn-rate tracking, and clear runway visibility before it gets tight.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-users-gear" aria-hidden="true"></i></span>
-                                <h4>Payroll Support</h4>
-                                <p>Payroll setup, processing coordination, and compliance so people get paid right.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-gauge-high" aria-hidden="true"></i></span>
-                                <h4>KPI Dashboards</h4>
-                                <p>The handful of numbers that truly move your business — in one clear view.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-user-tie" aria-hidden="true"></i></span>
-                                <h4>CFO-Level Advisory</h4>
-                                <p>A senior set of eyes on budgets, pricing, and margins whenever you need it.</p>
-                            </li>
-                        </ul>
-
-                        <div class="svcblock__split">
-                            <div class="svcout">
-                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
-                                <ul class="svcout__list">
+                            <div class="srv-svc__outcomes">
+                                <h3>What you walk away with</h3>
+                                <ul class="srv-check">
                                     <li><i class="fas fa-check" aria-hidden="true"></i> Books that are always current</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> Faster, clearer decisions</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> Investor- and lender-ready reports</li>
                                 </ul>
                             </div>
-                            <div class="svcwho">
-                                <span class="svcwho__label">Built for</span>
-                                <ul class="svcwho__tags">
+
+                            <div class="srv-svc__who">
+                                <span class="srv-svc__who-label">Built for</span>
+                                <ul class="srv-pills">
                                     <li>Startups</li>
                                     <li>Established SMBs</li>
                                     <li>Professional practices</li>
                                     <li>Real estate</li>
                                 </ul>
                             </div>
+
+                            <a href="contact.html" class="btn btn--primary js-magnetic srv-svc__cta">
+                                <span>Clean up my books</span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                         </div>
 
-                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
-                            <span>Clean up my books</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        <div class="srv-svc__includes">
+                            <h3 class="srv-svc__includes-title">What's included</h3>
+                            <ul class="srv-feature-grid">
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-book-open" aria-hidden="true"></i></span>
+                                    <h4>Bookkeeping &amp; Reconciliation</h4>
+                                    <p>Monthly categorization, bank and credit reconciliation, ledgers that tie out.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
+                                    <h4>Financial Reporting</h4>
+                                    <p>P&amp;L, balance sheet, and cash-flow statements on a predictable schedule.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-money-bill-trend-up" aria-hidden="true"></i></span>
+                                    <h4>Cash-Flow Management</h4>
+                                    <p>Forecasting, burn-rate tracking, and clear runway visibility.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-users-gear" aria-hidden="true"></i></span>
+                                    <h4>Payroll Support</h4>
+                                    <p>Payroll setup, processing coordination, and compliance.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-gauge-high" aria-hidden="true"></i></span>
+                                    <h4>KPI Dashboards</h4>
+                                    <p>The handful of numbers that truly move your business, in one view.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-user-tie" aria-hidden="true"></i></span>
+                                    <h4>CFO-Level Advisory</h4>
+                                    <p>A senior set of eyes on budgets, pricing, and margins when you need it.</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </article>
 
-                </div>
-            </section>
-
-            <!-- ─────────────── 03 · BUSINESS ADVISORY ─────────────── -->
-            <section class="svcblock" id="service-advisory">
-                <div class="shell svcblock__inner">
-
-                    <div class="svcblock__media" data-reveal>
-                        <div class="svcblock__frame" data-parallax>
-                            <img class="svcblock__img"
-                                 src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80"
-                                 alt="Business strategy meeting" loading="lazy" decoding="async">
+                <!-- ─────────── 03 · BUSINESS ADVISORY ─────────── -->
+                <article class="srv-svc" id="svc-03" data-reveal>
+                    <header class="srv-svc__head">
+                        <span class="srv-svc__no" aria-hidden="true">03</span>
+                        <div class="srv-svc__title-wrap">
+                            <span class="eyebrow"><i class="fas fa-lightbulb" aria-hidden="true"></i> Service 03</span>
+                            <h2 class="srv-svc__title">Business Advisory</h2>
+                            <p class="srv-svc__tag">Strategic counsel for the decisions that matter most — growth, risk, and the eventual exit.</p>
                         </div>
-                        <span class="svcblock__index" aria-hidden="true">03</span>
-                        <div class="svcblock__float">
-                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
-                            <div>
-                                <strong>On your side</strong>
-                                <span>For every big move</span>
-                            </div>
-                        </div>
-                    </div>
+                    </header>
 
-                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
-                        <span class="eyebrow"><i class="fas fa-lightbulb" aria-hidden="true"></i> Service 03</span>
-                        <h2>Business <span class="text-accent">Advisory</span></h2>
-                        <p class="svcblock__lead">
-                            We sit on your side of the table for the decisions that matter most — growth,
-                            transitions, risk, and the eventual exit. Strategic counsel that reaches well
-                            beyond the return.
-                        </p>
+                    <div class="srv-svc__body">
+                        <div class="srv-svc__intro">
+                            <p class="srv-svc__lead">
+                                We sit on your side of the table for the big moves — growth, transitions,
+                                risk, and succession. Strategic guidance that reaches well beyond the return.
+                            </p>
 
-                        <h3 class="svcblock__sub">What's included</h3>
-                        <ul class="svcblock__grid">
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i></span>
-                                <h4>Growth Strategy</h4>
-                                <p>Scenario modeling, expansion planning, and the capital structure to support it.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-shield" aria-hidden="true"></i></span>
-                                <h4>Risk &amp; Internal Controls</h4>
-                                <p>Process review, fraud safeguards, and compliance frameworks that hold up.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-gears" aria-hidden="true"></i></span>
-                                <h4>Process Optimization</h4>
-                                <p>Systems, automation, and workflow design that quietly buys back your hours.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-people-arrows" aria-hidden="true"></i></span>
-                                <h4>Succession &amp; Exit Planning</h4>
-                                <p>Ownership transitions, valuations, and getting the business exit-ready.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-handshake-angle" aria-hidden="true"></i></span>
-                                <h4>M&amp;A Support</h4>
-                                <p>Due diligence, deal structuring, and the post-close integration work.</p>
-                            </li>
-                            <li class="svcfeat">
-                                <span class="svcfeat__ic"><i class="fas fa-gem" aria-hidden="true"></i></span>
-                                <h4>Wealth Coordination</h4>
-                                <p>Aligning the business with your personal, retirement, and estate planning.</p>
-                            </li>
-                        </ul>
-
-                        <div class="svcblock__split">
-                            <div class="svcout">
-                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
-                                <ul class="svcout__list">
+                            <div class="srv-svc__outcomes">
+                                <h3>What you walk away with</h3>
+                                <ul class="srv-check">
                                     <li><i class="fas fa-check" aria-hidden="true"></i> A clear, prioritized roadmap</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> Fewer blind spots and surprises</li>
                                     <li><i class="fas fa-check" aria-hidden="true"></i> A business built to transfer value</li>
                                 </ul>
                             </div>
-                            <div class="svcwho">
-                                <span class="svcwho__label">Built for</span>
-                                <ul class="svcwho__tags">
+
+                            <div class="srv-svc__who">
+                                <span class="srv-svc__who-label">Built for</span>
+                                <ul class="srv-pills">
                                     <li>Founders</li>
                                     <li>Partnerships</li>
                                     <li>Family businesses</li>
                                     <li>HNW individuals</li>
                                 </ul>
                             </div>
+
+                            <a href="contact.html" class="btn btn--primary js-magnetic srv-svc__cta">
+                                <span>Plan my next move</span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                         </div>
 
-                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
-                            <span>Plan my next move</span>
-                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        <div class="srv-svc__includes">
+                            <h3 class="srv-svc__includes-title">What's included</h3>
+                            <ul class="srv-feature-grid">
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i></span>
+                                    <h4>Growth Strategy</h4>
+                                    <p>Scenario modeling, expansion planning, and the capital structure to match.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-shield" aria-hidden="true"></i></span>
+                                    <h4>Risk &amp; Internal Controls</h4>
+                                    <p>Process review, fraud safeguards, and compliance frameworks that hold up.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-gears" aria-hidden="true"></i></span>
+                                    <h4>Process Optimization</h4>
+                                    <p>Systems, automation, and workflow design that buys back your hours.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-people-arrows" aria-hidden="true"></i></span>
+                                    <h4>Succession &amp; Exit Planning</h4>
+                                    <p>Ownership transitions, valuations, and getting the business exit-ready.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-handshake-angle" aria-hidden="true"></i></span>
+                                    <h4>M&amp;A Support</h4>
+                                    <p>Due diligence, deal structuring, and post-close integration.</p>
+                                </li>
+                                <li class="srv-feature">
+                                    <span class="srv-feature__ic"><i class="fas fa-gem" aria-hidden="true"></i></span>
+                                    <h4>Wealth Coordination</h4>
+                                    <p>Aligning the business with your personal, retirement, and estate planning.</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </article>
 
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
-        <!-- ============================================================ PROCESS TIMELINE -->
-        <section class="svcflow" id="process">
+        <!-- ============================================================ PROCESS -->
+        <section class="srv-flow" id="process">
             <div class="shell">
-                <div class="section-head" data-reveal>
+                <div class="srv-sec-head" data-reveal>
                     <span class="eyebrow">How We Work</span>
-                    <h2>From First Call to <span class="text-accent">Ongoing</span> Peace of Mind</h2>
+                    <h2>From first call to ongoing peace of mind</h2>
                     <p>A clear, five-step path — no jargon, no surprises, just steady progress.</p>
                 </div>
 
-                <div class="svcflow__timeline js-flow" data-flow>
-                    <span class="svcflow__line" aria-hidden="true">
-                        <span class="svcflow__line-fill js-flow-fill"></span>
-                    </span>
+                <ol class="srv-steps">
+                    <li class="srv-step" data-reveal>
+                        <span class="srv-step__no">01</span>
+                        <h3>Discovery Call</h3>
+                        <p>We learn your goals, your situation, and the pain points keeping you up at night.</p>
+                    </li>
+                    <li class="srv-step" data-reveal data-reveal-delay="80">
+                        <span class="srv-step__no">02</span>
+                        <h3>Deep-Dive Analysis</h3>
+                        <p>We review prior returns, statements, and structure to surface risks and opportunities.</p>
+                    </li>
+                    <li class="srv-step" data-reveal data-reveal-delay="160">
+                        <span class="srv-step__no">03</span>
+                        <h3>Strategy Blueprint</h3>
+                        <p>A tailored plan with clear priorities, projected savings, and a realistic timeline.</p>
+                    </li>
+                    <li class="srv-step" data-reveal data-reveal-delay="240">
+                        <span class="srv-step__no">04</span>
+                        <h3>Implementation</h3>
+                        <p>Filings, restructuring, and systems — handled end to end by our team.</p>
+                    </li>
+                    <li class="srv-step" data-reveal data-reveal-delay="320">
+                        <span class="srv-step__no">05</span>
+                        <h3>Ongoing Advisory</h3>
+                        <p>Quarterly reviews and year-round access mean nothing catches you off guard.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
 
-                    <article class="svcflow__step" data-reveal>
-                        <div class="svcflow__node"><span>01</span></div>
-                        <div class="svcflow__card">
-                            <i class="fas fa-comments svcflow__icon" aria-hidden="true"></i>
-                            <h3>Discovery Call</h3>
-                            <p>We get to know your goals, your situation, and the pain points keeping you up at night — no cost, no pressure.</p>
+        <!-- ============================================================ ENGAGEMENT MODELS -->
+        <section class="srv-plan-sec" id="plans">
+            <div class="shell">
+                <div class="srv-sec-head" data-reveal>
+                    <span class="eyebrow">Ways to Work Together</span>
+                    <h2>Engagements that fit you</h2>
+                    <p>Every relationship is scoped to your needs — here's a starting point. Final pricing is always tailored.</p>
+                </div>
+
+                <div class="srv-plans">
+                    <article class="srv-plan" data-reveal>
+                        <div class="srv-plan__head">
+                            <span class="srv-plan__name">Essentials</span>
+                            <p class="srv-plan__for">For individuals &amp; solo owners</p>
                         </div>
+                        <div class="srv-plan__price"><span>Tailored</span><small>annual engagement</small></div>
+                        <ul class="srv-plan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Annual tax preparation &amp; filing</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Planning check-ins before year-end</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Notice &amp; letter support</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> A direct line to your accountant</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--outline js-magnetic srv-plan__btn">
+                            <span>Get started</span>
+                        </a>
                     </article>
 
-                    <article class="svcflow__step" data-reveal data-reveal-delay="80">
-                        <div class="svcflow__node"><span>02</span></div>
-                        <div class="svcflow__card">
-                            <i class="fas fa-magnifying-glass-chart svcflow__icon" aria-hidden="true"></i>
-                            <h3>Deep-Dive Analysis</h3>
-                            <p>We review prior returns, statements, and your current structure to surface risks and missed opportunities.</p>
+                    <article class="srv-plan srv-plan--featured" data-reveal data-reveal-delay="100">
+                        <span class="srv-plan__flag"><i class="fas fa-star" aria-hidden="true"></i> Most popular</span>
+                        <div class="srv-plan__head">
+                            <span class="srv-plan__name">Growth Partner</span>
+                            <p class="srv-plan__for">For active, growing businesses</p>
                         </div>
+                        <div class="srv-plan__price"><span>Tailored</span><small>monthly engagement</small></div>
+                        <ul class="srv-plan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Monthly bookkeeping &amp; reporting</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Quarterly strategy sessions</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Full federal &amp; state compliance</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Priority, year-round support</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Entity &amp; payroll coordination</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--primary js-magnetic srv-plan__btn">
+                            <span>Book a consult</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
                     </article>
 
-                    <article class="svcflow__step" data-reveal data-reveal-delay="160">
-                        <div class="svcflow__node"><span>03</span></div>
-                        <div class="svcflow__card">
-                            <i class="fas fa-drafting-compass svcflow__icon" aria-hidden="true"></i>
-                            <h3>Strategy Blueprint</h3>
-                            <p>You get a tailored plan with clear priorities, projected savings, and a realistic timeline to execute.</p>
+                    <article class="srv-plan" data-reveal data-reveal-delay="200">
+                        <div class="srv-plan__head">
+                            <span class="srv-plan__name">Private Advisory</span>
+                            <p class="srv-plan__for">For HNW &amp; complex needs</p>
                         </div>
-                    </article>
-
-                    <article class="svcflow__step" data-reveal data-reveal-delay="240">
-                        <div class="svcflow__node"><span>04</span></div>
-                        <div class="svcflow__card">
-                            <i class="fas fa-gears svcflow__icon" aria-hidden="true"></i>
-                            <h3>Implementation</h3>
-                            <p>Filings, restructuring, and systems — handled end to end by our team, so you can stay focused on your work.</p>
-                        </div>
-                    </article>
-
-                    <article class="svcflow__step" data-reveal data-reveal-delay="320">
-                        <div class="svcflow__node"><span>05</span></div>
-                        <div class="svcflow__card">
-                            <i class="fas fa-seedling svcflow__icon" aria-hidden="true"></i>
-                            <h3>Ongoing Advisory</h3>
-                            <p>Quarterly reviews and year-round access mean nothing catches you off guard — ever again.</p>
-                        </div>
+                        <div class="srv-plan__price"><span>Tailored</span><small>dedicated engagement</small></div>
+                        <ul class="srv-plan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> A dedicated, senior-led team</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> International &amp; FATCA coverage</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> M&amp;A, succession &amp; exit planning</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Wealth &amp; estate coordination</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> White-glove, on-call service</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--outline js-magnetic srv-plan__btn">
+                            <span>Request access</span>
+                        </a>
                     </article>
                 </div>
             </div>
@@ -625,11 +562,9 @@
             </div>
         </section>
 
-        <!-- ============================================================ SERVICES FAQ -->
+        <!-- ============================================================ FAQ -->
         <section class="faq" id="faq">
             <div class="shell faq__inner">
-
-                <!-- Left · sticky intro + CTA -->
                 <div class="faq__intro" data-reveal>
                     <span class="eyebrow"><i class="fas fa-circle-question" aria-hidden="true"></i> Good Questions</span>
                     <span class="handwritten faq__hand">ask away</span>
@@ -654,7 +589,6 @@
                     </div>
                 </div>
 
-                <!-- Right · accordion -->
                 <div class="faq__list js-faq">
                     <div class="faq__item" data-reveal>
                         <button class="faq__q" aria-expanded="false">
@@ -664,7 +598,7 @@
                         </button>
                         <div class="faq__a">
                             <div class="faq__a-body">
-                                <p>You work directly with senior people who know your file — not a rotating cast of juniors. That means proactive strategy year-round, faster answers, and advice tailored to your specific situation rather than a template.</p>
+                                <p>You work directly with senior people who know your file — not a rotating cast of juniors. That means proactive strategy year-round, faster answers, and advice tailored to your situation rather than a template.</p>
                             </div>
                         </div>
                     </div>
@@ -690,7 +624,7 @@
                         </button>
                         <div class="faq__a">
                             <div class="faq__a-body">
-                                <p>It depends entirely on your income, entity type, and current setup — there's no one-size number. The honest answer: we'll review your last two returns and show you, specifically, where the opportunities are before you commit to anything.</p>
+                                <p>It depends on your income, entity type, and current setup — there's no one-size number. The honest answer: we'll review your last two returns and show you, specifically, where the opportunities are before you commit to anything.</p>
                             </div>
                         </div>
                     </div>
@@ -785,12 +719,10 @@
     </footer>
 
     <!-- ============================================================ FLOATING UI -->
-    <!-- Back to top (left) -->
     <button class="to-top js-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Contact FAB (right) -->
     <div class="cfab js-fab">
         <div class="cfab__menu">
             <a class="cfab__action fab__action" href="tel:+17184573840">
@@ -815,8 +747,7 @@
         </button>
     </div>
 
-    <!-- ============================================================ SCRIPTS
-         Shared site behaviour + this page's behaviour. -->
+    <!-- ============================================================ SCRIPTS -->
     <script src="./js/main.js" defer></script>
     <script src="./js/services.js" defer></script>
 </body>
