@@ -1,119 +1,151 @@
 /* ============================================================================
-   COHEN & ASSOCIATES — faq.css  (FAQ page · editorial layer)
+   COHEN & ASSOCIATES — faq.css  (FAQ page · help-center redesign)
    ----------------------------------------------------------------------------
-   Loads AFTER style.css and reuses its :root tokens. The accordion mechanics
-   (.faq__item / .faq__q / .faq__a …) are already defined in style.css §19 and
-   are reused here as-is — this layer only adds the FAQ-page shell: an editorial
-   hero, category chips with scroll-spy, and numbered category blocks set in
-   Fraunces.
-
-   FONT NOTE — this layer uses Fraunces for display type, to match about.css.
-   Add it to the Google Fonts <link> in faq.html (see chat for the exact tag).
+   Loads AFTER style.css and reuses its :root tokens. A modern help-center
+   layout: dark search hero, sticky filter tabs, and rounded accordion cards
+   (no editorial numbers — deliberately distinct from the Team/About pages).
 
    JS CONTRACT (js/faq.js):
-     • .faq__item / .faq__q   → .is-open + aria-expanded   (accordion)
-     • .faqp-chip             → .is-active                 (scroll-spy)
+     • .fx-item / .fx-q      → .is-open + aria-expanded   (accordion)
+     • .fx-tab               → .is-active                 (topic filter)
+     • #fxSearch             → live text filter
+     • .js-fx-empty          → toggled when no results
 
    CONTENTS
-     01. TOKENS  (serif stack)
-     02. HERO
-     03. CATEGORY CHIPS
-     04. FAQ BODY + CATEGORIES
-     05. ACCORDION  (inherited — notes only)
-     06. RESPONSIVE
-     07. MOTION SAFETY
+     01. HERO + SEARCH
+     02. STICKY TABS
+     03. FAQ LIST + CARDS
+     04. EMPTY STATE
+     05. RESPONSIVE
+     06. MOTION SAFETY
 ============================================================================ */
 
 
 /* ============================================================================
-   01. TOKENS
+   01. HERO + SEARCH
 ============================================================================ */
-:root {
-    --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-}
-
-
-/* ============================================================================
-   02. HERO
-============================================================================ */
-.faqp-hero {
+.fx-hero {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     text-align: center;
-    background: var(--paper);
-    padding: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem)) 0 clamp(2.75rem, 6vw, 4.5rem);
+    color: #fff;
+    background: var(--grad-navy);
+    padding: calc(var(--header-h) + clamp(2.75rem, 6vw, 4.5rem)) 0 clamp(2.75rem, 6vw, 4.25rem);
 }
-
-/* Soft copper glow behind the headline */
-.faqp-hero__glow {
+.fx-hero::before {
+    content: '';
     position: absolute;
+    inset: 0;
     z-index: -1;
-    top: -160px;
-    left: 50%;
-    width: min(680px, 92vw);
-    height: 680px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(170, 86, 52, 0.16), transparent 66%);
-    filter: blur(60px);
-    pointer-events: none;
+    background: radial-gradient(circle at 78% 16%, rgba(170, 86, 52, 0.32), transparent 55%);
 }
 
-.faqp-hero .eyebrow { justify-content: center; }
-
-.faqp-hero__title {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: clamp(2.6rem, 1.7rem + 4.2vw, 4.6rem);
-    line-height: 1.04;
-    letter-spacing: -0.02em;
-    color: var(--navy);
-    margin: 1.1rem auto 1.35rem;
-    max-width: 18ch;
+.fx-hero__hand {
+    display: block;
+    color: var(--copper-light);
+    font-size: clamp(1.5rem, 1rem + 1.6vw, 2.1rem);
+    transform: rotate(-3deg);
+    margin-bottom: 0.35rem;
 }
+.fx-hero .eyebrow { justify-content: center; }
 
-.faqp-hero__sub {
-    max-width: 58ch;
+.fx-hero__title {
+    color: #fff;
+    font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+    line-height: 1.05;
+    margin: 0.75rem 0 1rem;
+}
+.fx-hero__sub {
+    max-width: 54ch;
     margin: 0 auto;
     font-size: var(--fs-lead);
-    line-height: 1.65;
-    color: var(--g-600);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
 }
+
+/* Search bar (frosted, on dark) */
+.fx-search {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 620px;
+    margin: clamp(1.75rem, 4vw, 2.5rem) auto 0;
+    padding: 0.9rem 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, 0.10);
+    -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+    transition: border-color var(--t-base), box-shadow var(--t-base), background var(--t-base);
+}
+.fx-search:focus-within {
+    border-color: var(--copper-light);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 0 0 4px rgba(170, 86, 52, 0.18);
+}
+.fx-search__icon { color: var(--copper-light); font-size: 1rem; }
+.fx-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1.05rem;
+}
+.fx-search input:focus { outline: none; }
+.fx-search input::placeholder { color: rgba(255, 255, 255, 0.6); }
+.fx-search input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+.fx-search__clear {
+    display: none;
+    place-items: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 0.8rem;
+    transition: background var(--t-base);
+}
+.fx-search__clear.is-visible { display: grid; }
+.fx-search__clear:hover { background: rgba(255, 255, 255, 0.3); }
 
 
 /* ============================================================================
-   03. CATEGORY CHIPS
+   02. STICKY TABS
 ============================================================================ */
-.faqp-chips {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.65rem;
-    margin-top: clamp(2rem, 4vw, 3rem);
+.fx-tabs-wrap {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 60;
+    background: rgba(249, 246, 241, 0.92);
+    -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--g-200);
 }
+.fx-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.85rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.fx-tabs::-webkit-scrollbar { display: none; }
 
-.faqp-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.6rem 1.15rem;
+.fx-tab {
+    flex-shrink: 0;
+    padding: 0.55rem 1.1rem;
     border: 1.5px solid var(--g-300);
     border-radius: var(--r-full);
     background: var(--paper);
     color: var(--g-700);
     font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    white-space: nowrap;
     transition: color var(--t-base), background var(--t-base),
-                border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+                border-color var(--t-base), transform var(--t-base);
 }
-.faqp-chip:hover {
-    color: var(--copper-dark);
-    border-color: rgba(170, 86, 52, 0.55);
-    transform: translateY(-2px);
-    box-shadow: var(--sh-sm);
-}
-.faqp-chip.is-active {
+.fx-tab:hover { color: var(--copper-dark); border-color: rgba(170, 86, 52, 0.55); }
+.fx-tab.is-active {
     background: var(--navy);
     border-color: var(--navy);
     color: #fff;
@@ -121,86 +153,117 @@
 
 
 /* ============================================================================
-   04. FAQ BODY + CATEGORIES
+   03. FAQ LIST + CARDS
 ============================================================================ */
-.faqp-body {
+.fx-body {
     background: var(--cream);
-    border-top: 1px solid rgba(26, 35, 126, 0.10);
-    padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(4rem, 9vw, 7.5rem);
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(4rem, 8vw, 7rem);
+}
+.fx-list {
+    max-width: 820px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
 }
 
-/* Each category is separated by a full hairline */
-.faqp-cat {
-    margin-top: clamp(2.5rem, 5vw, 4rem);
-    padding-top: clamp(2.5rem, 5vw, 4rem);
-    border-top: 1px solid rgba(26, 35, 126, 0.12);
+.fx-item {
+    background: var(--paper);
+    border: 1px solid var(--g-200);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-xs);
+    overflow: hidden;
+    transition: box-shadow var(--t-base), border-color var(--t-base), transform var(--t-base);
 }
-.faqp-cat:first-child {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-}
+.fx-item:hover { border-color: rgba(170, 86, 52, 0.30); box-shadow: var(--sh-sm); }
+.fx-item.is-open { border-color: rgba(170, 86, 52, 0.40); box-shadow: var(--sh-md); }
 
-.faqp-cat__head {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    gap: clamp(1.1rem, 2.6vw, 1.9rem);
-    max-width: 760px;
-    margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+.fx-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: clamp(1.1rem, 2.2vw, 1.4rem) clamp(1.25rem, 2.5vw, 1.6rem);
+    text-align: left;
 }
-
-/* Oversized italic section marker, copper gradient */
-.faqp-cat__no {
-    font-family: var(--font-serif);
+.fx-q__text {
+    font-size: var(--fs-h3);
     font-weight: 600;
-    font-style: italic;
-    font-size: clamp(2.3rem, 1.7rem + 2.4vw, 3.6rem);
-    line-height: 0.85;
-    color: var(--copper); /* fallback if background-clip:text unsupported */
-    background: var(--grad-copper);
-    -webkit-background-clip: text;
-            background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.faqp-cat__head h2 {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: clamp(1.65rem, 1.3rem + 1.6vw, 2.4rem);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
+    line-height: 1.35;
     color: var(--navy);
-    margin-bottom: 0.3rem;
 }
-.faqp-cat__head p {
-    font-size: 1rem;
-    line-height: 1.55;
+
+/* Plus → × toggle */
+.fx-q__toggle {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(26, 35, 126, 0.06);
+    color: var(--navy);
+    font-size: 0.8rem;
+    transition: background var(--t-base), color var(--t-base);
+}
+.fx-q__toggle i { transition: transform var(--t-base); }
+.fx-q:hover .fx-q__toggle { background: rgba(26, 35, 126, 0.12); }
+.fx-item.is-open .fx-q__toggle { background: var(--grad-copper); color: #fff; }
+.fx-item.is-open .fx-q__toggle i { transform: rotate(45deg); }
+
+/* Smooth height reveal */
+.fx-a {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.42s var(--ease);
+}
+.fx-item.is-open .fx-a { grid-template-rows: 1fr; }
+.fx-a__inner { overflow: hidden; min-height: 0; }
+.fx-a__inner p {
+    padding: 0 clamp(1.25rem, 2.5vw, 1.6rem) clamp(1.2rem, 2.2vw, 1.5rem);
+    color: var(--g-600);
+    line-height: 1.7;
+}
+
+
+/* ============================================================================
+   04. EMPTY STATE
+============================================================================ */
+.fx-empty {
+    max-width: 820px;
+    margin: 0.5rem auto 0;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 1.25rem;
+    text-align: center;
     color: var(--g-500);
 }
+.fx-empty i {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--g-400);
+    margin-bottom: 0.85rem;
+}
+.fx-empty p { font-size: 1rem; line-height: 1.6; }
+.fx-empty a { color: var(--copper); font-weight: 700; }
+.fx-empty a:hover { color: var(--copper-dark); }
 
 
 /* ============================================================================
-   05. ACCORDION  (inherited from style.css §19)
-   ----------------------------------------------------------------------------
-   .faq__list / .faq__item / .faq__q / .faq__q-num / .faq__q-text / .faq__icon
-   / .faq__a / .faq__a-body are styled in style.css and need no overrides here.
-   js/faq.js toggles .is-open on each item independently.
+   05. RESPONSIVE
 ============================================================================ */
-
-
-/* ============================================================================
-   06. RESPONSIVE
-============================================================================ */
-@media (max-width: 600px) {
-    .faqp-cat__head { grid-template-columns: 1fr; gap: 0.4rem; }
-    .faqp-cat__no { font-size: 2.4rem; line-height: 1; }
+@media (max-width: 480px) {
+    .fx-q { gap: 0.7rem; padding: 1rem; }
+    .fx-q__toggle { width: 30px; height: 30px; }
+    .fx-a__inner p { padding-inline: 1rem; }
 }
 
 
 /* ============================================================================
-   07. MOTION SAFETY
+   06. MOTION SAFETY
 ============================================================================ */
 @media (prefers-reduced-motion: reduce) {
-    .faqp-chip { transition: none; }
+    .fx-search,
+    .fx-tab,
+    .fx-item,
+    .fx-q__toggle,
+    .fx-q__toggle i { transition: none; }
 }
