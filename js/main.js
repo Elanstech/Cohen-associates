@@ -1,20 +1,21 @@
 /* ============================================================================
-   COHEN & ASSOCIATES — main.js  (Homepage)
+   COHEN & ASSOCIATES — main.js  (Homepage · rebuild)
    ----------------------------------------------------------------------------
-   ES6 modules of behaviour, each guarded so missing elements never throw.
+   ES6 behaviour modules, each guarded so missing elements never throw.
      01. Utilities
      02. Page loader
      03. Sticky header
      04. Mobile navigation
      05. Reveal on scroll
      06. Animated counters
-     07. Hero cursor spotlight
-     08. Magnetic buttons
-     09. Video 
-     10. FAQ accordion
-     11. Contact form (validate + mailto)
-     12. Footer year
-     13. Bootstrap
+     07. Magnetic buttons
+     08. Video (play / pause on visibility)
+     09. FAQ accordion
+     10. Contact form (validate + mailto)
+     11. Back to top
+     12. Contact FAB
+     13. Footer year
+     14. Bootstrap
 ============================================================================ */
 'use strict';
 
@@ -54,13 +55,12 @@ const initLoader = () => {
     if (document.readyState === 'complete') dismiss();
     else window.addEventListener('load', dismiss, { once: true });
 
-    // Safety net: never trap the page behind the loader.
-    setTimeout(dismiss, 4000);
+    setTimeout(dismiss, 4000); // safety net
 };
 
 
 /* ============================================================================
-   03. STICKY HEADER  → toggles .is-scrolled / .is-hidden
+   03. STICKY HEADER  → .is-scrolled / .is-hidden
 ============================================================================ */
 const initHeader = () => {
     const header = select('.js-header');
@@ -71,7 +71,6 @@ const initHeader = () => {
     const onScroll = () => {
         const y = window.scrollY;
         header.classList.toggle('is-scrolled', y > 40);
-        // Hide on downward scroll past the fold, show on scroll up.
         header.classList.toggle('is-hidden', y > lastY && y > 400);
         lastY = y;
     };
@@ -82,7 +81,7 @@ const initHeader = () => {
 
 
 /* ============================================================================
-   04. MOBILE NAVIGATION  → toggles .is-open + body.is-locked
+   04. MOBILE NAVIGATION  → .is-open + body.is-locked
 ============================================================================ */
 const initMobileNav = () => {
     const toggle = select('.js-nav-toggle');
@@ -106,7 +105,6 @@ const initMobileNav = () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') setOpen(false);
     });
-
     window.addEventListener('resize', rafThrottle(() => {
         if (window.innerWidth > 992) setOpen(false);
     }), { passive: true });
@@ -114,7 +112,7 @@ const initMobileNav = () => {
 
 
 /* ============================================================================
-   05. REVEAL ON SCROLL  → adds .is-visible, sets --reveal-delay
+   05. REVEAL ON SCROLL  → .is-visible + --reveal-delay
 ============================================================================ */
 const initReveal = () => {
     const items = selectAll('[data-reveal]');
@@ -187,29 +185,7 @@ const initCounters = () => {
 
 
 /* ============================================================================
-   07. HERO CURSOR SPOTLIGHT  → sets --mx / --my on .js-spotlight
-============================================================================ */
-const initSpotlight = () => {
-    const spotlight = select('.js-spotlight');
-    if (!spotlight || !FINE_POINTER || REDUCED_MOTION) return;
-
-    const hero = spotlight.closest('.hero') || spotlight.parentElement;
-    if (!hero) return;
-
-    const onMove = (e) => {
-        const rect = hero.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        spotlight.style.setProperty('--mx', `${x}%`);
-        spotlight.style.setProperty('--my', `${y}%`);
-    };
-
-    hero.addEventListener('mousemove', rafThrottle(onMove), { passive: true });
-};
-
-
-/* ============================================================================
-   08. MAGNETIC BUTTONS  (buttons only — preserves transforms elsewhere)
+   07. MAGNETIC BUTTONS  (buttons only — preserves transforms elsewhere)
 ============================================================================ */
 const initMagnetic = () => {
     if (!FINE_POINTER || REDUCED_MOTION) return;
@@ -222,37 +198,15 @@ const initMagnetic = () => {
             const y = (e.clientY - rect.top - rect.height / 2) * STRENGTH;
             el.style.transform = `translate(${x}px, ${y}px)`;
         });
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = '';
-        });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
     });
 };
 
 
 /* ============================================================================
-   09. VIDEO  → mute toggles + play/pause on visibility (performance)
+   08. VIDEO  → play only while on screen (performance)
 ============================================================================ */
 const initVideo = () => {
-    // Mute / unmute toggles
-    selectAll('.js-mute-toggle').forEach((btn) => {
-        const video = document.getElementById(btn.dataset.target);
-        if (!video) return;
-        const icon = btn.querySelector('i');
-
-        btn.addEventListener('click', () => {
-            const nowMuted = !video.muted;
-            video.muted = nowMuted;
-            btn.setAttribute('aria-pressed', String(!nowMuted));
-
-            if (icon) {
-                icon.classList.toggle('fa-volume-xmark', nowMuted);
-                icon.classList.toggle('fa-volume-high', !nowMuted);
-            }
-            if (!nowMuted) video.play?.().catch(() => {});
-        });
-    });
-
-    // Only decode/play videos while they're on screen.
     const videos = selectAll('video');
     if (!videos.length || !HAS_IO) return;
 
@@ -268,7 +222,7 @@ const initVideo = () => {
 
 
 /* ============================================================================
-   10. FAQ ACCORDION  → single-open, toggles .is-open + aria-expanded
+   09. FAQ ACCORDION  → single-open, .is-open + aria-expanded
 ============================================================================ */
 const initFaq = () => {
     const faq = select('.js-faq');
@@ -298,7 +252,7 @@ const initFaq = () => {
 
 
 /* ============================================================================
-   11. CONTACT FORM  → inline validation + mailto handoff
+   10. CONTACT FORM  → inline validation + mailto handoff
 ============================================================================ */
 const initContactForm = () => {
     const form = select('.js-contact-form');
@@ -379,7 +333,7 @@ const initContactForm = () => {
             .map(([key, value]) => `${key}: ${value}`)
             .join('\n');
 
-        const action = form.getAttribute('action') || 'mailto:oksana@cohen-associates.com';
+        const action = form.getAttribute('action') || 'mailto:info@cohen-associates.com';
         const to = action.replace('mailto:', '').split('?')[0];
 
         showMessage('success', 'Opening your email client…');
@@ -391,7 +345,54 @@ const initContactForm = () => {
 
 
 /* ============================================================================
-   12. FOOTER YEAR
+   11. BACK TO TOP  → .is-visible past threshold
+============================================================================ */
+const initBackToTop = () => {
+    const btn = select('.js-to-top');
+    if (!btn) return;
+
+    const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 600);
+
+    window.addEventListener('scroll', rafThrottle(toggle), { passive: true });
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
+    });
+    toggle();
+};
+
+
+/* ============================================================================
+   12. CONTACT FAB  → .is-open (toggle + outside-click + Escape)
+============================================================================ */
+const initFab = () => {
+    const fab = select('.js-fab');
+    const toggle = select('.js-fab-toggle');
+    if (!fab || !toggle) return;
+
+    const setOpen = (open) => {
+        fab.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(!fab.classList.contains('is-open'));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (fab.classList.contains('is-open') && !fab.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+    });
+    selectAll('.fab__action', fab).forEach((action) =>
+        action.addEventListener('click', () => setOpen(false))
+    );
+};
+
+
+/* ============================================================================
+   13. FOOTER YEAR
 ============================================================================ */
 const initYear = () => {
     selectAll('.js-year').forEach((el) => {
@@ -401,7 +402,7 @@ const initYear = () => {
 
 
 /* ============================================================================
-   13. BOOTSTRAP
+   14. BOOTSTRAP
 ============================================================================ */
 const init = () => {
     initLoader();
@@ -409,11 +410,12 @@ const init = () => {
     initMobileNav();
     initReveal();
     initCounters();
-    initSpotlight();
     initMagnetic();
     initVideo();
     initFaq();
     initContactForm();
+    initBackToTop();
+    initFab();
     initYear();
 };
 
