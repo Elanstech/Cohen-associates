@@ -1,267 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ============================================================ CORE META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Cohen & Associates</title>
-    
-    <!-- Font Awesome -->
+    <meta name="theme-color" content="#1a237e">
+    <meta name="color-scheme" content="light">
+
+    <title>About | Cohen &amp; Associates — Boutique Tax &amp; Financial Expertise Since 2004</title>
+    <meta name="description" content="The story behind Cohen & Associates — a boutique accounting firm in Rego Park, Queens pairing sophisticated tax strategy with genuinely personal service since 2004. Meet our founders, Oksana Inoyatova and Steve Inoyatov.">
+    <meta name="keywords" content="about Cohen and Associates, accounting firm Rego Park, Oksana Inoyatova, Steve Inoyatov, boutique CPA Queens, tax firm history, IRS representation">
+    <meta name="author" content="Cohen &amp; Associates">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cohen-associates.com/about.html">
+
+    <!-- ============================================================ SOCIAL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cohen &amp; Associates">
+    <meta property="og:title" content="About | Cohen &amp; Associates">
+    <meta property="og:description" content="Sophisticated tax strategy, genuinely personal service — boutique expertise from Rego Park since 2004.">
+    <meta property="og:url" content="https://cohen-associates.com/about.html">
+    <meta property="og:image" content="https://cohen-associates.com/aboutuspageimage.jpeg">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About | Cohen &amp; Associates">
+    <meta name="twitter:description" content="Boutique tax & financial expertise, personal by design, since 2004.">
+    <meta name="twitter:image" content="https://cohen-associates.com/aboutuspageimage.jpeg">
+
+    <!-- ============================================================ PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="icon" type="image/jpeg" href="logocohen.jpeg">
+    <link rel="apple-touch-icon" href="logocohen.jpeg">
+
+    <!-- ============================================================ FONTS + ICONS
+         Fraunces (editorial display) + Plus Jakarta Sans (body) + Caveat (signatures) -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
+
+    <!-- ============================================================ STYLES
+         Shared site styles + this page's editorial layer. -->
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/about.css">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- ============================================================ STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "About Cohen & Associates",
+      "url": "https://cohen-associates.com/about.html",
+      "mainEntity": {
+        "@type": "AccountingService",
+        "name": "Cohen & Associates",
+        "foundingDate": "2004",
+        "url": "https://cohen-associates.com/",
+        "telephone": "+1-718-457-3840",
+        "email": "info@cohen-associates.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "93-03 63rd Drive",
+          "addressLocality": "Rego Park",
+          "addressRegion": "NY",
+          "postalCode": "11374",
+          "addressCountry": "US"
+        },
+        "founder": [
+          { "@type": "Person", "name": "Oksana Inoyatova", "jobTitle": "CEO & Founder", "sameAs": "https://www.linkedin.com/in/oksana-inoyatova-72680515" },
+          { "@type": "Person", "name": "Steve Inoyatov", "jobTitle": "COO & Co-Founder", "sameAs": "https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" }
+        ]
+      }
+    }
+    </script>
 </head>
+
 <body>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-        </div>
+    <!-- ============================================================ READING PROGRESS -->
+    <div class="ab-progress" aria-hidden="true"><span class="js-ab-progress"></span></div>
+
+    <!-- ============================================================ LOADER -->
+    <div class="page-loader js-loader" aria-hidden="true">
+        <div class="page-loader__mark">C<span>&amp;</span>A</div>
+        <div class="page-loader__bar"><span></span></div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="logocohen.jpeg" alt="Cohen & Associates Logo">
-                </a>
-                
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="about.html" class="active">About</a>
-                    <a href="teams.html">Team</a>
-                    <a href="faq.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                
-                <button class="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+    <!-- ============================================================ HEADER -->
+    <header class="site-header js-header">
+        <div class="site-header__inner">
+            <a href="index.html" class="brand" aria-label="Cohen & Associates home">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" width="160" height="44">
+            </a>
+
+            <nav class="nav-links" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html" class="is-active" aria-current="page">About</a>
+                <a href="teams.html">Team</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
             </nav>
+
+            <a href="contact.html" class="btn btn--primary nav-cta js-magnetic">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span>Book a Consult</span>
+            </a>
+
+            <button class="nav-toggle js-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-links">
+    <div class="mobile-nav js-mobile-nav" id="mobileNav" aria-hidden="true">
+        <nav class="mobile-nav__links" aria-label="Mobile">
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
-            <a href="about.html" class="active">About</a>
+            <a href="about.html" class="is-active">About</a>
             <a href="teams.html">Team</a>
             <a href="faq.html">FAQ</a>
             <a href="contact.html">Contact</a>
-        </div>
+            <a href="contact.html" class="btn btn--primary mobile-nav__cta">Book a Consult</a>
+        </nav>
     </div>
+    <div class="nav-backdrop js-nav-backdrop" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-background">
-            <div class="particle particle-1"></div>
-            <div class="particle particle-2"></div>
-            <div class="particle particle-3"></div>
-            <div class="gradient-overlay"></div>
-        </div>
-        
-        <div class="section-container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-right">
-                    <span class="hero-badge">About Us</span>
-                    <h1>Transforming Financial 
-                        <span class="gradient-text">Futures</span>
-                        <br>Since 2004</h1>
-                    <p>Expert financial guidance combined with innovative solutions 
-                    to help you achieve your goals.</p>
-                    <div class="hero-buttons">
-                        <a href="#team" class="btn btn-primary">
-                            <i class="fas fa-users"></i>
-                            Meet Our Team
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-visual" data-aos="fade-left">
-                    <div class="hero-video-wrapper">
-                        <video id="heroVideo" autoplay muted loop playsinline>
-                            <source src="movie.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="experience-badge">
-                            <span class="number">20+</span>
-                            <span class="text">Years of Excellence</span>
-                        </div>
-                    </div>
-                </div>
+    <main>
+        <!-- ============================================================ EDITORIAL HERO -->
+        <section class="abhero">
+            <!-- Running head (magazine masthead) -->
+            <div class="shell abhero__meta">
+                <span class="abhero__meta-l">About — Cohen &amp; Associates</span>
+                <span class="abhero__meta-r">Est. 2004 · Rego Park, NY</span>
             </div>
-        </div>
-    </section>
+            <span class="ed-rule"></span>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="section-container">
-            <div class="stats-header" data-aos="fade-up">
-                <span class="section-badge">Our Impact</span>
-                <h2>Growth Through Numbers</h2>
-                <p>Two decades of excellence in financial services</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="20">0</div>
-                        <div class="stat-label">Years of Excellence</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-                
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="1000">0</div>
-                        <div class="stat-label">Happy Clients</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-                
-                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-info">
-                        <div class="stat-number" data-value="95">0</div>
-                        <div class="stat-label">Success Rate</div>
-                    </div>
-                    <svg class="progress-ring">
-                        <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="shell abhero__grid">
+                <div class="abhero__text">
+                    <span class="ed-kicker">Our Story</span>
+                    <h1 class="ed-display abhero__title" data-hero>
+                        <span class="line">Not just your</span>
+                        <span class="line"><em>regular</em> accountants.</span>
+                    </h1>
+                    <p class="abhero__lede">
+                        For two decades, we've paired sophisticated tax strategy with the kind of
+                        personal attention you'd never expect from a firm this capable — for the
+                        people, businesses, and families who expect more.
+                    </p>
 
-    <!-- Story Section -->
-    <section class="story-section">
-        <div class="section-container">
-            <div class="story-content">
-                <div class="story-text" data-aos="fade-right">
-                    <span class="section-badge">Our Story</span>
-                    <h2>Building Trust Through Excellence</h2>
-                    <p>Our accounting firm distinguishes itself by offering tailored financial strategies 
-                    that go beyond numbers. With a team of over 15 accountants and support staff, we 
-                    provide a full spectrum of services designed to meet the unique needs of businesses, 
-                    from start-ups to established corporations, as well as high-net-worth individuals.</p>
-                    
-                    <p>Specializing in optimal tax structures and business consulting, we represent 
-                    businesses and individuals before the IRS and other tax authorities across all 50 
-                    states. We handle all aspects of tax and accounting, including consulting, 
-                    preparation of federal and state tax returns for businesses, individuals, trusts, 
-                    non-profits, and more.</p>
-                    
-                    <div class="story-features">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Expert Financial Planning</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Personalized Solutions</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Innovative Approach</span>
-                        </div>
-                    </div>
+                    <ul class="abhero__facts">
+                        <li><span class="abhero__facts-num" data-count="20" data-suffix="+">0</span><span class="abhero__facts-label">Years</span></li>
+                        <li><span class="abhero__facts-num" data-count="1000" data-suffix="+">0</span><span class="abhero__facts-label">Clients</span></li>
+                        <li><span class="abhero__facts-num" data-count="50">0</span><span class="abhero__facts-label">States</span></li>
+                        <li><span class="abhero__facts-num" data-count="15" data-suffix="+">0</span><span class="abhero__facts-label">Specialists</span></li>
+                    </ul>
                 </div>
-                <div class="story-image" data-aos="fade-left">
-                    <img src="aboutuspageimage.jpeg" alt="Cohen & Associates Team">
-                </div>
-            </div>
-        </div>
-    </section>
 
- <!-- Team Section -->
-    <section id="team" class="team-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Meet the Team Behind Our Success</h2>
-                <p>Get to know our founders</p>
+                <figure class="abhero__media">
+                    <div class="ed-frame" data-reveal-img>
+                        <img src="aboutuspageimage.jpeg" alt="The Cohen & Associates team" loading="eager" decoding="async">
+                    </div>
+                    <figcaption>The Cohen &amp; Associates team — Rego Park, Queens.</figcaption>
+                    <span class="abhero__year handwritten">since '04</span>
+                </figure>
             </div>
-            
-            <div class="team-grid">
-                <div class="team-card" data-aos="fade-up">
-                    <div class="member-image">
-                        <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
-                        <div class="member-overlay">
-                            <div class="member-social">
-                                <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" 
-                                   aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
+
+            <a href="#story" class="abhero__cue" aria-label="Read our story">
+                <span></span> Read on
+            </a>
+        </section>
+
+        <!-- ============================================================ STORY LEDE (drop cap) -->
+        <section class="ablede" id="story">
+            <div class="shell ablede__inner">
+                <header class="ablede__head" data-reveal>
+                    <span class="ed-kicker">The Beginning</span>
+                    <h2 class="ed-h2">A boutique firm, built on a slightly contrarian idea.</h2>
+                </header>
+
+                <div class="ablede__body">
+                    <div class="ablede__col" data-reveal>
+                        <p class="dropcap">
+                            Cohen &amp; Associates was founded in 2004 on a simple premise: that serious
+                            financial expertise and genuinely personal service don't have to be mutually
+                            exclusive. Most firms ask you to pick one. We were built to deliver both.
+                        </p>
+                        <p>
+                            Today we're a team of more than fifteen accountants and specialists serving
+                            the full spectrum — start-ups finding their footing, established corporations
+                            with real complexity, and high-net-worth individuals whose finances deserve
+                            careful, discreet attention.
+                        </p>
+                        <p>
+                            We represent businesses and individuals before the IRS and state authorities
+                            in all fifty states, and we handle every part of the picture: planning,
+                            preparation, compliance, and the kind of year-round advisory that means you're
+                            never caught off guard.
+                        </p>
+                    </div>
+
+                    <aside class="ablede__aside" data-reveal data-reveal-delay="120">
+                        <blockquote class="ed-pull">
+                            <p>We treat every return as if it were our own.</p>
+                        </blockquote>
+                        <figure class="ablede__photo">
+                            <div class="ed-frame ed-frame--sm" data-reveal-img>
+                                <img src="frontabout.jpeg" alt="Inside the Cohen & Associates office" loading="lazy" decoding="async">
                             </div>
-                        </div>
-                    </div>
-                    <div class="member-info">
-                        <h3>Oksana Inoyatova</h3>
-                        <span class="member-role">CEO & Founder</span>
-                        <p>Leading with vision and expertise in financial services for over 20 years.</p>
-                    </div>
+                        </figure>
+                    </aside>
                 </div>
+            </div>
+        </section>
 
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="member-image">
-                        <img src="Steveimage.jpeg" alt="Steve Inoyatov" class="steve-image">
-                        <div class="member-overlay">
-                            <div class="member-social">
-                                <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" 
-                                   aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
+        <!-- ============================================================ FIGURES BAND -->
+        <section class="abfig">
+            <span class="ed-rule"></span>
+            <div class="shell">
+                <p class="abfig__kicker" data-reveal>By the numbers</p>
+                <div class="abfig__grid">
+                    <div class="abfig__item" data-reveal>
+                        <span class="abfig__num" data-count="20" data-suffix="+">0</span>
+                        <span class="abfig__label">Years of excellence</span>
                     </div>
-                    <div class="member-info">
-                        <h3>Steve Inoyatov</h3>
-                        <span class="member-role">COO & Co-Founder</span>
-                        <p>Expert in international finance and strategic planning.</p>
+                    <div class="abfig__item" data-reveal data-reveal-delay="80">
+                        <span class="abfig__num" data-count="1000" data-suffix="+">0</span>
+                        <span class="abfig__label">Clients served</span>
+                    </div>
+                    <div class="abfig__item" data-reveal data-reveal-delay="160">
+                        <span class="abfig__num" data-count="50">0</span>
+                        <span class="abfig__label">States covered</span>
+                    </div>
+                    <div class="abfig__item" data-reveal data-reveal-delay="240">
+                        <span class="abfig__num" data-count="15" data-suffix="+">0</span>
+                        <span class="abfig__label">Experts on staff</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <span class="ed-rule"></span>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
-                <p>Expert financial solutions tailored to your success</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/CohenAssociatesinc" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
+        <!-- ============================================================ PRINCIPLES / CREED -->
+        <section class="abcreed">
+            <div class="shell">
+                <header class="abcreed__head" data-reveal>
+                    <span class="ed-kicker">What Guides Us</span>
+                    <h2 class="ed-h2">Four principles we don't compromise on.</h2>
+                </header>
+
+                <ol class="abcreed__grid">
+                    <li class="abcreed__item" data-reveal>
+                        <span class="abcreed__num">01</span>
+                        <div>
+                            <h3>Personal by design</h3>
+                            <p>You work directly with people who know your name and your numbers — not a rotating cast of juniors.</p>
+                        </div>
+                    </li>
+                    <li class="abcreed__item" data-reveal data-reveal-delay="80">
+                        <span class="abcreed__num">02</span>
+                        <div>
+                            <h3>Strategy over paperwork</h3>
+                            <p>We plan all year long, not just at filing time. The biggest savings live in the decisions made early.</p>
+                        </div>
+                    </li>
+                    <li class="abcreed__item" data-reveal data-reveal-delay="160">
+                        <span class="abcreed__num">03</span>
+                        <div>
+                            <h3>Plain language, always</h3>
+                            <p>Clear answers, no jargon, no surprises. If you don't understand it, we haven't finished explaining it.</p>
+                        </div>
+                    </li>
+                    <li class="abcreed__item" data-reveal data-reveal-delay="240">
+                        <span class="abcreed__num">04</span>
+                        <div>
+                            <h3>Precision you can trust</h3>
+                            <p>Every detail checked, every deadline met. Discretion and accuracy are simply non-negotiable.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============================================================ TIMELINE / JOURNEY -->
+        <section class="abtime">
+            <div class="shell">
+                <header class="abtime__head" data-reveal>
+                    <span class="ed-kicker">The Journey</span>
+                    <h2 class="ed-h2">Two decades, one standard.</h2>
+                </header>
+
+                <ol class="abtime__list">
+                    <li class="abtime__item" data-reveal>
+                        <span class="abtime__year">2004</span>
+                        <div class="abtime__body">
+                            <h3>The doors open</h3>
+                            <p>A boutique firm launches in Rego Park, Queens — small by choice, ambitious by nature.</p>
+                        </div>
+                    </li>
+                    <li class="abtime__item" data-reveal data-reveal-delay="80">
+                        <span class="abtime__year">The early years</span>
+                        <div class="abtime__body">
+                            <h3>A reputation takes shape</h3>
+                            <p>Word spreads quietly the way it does for good accountants — through clients who tell their friends.</p>
+                        </div>
+                    </li>
+                    <li class="abtime__item" data-reveal data-reveal-delay="160">
+                        <span class="abtime__year">Growth</span>
+                        <div class="abtime__body">
+                            <h3>Building the bench</h3>
+                            <p>The team grows past fifteen accountants and specialists, deepening expertise across every discipline.</p>
+                        </div>
+                    </li>
+                    <li class="abtime__item" data-reveal data-reveal-delay="240">
+                        <span class="abtime__year">Coast to coast</span>
+                        <div class="abtime__body">
+                            <h3>Fifty states, one team</h3>
+                            <p>Representation before the IRS and state authorities everywhere our clients do business — including abroad.</p>
+                        </div>
+                    </li>
+                    <li class="abtime__item" data-reveal data-reveal-delay="320">
+                        <span class="abtime__year">Today</span>
+                        <div class="abtime__body">
+                            <h3>1,000+ clients, same standard</h3>
+                            <p>Bigger reach, broader expertise — and the exact same personal attention we started with.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============================================================ FOUNDERS -->
+        <section class="abfounder" id="team">
+            <div class="shell">
+                <header class="abfounder__head" data-reveal>
+                    <span class="ed-kicker">The Founders</span>
+                    <h2 class="ed-h2">The people behind your numbers.</h2>
+                    <p class="abfounder__intro">Two complementary minds — one set on the human side of this work, the other on its most complex corners.</p>
+                </header>
+
+                <!-- Oksana -->
+                <article class="abprofile">
+                    <figure class="abprofile__media" data-reveal>
+                        <div class="ed-frame" data-reveal-img>
+                            <img src="oksanafront.jpeg" alt="Oksana Inoyatova, CEO & Founder" loading="lazy" decoding="async">
+                        </div>
+                        <span class="abprofile__no">01</span>
+                    </figure>
+
+                    <div class="abprofile__body" data-reveal data-reveal-delay="120">
+                        <span class="ed-kicker">CEO &amp; Founder</span>
+                        <h3 class="ed-h3 abprofile__name">Oksana Inoyatova</h3>
+                        <p>
+                            Oksana founded Cohen &amp; Associates with a vision that's never wavered: build a
+                            firm clients genuinely trust. For more than twenty years she's led with a rare
+                            mix of technical depth and real warmth, guiding everyone from first-time
+                            founders to high-net-worth families through decisions that matter.
+                        </p>
+                        <blockquote class="ed-pull ed-pull--inline">
+                            <p>Your success is personal to us.</p>
+                        </blockquote>
+                        <div class="abprofile__foot">
+                            <span class="handwritten abprofile__sign">Oksana</span>
+                            <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" rel="noopener noreferrer" class="abprofile__link" aria-label="Oksana Inoyatova on LinkedIn">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i> Connect
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Steve -->
+                <article class="abprofile abprofile--flip">
+                    <figure class="abprofile__media" data-reveal>
+                        <div class="ed-frame" data-reveal-img>
+                            <img src="Steveimage.jpeg" alt="Steve Inoyatov, COO & Co-Founder" loading="lazy" decoding="async">
+                        </div>
+                        <span class="abprofile__no">02</span>
+                    </figure>
+
+                    <div class="abprofile__body" data-reveal data-reveal-delay="120">
+                        <span class="ed-kicker">COO &amp; Co-Founder · EA</span>
+                        <h3 class="ed-h3 abprofile__name">Steve Inoyatov</h3>
+                        <p>
+                            An Enrolled Agent and the firm's strategic engine, Steve specializes in
+                            international finance and complex, cross-border matters. He's the person clients
+                            want in the room when the stakes — and the structures — get complicated, turning
+                            tangled situations into clear, defensible plans.
+                        </p>
+                        <blockquote class="ed-pull ed-pull--inline">
+                            <p>The details are where trust is earned.</p>
+                        </blockquote>
+                        <div class="abprofile__foot">
+                            <span class="handwritten abprofile__sign">Steve</span>
+                            <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" target="_blank" rel="noopener noreferrer" class="abprofile__link" aria-label="Steve Inoyatov on LinkedIn">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i> Connect
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============================================================ PULL-QUOTE BAND -->
+        <section class="abquote">
+            <div class="shell">
+                <blockquote data-reveal>
+                    <p class="ed-display abquote__text">
+                        We measure our success<br>by <em>yours.</em>
+                    </p>
+                    <cite>— The Cohen &amp; Associates team</cite>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- ============================================================ EDITORIAL CTA -->
+        <section class="abcta">
+            <div class="shell abcta__inner" data-reveal>
+                <span class="ed-kicker">Work With Us</span>
+                <h2 class="ed-display abcta__title">Let's build something that lasts.</h2>
+                <p class="abcta__text">
+                    Tell us where you are and where you'd like to be. The first conversation is
+                    always free — no pressure, just clarity.
+                </p>
+                <div class="abcta__actions">
+                    <a href="contact.html" class="btn btn--primary js-magnetic">
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                        <span>Book a Consultation</span>
+                    </a>
+                    <a href="tel:+17184573840" class="abcta__call">
+                        <i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840
                     </a>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <nav>
+    <!-- ============================================================ FOOTER -->
+    <footer class="site-footer">
+        <div class="shell site-footer__grid">
+            <div class="site-footer__brand">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" class="site-footer__logo" width="160" height="40">
+                <p>Boutique tax &amp; financial expertise, tailored to your success.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/CohenAssociatesinc" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="site-footer__col">
+                <h3>Explore</h3>
+                <nav aria-label="Footer">
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
                     <a href="about.html">About</a>
@@ -270,31 +460,61 @@
                     <a href="contact.html">Contact</a>
                 </nav>
             </div>
-
-            <div class="footer-contact">
-                <h3>Contact Info</h3>
-                <p>
-                    <i class="fas fa-map-marker-alt"></i>
-                    93-03 63rd Drive, Rego Park, NY 11374
-                </p>
-                <p>
-                    <i class="fas fa-phone"></i>
-                    (718) 457-3840
-                </p>
-                <p>
-                    <i class="fas fa-envelope"></i>
-                    info@cohen-associates.com
-                </p>
+            <div class="site-footer__col">
+                <h3>Contact</h3>
+                <address>
+                    <a href="https://maps.google.com/?q=93-03+63rd+Drive+Rego+Park+NY+11374" target="_blank" rel="noopener noreferrer"><i class="fas fa-location-dot" aria-hidden="true"></i> 93-03 63rd Drive, Rego Park, NY 11374</a>
+                    <a href="tel:+17184573840"><i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840</a>
+                    <a href="mailto:info@cohen-associates.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@cohen-associates.com</a>
+                </address>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+        <div class="site-footer__bottom">
+            <p>&copy; <span class="js-year">2026</span> Cohen &amp; Associates. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="./js/about.js"></script>
+    <footer class="designer-footer">
+        <a href="https://elanstechworld.com" target="_blank" rel="noopener noreferrer" class="designer-footer__link">
+            <img src="elanstechlogo.jpeg" alt="Elan's Tech World logo" class="designer-footer__logo" width="40" height="40">
+            <span>Designed &amp; Developed by <strong>Elan's Tech World</strong></span>
+        </a>
+    </footer>
+
+    <!-- ============================================================ FLOATING UI -->
+    <!-- Back to top (left) -->
+    <button class="to-top js-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Contact FAB (right) -->
+    <div class="cfab js-fab">
+        <div class="cfab__menu">
+            <a class="cfab__action fab__action" href="tel:+17184573840">
+                <span class="cfab__ic"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Call us</span>
+            </a>
+            <a class="cfab__action fab__action" href="mailto:info@cohen-associates.com">
+                <span class="cfab__ic"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Email</span>
+            </a>
+            <a class="cfab__action fab__action" href="https://www.instagram.com/"
+               target="_blank" rel="noopener noreferrer">
+                <span class="cfab__ic"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Instagram</span>
+            </a>
+        </div>
+
+        <button class="cfab__toggle js-fab-toggle" type="button"
+                aria-expanded="false" aria-label="Contact options">
+            <i class="fas fa-comment-dots cfab__icon cfab__icon--open" aria-hidden="true"></i>
+            <i class="fas fa-xmark cfab__icon cfab__icon--close" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================ SCRIPTS
+         Shared site behaviour + this page's editorial behaviour. -->
+    <script src="./js/main.js" defer></script>
+    <script src="./js/about.js" defer></script>
 </body>
 </html>
