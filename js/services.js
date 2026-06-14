@@ -1,310 +1,217 @@
-// Initialize all functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
-    initAOS();
-    initScrollEffects();
-    initMobileMenu();
-    initServiceCards();
-    initParallaxEffects();
-    initSmoothScroll();
-    initCategoryCards();
-    initFeatureCards();
-    initScrollAnimations();
-    initBackgroundParticles();
-});
+/* ============================================================================
+   COHEN & ASSOCIATES — services.js  (Services page · page-specific)
+   ----------------------------------------------------------------------------
+   Loads AFTER main.js. Wrapped in an IIFE so its locals never collide with
+   main.js's top-level consts (select, selectAll, rafThrottle, init, …).
 
-// Initialize Loader
-function initLoader() {
-    const loader = document.querySelector('.loader');
-    
-    window.addEventListener('load', () => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.classList.add('page-loaded');
-        }, 500);
-    });
-}
+   Shared behaviour (loader, header, mobile nav, reveal, counters, magnetic
+   buttons, FAQ accordion, back-to-top, FAB, footer year) all run from main.js
+   and are NOT duplicated here.
 
-// Initialize AOS
-function initAOS() {
-    AOS.init({
-        duration: 800,
-        offset: 100,
-        once: true,
-        easing: 'ease-out-cubic',
-        disable: window.innerWidth < 768
-    });
-}
+   Modules
+     01. Utilities
+     02. Scroll-spy rail        (.svcnav → .is-visible / dots → .is-active)
+     03. Image parallax         (.svcblock__img → translateY, gap-free)
+     04. Timeline progress fill ([data-flow] → --flow: 0–100%)
+     05. Card tilt              (.svcplan__card → --rx / --ry)
+     06. Bootstrap
+============================================================================ */
+(() => {
+    'use strict';
 
-// Scroll Effects
-function initScrollEffects() {
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', throttle(() => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add/remove scrolled class
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Hide/show header based on scroll direction
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.classList.add('header-hidden');
-        } else {
-            header.classList.remove('header-hidden');
-        }
-        
-        lastScroll = currentScroll;
-    }, 50));
-}
+    /* ========================================================================
+       01. UTILITIES
+    ======================================================================== */
+    const select = (sel, ctx = document) => ctx.querySelector(sel);
+    const selectAll = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-// Improved Mobile Menu
-function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const body = document.body;
-    
-    // Create overlay div if it doesn't exist
-    let overlay = document.querySelector('.menu-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'menu-overlay';
-        document.body.appendChild(overlay);
-    }
-    
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu();
-        });
-        
-        // Close menu when clicking overlay
-        overlay.addEventListener('click', toggleMenu);
-        
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
-        
-        // Close menu when clicking links
-        const menuLinks = mobileMenu.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-    }
-    
-    function toggleMenu() {
-        menuBtn.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
-        overlay.classList.toggle('active');
-    }
-}
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const FINE_POINTER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-// Service Cards Interaction
-function initServiceCards() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(card => {
-        // Add hover effect
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
-            this.style.boxShadow = 'var(--shadow-xl)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'var(--shadow-sm)';
-        });
-        
-        // Add focus states for accessibility
-        card.setAttribute('tabindex', '0');
-        
-        card.addEventListener('focus', function() {
-            this.style.transform = 'translateY(-10px)';
-            this.style.boxShadow = 'var(--shadow-xl)';
-        });
-        
-        card.addEventListener('blur', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'var(--shadow-sm)';
-        });
-    });
-}
+    const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
 
-// Parallax Effects
-function initParallaxEffects() {
-    const particles = document.querySelectorAll('.particle');
-    
-    // Only enable on desktop as it can cause performance issues on mobile
-    if (window.innerWidth > 992 && particles.length > 0) {
-        let mouseX = 0;
-        let mouseY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            particles.forEach((particle, index) => {
-                const speed = 0.02 + (index * 0.01);
-                const x = (mouseX - window.innerWidth / 2) * speed;
-                const y = (mouseY - window.innerHeight / 2) * speed;
-                
-                particle.style.transform = `translate(${x}px, ${y}px)`;
+    /** Run a handler at most once per animation frame. */
+    const rafThrottle = (fn) => {
+        let ticking = false;
+        return (...args) => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                fn(...args);
+                ticking = false;
             });
-        });
-    }
-}
-
-// Smooth Scroll
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Only apply smooth scroll to hash links that point to elements on the page
-            if (href.startsWith('#') && href.length > 1) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                
-                if (target) {
-                    const headerOffset = document.querySelector('.header').offsetHeight;
-                    const elementPosition = target.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-}
-
-// Category Cards Interaction
-function initCategoryCards() {
-    const categoryCards = document.querySelectorAll('.category-card');
-    
-    categoryCards.forEach((card, index) => {
-        card.addEventListener('click', function() {
-            const targetSection = document.querySelector(`.service-block:nth-child(${index + 1})`);
-            if (targetSection) {
-                const headerOffset = document.querySelector('.header').offsetHeight;
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Hover Effect for Feature Cards
-function initFeatureCards() {
-    const featureCards = document.querySelectorAll('.feature-card');
-    
-    featureCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.style.transform = 'scale(1.2) rotate(10deg)';
-            }
-            this.style.transform = 'translateY(-5px)';
-            this.style.boxShadow = 'var(--shadow-lg)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.style.transform = 'scale(1) rotate(0)';
-            }
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'var(--shadow-sm)';
-        });
-    });
-}
-
-// Add scroll-based animations
-function initScrollAnimations() {
-    if ('IntersectionObserver' in window) {
-        const animatedElements = document.querySelectorAll('[data-aos]');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('aos-animate');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        animatedElements.forEach(element => observer.observe(element));
-    }
-}
-
-// Initialize Background Particles
-function initBackgroundParticles() {
-    const particles = document.querySelectorAll('.particle');
-    
-    particles.forEach((particle, index) => {
-        const randomX = Math.random() * 20 - 10;
-        const randomY = Math.random() * 20 - 10;
-        const randomDelay = Math.random() * 2;
-        
-        particle.style.animation = `float ${15 + index * 2}s ${randomDelay}s infinite`;
-        particle.style.transform = `translate(${randomX}px, ${randomY}px)`;
-    });
-}
-
-// Handle window resize
-window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth > 992) {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const overlay = document.querySelector('.menu-overlay');
-        
-        if (mobileMenu && mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            if (menuBtn) menuBtn.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        }
-    }
-}, 250));
-
-// Utility function: Debounce
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
         };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
     };
-}
 
-// Utility function: Throttle
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
+
+    /* ========================================================================
+       02. SCROLL-SPY RAIL
+       ----------------------------------------------------------------------
+       • Reveals the fixed rail (.is-visible) while the services region
+         (.svcwrap) occupies the central band of the viewport.
+       • Marks the dot whose section has most recently crossed the ~42% line.
+    ======================================================================== */
+    const initScrollSpy = () => {
+        const rail = select('.js-svcnav');
+        if (!rail) return;
+
+        const dots = selectAll('.svcnav__dot', rail);
+        if (!dots.length) return;
+
+        const wrap = select('.svcwrap');
+        const sections = dots
+            .map((dot) => document.getElementById(dot.dataset.spy))
+            .filter(Boolean);
+        if (!sections.length) return;
+
+        const onScroll = () => {
+            const vh = window.innerHeight;
+
+            // Visibility — show while the services region is centre-stage
+            if (wrap) {
+                const r = wrap.getBoundingClientRect();
+                const visible = r.top < vh * 0.6 && r.bottom > vh * 0.4;
+                rail.classList.toggle('is-visible', visible);
+            } else {
+                rail.classList.add('is-visible');
+            }
+
+            // Active section — the last one whose top has passed the 42% line
+            const line = vh * 0.42;
+            let activeId = sections[0].id;
+            sections.forEach((sec) => {
+                if (sec.getBoundingClientRect().top - line <= 0) activeId = sec.id;
+            });
+
+            dots.forEach((dot) =>
+                dot.classList.toggle('is-active', dot.dataset.spy === activeId)
+            );
+        };
+
+        const throttled = rafThrottle(onScroll);
+        window.addEventListener('scroll', throttled, { passive: true });
+        window.addEventListener('resize', throttled, { passive: true });
+        onScroll();
     };
-}
+
+
+    /* ========================================================================
+       03. IMAGE PARALLAX
+       ----------------------------------------------------------------------
+       Each .svcblock__img is 120% of its frame height inside an overflow-hidden
+       frame. We translate it within the safe range [0, -20% · frameH] as the
+       frame transits the viewport, so it always fully covers the frame.
+    ======================================================================== */
+    const initParallax = () => {
+        if (REDUCED_MOTION) return;
+
+        const frames = selectAll('[data-parallax]');
+        if (!frames.length) return;
+
+        const pairs = frames
+            .map((frame) => ({ frame, img: select('.svcblock__img', frame) }))
+            .filter((p) => p.img);
+        if (!pairs.length) return;
+
+        const update = () => {
+            const vh = window.innerHeight;
+
+            pairs.forEach(({ frame, img }) => {
+                const rect = frame.getBoundingClientRect();
+
+                // Skip frames comfortably off-screen
+                if (rect.bottom < -80 || rect.top > vh + 80) return;
+
+                // p: 0 as the frame enters the bottom → 1 as it leaves the top
+                const p = clamp((vh - rect.top) / (vh + rect.height), 0, 1);
+                const shift = -p * rect.height * 0.2; // 0 → -20% of frame height
+                img.style.transform = `translateY(${shift.toFixed(1)}px)`;
+            });
+        };
+
+        const throttled = rafThrottle(update);
+        window.addEventListener('scroll', throttled, { passive: true });
+        window.addEventListener('resize', throttled, { passive: true });
+        update();
+    };
+
+
+    /* ========================================================================
+       04. TIMELINE PROGRESS FILL
+       ----------------------------------------------------------------------
+       Sets --flow (0–100%) on the [data-flow] timeline. The copper fill
+       (.svcflow__line-fill { height: var(--flow) }) tracks a reference line at
+       50% of the viewport as it travels down the spine.
+    ======================================================================== */
+    const initTimeline = () => {
+        const flow = select('[data-flow]');
+        if (!flow) return;
+
+        const update = () => {
+            const rect = flow.getBoundingClientRect();
+            const line = window.innerHeight * 0.5;
+            const p = clamp((line - rect.top) / rect.height, 0, 1);
+            flow.style.setProperty('--flow', `${(p * 100).toFixed(1)}%`);
+        };
+
+        const throttled = rafThrottle(update);
+        window.addEventListener('scroll', throttled, { passive: true });
+        window.addEventListener('resize', throttled, { passive: true });
+        update();
+    };
+
+
+    /* ========================================================================
+       05. CARD TILT  (desktop pointers only)
+       ----------------------------------------------------------------------
+       Sets --rx / --ry on each .svcplan__card so the CSS transform tilts it
+       toward the cursor. Resets on leave.
+    ======================================================================== */
+    const initTilt = () => {
+        if (!FINE_POINTER || REDUCED_MOTION) return;
+
+        const cards = selectAll('.svcplan__card[data-tilt]');
+        if (!cards.length) return;
+
+        const TILT = 6; // max degrees
+
+        cards.forEach((card) => {
+            let frame = null;
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;   // 0 → 1
+                const py = (e.clientY - rect.top) / rect.height;   // 0 → 1
+
+                if (frame) cancelAnimationFrame(frame);
+                frame = requestAnimationFrame(() => {
+                    card.style.setProperty('--rx', `${((0.5 - py) * TILT).toFixed(2)}deg`);
+                    card.style.setProperty('--ry', `${((px - 0.5) * TILT).toFixed(2)}deg`);
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (frame) cancelAnimationFrame(frame);
+                card.style.setProperty('--rx', '0deg');
+                card.style.setProperty('--ry', '0deg');
+            });
+        });
+    };
+
+
+    /* ========================================================================
+       06. BOOTSTRAP
+    ======================================================================== */
+    const init = () => {
+        initScrollSpy();
+        initParallax();
+        initTimeline();
+        initTilt();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
