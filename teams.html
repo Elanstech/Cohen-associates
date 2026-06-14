@@ -1,317 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ============================================================ CORE META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Team - Cohen & Associates</title>
-    
-    <!-- Font Awesome -->
+    <meta name="theme-color" content="#1a237e">
+    <meta name="color-scheme" content="light">
+
+    <title>Our Team | Cohen &amp; Associates — The Experts Behind Your Numbers</title>
+    <meta name="description" content="Meet the Cohen & Associates team — licensed professionals with decades of combined experience in tax planning, financial advisory, and business solutions. Boutique expertise from Rego Park, Queens.">
+    <meta name="keywords" content="Cohen and Associates team, Oksana Inoyatova, Steve Inoyatov, accountants Rego Park, tax professionals Queens, financial advisory team">
+    <meta name="author" content="Cohen &amp; Associates">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cohen-associates.com/teams.html">
+
+    <!-- ============================================================ SOCIAL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cohen &amp; Associates">
+    <meta property="og:title" content="Our Team | Cohen &amp; Associates">
+    <meta property="og:description" content="Licensed professionals with decades of experience — meet the people behind Cohen & Associates.">
+    <meta property="og:url" content="https://cohen-associates.com/teams.html">
+    <meta property="og:image" content="https://cohen-associates.com/frontabout.jpeg">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Our Team | Cohen &amp; Associates">
+    <meta name="twitter:description" content="Meet the experts behind Cohen & Associates.">
+    <meta name="twitter:image" content="https://cohen-associates.com/frontabout.jpeg">
+
+    <!-- ============================================================ PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="icon" type="image/jpeg" href="logocohen.jpeg">
+    <link rel="apple-touch-icon" href="logocohen.jpeg">
+
+    <!-- ============================================================ FONTS + ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
+
+    <!-- ============================================================ STYLES -->
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/teams.css">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- ============================================================ STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "name": "Our Team — Cohen & Associates",
+      "url": "https://cohen-associates.com/teams.html",
+      "mainEntity": {
+        "@type": "AccountingService",
+        "name": "Cohen & Associates",
+        "url": "https://cohen-associates.com/",
+        "employee": [
+          { "@type": "Person", "name": "Oksana Inoyatova", "jobTitle": "CEO & Founder", "sameAs": "https://www.linkedin.com/in/oksana-inoyatova-72680515" },
+          { "@type": "Person", "name": "Steve Inoyatov", "jobTitle": "COO & Co-Founder", "sameAs": "https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" },
+          { "@type": "Person", "name": "Eddie Maks", "jobTitle": "Manager" },
+          { "@type": "Person", "name": "Anastasia Dyrnk", "jobTitle": "Team Member" },
+          { "@type": "Person", "name": "Mariniel Berkonti", "jobTitle": "Senior Accountant" }
+        ]
+      }
+    }
+    </script>
 </head>
+
 <body>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-        </div>
+    <!-- ============================================================ LOADER -->
+    <div class="page-loader js-loader" aria-hidden="true">
+        <div class="page-loader__mark">C<span>&amp;</span>A</div>
+        <div class="page-loader__bar"><span></span></div>
     </div>
 
-    <!-- Background Pattern -->
-    <div class="background-patterns">
-        <div class="pattern pattern-1"></div>
-        <div class="pattern pattern-2"></div>
-    </div>
+    <!-- ============================================================ HEADER -->
+    <header class="site-header js-header">
+        <div class="site-header__inner">
+            <a href="index.html" class="brand" aria-label="Cohen & Associates home">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" width="160" height="44">
+            </a>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="logocohen.jpeg" alt="Cohen & Associates Logo">
-                </a>
-                
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="about.html">About</a>
-                    <a href="#" class="active">Team</a>
-                    <a href="faq.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                
-                <button class="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="teams.html" class="is-active" aria-current="page">Team</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
             </nav>
+
+            <a href="contact.html" class="btn btn--primary nav-cta js-magnetic">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span>Book a Consult</span>
+            </a>
+
+            <button class="nav-toggle js-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-links">
+    <div class="mobile-nav js-mobile-nav" id="mobileNav" aria-hidden="true">
+        <nav class="mobile-nav__links" aria-label="Mobile">
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
-            <a href="#" class="active">Team</a>
+            <a href="teams.html" class="is-active">Team</a>
             <a href="faq.html">FAQ</a>
             <a href="contact.html">Contact</a>
-        </div>
+            <a href="contact.html" class="btn btn--primary mobile-nav__cta">Book a Consult</a>
+        </nav>
     </div>
+    <div class="nav-backdrop js-nav-backdrop" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up">
-                    <span class="hero-badge">Our Team</span>
-                    <h1>Meet Our Expert 
-                        <span class="gradient-text">Financial</span> Team
-                    </h1>
-                    <p class="hero-description">Our licensed professionals bring decades of experience in tax planning, financial advisory, and business solutions to help you achieve your goals.</p>
+    <main>
+        <!-- ============================================================ HERO -->
+        <section class="tm-hero">
+            <span class="tm-hero__glow" aria-hidden="true"></span>
+
+            <div class="shell tm-hero__inner" data-reveal>
+                <span class="eyebrow"><i class="fas fa-users" aria-hidden="true"></i> Our Team</span>
+                <h1 class="tm-hero__title">Meet the team in your <span class="text-accent">corner</span>.</h1>
+                <p class="tm-hero__sub">
+                    Licensed professionals with decades of combined experience in tax planning,
+                    financial advisory, and business solutions — here to help you reach your goals.
+                </p>
+
+                <ul class="tm-hero__stats">
+                    <li class="tm-stat">
+                        <span class="tm-stat__num" data-count="20" data-suffix="+">0</span>
+                        <span class="tm-stat__label">Years Experience</span>
+                    </li>
+                    <li class="tm-stat">
+                        <span class="tm-stat__num" data-count="1000" data-suffix="+">0</span>
+                        <span class="tm-stat__label">Happy Clients</span>
+                    </li>
+                    <li class="tm-stat">
+                        <span class="tm-stat__num" data-count="15" data-suffix="+">0</span>
+                        <span class="tm-stat__label">Specialists</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================================================ LEADERSHIP -->
+        <section class="tm-leaders">
+            <div class="shell">
+                <div class="section-head" data-reveal>
+                    <span class="eyebrow">Leadership</span>
+                    <h2>Our Founders</h2>
+                    <p>Visionary leaders committed to your financial success.</p>
+                </div>
+
+                <div class="tm-grid tm-grid--lead">
+                    <!-- Oksana -->
+                    <article class="tm-card tm-card--lead" data-reveal>
+                        <div class="tm-card__photo">
+                            <img src="oksanafront.jpeg" alt="Oksana Inoyatova, CEO & Founder" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tm-card__body">
+                            <h3 class="tm-card__name">Oksana Inoyatova</h3>
+                            <span class="tm-card__role">CEO &amp; Founder</span>
+                            <p class="tm-card__bio">Expert in tax preparation and international financial services, leading the firm with over two decades of experience.</p>
+                            <a class="tm-card__social" href="https://www.linkedin.com/in/oksana-inoyatova-72680515"
+                               target="_blank" rel="noopener noreferrer" aria-label="Oksana Inoyatova on LinkedIn">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Steve -->
+                    <article class="tm-card tm-card--lead" data-reveal data-reveal-delay="120">
+                        <div class="tm-card__photo">
+                            <img src="Steveimage.jpeg" alt="Steve Inoyatov, COO & Co-Founder" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tm-card__body">
+                            <h3 class="tm-card__name">Steve Inoyatov</h3>
+                            <span class="tm-card__role">COO &amp; Co-Founder</span>
+                            <p class="tm-card__bio">Specializes in tax structuring and business advisory, with deep expertise in international and cross-border matters.</p>
+                            <a class="tm-card__social" href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465"
+                               target="_blank" rel="noopener noreferrer" aria-label="Steve Inoyatov on LinkedIn">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat-item" data-aos="fade-up">
-                    <span class="stat-number" data-target="20">0</span>
-                    <span class="stat-label">Years Experience</span>
+        </section>
+
+        <!-- ============================================================ CORE TEAM -->
+        <section class="tm-team">
+            <div class="shell">
+                <div class="section-head" data-reveal>
+                    <span class="eyebrow">Our Experts</span>
+                    <h2>Core Team Members</h2>
+                    <p>The dedicated professionals who make our success possible.</p>
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                    <span class="stat-number" data-target="1000">0</span>
-                    <span class="stat-label">Happy Clients</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                    <span class="stat-number" data-target="100">0</span>
-                    <span class="stat-label">Client Satisfaction</span>
+
+                <div class="tm-grid tm-grid--core">
+                    <!-- Eddie -->
+                    <article class="tm-card" data-reveal>
+                        <div class="tm-card__photo">
+                            <img src="eddy.jpeg" alt="Eddie Maks, Manager" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tm-card__body">
+                            <h3 class="tm-card__name">Eddie Maks</h3>
+                            <span class="tm-card__role">Manager</span>
+                            <p class="tm-card__bio">Specialized in high-net-worth individuals and business advisory.</p>
+                        </div>
+                    </article>
+
+                    <!-- Anastasia — TODO: replace photo (anastasia.jpeg), role, bio & add LinkedIn -->
+                    <article class="tm-card" data-reveal data-reveal-delay="120">
+                        <div class="tm-card__photo">
+                            <img src="anastasia.jpeg" alt="Anastasia Dyrnk" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tm-card__body">
+                            <h3 class="tm-card__name">Anastasia Dyrnk</h3>
+                            <span class="tm-card__role">Team Member</span>
+                            <p class="tm-card__bio">A dedicated member of our financial team. <!-- placeholder bio --></p>
+                        </div>
+                    </article>
+
+                    <!-- Mariniel -->
+                    <article class="tm-card" data-reveal data-reveal-delay="240">
+                        <div class="tm-card__photo">
+                            <img src="mari.jpeg" alt="Mariniel Berkonti, Senior Accountant" loading="lazy" decoding="async">
+                        </div>
+                        <div class="tm-card__body">
+                            <h3 class="tm-card__name">Mariniel Berkonti</h3>
+                            <span class="tm-card__role">Senior Accountant</span>
+                            <p class="tm-card__bio">Expert in financial analysis and business advisory services.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Leadership Section -->
-    <section class="leadership-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Leadership</span>
-                <h2>Our Founders</h2>
-                <p>Visionary leaders committed to your financial success</p>
-            </div>
-            <div class="leadership-grid">
-                <!-- Oksana's Card -->
-                <div class="team-card featured" data-aos="fade-up">
-                    <div class="card-inner">
-                        <div class="member-image">
-                            <img src="oksanafront.jpeg" alt="Oksana Inoyatova">
-                            <div class="image-overlay">
-                                <button class="read-more-btn" onclick="openBioModal('oksana')">
-                                    View Full Bio
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Oksana Inoyatova</h3>
-                            <span class="member-role">CEO</span>
-                            <p>Expert in tax preparation and international financial services.</p>
-                            <div class="member-social">
-                                <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" 
-                                   rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- ============================================================ CTA BAND -->
+        <section class="cta">
+            <div class="shell cta__inner" data-reveal>
+                <div>
+                    <h2>Work With a Team That Knows You</h2>
+                    <p>Book a consultation and meet the people who'll handle your finances — personally.</p>
                 </div>
-
-                <!-- Steve's Card -->
-                <div class="team-card featured" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-inner">
-                        <div class="member-image">
-                            <img src="Steveimage.jpeg" alt="Steve Inoyatov">
-                            <div class="image-overlay">
-                                <button class="read-more-btn" onclick="openBioModal('steve')">
-                                    View Full Bio
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Steve Inoyatov</h3>
-                            <span class="member-role">Co-Founder & CFO</span>
-                            <p>Specializes in tax structuring and business advisory services.</p>
-                            <div class="member-social">
-                                <a href="https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465" target="_blank" 
-                                   rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="contact.html" class="btn btn--light js-magnetic">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <span>Get Started</span>
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Core Team Section -->
-    <section class="team-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-badge">Our Experts</span>
-                <h2>Core Team Members</h2>
-                <p>Meet the dedicated professionals who make our success possible</p>
-            </div>
-            <div class="team-grid">
-                <!-- Eddie's Card -->
-                <div class="team-card" data-aos="fade-up">
-                    <div class="card-inner">
-                        <div class="member-image">
-                            <img src="eddy.jpeg" alt="Eddie Maks">
-                            <div class="image-overlay">
-                                <button class="read-more-btn" onclick="openBioModal('eddie')">
-                                    View Full Bio
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Eddie Maks</h3>
-                            <span class="member-role">Manager</span>
-                            <p>Specialized in high net worth individuals and business advisory.</p>
-                            <div class="member-social">
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Yulia's Card -->
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-inner">
-                        <div class="member-image">
-                            <img src="yulia.jpeg" alt="Yulia Konopka">
-                            <div class="image-overlay">
-                                <button class="read-more-btn" onclick="openBioModal('yulia')">
-                                    View Full Bio
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Yulia Konopka</h3>
-                            <span class="member-role">Executive Assistant</span>
-                            <p>Ensures seamless operations and exceptional client support.</p>
-                            <div class="member-social">
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Marianell's Card -->
-                <div class="team-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card-inner">
-                        <div class="member-image">
-                            <img src="mari.jpeg" alt="Mariniel Berkonti">
-                            <div class="image-overlay">
-                                <button class="read-more-btn" onclick="openBioModal('marianell')">
-                                    View Full Bio
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Mariniel Berkonti</h3>
-                            <span class="member-role">Senior Accountant</span>
-                            <p>Expert in financial analysis and business advisory services.</p>
-                            <div class="member-social">
-                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bio Modal -->
-    <div class="bio-modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeBioModal()">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="bio-content">
-                <!-- Content will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
-                <p>Expert financial solutions tailored to your success</p>
+    <!-- ============================================================ FOOTER -->
+    <footer class="site-footer">
+        <div class="shell site-footer__grid">
+            <div class="site-footer__brand">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" class="site-footer__logo" width="160" height="40">
+                <p>Boutique tax &amp; financial expertise, tailored to your success.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/CohenAssociatesinc" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
+                    <a href="https://www.facebook.com/CohenAssociatesinc" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                 </div>
             </div>
-
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <nav>
+            <div class="site-footer__col">
+                <h3>Explore</h3>
+                <nav aria-label="Footer">
                     <a href="index.html">Home</a>
                     <a href="services.html">Services</a>
                     <a href="about.html">About</a>
-                    <a href="#">Team</a>
+                    <a href="teams.html">Team</a>
                     <a href="faq.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
             </div>
-
-            <div class="footer-contact">
-                <h3>Contact Info</h3>
-                <p>
-                    <i class="fas fa-map-marker-alt"></i>
-                    93-03 63rd Drive, Rego Park, NY 11374
-                </p>
-                <p>
-                    <i class="fas fa-phone"></i>
-                    (718) 457-3840
-                </p>
-                <p>
-                    <i class="fas fa-envelope"></i>
-                    info@cohen-associates.com
-                </p>
+            <div class="site-footer__col">
+                <h3>Contact</h3>
+                <address>
+                    <a href="https://maps.google.com/?q=93-03+63rd+Drive+Rego+Park+NY+11374" target="_blank" rel="noopener noreferrer"><i class="fas fa-location-dot" aria-hidden="true"></i> 93-03 63rd Drive, Rego Park, NY 11374</a>
+                    <a href="tel:+17184573840"><i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840</a>
+                    <a href="mailto:info@cohen-associates.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@cohen-associates.com</a>
+                </address>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+        <div class="site-footer__bottom">
+            <p>&copy; <span class="js-year">2026</span> Cohen &amp; Associates. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="./js/teams.js"></script>
+    <footer class="designer-footer">
+        <a href="https://elanstechworld.com" target="_blank" rel="noopener noreferrer" class="designer-footer__link">
+            <img src="elanstechlogo.jpeg" alt="Elan's Tech World logo" class="designer-footer__logo" width="40" height="40">
+            <span>Designed &amp; Developed by <strong>Elan's Tech World</strong></span>
+        </a>
+    </footer>
+
+    <!-- ============================================================ FLOATING UI -->
+    <button class="to-top js-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <div class="cfab js-fab">
+        <div class="cfab__menu">
+            <a class="cfab__action fab__action" href="tel:+17184573840">
+                <span class="cfab__ic"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Call us</span>
+            </a>
+            <a class="cfab__action fab__action" href="mailto:info@cohen-associates.com">
+                <span class="cfab__ic"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Email</span>
+            </a>
+            <a class="cfab__action fab__action" href="https://www.instagram.com/"
+               target="_blank" rel="noopener noreferrer">
+                <span class="cfab__ic"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Instagram</span>
+            </a>
+        </div>
+
+        <button class="cfab__toggle js-fab-toggle" type="button"
+                aria-expanded="false" aria-label="Contact options">
+            <i class="fas fa-comment-dots cfab__icon cfab__icon--open" aria-hidden="true"></i>
+            <i class="fas fa-xmark cfab__icon cfab__icon--close" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================ SCRIPTS -->
+    <script src="./js/main.js" defer></script>
 </body>
 </html>
