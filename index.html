@@ -136,16 +136,20 @@
     <div class="nav-backdrop js-nav-backdrop" aria-hidden="true"></div>
 
     <main>
-        <!-- ============================================================ HERO -->
+        <!-- ============================================================ HERO (full-bleed background video) -->
         <section class="hero" id="home">
-            <div class="hero__bg" aria-hidden="true">
-                <span class="hero__bloom hero__bloom--1"></span>
-                <span class="hero__bloom hero__bloom--2"></span>
+            <!-- Full-bleed background video + readability overlay -->
+            <div class="hero__media" aria-hidden="true">
+                <video id="heroVideo" class="hero__video" autoplay muted loop playsinline preload="auto" poster="teamfront.jpeg">
+                    <source src="moviecohen.mp4" type="video/mp4">
+                </video>
+                <div class="hero__overlay"></div>
             </div>
 
+            <!-- Overlaid content -->
             <div class="shell hero__inner">
                 <div class="hero__content" data-reveal>
-                    <span class="eyebrow"><i class="fas fa-award" aria-hidden="true"></i> Trusted Advisors Since 2004</span>
+                    <span class="eyebrow eyebrow--light"><i class="fas fa-award" aria-hidden="true"></i> Trusted Advisors Since 2004</span>
                     <h1 class="hero__title">Empowering Your <span class="text-accent">Financial</span> Future</h1>
                     <p class="hero__lead">
                         A boutique firm pairing sophisticated tax strategy with genuinely personal
@@ -169,24 +173,23 @@
                         <li><span class="hero__trust-num" data-count="50">0</span><span class="hero__trust-label">States</span></li>
                     </ul>
                 </div>
+            </div>
 
-                <div class="hero__visual" data-reveal data-reveal-delay="120">
-                    <div class="hero__frame">
-                        <video id="heroVideo" class="hero__video" autoplay muted loop playsinline preload="metadata" poster="teamfront.jpeg">
-                            <source src="movie.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="hero__badge">
-                        <i class="fas fa-shield-halved" aria-hidden="true"></i>
-                        <div>
-                            <strong>IRS Enrolled Agents</strong>
-                            <span>Representation in all 50 states</span>
-                        </div>
-                    </div>
-                    <span class="handwritten hero__note">est. 2004</span>
+            <!-- Floating credential badge -->
+            <div class="hero__badge">
+                <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                <div>
+                    <strong>IRS Enrolled Agents</strong>
+                    <span>Representation in all 50 states</span>
                 </div>
             </div>
 
+            <!-- Background-video sound toggle -->
+            <button class="hero__sound js-mute-toggle" data-target="heroVideo" aria-label="Toggle video sound" aria-pressed="false">
+                <i class="fas fa-volume-xmark" aria-hidden="true"></i>
+            </button>
+
+            <!-- Scroll cue -->
             <a href="#services" class="hero__scroll" aria-label="Scroll to content">
                 <span></span> Scroll
             </a>
