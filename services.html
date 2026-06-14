@@ -1,314 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ============================================================ CORE META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - Cohen & Associates</title>
-    
-    <!-- Font Awesome -->
+    <meta name="theme-color" content="#1a237e">
+    <meta name="color-scheme" content="light">
+
+    <title>Services | Cohen &amp; Associates — Tax Strategy, Financial Management &amp; Advisory</title>
+    <meta name="description" content="Explore Cohen & Associates' full range of services: proactive tax strategy & IRS representation, financial management & reporting, and strategic business advisory. Boutique expertise across all 50 states since 2004.">
+    <meta name="keywords" content="tax strategy Rego Park, IRS representation Queens, bookkeeping services NYC, financial reporting, business advisory, succession planning, international tax, FATCA, CPA services Queens">
+    <meta name="author" content="Cohen &amp; Associates">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cohen-associates.com/services.html">
+
+    <!-- ============================================================ SOCIAL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cohen &amp; Associates">
+    <meta property="og:title" content="Services | Cohen &amp; Associates">
+    <meta property="og:description" content="Tax strategy, financial management, and business advisory — boutique expertise, tailored to you, across all 50 states.">
+    <meta property="og:url" content="https://cohen-associates.com/services.html">
+    <meta property="og:image" content="https://cohen-associates.com/frontabout.jpeg">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Services | Cohen &amp; Associates">
+    <meta name="twitter:description" content="Tax strategy, financial management, and business advisory across all 50 states since 2004.">
+    <meta name="twitter:image" content="https://cohen-associates.com/frontabout.jpeg">
+
+    <!-- ============================================================ PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="icon" type="image/jpeg" href="logocohen.jpeg">
+    <link rel="apple-touch-icon" href="logocohen.jpeg">
+
+    <!-- ============================================================ FONTS + ICONS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
+
+    <!-- ============================================================ STYLES
+         Shared site styles + this page's styles. -->
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/services.css">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <!-- ============================================================ STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cohen-associates.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://cohen-associates.com/services.html" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AccountingService",
+      "name": "Cohen & Associates",
+      "url": "https://cohen-associates.com/",
+      "telephone": "+1-718-457-3840",
+      "email": "info@cohen-associates.com",
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Accounting & Advisory Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tax Strategy & Compliance" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Financial Management" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Advisory" } }
+        ]
+      }
+    }
+    </script>
 </head>
+
 <body>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-        </div>
+    <!-- ============================================================ LOADER -->
+    <div class="page-loader js-loader" aria-hidden="true">
+        <div class="page-loader__mark">C<span>&amp;</span>A</div>
+        <div class="page-loader__bar"><span></span></div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <img src="logocohen.jpeg" alt="Cohen & Associates Logo">
-                </a>
-                
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="#" class="active">Services</a>
-                    <a href="about.html">About</a>
-                    <a href="teams.html">Team</a>
-                    <a href="faq.html">FAQ</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                
-                <button class="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+    <!-- ============================================================ HEADER -->
+    <header class="site-header js-header">
+        <div class="site-header__inner">
+            <a href="index.html" class="brand" aria-label="Cohen & Associates home">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" width="160" height="44">
+            </a>
+
+            <nav class="nav-links" aria-label="Primary">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="is-active" aria-current="page">Services</a>
+                <a href="about.html">About</a>
+                <a href="teams.html">Team</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
             </nav>
+
+            <a href="contact.html" class="btn btn--primary nav-cta js-magnetic">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span>Book a Consult</span>
+            </a>
+
+            <button class="nav-toggle js-nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-links">
+    <div class="mobile-nav js-mobile-nav" id="mobileNav" aria-hidden="true">
+        <nav class="mobile-nav__links" aria-label="Mobile">
             <a href="index.html">Home</a>
-            <a href="#" class="active">Services</a>
+            <a href="services.html" class="is-active">Services</a>
             <a href="about.html">About</a>
             <a href="teams.html">Team</a>
             <a href="faq.html">FAQ</a>
             <a href="contact.html">Contact</a>
-        </div>
+            <a href="contact.html" class="btn btn--primary mobile-nav__cta">Book a Consult</a>
+        </nav>
     </div>
+    <div class="nav-backdrop js-nav-backdrop" aria-hidden="true"></div>
 
-  <section class="services-hero">
-    <div class="hero-background">
-        <div class="particle particle-1"></div>
-        <div class="particle particle-2"></div>
-        <div class="particle particle-3"></div>
-        <div class="gradient-overlay"></div>
-    </div>
-    
-    <div class="section-container">
-        <div class="hero-content" data-aos="fade-up">
-            <div class="hero-text">
-                <h1>Comprehensive Financial Solutions</h1>
-                <p class="hero-subtitle">Expert guidance for your business success</p>
-            </div>
-            
-            <!-- Service Categories -->
-            <div class="service-categories">
-                <div class="category-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-chart-pie"></i>
-                    <h3>Tax Services</h3>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-globe"></i>
-                    <h3>International Tax</h3>
-                </div>
-                <div class="category-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Business Advisory</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Main Services Section -->
-    <section class="main-services">
-        <div class="section-container">
-            <!-- Tax Services -->
-            <div class="service-block" data-aos="fade-up">
-                <div class="service-header">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h2>Tax Services</h2>
-                </div>
-                <div class="service-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <h3>Tax Planning & Preparation</h3>
-                        <p>Strategic tax planning and preparation services for individuals and businesses</p>
-                        <ul>
-                            <li>Personal Tax Returns</li>
-                            <li>Business Tax Returns</li>
-                            <li>Tax Planning Strategies</li>
-                            <li>Deduction Optimization</li>
-                        </ul>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>IRS Representation</h3>
-                        <p>Professional representation in IRS matters and tax dispute resolution</p>
-                        <ul>
-                            <li>Audit Defense</li>
-                            <li>Tax Resolution</li>
-                            <li>Penalty Abatement</li>
-                            <li>IRS Negotiations</li>
-                        </ul>
-                    </div>
-                </div>
+    <main>
+        <!-- ============================================================ HERO -->
+        <section class="svchero" id="top">
+            <!-- Animated background -->
+            <div class="svchero__bg" aria-hidden="true">
+                <span class="svchero__grid"></span>
+                <span class="svchero__orb svchero__orb--1"></span>
+                <span class="svchero__orb svchero__orb--2"></span>
+                <span class="svchero__orb svchero__orb--3"></span>
+                <span class="svchero__noise"></span>
             </div>
 
-            <!-- International Tax -->
-            <div class="service-block" data-aos="fade-up">
-                <div class="service-header">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h2>International Tax</h2>
-                </div>
-                <div class="service-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <h3>Cross-border Taxation</h3>
-                        <p>Comprehensive international tax planning and compliance services</p>
-                        <ul>
-                            <li>International Tax Planning</li>
-                            <li>Transfer Pricing</li>
-                            <li>Treaty Analysis</li>
-                            <li>Global Compliance</li>
-                        </ul>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-icon">
-                            <i class="fas fa-passport"></i>
-                        </div>
-                        <h3>Expatriate Services</h3>
-                        <p>Specialized tax services for international professionals</p>
-                        <ul>
-                            <li>Expatriate Tax Returns</li>
-                            <li>FBAR Compliance</li>
-                            <li>Foreign Tax Credits</li>
-                            <li>International Reporting</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Business Advisory -->
-            <div class="service-block" data-aos="fade-up">
-                <div class="service-header">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h2>Business Advisory</h2>
-                </div>
-                <div class="service-grid">
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h3>Strategic Planning</h3>
-                        <p>Business growth and optimization strategies</p>
-                        <ul>
-                            <li>Business Planning</li>
-                            <li>Growth Strategies</li>
-                            <li>Risk Assessment</li>
-                            <li>Performance Analysis</li>
-                        </ul>
-                    </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3>Financial Advisory</h3>
-                        <p>Comprehensive financial guidance and analysis</p>
-                        <ul>
-                            <li>Financial Modeling</li>
-                            <li>Cash Flow Management</li>
-                            <li>Investment Analysis</li>
-                            <li>Business Valuation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-us">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Why Choose Cohen & Associates?</h2>
-                <p>Experience the difference of working with true financial experts</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-user-tie"></i>
-                    <h3>Expert Team</h3>
-                    <p>Seasoned professionals with decades of combined experience</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-clock"></i>
-                    <h3>Timely Service</h3>
-                    <p>Quick response times and on-time delivery of services</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-lock"></i>
-                    <h3>Confidentiality</h3>
-                    <p>Your financial information is always secure with us</p>
-                </div>
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Personal Approach</h3>
-                    <p>Tailored solutions for your unique needs</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="section-container">
-            <div class="cta-content" data-aos="fade-up">
-                <h2>Ready to Transform Your Financial Future?</h2>
-                <p>Schedule a consultation with our expert team today</p>
-                <a href="contact.html" class="btn btn-primary">Get Started</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <img src="logocohen.jpeg" alt="Cohen & Associates Logo" class="footer-logo">
-                <p>Expert financial solutions tailored to your success</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/CohenAssociatesinc" aria-label="Facebook">
-                        <i class="fab fa-facebook"></i>
+            <div class="shell svchero__inner">
+                <div class="svchero__content" data-reveal>
+                    <a href="index.html" class="svchero__crumb">
+                        <i class="fas fa-arrow-left-long" aria-hidden="true"></i>
+                        <span>Back to Home</span>
                     </a>
+                    <span class="eyebrow eyebrow--light"><i class="fas fa-layer-group" aria-hidden="true"></i> What We Do</span>
+                    <span class="handwritten svchero__hand">more than the numbers</span>
+                    <h1 class="svchero__title">
+                        Services built around<br><span class="text-accent">your</span> whole picture
+                    </h1>
+                    <p class="svchero__lead">
+                        Three connected pillars — proactive tax strategy, clean financial management,
+                        and forward-looking advisory. Below, we break down exactly what each one
+                        includes, how we work, and what it means for you.
+                    </p>
+
+                    <div class="svchero__actions">
+                        <a href="contact.html" class="btn btn--primary js-magnetic">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                            <span>Book a Consultation</span>
+                        </a>
+                        <a href="#service-tax" class="btn btn--outline js-magnetic">
+                            <span>Explore Services</span>
+                            <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Glass "contents" index -->
+                <aside class="svchero__index" data-reveal data-reveal-delay="140" aria-label="On this page">
+                    <span class="svchero__index-label">On this page</span>
+                    <ul class="svchero__index-list">
+                        <li>
+                            <a href="#service-tax">
+                                <span class="svchero__index-num">01</span>
+                                <span class="svchero__index-txt">
+                                    <strong>Tax Strategy &amp; Compliance</strong>
+                                    <small>Plan, file, defend</small>
+                                </span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#service-financial">
+                                <span class="svchero__index-num">02</span>
+                                <span class="svchero__index-txt">
+                                    <strong>Financial Management</strong>
+                                    <small>Books, reporting, cash flow</small>
+                                </span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#service-advisory">
+                                <span class="svchero__index-num">03</span>
+                                <span class="svchero__index-txt">
+                                    <strong>Business Advisory</strong>
+                                    <small>Growth, risk, succession</small>
+                                </span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#process">
+                                <span class="svchero__index-num">04</span>
+                                <span class="svchero__index-txt">
+                                    <strong>How We Work</strong>
+                                    <small>Our 5-step process</small>
+                                </span>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
             </div>
 
-            <div class="footer-links">
-                <h3>Quick Links</h3>
-                <nav>
+            <!-- Scroll cue -->
+            <a href="#service-tax" class="svchero__scroll" aria-label="Scroll to services">
+                <span></span> Scroll
+            </a>
+        </section>
+
+        <!-- ============================================================ CAPABILITIES MARQUEE -->
+        <section class="marquee" aria-label="Capabilities">
+            <div class="marquee__track">
+                <span><i class="fas fa-chart-pie"></i> Tax Planning</span>
+                <span><i class="fas fa-shield-halved"></i> IRS Representation</span>
+                <span><i class="fas fa-building-columns"></i> Entity Structuring</span>
+                <span><i class="fas fa-book"></i> Bookkeeping</span>
+                <span><i class="fas fa-chart-line"></i> Financial Reporting</span>
+                <span><i class="fas fa-globe"></i> International &amp; FATCA</span>
+                <span><i class="fas fa-lightbulb"></i> Business Advisory</span>
+                <span><i class="fas fa-people-arrows"></i> Succession &amp; Exit</span>
+                <span aria-hidden="true"><i class="fas fa-chart-pie"></i> Tax Planning</span>
+                <span aria-hidden="true"><i class="fas fa-shield-halved"></i> IRS Representation</span>
+                <span aria-hidden="true"><i class="fas fa-building-columns"></i> Entity Structuring</span>
+                <span aria-hidden="true"><i class="fas fa-book"></i> Bookkeeping</span>
+                <span aria-hidden="true"><i class="fas fa-chart-line"></i> Financial Reporting</span>
+                <span aria-hidden="true"><i class="fas fa-globe"></i> International &amp; FATCA</span>
+                <span aria-hidden="true"><i class="fas fa-lightbulb"></i> Business Advisory</span>
+                <span aria-hidden="true"><i class="fas fa-people-arrows"></i> Succession &amp; Exit</span>
+            </div>
+        </section>
+
+        <!-- ============================================================ SERVICE DEEP-DIVES -->
+        <div class="svcwrap">
+
+            <!-- Floating scroll-spy rail -->
+            <nav class="svcnav js-svcnav" aria-label="Service sections">
+                <a href="#service-tax" class="svcnav__dot is-active" data-spy="service-tax">
+                    <span class="svcnav__bullet"></span>
+                    <span class="svcnav__name">01 · Tax Strategy</span>
+                </a>
+                <a href="#service-financial" class="svcnav__dot" data-spy="service-financial">
+                    <span class="svcnav__bullet"></span>
+                    <span class="svcnav__name">02 · Financial Mgmt</span>
+                </a>
+                <a href="#service-advisory" class="svcnav__dot" data-spy="service-advisory">
+                    <span class="svcnav__bullet"></span>
+                    <span class="svcnav__name">03 · Advisory</span>
+                </a>
+            </nav>
+
+            <!-- ─────────────── 01 · TAX STRATEGY ─────────────── -->
+            <section class="svcblock" id="service-tax">
+                <div class="shell svcblock__inner">
+
+                    <div class="svcblock__media" data-reveal>
+                        <div class="svcblock__frame" data-parallax>
+                            <img class="svcblock__img"
+                                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80"
+                                 alt="Tax documents and planning" loading="lazy" decoding="async">
+                        </div>
+                        <span class="svcblock__index" aria-hidden="true">01</span>
+                        <div class="svcblock__float">
+                            <i class="fas fa-shield-halved" aria-hidden="true"></i>
+                            <div>
+                                <strong>IRS Enrolled Agents</strong>
+                                <span>Audit defense in all 50 states</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
+                        <span class="eyebrow"><i class="fas fa-chart-pie" aria-hidden="true"></i> Service 01</span>
+                        <h2>Tax Strategy &amp; <span class="text-accent">Compliance</span></h2>
+                        <p class="svcblock__lead">
+                            Tax shouldn't be a once-a-year scramble. We build a year-round strategy that
+                            legally minimizes what you owe and keeps you airtight with the IRS and every
+                            state and country you touch.
+                        </p>
+
+                        <h3 class="svcblock__sub">What's included</h3>
+                        <ul class="svcblock__grid">
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-compass-drafting" aria-hidden="true"></i></span>
+                                <h4>Proactive Tax Planning</h4>
+                                <p>Multi-year projections and timing of income, deductions, and distributions to shrink your effective rate.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-gavel" aria-hidden="true"></i></span>
+                                <h4>IRS &amp; State Representation</h4>
+                                <p>Enrolled Agents stand in for you on audits, notices, liens, and appeals — federal and state.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-building-columns" aria-hidden="true"></i></span>
+                                <h4>Entity Structuring</h4>
+                                <p>S-corp, C-corp, LLC, and partnership selection or restructuring to optimize how you're taxed.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-percent" aria-hidden="true"></i></span>
+                                <h4>Credits &amp; Incentives</h4>
+                                <p>R&amp;D credits, QBI, energy incentives, and industry-specific deductions you may be leaving behind.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-earth-americas" aria-hidden="true"></i></span>
+                                <h4>International &amp; FATCA</h4>
+                                <p>Foreign income, FBAR, treaty positions, and transfer pricing handled cleanly and compliantly.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i></span>
+                                <h4>Return Preparation</h4>
+                                <p>Federal, state, and local filings prepared, reviewed, and filed accurately — and on time.</p>
+                            </li>
+                        </ul>
+
+                        <div class="svcblock__split">
+                            <div class="svcout">
+                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
+                                <ul class="svcout__list">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> A lower effective tax rate</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> No surprise notices or penalties</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Audit-ready documentation, always</li>
+                                </ul>
+                            </div>
+                            <div class="svcwho">
+                                <span class="svcwho__label">Built for</span>
+                                <ul class="svcwho__tags">
+                                    <li>Business owners</li>
+                                    <li>High earners</li>
+                                    <li>Multi-state filers</li>
+                                    <li>Expats</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
+                            <span>Talk tax strategy</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ─────────────── 02 · FINANCIAL MANAGEMENT (flipped) ─────────────── -->
+            <section class="svcblock svcblock--flip svcblock--tint" id="service-financial">
+                <div class="shell svcblock__inner">
+
+                    <div class="svcblock__media" data-reveal>
+                        <div class="svcblock__frame" data-parallax>
+                            <img class="svcblock__img"
+                                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80"
+                                 alt="Financial dashboards and reporting" loading="lazy" decoding="async">
+                        </div>
+                        <span class="svcblock__index" aria-hidden="true">02</span>
+                        <div class="svcblock__float">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <div>
+                                <strong>Always current</strong>
+                                <span>Books closed on schedule</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
+                        <span class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> Service 02</span>
+                        <h2>Financial <span class="text-accent">Management</span></h2>
+                        <p class="svcblock__lead">
+                            Clean books are the foundation of every good decision. We keep your numbers
+                            accurate, current, and genuinely readable — so you always know exactly where
+                            you stand.
+                        </p>
+
+                        <h3 class="svcblock__sub">What's included</h3>
+                        <ul class="svcblock__grid">
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-book-open" aria-hidden="true"></i></span>
+                                <h4>Bookkeeping &amp; Reconciliation</h4>
+                                <p>Monthly categorization, bank and credit reconciliation, and ledgers that actually tie out.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-file-lines" aria-hidden="true"></i></span>
+                                <h4>Financial Reporting</h4>
+                                <p>P&amp;L, balance sheet, and cash-flow statements delivered on a predictable schedule.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-money-bill-trend-up" aria-hidden="true"></i></span>
+                                <h4>Cash-Flow Management</h4>
+                                <p>Forecasting, burn-rate tracking, and clear runway visibility before it gets tight.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-users-gear" aria-hidden="true"></i></span>
+                                <h4>Payroll Support</h4>
+                                <p>Payroll setup, processing coordination, and compliance so people get paid right.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-gauge-high" aria-hidden="true"></i></span>
+                                <h4>KPI Dashboards</h4>
+                                <p>The handful of numbers that truly move your business — in one clear view.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-user-tie" aria-hidden="true"></i></span>
+                                <h4>CFO-Level Advisory</h4>
+                                <p>A senior set of eyes on budgets, pricing, and margins whenever you need it.</p>
+                            </li>
+                        </ul>
+
+                        <div class="svcblock__split">
+                            <div class="svcout">
+                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
+                                <ul class="svcout__list">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Books that are always current</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Faster, clearer decisions</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Investor- and lender-ready reports</li>
+                                </ul>
+                            </div>
+                            <div class="svcwho">
+                                <span class="svcwho__label">Built for</span>
+                                <ul class="svcwho__tags">
+                                    <li>Startups</li>
+                                    <li>Established SMBs</li>
+                                    <li>Professional practices</li>
+                                    <li>Real estate</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
+                            <span>Clean up my books</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ─────────────── 03 · BUSINESS ADVISORY ─────────────── -->
+            <section class="svcblock" id="service-advisory">
+                <div class="shell svcblock__inner">
+
+                    <div class="svcblock__media" data-reveal>
+                        <div class="svcblock__frame" data-parallax>
+                            <img class="svcblock__img"
+                                 src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80"
+                                 alt="Business strategy meeting" loading="lazy" decoding="async">
+                        </div>
+                        <span class="svcblock__index" aria-hidden="true">03</span>
+                        <div class="svcblock__float">
+                            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            <div>
+                                <strong>On your side</strong>
+                                <span>For every big move</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="svcblock__body" data-reveal data-reveal-delay="120">
+                        <span class="eyebrow"><i class="fas fa-lightbulb" aria-hidden="true"></i> Service 03</span>
+                        <h2>Business <span class="text-accent">Advisory</span></h2>
+                        <p class="svcblock__lead">
+                            We sit on your side of the table for the decisions that matter most — growth,
+                            transitions, risk, and the eventual exit. Strategic counsel that reaches well
+                            beyond the return.
+                        </p>
+
+                        <h3 class="svcblock__sub">What's included</h3>
+                        <ul class="svcblock__grid">
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i></span>
+                                <h4>Growth Strategy</h4>
+                                <p>Scenario modeling, expansion planning, and the capital structure to support it.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-shield" aria-hidden="true"></i></span>
+                                <h4>Risk &amp; Internal Controls</h4>
+                                <p>Process review, fraud safeguards, and compliance frameworks that hold up.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-gears" aria-hidden="true"></i></span>
+                                <h4>Process Optimization</h4>
+                                <p>Systems, automation, and workflow design that quietly buys back your hours.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-people-arrows" aria-hidden="true"></i></span>
+                                <h4>Succession &amp; Exit Planning</h4>
+                                <p>Ownership transitions, valuations, and getting the business exit-ready.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-handshake-angle" aria-hidden="true"></i></span>
+                                <h4>M&amp;A Support</h4>
+                                <p>Due diligence, deal structuring, and the post-close integration work.</p>
+                            </li>
+                            <li class="svcfeat">
+                                <span class="svcfeat__ic"><i class="fas fa-gem" aria-hidden="true"></i></span>
+                                <h4>Wealth Coordination</h4>
+                                <p>Aligning the business with your personal, retirement, and estate planning.</p>
+                            </li>
+                        </ul>
+
+                        <div class="svcblock__split">
+                            <div class="svcout">
+                                <h3 class="svcout__title"><i class="fas fa-bullseye" aria-hidden="true"></i> What you walk away with</h3>
+                                <ul class="svcout__list">
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> A clear, prioritized roadmap</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> Fewer blind spots and surprises</li>
+                                    <li><i class="fas fa-check" aria-hidden="true"></i> A business built to transfer value</li>
+                                </ul>
+                            </div>
+                            <div class="svcwho">
+                                <span class="svcwho__label">Built for</span>
+                                <ul class="svcwho__tags">
+                                    <li>Founders</li>
+                                    <li>Partnerships</li>
+                                    <li>Family businesses</li>
+                                    <li>HNW individuals</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <a href="contact.html" class="btn btn--primary js-magnetic svcblock__cta">
+                            <span>Plan my next move</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================================ PROCESS TIMELINE -->
+        <section class="svcflow" id="process">
+            <div class="shell">
+                <div class="section-head" data-reveal>
+                    <span class="eyebrow">How We Work</span>
+                    <h2>From First Call to <span class="text-accent">Ongoing</span> Peace of Mind</h2>
+                    <p>A clear, five-step path — no jargon, no surprises, just steady progress.</p>
+                </div>
+
+                <div class="svcflow__timeline js-flow" data-flow>
+                    <span class="svcflow__line" aria-hidden="true">
+                        <span class="svcflow__line-fill js-flow-fill"></span>
+                    </span>
+
+                    <article class="svcflow__step" data-reveal>
+                        <div class="svcflow__node"><span>01</span></div>
+                        <div class="svcflow__card">
+                            <i class="fas fa-comments svcflow__icon" aria-hidden="true"></i>
+                            <h3>Discovery Call</h3>
+                            <p>We get to know your goals, your situation, and the pain points keeping you up at night — no cost, no pressure.</p>
+                        </div>
+                    </article>
+
+                    <article class="svcflow__step" data-reveal data-reveal-delay="80">
+                        <div class="svcflow__node"><span>02</span></div>
+                        <div class="svcflow__card">
+                            <i class="fas fa-magnifying-glass-chart svcflow__icon" aria-hidden="true"></i>
+                            <h3>Deep-Dive Analysis</h3>
+                            <p>We review prior returns, statements, and your current structure to surface risks and missed opportunities.</p>
+                        </div>
+                    </article>
+
+                    <article class="svcflow__step" data-reveal data-reveal-delay="160">
+                        <div class="svcflow__node"><span>03</span></div>
+                        <div class="svcflow__card">
+                            <i class="fas fa-drafting-compass svcflow__icon" aria-hidden="true"></i>
+                            <h3>Strategy Blueprint</h3>
+                            <p>You get a tailored plan with clear priorities, projected savings, and a realistic timeline to execute.</p>
+                        </div>
+                    </article>
+
+                    <article class="svcflow__step" data-reveal data-reveal-delay="240">
+                        <div class="svcflow__node"><span>04</span></div>
+                        <div class="svcflow__card">
+                            <i class="fas fa-gears svcflow__icon" aria-hidden="true"></i>
+                            <h3>Implementation</h3>
+                            <p>Filings, restructuring, and systems — handled end to end by our team, so you can stay focused on your work.</p>
+                        </div>
+                    </article>
+
+                    <article class="svcflow__step" data-reveal data-reveal-delay="320">
+                        <div class="svcflow__node"><span>05</span></div>
+                        <div class="svcflow__card">
+                            <i class="fas fa-seedling svcflow__icon" aria-hidden="true"></i>
+                            <h3>Ongoing Advisory</h3>
+                            <p>Quarterly reviews and year-round access mean nothing catches you off guard — ever again.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ ENGAGEMENT MODELS -->
+        <section class="svcplan" id="plans">
+            <div class="shell">
+                <div class="section-head" data-reveal>
+                    <span class="eyebrow">Ways to Work Together</span>
+                    <h2>Engagements That <span class="text-accent">Fit</span> You</h2>
+                    <p>Every relationship is scoped to your needs — here's a starting point. Final pricing is always tailored.</p>
+                </div>
+
+                <div class="svcplan__grid">
+                    <article class="svcplan__card" data-reveal data-tilt>
+                        <div class="svcplan__head">
+                            <span class="svcplan__name">Essentials</span>
+                            <p class="svcplan__for">For individuals &amp; solo owners</p>
+                        </div>
+                        <div class="svcplan__price"><span>Tailored</span><small>annual engagement</small></div>
+                        <ul class="svcplan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Annual tax preparation &amp; filing</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Planning check-ins before year-end</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Notice &amp; letter support</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> A direct line to your accountant</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--outline js-magnetic svcplan__btn">
+                            <span>Get started</span>
+                        </a>
+                    </article>
+
+                    <article class="svcplan__card svcplan__card--featured" data-reveal data-reveal-delay="100" data-tilt>
+                        <span class="svcplan__flag"><i class="fas fa-star" aria-hidden="true"></i> Most popular</span>
+                        <div class="svcplan__head">
+                            <span class="svcplan__name">Growth Partner</span>
+                            <p class="svcplan__for">For active, growing businesses</p>
+                        </div>
+                        <div class="svcplan__price"><span>Tailored</span><small>monthly engagement</small></div>
+                        <ul class="svcplan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Monthly bookkeeping &amp; reporting</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Quarterly strategy sessions</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Full federal &amp; state compliance</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Priority, year-round support</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Entity &amp; payroll coordination</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--primary js-magnetic svcplan__btn">
+                            <span>Book a consult</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="svcplan__card" data-reveal data-reveal-delay="200" data-tilt>
+                        <div class="svcplan__head">
+                            <span class="svcplan__name">Private Advisory</span>
+                            <p class="svcplan__for">For HNW &amp; complex needs</p>
+                        </div>
+                        <div class="svcplan__price"><span>Tailored</span><small>dedicated engagement</small></div>
+                        <ul class="svcplan__list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> A dedicated, senior-led team</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> International &amp; FATCA coverage</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> M&amp;A, succession &amp; exit planning</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Wealth &amp; estate coordination</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> White-glove, on-call service</li>
+                        </ul>
+                        <a href="contact.html" class="btn btn--outline js-magnetic svcplan__btn">
+                            <span>Request access</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ STATS -->
+        <section class="stats" id="stats">
+            <div class="shell">
+                <div class="stats__grid">
+                    <div class="stat" data-reveal>
+                        <span class="stat__num" data-count="20" data-suffix="+">0</span>
+                        <span class="stat__label">Years of Excellence</span>
+                    </div>
+                    <div class="stat" data-reveal data-reveal-delay="100">
+                        <span class="stat__num" data-count="1000" data-suffix="+">0</span>
+                        <span class="stat__label">Clients Served</span>
+                    </div>
+                    <div class="stat" data-reveal data-reveal-delay="200">
+                        <span class="stat__num" data-count="50">0</span>
+                        <span class="stat__label">States Covered</span>
+                    </div>
+                    <div class="stat" data-reveal data-reveal-delay="300">
+                        <span class="stat__num" data-count="15" data-suffix="+">0</span>
+                        <span class="stat__label">Experts on Staff</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ SERVICES FAQ -->
+        <section class="faq" id="faq">
+            <div class="shell faq__inner">
+
+                <!-- Left · sticky intro + CTA -->
+                <div class="faq__intro" data-reveal>
+                    <span class="eyebrow"><i class="fas fa-circle-question" aria-hidden="true"></i> Good Questions</span>
+                    <span class="handwritten faq__hand">ask away</span>
+                    <h2>Services, <span class="text-accent">Explained</span></h2>
+                    <p>The things clients ask most when deciding how to work with us — answered straight.</p>
+
+                    <div class="faq__cta">
+                        <div class="faq__cta-icon"><i class="fas fa-headset" aria-hidden="true"></i></div>
+                        <div class="faq__cta-body">
+                            <h3>Not sure which service you need?</h3>
+                            <p>Tell us your situation — we'll point you the right way.</p>
+                            <div class="faq__cta-actions">
+                                <a href="contact.html" class="btn btn--primary js-magnetic">
+                                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                    <span>Book a Consult</span>
+                                </a>
+                                <a href="tel:+17184573840" class="faq__cta-call">
+                                    <i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right · accordion -->
+                <div class="faq__list js-faq">
+                    <div class="faq__item" data-reveal>
+                        <button class="faq__q" aria-expanded="false">
+                            <span class="faq__q-num" aria-hidden="true">01</span>
+                            <span class="faq__q-text">How is a boutique firm different from a big tax shop?</span>
+                            <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq__a">
+                            <div class="faq__a-body">
+                                <p>You work directly with senior people who know your file — not a rotating cast of juniors. That means proactive strategy year-round, faster answers, and advice tailored to your specific situation rather than a template.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq__item" data-reveal data-reveal-delay="80">
+                        <button class="faq__q" aria-expanded="false">
+                            <span class="faq__q-num" aria-hidden="true">02</span>
+                            <span class="faq__q-text">Do you work with clients outside New York?</span>
+                            <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq__a">
+                            <div class="faq__a-body">
+                                <p>Yes. We represent clients before the IRS and state authorities in all fifty states, and we handle international matters too. Most of our work happens securely online, so location is rarely a barrier.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq__item" data-reveal data-reveal-delay="160">
+                        <button class="faq__q" aria-expanded="false">
+                            <span class="faq__q-num" aria-hidden="true">03</span>
+                            <span class="faq__q-text">How much can proactive tax planning actually save?</span>
+                            <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq__a">
+                            <div class="faq__a-body">
+                                <p>It depends entirely on your income, entity type, and current setup — there's no one-size number. The honest answer: we'll review your last two returns and show you, specifically, where the opportunities are before you commit to anything.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq__item" data-reveal data-reveal-delay="240">
+                        <button class="faq__q" aria-expanded="false">
+                            <span class="faq__q-num" aria-hidden="true">04</span>
+                            <span class="faq__q-text">Can you take over mid-year from another accountant?</span>
+                            <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq__a">
+                            <div class="faq__a-body">
+                                <p>Absolutely — it happens often. We coordinate the handoff, get up to speed on your records, and make the transition seamless so nothing falls through the cracks during the switch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq__item" data-reveal data-reveal-delay="320">
+                        <button class="faq__q" aria-expanded="false">
+                            <span class="faq__q-num" aria-hidden="true">05</span>
+                            <span class="faq__q-text">Can you handle both my business and personal returns?</span>
+                            <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                        </button>
+                        <div class="faq__a">
+                            <div class="faq__a-body">
+                                <p>Yes, and we recommend it. When the same team sees both, we can coordinate strategy across your business and personal picture — which is exactly where the biggest, most durable savings tend to live.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================ CTA BAND -->
+        <section class="cta">
+            <div class="shell cta__inner" data-reveal>
+                <div>
+                    <h2>Ready to Build Your Strategy?</h2>
+                    <p>Book a consultation and we'll map the right services to your goals — no pressure, just clarity.</p>
+                </div>
+                <a href="contact.html" class="btn btn--light js-magnetic">
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                    <span>Get Started</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================ FOOTER -->
+    <footer class="site-footer">
+        <div class="shell site-footer__grid">
+            <div class="site-footer__brand">
+                <img src="logocohen.jpeg" alt="Cohen & Associates logo" class="site-footer__logo" width="160" height="40">
+                <p>Boutique tax &amp; financial expertise, tailored to your success.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/CohenAssociatesinc" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/oksana-inoyatova-72680515" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="site-footer__col">
+                <h3>Explore</h3>
+                <nav aria-label="Footer">
                     <a href="index.html">Home</a>
-                    <a href="#">Services</a>
+                    <a href="services.html">Services</a>
                     <a href="about.html">About</a>
                     <a href="teams.html">Team</a>
                     <a href="faq.html">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
             </div>
-
-            <div class="footer-contact">
-                <h3>Contact Info</h3>
-                <p>
-                    <i class="fas fa-map-marker-alt"></i>
-                    93-03 63rd Drive, Rego Park, NY 11374
-                </p>
-                <p>
-                    <i class="fas fa-phone"></i>
-                    (718) 457-3840
-                </p>
-                <p>
-                    <i class="fas fa-envelope"></i>
-                    info@cohen-associates.com
-                </p>
+            <div class="site-footer__col">
+                <h3>Contact</h3>
+                <address>
+                    <a href="https://maps.google.com/?q=93-03+63rd+Drive+Rego+Park+NY+11374" target="_blank" rel="noopener noreferrer"><i class="fas fa-location-dot" aria-hidden="true"></i> 93-03 63rd Drive, Rego Park, NY 11374</a>
+                    <a href="tel:+17184573840"><i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840</a>
+                    <a href="mailto:info@cohen-associates.com"><i class="fas fa-envelope" aria-hidden="true"></i> info@cohen-associates.com</a>
+                </address>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Cohen & Associates. All rights reserved.</p>
+        <div class="site-footer__bottom">
+            <p>&copy; <span class="js-year">2026</span> Cohen &amp; Associates. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="./js/services.js"></script>
+    <footer class="designer-footer">
+        <a href="https://elanstechworld.com" target="_blank" rel="noopener noreferrer" class="designer-footer__link">
+            <img src="elanstechlogo.jpeg" alt="Elan's Tech World logo" class="designer-footer__logo" width="40" height="40">
+            <span>Designed &amp; Developed by <strong>Elan's Tech World</strong></span>
+        </a>
+    </footer>
+
+    <!-- ============================================================ FLOATING UI -->
+    <!-- Back to top (left) -->
+    <button class="to-top js-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Contact FAB (right) -->
+    <div class="cfab js-fab">
+        <div class="cfab__menu">
+            <a class="cfab__action fab__action" href="tel:+17184573840">
+                <span class="cfab__ic"><i class="fas fa-phone" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Call us</span>
+            </a>
+            <a class="cfab__action fab__action" href="mailto:info@cohen-associates.com">
+                <span class="cfab__ic"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Email</span>
+            </a>
+            <a class="cfab__action fab__action" href="https://www.instagram.com/"
+               target="_blank" rel="noopener noreferrer">
+                <span class="cfab__ic"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                <span class="cfab__txt">Instagram</span>
+            </a>
+        </div>
+
+        <button class="cfab__toggle js-fab-toggle" type="button"
+                aria-expanded="false" aria-label="Contact options">
+            <i class="fas fa-comment-dots cfab__icon cfab__icon--open" aria-hidden="true"></i>
+            <i class="fas fa-xmark cfab__icon cfab__icon--close" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- ============================================================ SCRIPTS
+         Shared site behaviour + this page's behaviour. -->
+    <script src="./js/main.js" defer></script>
+    <script src="./js/services.js" defer></script>
 </body>
 </html>
