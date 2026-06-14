@@ -1401,6 +1401,28 @@ p { color: var(--g-600); }
 /* ============================================================================
    23. FLOATING UI
 ============================================================================ */
+.to-top {
+    position: fixed;
+    left: clamp(1rem, 3vw, 1.75rem);
+    bottom: clamp(1rem, 3vw, 1.75rem);
+    z-index: 190;
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: var(--sh-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.9);
+    transition: opacity var(--t-base), visibility var(--t-base),
+                transform var(--t-base), background var(--t-base);
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--copper); transform: translateY(-3px) scale(1.06); }
+
+}
 
 .cfab {
     position: fixed;
