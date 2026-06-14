@@ -1,293 +1,198 @@
-// Team member bios data
-const teamBios = {
-    oksana: {
-        name: "Oksana Inoyatova",
-        role: "Founder & CEO",
-        image: "oksanafront.jpeg",
-        bio: `Oksana graduated with honors from Queens College, City University of New York, in 2005, earning dual degrees in Accounting and Economics. She gained extensive experience working for top-tier firms like Deloitte, where she developed expertise in tax preparation for high-net-worth individuals and international clients. Oksana is a trusted advisor for clients navigating complex financial landscapes, with in-depth knowledge of FATCA compliance and international tax matters.`,
-        linkedin: "https://www.linkedin.com/in/oksana-inoyatova-72680515"
-    },
-    steve: {
-        name: "Steve Inoyatov",
-        role: "Co-Founder & CFO",
-        image: "websteve.jpeg",
-        bio: `Steve, an honors graduate from Queens College, earned his dual degrees in Accounting and Economics. With experience at both Big 4 and small to mid-sized public accounting firms, Steve specializes in serving dental and medical providers, international and domestic celebrities, real estate professionals, and high-net-worth individuals. He focuses on providing tailored tax structures to maximize savings at the federal, state, and local levels. Steve holds the prestigious IRS Enrolled Agent status, granting him unlimited rights to represent taxpayers before the IRS in all 50 states. Together, Oksana and Steve lead a firm dedicated to guiding clients toward financial success, whether locally or globally.`,
-        linkedin: "https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465"
-    },
-    eddie: {
-        name: "Eddie Maks",
-        role: "Manager",
-        image: "eddy.jpeg",
-        bio: `Eddie is an experienced accounting professional with a strong background in assisting high net worth individuals and business owners. He specializes in helping clients navigate the complexities of tax planning and financial management. His expertise includes managing tax compliance, structuring real estate transactions, and implementing tax-saving strategies. He works closely with business owners, particularly real estate developers, investors, and property owners to optimize their financial outcomes while ensuring adherence to tax regulations. Eddie is also a co-founder of non-profit organization that assists families and children with special needs.`,
-        linkedin: "#"
-    },
-    yulia: {
-        name: "Yulia Konopka",
-        role: "Executive Assistant",
-        image: "yulia.jpeg",
-        bio: `Yulia Konopka serves as the Executive Assistant at Cohen & Associates, where she plays a crucial role in ensuring seamless operations and exceptional client support. With her background in business administration and extensive experience in office management, Yulia has become an indispensable part of the firm's day-to-day operations.
+/* ============================================================================
+   COHEN & ASSOCIATES — teams.js  (Team page · bio modal)
+   ----------------------------------------------------------------------------
+   Loads AFTER main.js. Wrapped in an IIFE so its locals never collide with
+   main.js's globals. Shared behaviour (loader, header, mobile nav, reveal,
+   counters, magnetic buttons, FAB, back-to-top, footer year) runs from main.js.
 
-        In her role, Yulia manages complex administrative tasks, coordinates team schedules, and serves as the primary point of contact for client communications. Her exceptional organizational skills and attention to detail ensure that all office operations run smoothly and efficiently.
+   Modules
+     01. Utilities
+     02. Bio data
+     03. Bio modal  (open / populate / focus-trap / close)
+     04. Bootstrap
+============================================================================ */
+(() => {
+    'use strict';
 
-        Yulia's commitment to professional excellence is evident in her proactive approach to problem-solving and her dedication to maintaining the highest standards of client service. She has implemented several innovative systems to improve office efficiency and enhance the client experience.
+    /* ========================================================================
+       01. UTILITIES
+    ======================================================================== */
+    const select = (sel, ctx = document) => ctx.querySelector(sel);
+    const selectAll = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-        Beyond her administrative duties, Yulia contributes significantly to team building and maintaining a positive work environment at Cohen & Associates. Her multilingual capabilities and cultural awareness have been particularly valuable in serving the firm's diverse international client base.`,
-        linkedin: "#"
-    },
-    marianell: {
-        name: "Mariniel Berkonti",
-        role: "Senior Accountant",
-        image: "mari.jpeg",
-        bio: `Mariniel Berkonti brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background in accounting and finance, Mariniel has developed a reputation for excellence in financial analysis and reporting.
 
-        Throughout her career, Mariniel has demonstrated exceptional skill in handling complex accounting challenges and providing innovative solutions for clients. Her expertise spans various areas of accounting, including tax preparation, financial statement analysis, and business advisory services.
+    /* ========================================================================
+       02. BIO DATA
+       ----------------------------------------------------------------------
+       Keys match the data-bio="…" attribute on each "View full bio" button.
+       `bio` is an array of paragraphs. linkedin "#" (or empty) hides the link.
+    ======================================================================== */
+    const teamBios = {
+        oksana: {
+            name: 'Oksana Inoyatova',
+            role: 'Founder & CEO',
+            image: 'oksanafront.jpeg',
+            linkedin: 'https://www.linkedin.com/in/oksana-inoyatova-72680515',
+            bio: [
+                'Oksana graduated with honors from Queens College, City University of New York, in 2005, earning dual degrees in Accounting and Economics. She gained extensive experience working for top-tier firms like Deloitte, where she developed expertise in tax preparation for high-net-worth individuals and international clients.',
+                'Oksana is a trusted advisor for clients navigating complex financial landscapes, with in-depth knowledge of FATCA compliance and international tax matters.'
+            ]
+        },
+        steve: {
+            name: 'Steve Inoyatov',
+            role: 'Co-Founder & CFO',
+            image: 'websteve.jpeg',
+            linkedin: 'https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465',
+            bio: [
+                'Steve, an honors graduate from Queens College, earned his dual degrees in Accounting and Economics. With experience at both Big 4 and small to mid-sized public accounting firms, Steve specializes in serving dental and medical providers, international and domestic celebrities, real estate professionals, and high-net-worth individuals.',
+                'He focuses on providing tailored tax structures to maximize savings at the federal, state, and local levels. Steve holds the prestigious IRS Enrolled Agent status, granting him unlimited rights to represent taxpayers before the IRS in all 50 states.',
+                'Together, Oksana and Steve lead a firm dedicated to guiding clients toward financial success, whether locally or globally.'
+            ]
+        },
+        eddie: {
+            name: 'Eddie Maks',
+            role: 'Manager',
+            image: 'eddy.jpeg',
+            linkedin: '#',
+            bio: [
+                'Eddie is an experienced accounting professional with a strong background in assisting high-net-worth individuals and business owners. He specializes in helping clients navigate the complexities of tax planning and financial management.',
+                'His expertise includes managing tax compliance, structuring real estate transactions, and implementing tax-saving strategies. He works closely with business owners — particularly real estate developers, investors, and property owners — to optimize their financial outcomes while ensuring adherence to tax regulations.',
+                'Eddie is also a co-founder of a non-profit organization that assists families and children with special needs.'
+            ]
+        },
+        mariniel: {
+            name: 'Mariniel Berkonti',
+            role: 'Senior Accountant',
+            image: 'mari.jpeg',
+            linkedin: '#',
+            bio: [
+                'Mariniel Berkonti brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background in accounting and finance, Mariniel has developed a reputation for excellence in financial analysis and reporting.',
+                'Throughout her career, Mariniel has demonstrated exceptional skill in handling complex accounting challenges and providing innovative solutions for clients. Her expertise spans various areas of accounting, including tax preparation, financial statement analysis, and business advisory services.',
+                'As a Senior Accountant, Mariniel plays a key role in managing client relationships and ensuring the highest quality of service delivery. Her attention to detail and thorough understanding of accounting principles have made her an invaluable resource for both clients and team members.',
+                "Mariniel's commitment to professional development and staying current with industry trends enables her to provide cutting-edge solutions and advice to clients. Her dedication to excellence and client satisfaction exemplifies the core values of Cohen & Associates."
+            ]
+        }
+    };
 
-        As a Senior Accountant, Mariniel plays a key role in managing client relationships and ensuring the highest quality of service delivery. Her attention to detail and thorough understanding of accounting principles have made her an invaluable resource for both clients and team members.
 
-        Mariniel's commitment to professional development and staying current with industry trends enables her to provide cutting-edge solutions and advice to clients. Her dedication to excellence and client satisfaction exemplifies the core values of Cohen & Associates.`,
-        linkedin: "#"
-    }
-};
+    /* ========================================================================
+       03. BIO MODAL
+    ======================================================================== */
+    const initBioModal = () => {
+        const modal = select('.js-bio-modal');
+        const triggers = selectAll('[data-bio]');
+        if (!modal || !triggers.length) return;
 
-// Initialize all functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initLoader();
-    initAOS();
-    initMobileMenu();
-    initStickyHeader();
-    initCounters();
-    initTeamCards();
-});
+        const dialog = select('.tm-modal__dialog', modal);
+        const bodyEl = select('.tm-modal__body', modal);
+        const img = select('.js-bio-img', modal);
+        const roleEl = select('.js-bio-role', modal);
+        const nameEl = select('.js-bio-name', modal);
+        const bioEl = select('.js-bio-text', modal);
+        const linkEl = select('.js-bio-link', modal);
+        const closeEls = selectAll('[data-bio-close]', modal);
 
-// Initialize Loader
-function initLoader() {
-    const loader = document.querySelector('.loader');
-    
-    window.addEventListener('load', () => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.classList.add('page-loaded');
-        }, 500);
-    });
-}
+        const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        const getFocusable = () =>
+            selectAll(FOCUSABLE, dialog).filter((el) => el.offsetParent !== null);
 
-// Initialize AOS
-function initAOS() {
-    AOS.init({
-        duration: 800,
-        once: true,
-        offset: 100,
-        easing: 'ease-out-cubic'
-    });
-}
+        let lastFocused = null;
 
-// Mobile Menu
-function initMobileMenu() {
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const body = document.body;
-    let isMenuOpen = false;
-    
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', toggleMenu);
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (isMenuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-                toggleMenu();
+        const populate = (data) => {
+            img.src = data.image;
+            img.alt = data.name;
+            roleEl.textContent = data.role;
+            nameEl.textContent = data.name;
+
+            bioEl.innerHTML = '';
+            data.bio.forEach((paragraph) => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                bioEl.appendChild(p);
+            });
+
+            if (data.linkedin && data.linkedin !== '#') {
+                linkEl.href = data.linkedin;
+                linkEl.style.display = '';
+            } else {
+                linkEl.style.display = 'none';
             }
-        });
-        
-        // Close menu when pressing escape
+        };
+
+        const open = (key, trigger) => {
+            const data = teamBios[key];
+            if (!data) return;
+
+            lastFocused = trigger || document.activeElement;
+            populate(data);
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('is-locked');
+            if (bodyEl) bodyEl.scrollTop = 0;
+
+            requestAnimationFrame(() => {
+                const closeBtn = select('.js-bio-close', modal);
+                if (closeBtn) closeBtn.focus({ preventScroll: true });
+            });
+        };
+
+        const close = () => {
+            if (!modal.classList.contains('is-open')) return;
+
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('is-locked');
+
+            if (lastFocused) {
+                try { lastFocused.focus({ preventScroll: true }); } catch (e) { /* noop */ }
+                lastFocused = null;
+            }
+        };
+
+        triggers.forEach((btn) =>
+            btn.addEventListener('click', () => open(btn.dataset.bio, btn))
+        );
+        closeEls.forEach((el) => el.addEventListener('click', close));
+
+        // Esc to close + focus trap while open
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isMenuOpen) {
-                toggleMenu();
+            if (!modal.classList.contains('is-open')) return;
+
+            if (e.key === 'Escape') {
+                close();
+                return;
             }
-        });
-    }
-    
-    function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
-        menuBtn.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        body.style.overflow = isMenuOpen ? 'hidden' : '';
-    }
-}
 
-// Sticky Header
-function initStickyHeader() {
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add/remove scrolled class
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Hide/show header based on scroll direction
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.classList.add('header-hidden');
-        } else {
-            header.classList.remove('header-hidden');
-        }
-        
-        lastScroll = currentScroll;
-    });
-}
+            if (e.key === 'Tab') {
+                const focusable = getFocusable();
+                if (!focusable.length) { e.preventDefault(); return; }
 
-// Initialize Stats Counters
-function initCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                animateCounter(entry.target, target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-    
-    counters.forEach(counter => observer.observe(counter));
-}
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
 
-function animateCounter(element, target) {
-    let current = 0;
-    const duration = 2000; // 2 seconds
-    const step = (target / duration) * 16; // 60 FPS
-    
-    function update() {
-        current += step;
-        if (current < target) {
-            element.textContent = Math.round(current);
-            requestAnimationFrame(update);
-        } else {
-            element.textContent = target;
-        }
-    }
-    
-    requestAnimationFrame(update);
-}
-
-// Team Cards Interaction
-function initTeamCards() {
-    const teamCards = document.querySelectorAll('.team-card');
-    
-    teamCards.forEach(card => {
-        // Add keyboard navigation
-        card.setAttribute('tabindex', '0');
-        
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const readMoreBtn = card.querySelector('.read-more-btn');
-                if (readMoreBtn) {
-                    readMoreBtn.click();
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
                 }
             }
         });
-    });
-}
-
-// Bio Modal Functions
-function openBioModal(memberId) {
-    const member = teamBios[memberId];
-    const modal = document.querySelector('.bio-modal');
-    const bioContent = modal.querySelector('.bio-content');
-    
-    // Format bio text with paragraphs
-    const formattedBio = member.bio.split('\n\n')
-        .map(paragraph => paragraph.trim())
-        .filter(paragraph => paragraph.length > 0)
-        .map(paragraph => `<p>${paragraph}</p>`)
-        .join('');
-    
-    // Insert bio content
-    bioContent.innerHTML = `
-        <div class="bio-header">
-            <div class="bio-image">
-                <img src="${member.image}" alt="${member.name}" />
-            </div>
-            <div class="bio-info">
-                <h3>${member.name}</h3>
-                <span class="member-role">${member.role}</span>
-            </div>
-        </div>
-        <div class="bio-text">
-            ${formattedBio}
-        </div>
-        ${member.linkedin !== "#" ? `
-            <div class="bio-social">
-                <a href="${member.linkedin}" target="_blank" rel="noopener noreferrer" 
-                   class="linkedin-link">
-                    <i class="fab fa-linkedin"></i> View LinkedIn Profile
-                </a>
-            </div>
-        ` : ''}
-    `;
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Focus management
-    const closeBtn = modal.querySelector('.close-modal');
-    setTimeout(() => closeBtn.focus(), 100);
-
-    // Add event listeners for modal
-    closeBtn.addEventListener('click', closeBioModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeBioModal();
-    });
-    document.addEventListener('keydown', handleModalKeyboard);
-}
-
-function closeBioModal() {
-    const modal = document.querySelector('.bio-modal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    
-    // Remove modal event listeners
-    document.removeEventListener('keydown', handleModalKeyboard);
-}
-
-function handleModalKeyboard(e) {
-    if (e.key === 'Escape') {
-        closeBioModal();
-    }
-}
-
-// Handle window resize
-window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth > 992) {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        
-        if (mobileMenu.classList.contains('active')) {
-            mobileMenu.classList.remove('active');
-            menuBtn.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    }
-}, 250));
-
-// Utility function: Debounce
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
     };
-}
+
+
+    /* ========================================================================
+       04. BOOTSTRAP
+    ======================================================================== */
+    const init = () => {
+        initBioModal();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
