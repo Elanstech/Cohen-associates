@@ -1,258 +1,206 @@
-/* Import base styles */
-@import url('./style.css');
+/* ============================================================================
+   COHEN & ASSOCIATES — faq.css  (FAQ page · editorial layer)
+   ----------------------------------------------------------------------------
+   Loads AFTER style.css and reuses its :root tokens. The accordion mechanics
+   (.faq__item / .faq__q / .faq__a …) are already defined in style.css §19 and
+   are reused here as-is — this layer only adds the FAQ-page shell: an editorial
+   hero, category chips with scroll-spy, and numbered category blocks set in
+   Fraunces.
 
-/* FAQ Page Specific Styles */
+   FONT NOTE — this layer uses Fraunces for display type, to match about.css.
+   Add it to the Google Fonts <link> in faq.html (see chat for the exact tag).
 
-/* FAQ Hero Section */
-.faq-hero {
-    padding: var(--spacing-5xl) 0 var(--spacing-3xl);
-    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,247,255,0.95) 100%);
-    text-align: center;
-    margin-top: 80px; /* Account for fixed header */
+   JS CONTRACT (js/faq.js):
+     • .faq__item / .faq__q   → .is-open + aria-expanded   (accordion)
+     • .faqp-chip             → .is-active                 (scroll-spy)
+
+   CONTENTS
+     01. TOKENS  (serif stack)
+     02. HERO
+     03. CATEGORY CHIPS
+     04. FAQ BODY + CATEGORIES
+     05. ACCORDION  (inherited — notes only)
+     06. RESPONSIVE
+     07. MOTION SAFETY
+============================================================================ */
+
+
+/* ============================================================================
+   01. TOKENS
+============================================================================ */
+:root {
+    --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 }
 
-.faq-hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
-.faq-hero h1 {
-    margin-bottom: var(--spacing-lg);
-    color: var(--primary);
-    font-size: var(--font-size-5xl);
-}
-
-.hero-description {
-    font-size: var(--font-size-xl);
-    color: var(--gray-600);
-    margin-bottom: var(--spacing-xl);
-    line-height: var(--line-height-relaxed);
-}
-
-/* FAQ Categories */
-.faq-categories {
-    padding: var(--spacing-3xl) 0;
-    background: var(--text-light);
+/* ============================================================================
+   02. HERO
+============================================================================ */
+.faqp-hero {
     position: relative;
-}
-
-.faq-categories::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: var(--text-light);
-    transform: skewY(-2deg);
-    z-index: 1;
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-3xl);
-    position: relative;
-    z-index: 2;
-}
-
-.category-card {
-    background: var(--text-light);
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    transition: var(--transition-base);
-    position: relative;
+    isolation: isolate;
     overflow: hidden;
+    text-align: center;
+    background: var(--paper);
+    padding: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem)) 0 clamp(2.75rem, 6vw, 4.5rem);
 }
 
-.category-card::before {
-    content: '';
+/* Soft copper glow behind the headline */
+.faqp-hero__glow {
     position: absolute;
-    inset: 0;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: var(--transition-base);
-    z-index: 0;
+    z-index: -1;
+    top: -160px;
+    left: 50%;
+    width: min(680px, 92vw);
+    height: 680px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(170, 86, 52, 0.16), transparent 66%);
+    filter: blur(60px);
+    pointer-events: none;
 }
 
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+.faqp-hero .eyebrow { justify-content: center; }
+
+.faqp-hero__title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 1.7rem + 4.2vw, 4.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    margin: 1.1rem auto 1.35rem;
+    max-width: 18ch;
 }
 
-.category-card:hover::before {
-    opacity: 0.05;
+.faqp-hero__sub {
+    max-width: 58ch;
+    margin: 0 auto;
+    font-size: var(--fs-lead);
+    line-height: 1.65;
+    color: var(--g-600);
 }
 
-.category-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto var(--spacing-lg);
-    background: var(--gradient-secondary);
-    border-radius: var(--radius-full);
+
+/* ============================================================================
+   03. CATEGORY CHIPS
+============================================================================ */
+.faqp-chips {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.faqp-chip {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: var(--transition-bounce);
+    padding: 0.6rem 1.15rem;
+    border: 1.5px solid var(--g-300);
+    border-radius: var(--r-full);
+    background: var(--paper);
+    color: var(--g-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color var(--t-base), background var(--t-base),
+                border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+}
+.faqp-chip:hover {
+    color: var(--copper-dark);
+    border-color: rgba(170, 86, 52, 0.55);
+    transform: translateY(-2px);
+    box-shadow: var(--sh-sm);
+}
+.faqp-chip.is-active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #fff;
 }
 
-.category-card:hover .category-icon {
-    transform: scale(1.1) rotate(10deg);
+
+/* ============================================================================
+   04. FAQ BODY + CATEGORIES
+============================================================================ */
+.faqp-body {
+    background: var(--cream);
+    border-top: 1px solid rgba(26, 35, 126, 0.10);
+    padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(4rem, 9vw, 7.5rem);
 }
 
-.category-icon i {
-    font-size: var(--font-size-2xl);
-    color: var(--text-light);
+/* Each category is separated by a full hairline */
+.faqp-cat {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid rgba(26, 35, 126, 0.12);
+}
+.faqp-cat:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
 }
 
-.category-card h3 {
-    color: var(--primary);
-    margin-bottom: var(--spacing-sm);
-    position: relative;
+.faqp-cat__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: clamp(1.1rem, 2.6vw, 1.9rem);
+    max-width: 760px;
+    margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
 }
 
-.category-card p {
-    color: var(--gray-600);
-    margin-bottom: 0;
-    position: relative;
+/* Oversized italic section marker, copper gradient */
+.faqp-cat__no {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(2.3rem, 1.7rem + 2.4vw, 3.6rem);
+    line-height: 0.85;
+    color: var(--copper); /* fallback if background-clip:text unsupported */
+    background: var(--grad-copper);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Main FAQ Section */
-.main-faq {
-    padding: var(--spacing-4xl) 0;
-    background: linear-gradient(135deg, var(--gray-50) 0%, #ffffff 100%);
+.faqp-cat__head h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.65rem, 1.3rem + 1.6vw, 2.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+}
+.faqp-cat__head p {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--g-500);
 }
 
-.faq-section {
-    margin-bottom: var(--spacing-4xl);
+
+/* ============================================================================
+   05. ACCORDION  (inherited from style.css §19)
+   ----------------------------------------------------------------------------
+   .faq__list / .faq__item / .faq__q / .faq__q-num / .faq__q-text / .faq__icon
+   / .faq__a / .faq__a-body are styled in style.css and need no overrides here.
+   js/faq.js toggles .is-open on each item independently.
+============================================================================ */
+
+
+/* ============================================================================
+   06. RESPONSIVE
+============================================================================ */
+@media (max-width: 600px) {
+    .faqp-cat__head { grid-template-columns: 1fr; gap: 0.4rem; }
+    .faqp-cat__no { font-size: 2.4rem; line-height: 1; }
 }
 
-.faq-section:last-child {
-    margin-bottom: 0;
-}
 
-.faq-section h2 {
-    margin-bottom: var(--spacing-2xl);
-    position: relative;
-    padding-left: var(--spacing-lg);
-}
-
-.faq-section h2::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 70%;
-    background: var(--gradient-secondary);
-    border-radius: var(--radius-full);
-}
-
-/* FAQ CTA Section */
-.faq-cta {
-    padding: var(--spacing-4xl) 0;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.faq-cta::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    left: 0;
-    right: 0;
-    height: 100px;
-    background: inherit;
-    transform: skewY(-2deg);
-}
-
-.cta-content {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
-
-.cta-content h2 {
-    color: var(--text-light);
-    margin-bottom: var(--spacing-md);
-}
-
-.cta-content p {
-    color: var(--gray-200);
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-xl);
-}
-
-.cta-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: center;
-}
-
-/* Responsive Styles */
-@media (max-width: 992px) {
-    .faq-hero {
-        margin-top: 70px;
-    }
-
-    .faq-hero h1 {
-        font-size: var(--font-size-4xl);
-    }
-
-    .categories-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .faq-hero {
-        padding: var(--spacing-4xl) 0 var(--spacing-2xl);
-    }
-
-    .category-card {
-        padding: var(--spacing-lg);
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-        gap: var(--spacing-md);
-    }
-
-    .cta-buttons .btn {
-        width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .faq-hero h1 {
-        font-size: var(--font-size-3xl);
-    }
-
-    .hero-description {
-        font-size: var(--font-size-lg);
-    }
-
-    .faq-section h2 {
-        font-size: var(--font-size-2xl);
-    }
-}
-
-/* Animation Classes */
-.fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* ============================================================================
+   07. MOTION SAFETY
+============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .faqp-chip { transition: none; }
 }
