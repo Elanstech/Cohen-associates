@@ -1401,70 +1401,39 @@ p { color: var(--g-600); }
 /* ============================================================================
    23. FLOATING UI
 ============================================================================ */
-.to-top {
-    position: fixed;
-    left: clamp(1rem, 3vw, 1.75rem);
-    bottom: clamp(1rem, 3vw, 1.75rem);
-    z-index: 190;
-    width: 48px; height: 48px;
-    display: grid; place-items: center;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-    font-size: 1rem;
-    box-shadow: var(--sh-lg);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(14px) scale(0.9);
-    transition: opacity var(--t-base), visibility var(--t-base),
-                transform var(--t-base), background var(--t-base);
-}
-.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
-.to-top:hover { background: var(--copper); transform: translateY(-3px) scale(1.06); }
-
-}
-
+/* ===== Contact FAB (bottom-right) ===== */
 .cfab {
     position: fixed;
     right: clamp(1rem, 3vw, 1.75rem);
     bottom: clamp(1rem, 3vw, 1.75rem);
-    z-index: var(--z-float);
+    z-index: var(--z-float, 200);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     gap: 0.85rem;
 }
+.cfab__menu { display: flex; flex-direction: column; align-items: flex-end; gap: 0.7rem; }
 
-/* ---- Action pills (icon + label) ---- */
-.cfab__menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.7rem;
-}
 .cfab__action {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
     padding: 0.5rem 1.05rem 0.5rem 0.5rem;
-    border-radius: var(--r-full);
-    background: var(--paper);
-    box-shadow: var(--sh-md);
-    color: var(--navy);
+    border-radius: var(--r-full, 999px);
+    background: var(--paper, #fff);
+    box-shadow: var(--sh-md, 0 12px 32px rgba(20, 22, 50, 0.09));
+    color: var(--navy, #1a237e);
     font-weight: 600;
     font-size: 0.9rem;
     white-space: nowrap;
-    /* hidden until the dock is open */
     opacity: 0;
     visibility: hidden;
     transform: translateY(14px) scale(0.92);
     transform-origin: bottom right;
-    transition: opacity var(--t-base), visibility var(--t-base),
-                transform var(--t-base), background var(--t-base), color var(--t-base);
+    transition: opacity .34s, visibility .34s, transform .34s, background .34s, color .34s;
 }
 .cfab.is-open .cfab__action { opacity: 1; visibility: visible; transform: none; }
-
-/* rise from the toggle: nearest item appears first */
+/* nearest item rises first */
 .cfab.is-open .cfab__action:nth-child(1) { transition-delay: 0.15s; }
 .cfab.is-open .cfab__action:nth-child(2) { transition-delay: 0.10s; }
 .cfab.is-open .cfab__action:nth-child(3) { transition-delay: 0.05s; }
@@ -1475,26 +1444,27 @@ p { color: var(--g-600); }
     width: 40px; height: 40px;
     border-radius: 50%;
     background: rgba(170, 86, 52, 0.10);
-    color: var(--copper);
+    color: var(--copper, #aa5634);
     font-size: 1rem;
-    transition: background var(--t-base), color var(--t-base);
+    transition: background .34s, color .34s;
 }
 .cfab__action:hover {
-    background: var(--grad-copper);
+    background: var(--grad-copper, linear-gradient(135deg, #aa5634, #dd8563));
     color: #fff;
     transform: translateY(-2px);
 }
 .cfab__action:hover .cfab__ic { background: rgba(255, 255, 255, 0.22); color: #fff; }
 
-/* ---- Main toggle ---- */
 .cfab__toggle {
     position: relative;
     width: 62px; height: 62px;
+    border: none;
+    cursor: pointer;
     border-radius: 50%;
-    background: var(--grad-copper);
+    background: var(--grad-copper, linear-gradient(135deg, #aa5634, #dd8563));
     color: #fff;
-    box-shadow: var(--sh-copper);
-    transition: transform var(--t-base), box-shadow var(--t-base);
+    box-shadow: var(--sh-copper, 0 12px 30px rgba(170, 86, 52, 0.28));
+    transition: transform .34s, box-shadow .34s;
 }
 .cfab__toggle:hover { transform: scale(1.06); box-shadow: 0 16px 40px rgba(170, 86, 52, 0.45); }
 
@@ -1503,7 +1473,7 @@ p { color: var(--g-600); }
     content: '';
     position: absolute; inset: 0;
     border-radius: 50%;
-    border: 2px solid var(--copper);
+    border: 2px solid var(--copper, #aa5634);
     opacity: 0.6;
     animation: cfabPulse 2.4s ease-out infinite;
     pointer-events: none;
@@ -1515,10 +1485,10 @@ p { color: var(--g-600); }
     position: absolute; inset: 0;
     display: grid; place-items: center;
     font-size: 1.35rem;
-    transition: opacity var(--t-base), transform var(--t-base);
+    transition: opacity .34s, transform .34s;
 }
 .cfab__icon--close { opacity: 0; transform: rotate(-90deg) scale(0.6); }
-.cfab.is-open .cfab__icon--open { opacity: 0; transform: rotate(90deg) scale(0.6); }
+.cfab.is-open .cfab__icon--open  { opacity: 0; transform: rotate(90deg) scale(0.6); }
 .cfab.is-open .cfab__icon--close { opacity: 1; transform: none; }
 
 @keyframes cfabPulse {
@@ -1527,6 +1497,30 @@ p { color: var(--g-600); }
     100% { transform: scale(1.5); opacity: 0; }
 }
 
+/* ===== Back to top (bottom-left) ===== */
+.to-top {
+    position: fixed;
+    left: clamp(1rem, 3vw, 1.75rem);
+    bottom: clamp(1rem, 3vw, 1.75rem);
+    z-index: 190;
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background: var(--navy, #1a237e);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: var(--sh-lg, 0 22px 50px rgba(20, 22, 50, 0.11));
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.9);
+    transition: opacity .34s, visibility .34s, transform .34s, background .34s;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--copper, #aa5634); transform: translateY(-3px) scale(1.06); }
+
+/* Motion safety */
 @media (prefers-reduced-motion: reduce) {
     .cfab__toggle::before { animation: none; opacity: 0; }
 }
