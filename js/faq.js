@@ -1,19 +1,14 @@
 /* ============================================================================
-   COHEN & ASSOCIATES — faq.js  (FAQ page · behaviour)
+   COHEN & ASSOCIATES — faq.js  (FAQ page · help-center behaviour)
    ----------------------------------------------------------------------------
    Loads AFTER main.js. Wrapped in an IIFE so its locals never collide with
-   main.js's top-level consts (select, selectAll, …).
-
-   main.js already handles the loader, header, mobile nav, [data-reveal],
-   counters, magnetic buttons, back-to-top, FAB and footer year — none of that
-   is duplicated here. main.js's initFaq() targets `.js-faq` only, which this
-   page doesn't use, so the accordion below is the sole handler for .faq__item.
+   main.js's top-level consts. main.js's initFaq() targets `.js-faq` (the
+   homepage teaser) only, so the list below (`.js-fx`) is handled solely here.
 
    Modules
      01. Utilities
-     02. Accordion        (independent open/close per question)
-     03. Category chips   (scroll-spy → .is-active)
-     04. Bootstrap
+     02. FAQ experience  (accordion + topic tabs + live search + empty state)
+     03. Bootstrap
 ============================================================================ */
 (() => {
     'use strict';
@@ -23,94 +18,97 @@
     ==================================================================== */
     const select = (sel, ctx = document) => ctx.querySelector(sel);
     const selectAll = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-    const HAS_IO = 'IntersectionObserver' in window;
 
 
     /* ====================================================================
-       02. ACCORDION
-       ------------------------------------------------------------------
-       Every .faq__item toggles independently — a help center reads best
-       when answers can stay open side by side. The height reveal, icon
-       rotation and accent bar are all pure CSS, driven by .is-open.
+       02. FAQ EXPERIENCE
     ==================================================================== */
-    const initAccordion = () => {
-        const items = selectAll('.faq__item');
-        if (!items.length) return;
+    const initFaq = () => {
+        const list = select('.js-fx');
+        if (!list) return;
 
+        const items = selectAll('.fx-item', list);
+        const tabs = selectAll('.js-fx-tabs .fx-tab');
+        const input = select('#fxSearch');
+        const clearBtn = select('.js-fx-clear');
+        const empty = select('.js-fx-empty');
+        const term = select('.js-fx-term');
+
+        let activeCat = 'all';
+
+        // --- Accordion: each item opens/closes independently ---
         items.forEach((item) => {
-            const question = select('.faq__q', item);
-            if (!question) return;
-
-            question.addEventListener('click', () => {
+            const q = select('.fx-q', item);
+            q?.addEventListener('click', () => {
                 const open = item.classList.toggle('is-open');
-                question.setAttribute('aria-expanded', String(open));
+                q.setAttribute('aria-expanded', String(open));
             });
         });
-    };
 
-
-    /* ====================================================================
-       03. CATEGORY CHIPS  (scroll-spy)
-       ------------------------------------------------------------------
-       Highlights the chip for whichever category is nearest the top of
-       the viewport. Chips are plain anchor links, so smooth scrolling and
-       the header offset are handled by CSS (scroll-behavior /
-       scroll-padding-top in style.css).
-    ==================================================================== */
-    const initChips = () => {
-        const chips = selectAll('.faqp-chip');
-        if (!chips.length) return;
-
-        // Map each category id → its chip (from the chip's href).
-        const byId = new Map();
-        chips.forEach((chip) => {
-            const id = (chip.getAttribute('href') || '').replace('#', '');
-            if (id) byId.set(id, chip);
-        });
-
-        const setActive = (id) => {
-            chips.forEach((chip) => chip.classList.toggle('is-active', byId.get(id) === chip));
+        const setActiveTab = (filter) => {
+            activeCat = filter;
+            tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.filter === filter));
         };
 
-        // Instant feedback on click; the observer reconciles after scrolling.
-        chips.forEach((chip) => {
-            chip.addEventListener('click', () => {
-                const id = (chip.getAttribute('href') || '').replace('#', '');
-                if (id) setActive(id);
+        // --- Combined filter: active topic + search text ---
+        const apply = () => {
+            const query = (input?.value || '').trim().toLowerCase();
+            let shown = 0;
+
+            items.forEach((item) => {
+                const catOk = activeCat === 'all' || item.dataset.category === activeCat;
+                const textOk = !query || item.textContent.toLowerCase().includes(query);
+                const show = catOk && textOk;
+
+                item.hidden = !show;
+                if (show) {
+                    shown += 1;
+                } else if (item.classList.contains('is-open')) {
+                    // Collapse anything that gets filtered out while open
+                    item.classList.remove('is-open');
+                    select('.fx-q', item)?.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            if (empty) empty.hidden = shown !== 0;
+            if (term) term.textContent = (input?.value || '').trim();
+        };
+
+        // --- Topic tabs ---
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                setActiveTab(tab.dataset.filter);
+                apply();
             });
         });
 
-        const sections = selectAll('.faqp-cat').filter((cat) => byId.has(cat.id));
-        if (!sections.length || !HAS_IO) return;
-
-        const visible = new Set();
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) visible.add(entry.target.id);
-                else visible.delete(entry.target.id);
+        // --- Live search (searching spans all topics) ---
+        if (input) {
+            input.addEventListener('input', () => {
+                const hasText = input.value.trim() !== '';
+                clearBtn?.classList.toggle('is-visible', hasText);
+                if (hasText) setActiveTab('all');
+                apply();
             });
+        }
+        clearBtn?.addEventListener('click', () => {
+            if (!input) return;
+            input.value = '';
+            clearBtn.classList.remove('is-visible');
+            apply();
+            input.focus();
+        });
 
-            // Topmost visible category (querySelectorAll keeps document order).
-            const current = sections.find((cat) => visible.has(cat.id));
-            if (current) setActive(current.id);
-        }, { rootMargin: '-20% 0px -55% 0px', threshold: 0 });
-
-        sections.forEach((cat) => observer.observe(cat));
+        apply();
     };
 
 
     /* ====================================================================
-       04. BOOTSTRAP
+       03. BOOTSTRAP
     ==================================================================== */
-    const init = () => {
-        initAccordion();
-        initChips();
-    };
-
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', initFaq);
     } else {
-        init();
+        initFaq();
     }
 })();
