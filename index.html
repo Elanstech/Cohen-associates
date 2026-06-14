@@ -526,39 +526,78 @@
         </section>
 
         <!-- ============================================================ FAQ -->
-        <section class="faq" id="faq">
-            <div class="shell">
-                <div class="section-head" data-reveal>
-                    <span class="eyebrow">Good Questions</span>
-                    <h2>Frequently Asked</h2>
-                    <p>Quick answers to what clients ask most.</p>
-                </div>
+<section class="faq" id="faq">
+    <div class="shell faq__inner">
 
-                <div class="faq__list js-faq" data-reveal>
-                    <div class="faq__item">
-                        <button class="faq__q" aria-expanded="false">
-                            <span>What tax services do you offer for small businesses?</span>
-                            <span class="faq__icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq__a"><p>Comprehensive planning, preparation, compliance, and advisory tailored to small businesses — minimizing liability while keeping you fully compliant.</p></div>
-                    </div>
-                    <div class="faq__item">
-                        <button class="faq__q" aria-expanded="false">
-                            <span>How do you handle international tax matters?</span>
-                            <span class="faq__icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq__a"><p>Our specialists guide cross-border transactions, foreign tax credits, transfer pricing, FATCA, and treaty compliance to keep global operations efficient.</p></div>
-                    </div>
-                    <div class="faq__item">
-                        <button class="faq__q" aria-expanded="false">
-                            <span>What should I bring to my first consultation?</span>
-                            <span class="faq__icon" aria-hidden="true"></span>
-                        </button>
-                        <div class="faq__a"><p>Prior tax returns, financial statements, business registration documents, and any specific questions — that's all we need to get started.</p></div>
+        <!-- Left · sticky intro + CTA -->
+        <div class="faq__intro" data-reveal>
+            <span class="eyebrow"><i class="fas fa-circle-question" aria-hidden="true"></i> Good Questions</span>
+            <span class="handwritten faq__hand">ask away</span>
+            <h2>Frequently <span class="text-accent">Asked</span></h2>
+            <p>Quick answers to what clients ask most — and a direct line when you need more.</p>
+
+            <div class="faq__cta">
+                <div class="faq__cta-icon"><i class="fas fa-headset" aria-hidden="true"></i></div>
+                <div class="faq__cta-body">
+                    <h3>Still have questions?</h3>
+                    <p>Talk to a specialist — no pressure, just clarity.</p>
+                    <div class="faq__cta-actions">
+                        <a href="contact.html" class="btn btn--primary js-magnetic">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                            <span>Book a Consult</span>
+                        </a>
+                        <a href="tel:+17184573840" class="faq__cta-call">
+                            <i class="fas fa-phone" aria-hidden="true"></i> (718) 457-3840
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Right · accordion -->
+        <div class="faq__list js-faq">
+            <div class="faq__item" data-reveal>
+                <button class="faq__q" aria-expanded="false">
+                    <span class="faq__q-num" aria-hidden="true">01</span>
+                    <span class="faq__q-text">What tax services do you offer for small businesses?</span>
+                    <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                </button>
+                <div class="faq__a">
+                    <div class="faq__a-body">
+                        <p>Comprehensive planning, preparation, compliance, and advisory tailored to small businesses — minimizing liability while keeping you fully compliant.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq__item" data-reveal data-reveal-delay="80">
+                <button class="faq__q" aria-expanded="false">
+                    <span class="faq__q-num" aria-hidden="true">02</span>
+                    <span class="faq__q-text">How do you handle international tax matters?</span>
+                    <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                </button>
+                <div class="faq__a">
+                    <div class="faq__a-body">
+                        <p>Our specialists guide cross-border transactions, foreign tax credits, transfer pricing, FATCA, and treaty compliance to keep global operations efficient.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq__item" data-reveal data-reveal-delay="160">
+                <button class="faq__q" aria-expanded="false">
+                    <span class="faq__q-num" aria-hidden="true">03</span>
+                    <span class="faq__q-text">What should I bring to my first consultation?</span>
+                    <span class="faq__icon" aria-hidden="true"><i class="fas fa-chevron-down"></i></span>
+                </button>
+                <div class="faq__a">
+                    <div class="faq__a-body">
+                        <p>Prior tax returns, financial statements, business registration documents, and any specific questions — that's all we need to get started.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
         <!-- ============================================================ CTA BAND -->
         <section class="cta">
