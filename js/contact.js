@@ -1,342 +1,173 @@
-// Main initialization
-document.addEventListener('DOMContentLoaded', () => {
-    initializeAll();
-});
+/* ============================================================================
+   COHEN & ASSOCIATES — contact.js  (Contact page · behaviour)
+   ----------------------------------------------------------------------------
+   Loads AFTER main.js. Wrapped in an IIFE so its locals never collide with
+   main.js's top-level consts (select, selectAll, …).
 
-function initializeAll() {
-    setupFlatpickr();
-    setupContactForm();
-    setupBookingForm();
-    setupMobileMenu();
-    setupHeaderScroll();
-    initializeAOS();
-    setupFormValidation();
-}
+   main.js already handles the loader, header, mobile nav, [data-reveal],
+   counters, magnetic buttons, back-to-top, FAB and footer year. Its
+   initContactForm() targets `.js-contact-form` (the homepage form) only, so
+   the namespaced form below (`.js-cp-form`) is handled solely here.
 
-// AOS Animation Setup
-function initializeAOS() {
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        mirror: false
-    });
-}
+   Modules
+     01. Utilities
+     02. Contact form   (validate → mailto handoff, inline errors)
+     03. Map lazy-load  (set iframe src from data-src on approach)
+     04. Bootstrap
+============================================================================ */
+(() => {
+    'use strict';
 
-// Mobile Menu Setup
-function setupMobileMenu() {
-    const menuButton = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuLinks = document.querySelectorAll('.mobile-menu a');
+    /* ====================================================================
+       01. UTILITIES
+    ==================================================================== */
+    const select = (sel, ctx = document) => ctx.querySelector(sel);
+    const selectAll = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+    const HAS_IO = 'IntersectionObserver' in window;
 
-    if (menuButton && mobileMenu) {
-        // Toggle menu
-        menuButton.addEventListener('click', () => {
-            menuButton.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
-        });
 
-        // Close menu on link click
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuButton.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-            });
-        });
+    /* ====================================================================
+       02. CONTACT FORM
+       ------------------------------------------------------------------
+       Inline validation, then a mailto handoff (consistent with the rest
+       of the site — no backend required). The optional service <select>
+       is folded into the subject + body when chosen.
+    ==================================================================== */
+    const initForm = () => {
+        const form = select('.js-cp-form');
+        if (!form) return;
 
-        // Close on outside click
-        document.addEventListener('click', (e) => {
-            if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
-                menuButton.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.classList.remove('no-scroll');
+        const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        const isPhone = (v) => /^\+?[\d\s().-]{10,}$/.test(v);
+
+        const setError = (field, message) => {
+            field.classList.add('is-error');
+            let note = field.querySelector('.cp-field__error');
+            if (!note) {
+                note = document.createElement('span');
+                note.className = 'cp-field__error';
+                field.appendChild(note);
             }
-        });
-    }
-}
+            note.textContent = message;
+        };
 
-// Header Scroll Effect
-function setupHeaderScroll() {
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
+        const clearError = (field) => {
+            field.classList.remove('is-error');
+            field.querySelector('.cp-field__error')?.remove();
+        };
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
+        const validate = (input) => {
+            const field = input.closest('.cp-field');
+            if (!field) return true;
+            const value = input.value.trim();
+            clearError(field);
 
-        // Add/remove scrolled class
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        // Add/remove hidden class
-        if (currentScroll > lastScroll && currentScroll > 500) {
-            header.classList.add('hidden');
-        } else {
-            header.classList.remove('hidden');
-        }
-
-        lastScroll = currentScroll;
-    });
-}
-
-// Flatpickr Date Picker Setup
-function setupFlatpickr() {
-    const dateInput = document.getElementById('bookingDate');
-    if (dateInput) {
-        flatpickr(dateInput, {
-            enableTime: true,
-            dateFormat: "F j, Y at h:i K",
-            minDate: "today",
-            maxDate: new Date().fp_incr(30),
-            minTime: "09:00",
-            maxTime: "17:00",
-            disable: [
-                function(date) {
-                    return (date.getDay() === 0 || date.getDay() === 6);
-                }
-            ],
-            locale: {
-                firstDayOfWeek: 1
-            },
-            onChange: (selectedDates, dateStr) => {
-                validateField(dateInput);
+            if (input.hasAttribute('required') && !value) {
+                setError(field, 'This field is required.');
+                return false;
             }
-        });
-    }
-}
-
-// Contact Form Setup
-function setupContactForm() {
-    const form = document.getElementById('contactForm');
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (validateForm(form)) {
-                await handleContactSubmission(form);
+            if (input.type === 'email' && value && !isEmail(value)) {
+                setError(field, 'Enter a valid email address.');
+                return false;
             }
-        });
-    }
-}
-
-// Booking Form Setup
-function setupBookingForm() {
-    const form = document.getElementById('bookingForm');
-    if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (validateForm(form)) {
-                await handleBookingSubmission(form);
+            if (input.type === 'tel' && value && !isPhone(value)) {
+                setError(field, 'Enter a valid phone number.');
+                return false;
             }
-        });
-    }
-}
+            return true;
+        };
 
-// Form Validation Setup
-function setupFormValidation() {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        const inputs = form.querySelectorAll('input, textarea, select');
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => validateField(input));
+        const showNote = (type, text) => {
+            form.querySelector('.cp-form__note')?.remove();
+            const note = document.createElement('div');
+            note.className = `cp-form__note ${type}`;
+            note.textContent = text;
+            form.prepend(note);
+            setTimeout(() => note.remove(), 6000);
+        };
+
+        // Validate text-based fields (the select is optional, no rule).
+        const inputs = selectAll('input, textarea', form);
+        inputs.forEach((input) => {
+            input.addEventListener('blur', () => validate(input));
             input.addEventListener('input', () => {
-                if (input.closest('.form-group').classList.contains('error')) {
-                    validateField(input);
-                }
+                if (input.closest('.cp-field')?.classList.contains('is-error')) validate(input);
             });
         });
-    });
-}
 
-// Contact Form Submission Handler
-async function handleContactSubmission(form) {
-    const submitButton = form.querySelector('[type="submit"]');
-    toggleLoadingState(submitButton, true);
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-    try {
-        const formData = {
-            name: form.querySelector('#name').value,
-            email: form.querySelector('#email').value,
-            phone: form.querySelector('#phone').value,
-            message: form.querySelector('#message').value
-        };
+            const valid = inputs.map(validate).every(Boolean);
+            if (!valid) {
+                showNote('error', 'Please fix the highlighted fields.');
+                select('.cp-field.is-error input, .cp-field.is-error textarea', form)?.focus();
+                return;
+            }
 
-        // Create mailto link
-        const mailtoLink = createMailtoLink(formData, 'Contact Form Submission');
-        window.location.href = mailtoLink;
+            const val = (sel) => (form.querySelector(sel)?.value || '').trim();
+            const data = {
+                Name: val('#cpName'),
+                Email: val('#cpEmail'),
+                Phone: val('#cpPhone'),
+                Service: val('#cpService'),
+                Message: val('#cpMessage'),
+            };
 
-        showMessage(form, 'success', 'Message sent successfully! We\'ll get back to you soon.');
-        form.reset();
-    } catch (error) {
-        showMessage(form, 'error', 'Failed to send message. Please try again.');
-        console.error('Contact form error:', error);
-    } finally {
-        toggleLoadingState(submitButton, false);
-    }
-}
+            const subject = `Website enquiry from ${data.Name}` + (data.Service ? ` — ${data.Service}` : '');
+            const body = Object.entries(data)
+                .filter(([, value]) => value)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join('\n');
 
-// Booking Form Submission Handler
-async function handleBookingSubmission(form) {
-    const submitButton = form.querySelector('[type="submit"]');
-    toggleLoadingState(submitButton, true);
+            const action = form.getAttribute('action') || 'mailto:info@cohen-associates.com';
+            const to = action.replace('mailto:', '').split('?')[0];
 
-    try {
-        const formData = {
-            name: form.querySelector('#bookingName').value,
-            email: form.querySelector('#bookingEmail').value,
-            phone: form.querySelector('#bookingPhone').value,
-            service: form.querySelector('#serviceType').value,
-            date: form.querySelector('#bookingDate').value,
-            notes: form.querySelector('#bookingNotes').value
-        };
-
-        // Create mailto link
-        const mailtoLink = createMailtoLink(formData, 'Booking Request');
-        window.location.href = mailtoLink;
-
-        showMessage(form, 'success', 'Booking request sent! We\'ll confirm your appointment soon.');
-        form.reset();
-    } catch (error) {
-        showMessage(form, 'error', 'Failed to submit booking. Please try again.');
-        console.error('Booking form error:', error);
-    } finally {
-        toggleLoadingState(submitButton, false);
-    }
-}
-
-// Form Validation
-function validateForm(form) {
-    const requiredFields = form.querySelectorAll('[required]');
-    let isValid = true;
-
-    requiredFields.forEach(field => {
-        if (!validateField(field)) {
-            isValid = false;
-        }
-    });
-
-    return isValid;
-}
-
-// Field Validation
-function validateField(field) {
-    const formGroup = field.closest('.form-group');
-    const value = field.value.trim();
-    let isValid = true;
-    let errorMessage = '';
-
-    // Clear existing errors
-    clearFieldError(formGroup);
-
-    // Required field check
-    if (field.hasAttribute('required') && !value) {
-        isValid = false;
-        errorMessage = 'This field is required';
-    } else {
-        // Type-specific validation
-        switch (field.type) {
-            case 'email':
-                if (value && !isValidEmail(value)) {
-                    isValid = false;
-                    errorMessage = 'Please enter a valid email address';
-                }
-                break;
-            case 'tel':
-                if (value && !isValidPhone(value)) {
-                    isValid = false;
-                    errorMessage = 'Please enter a valid phone number';
-                }
-                break;
-        }
-    }
-
-    if (!isValid) {
-        showFieldError(formGroup, errorMessage);
-    }
-
-    return isValid;
-}
-
-// Utility Functions
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidPhone(phone) {
-    return /^\+?[\d\s-]{10,}$/.test(phone);
-}
-
-function showFieldError(formGroup, message) {
-    formGroup.classList.add('error');
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    formGroup.appendChild(errorDiv);
-}
-
-function clearFieldError(formGroup) {
-    formGroup.classList.remove('error');
-    const errorMessage = formGroup.querySelector('.error-message');
-    if (errorMessage) {
-        errorMessage.remove();
-    }
-}
-
-function showMessage(form, type, message) {
-    // Remove existing messages
-    const existingMessages = form.querySelectorAll('.form-message');
-    existingMessages.forEach(msg => msg.remove());
-
-    // Create new message
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${type}`;
-    messageDiv.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>${message}`;
-    form.insertBefore(messageDiv, form.firstChild);
-
-    // Auto-remove after 5 seconds
-    setTimeout(() => messageDiv.remove(), 5000);
-}
-
-function toggleLoadingState(button, isLoading) {
-    if (isLoading) {
-        button.disabled = true;
-        button.setAttribute('data-original-text', button.innerHTML);
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-    } else {
-        button.disabled = false;
-        button.innerHTML = button.getAttribute('data-original-text');
-    }
-}
-
-function createMailtoLink(data, subject) {
-    const body = Object.entries(data)
-        .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
-        .join('\n');
-
-    return `mailto:oksana@cohen-associates.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-// Responsive handler
-window.addEventListener('resize', debounce(() => {
-    if (window.innerWidth > 992) {
-        document.querySelector('.mobile-menu')?.classList.remove('active');
-        document.querySelector('.mobile-menu-btn')?.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-    }
-}, 250));
-
-// Utility: Debounce function
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+            showNote('success', 'Opening your email app…');
+            window.location.href =
+                `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            form.reset();
+        });
     };
-}
+
+
+    /* ====================================================================
+       03. MAP LAZY-LOAD
+       ------------------------------------------------------------------
+       The embed is heavy, so the src is held in data-src and swapped in
+       only as the map nears the viewport. Falls back to loading at once.
+    ==================================================================== */
+    const initMap = () => {
+        const frame = select('.js-map');
+        if (!frame || !frame.dataset.src) return;
+
+        const load = () => { frame.src = frame.dataset.src; };
+
+        if (!HAS_IO) { load(); return; }
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                load();
+                obs.disconnect();
+            });
+        }, { rootMargin: '200px 0px' });
+
+        observer.observe(frame);
+    };
+
+
+    /* ====================================================================
+       04. BOOTSTRAP
+    ==================================================================== */
+    const init = () => {
+        initForm();
+        initMap();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
