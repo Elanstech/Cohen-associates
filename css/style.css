@@ -521,6 +521,16 @@ p { color: var(--g-600); }
    12. SERVICES
 ============================================================================ */
 
+/* ============================================================================
+   SERVICES — 2026 refresh
+   Append to css/style.css. Uses the tokens you already defined in :root
+   (--navy, --copper, --grad-copper, shadows, radii, easings…). Fallback values
+   are included so it also previews on its own.
+
+   All classes are namespaced (.services-2026 / .svc-*), so your existing
+   .services and .service-card styles are untouched — remove them later if you like.
+============================================================================ */
+
 .services-2026 {
     position: relative;
     padding: var(--section-py, clamp(4.5rem, 9vw, 8.5rem)) 0;
@@ -659,11 +669,14 @@ p { color: var(--g-600); }
 .svc-card__media {
     position: absolute; inset: 0;
     z-index: -2;
+    border-radius: inherit;   /* keeps corners round during the hover tilt */
+    overflow: hidden;
     background: var(--grad-navy, linear-gradient(150deg, #070a33, #1a237e));
 }
 .svc-card__img {
     width: 100%; height: 100%;
     object-fit: cover;
+    border-radius: inherit;
     transform: scale(1.04);
     transition: transform .8s var(--ease, ease), opacity .4s ease;
     will-change: transform;
@@ -674,6 +687,7 @@ p { color: var(--g-600); }
 .svc-card__scrim {
     position: absolute; inset: 0;
     z-index: -1;
+    border-radius: inherit;
     background: linear-gradient(180deg,
         rgba(7, 10, 51, 0.12) 0%,
         rgba(7, 10, 51, 0.55) 46%,
@@ -684,6 +698,7 @@ p { color: var(--g-600); }
 .svc-card__spot {
     position: absolute; inset: 0;
     z-index: 0;
+    border-radius: inherit;
     background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
         rgba(221, 133, 99, 0.28), transparent 60%);
     opacity: 0;
@@ -884,7 +899,6 @@ p { color: var(--g-600); }
     .svc-card:hover .svc-card__img { transform: none !important; }
     .svc-card__reveal { grid-template-rows: 1fr !important; opacity: 1 !important; }
 }
-
 
 /* ============================================================================
    13. INDUSTRIES
