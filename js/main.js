@@ -14,8 +14,9 @@
      10. Contact form (validate + mailto)
      11. Back to top
      12. Contact FAB
-     13. Footer year
-     14. Bootstrap
+     13. Services 2026 (entrance reveal + 3D tilt + cursor spotlight)
+     14. Footer year
+     15. Bootstrap
 ============================================================================ */
 'use strict';
 
@@ -412,7 +413,76 @@ const initFab = () => {
 
 
 /* ============================================================================
-   13. FOOTER YEAR
+   13. SERVICES 2026  → entrance reveal + 3D tilt + cursor spotlight
+   ----------------------------------------------------------------------------
+   • Cards (.svc-card / [data-svc]) get a staggered .is-in entrance.
+   • On fine pointers, each card tilts toward the cursor and a copper
+     spotlight follows it (--rx / --ry / --mx / --my consumed by the CSS).
+   • Broken images are hidden so the navy gradient fallback shows.
+   Note: the section header still uses the shared [data-reveal] (module 05).
+============================================================================ */
+const initServices = () => {
+    const section = select('.services-2026');
+    if (!section) return;
+
+    const cards = selectAll('[data-svc]', section);
+    if (!cards.length) return;
+
+    // Graceful image fallback (broken image → navy gradient shows through)
+    selectAll('.svc-card__img', section).forEach((img) => {
+        img.addEventListener('error', () => { img.style.opacity = '0'; });
+    });
+
+    // Staggered entrance reveal
+    if (HAS_IO && !REDUCED_MOTION) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                el.style.setProperty('--d', `${cards.indexOf(el) * 90}ms`);
+                el.classList.add('is-in');
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+
+        cards.forEach((el) => observer.observe(el));
+    } else {
+        cards.forEach((el) => el.classList.add('is-in'));
+    }
+
+    // 3D tilt + spotlight (desktop pointers only)
+    if (!FINE_POINTER || REDUCED_MOTION) return;
+
+    const TILT = 5; // max degrees
+
+    cards.forEach((card) => {
+        let frame = null;
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;   // 0 → 1
+            const py = (e.clientY - rect.top) / rect.height;   // 0 → 1
+
+            if (frame) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(() => {
+                card.style.setProperty('--rx', `${((0.5 - py) * TILT).toFixed(2)}deg`);
+                card.style.setProperty('--ry', `${((px - 0.5) * TILT).toFixed(2)}deg`);
+                card.style.setProperty('--mx', `${(px * 100).toFixed(1)}%`);
+                card.style.setProperty('--my', `${(py * 100).toFixed(1)}%`);
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            if (frame) cancelAnimationFrame(frame);
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+        });
+    });
+};
+
+
+/* ============================================================================
+   14. FOOTER YEAR
 ============================================================================ */
 const initYear = () => {
     selectAll('.js-year').forEach((el) => {
@@ -422,7 +492,7 @@ const initYear = () => {
 
 
 /* ============================================================================
-   14. BOOTSTRAP
+   15. BOOTSTRAP
 ============================================================================ */
 const init = () => {
     initLoader();
@@ -436,6 +506,7 @@ const init = () => {
     initContactForm();
     initBackToTop();
     initFab();
+    initServices();
     initYear();
 };
 
