@@ -10,7 +10,7 @@
      06. Animated counters
      07. Hero cursor spotlight
      08. Magnetic buttons
-     09. Video (mute toggle + play/pause on visibility)
+     09. Video 
      10. FAQ accordion
      11. Contact form (validate + mailto)
      12. Footer year
