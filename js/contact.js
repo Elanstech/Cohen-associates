@@ -11,7 +11,7 @@
 
    Modules
      01. Utilities
-     02. Contact form   (validate → mailto handoff, inline errors)
+     02. Contact form   (validate → Formspree, inline errors)
      03. Map lazy-load  (set iframe src from data-src on approach)
      04. Bootstrap
 ============================================================================ */
@@ -29,9 +29,9 @@
     /* ====================================================================
        02. CONTACT FORM
        ------------------------------------------------------------------
-       Inline validation, then a mailto handoff (consistent with the rest
-       of the site — no backend required). The optional service <select>
-       is folded into the subject + body when chosen.
+       Inline validation, then a background POST to Formspree (falls back
+       to a mailto handoff if the form action is a mailto: link). The
+       optional service <select> is folded into the subject when chosen.
     ==================================================================== */
     const initForm = () => {
         const form = select('.js-cp-form');
@@ -95,7 +95,7 @@
             });
         });
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const valid = inputs.map(validate).every(Boolean);
@@ -121,6 +121,30 @@
                 .join('\n');
 
             const action = form.getAttribute('action') || 'mailto:oksana@cohen-associates.com';
+
+            // Formspree endpoint → send in the background, no email app needed.
+            if (/^https?:/i.test(action)) {
+                const btn = form.querySelector('[type="submit"]');
+                if (btn) btn.disabled = true;
+                try {
+                    const payload = new FormData(form);
+                    payload.append('_subject', subject);
+                    const res = await fetch(action, {
+                        method: 'POST',
+                        body: payload,
+                        headers: { Accept: 'application/json' },
+                    });
+                    if (!res.ok) throw new Error(`Form error ${res.status}`);
+                    showNote('success', 'Thank you! Your message has been sent. We\'ll be in touch shortly.');
+                    form.reset();
+                } catch (err) {
+                    showNote('error', 'Sorry, your message couldn\'t be sent. Please try again or call us.');
+                } finally {
+                    if (btn) btn.disabled = false;
+                }
+                return;
+            }
+
             const to = action.replace('mailto:', '').split('?')[0];
 
             showNote('success', 'Opening your email app…');

@@ -11,7 +11,7 @@
      07. Magnetic buttons
      08. Video (play / pause on visibility)
      09. FAQ accordion
-     10. Contact form (validate + mailto)
+     10. Contact form (validate + Formspree)
      11. Back to top
      12. Contact FAB
      13. Services 2026 (entrance reveal + 3D tilt + cursor spotlight)
@@ -273,7 +273,7 @@ const initFaq = () => {
 
 
 /* ============================================================================
-   10. CONTACT FORM  → inline validation + mailto handoff
+   10. CONTACT FORM  → inline validation + Formspree (mailto fallback)
 ============================================================================ */
 const initContactForm = () => {
     const form = select('.js-contact-form');
@@ -336,7 +336,7 @@ const initContactForm = () => {
         });
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const valid = inputs.map(validate).every(Boolean);
@@ -355,6 +355,30 @@ const initContactForm = () => {
             .join('\n');
 
         const action = form.getAttribute('action') || 'mailto:oksana@cohen-associates.com';
+
+        // Formspree endpoint → send in the background, no email app needed.
+        if (/^https?:/i.test(action)) {
+            const btn = form.querySelector('[type="submit"]');
+            if (btn) btn.disabled = true;
+            try {
+                const payload = new FormData(form);
+                payload.append('_subject', subject);
+                const res = await fetch(action, {
+                    method: 'POST',
+                    body: payload,
+                    headers: { Accept: 'application/json' },
+                });
+                if (!res.ok) throw new Error(`Form error ${res.status}`);
+                showMessage('success', 'Thank you! Your message has been sent. We\'ll be in touch shortly.');
+                form.reset();
+            } catch (err) {
+                showMessage('error', 'Sorry, your message couldn\'t be sent. Please try again or call us.');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+            return;
+        }
+
         const to = action.replace('mailto:', '').split('?')[0];
 
         showMessage('success', 'Opening your email client…');
