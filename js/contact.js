@@ -120,7 +120,7 @@
                 .map(([key, value]) => `${key}: ${value}`)
                 .join('\n');
 
-            const action = form.getAttribute('action') || 'mailto:info@cohen-associates.com';
+            const action = form.getAttribute('action') || 'mailto:oksana@cohen-associates.com';
             const to = action.replace('mailto:', '').split('?')[0];
 
             showNote('success', 'Opening your email app…');
