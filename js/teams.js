@@ -31,7 +31,7 @@
         oksana: {
             name: 'Oksana Inoyatova',
             role: 'Founder & CEO',
-            image: 'oksanafront.jpeg',
+            image: 'images/oksanafront.jpeg',
             linkedin: 'https://www.linkedin.com/in/oksana-inoyatova-72680515',
             bio: [
                 'As Founder and CEO, Oksana has built Cohen & Associates into a boutique firm known for sophisticated tax strategy paired with genuinely personal service. A graduate of CUNY Queens College, she began her career at top-tier firms — including Deloitte — sharpening her expertise in tax preparation for high-net-worth individuals and international clients.',
@@ -42,7 +42,7 @@
         steve: {
             name: 'Steve Inoyatov',
             role: 'Co-Founder & CFO',
-            image: 'websteve.jpeg',
+            image: 'images/websteve.jpeg',
             linkedin: 'https://www.linkedin.com/in/steve-inoyatov-ea-ab71a465',
             bio: [
                 'Steve co-founded Cohen & Associates and has led its practice for well over a decade. An honors graduate of Queens College — where he earned dual degrees in Accounting and Economics, graduating Cum Laude with a 3.73 GPA — he holds the prestigious IRS Enrolled Agent designation, granting him unlimited rights to represent taxpayers before the IRS in all 50 states.',
@@ -54,7 +54,7 @@
         eddie: {
             name: 'Eddie Maks',
             role: 'Manager',
-            image: 'eddy.jpeg',
+            image: 'images/eddy.jpeg',
             linkedin: '#',
             bio: [
                 'Eddie is an experienced accounting professional with a strong background in assisting high-net-worth individuals and business owners. He specializes in helping clients navigate the complexities of tax planning and financial management.',
@@ -65,7 +65,7 @@
         mariniel: {
             name: 'Mariniel Berkonti',
             role: 'Senior Accountant',
-            image: 'mari.jpeg',
+            image: 'images/mari.jpeg',
             linkedin: '#',
             bio: [
                 'Mariniel Berkonti brings extensive expertise to her role as Senior Accountant at Cohen & Associates. With a strong educational background in accounting and finance, Mariniel has developed a reputation for excellence in financial analysis and reporting.',
